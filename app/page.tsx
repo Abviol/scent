@@ -1,4 +1,5 @@
 import Image from "next/image";
+import CreateUserBtn from "./createUserBtn";
 
 export default function Home() {
   return (
@@ -58,6 +59,7 @@ export default function Home() {
           >
             Documentation
           </a>
+          <CreateUserBtn></CreateUserBtn>
         </div>
       </main>
     </div>
