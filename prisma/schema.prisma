@@ -1,4 +1,52 @@
-// Define database connection via the `DATABASE_URL` env var
+enum Volume {
+  ML30
+  ML50
+  ML100
+  ML200
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  PREFER_NOT_TO_SAY
+}
+
+enum FragranceGender {
+  MALE
+  FEMALE
+  UNISEX
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  RETURN_REQUESTED
+  RETURNED
+  REFUNDED
+}
+
+enum ReturnStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  RETURN_RECEIVED
+  REFUNDED
+}
+
+enum DeliveryMethod {
+  STANDARD
+  EXPRESS
+}
+
+enum Role {
+  USER
+  ADMIN
+  SELLER
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -12,8 +60,257 @@ generator client {
 
 // Example data model
 model User {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  email     String   @unique
-  name      String?
+  id String @id @default(cuid())
+
+  name          String?
+  surname       String?
+  email         String    @unique
+  emailVerified DateTime?
+  phone         String?   @unique
+  image         String?
+  gender        String?
+  password_hash String
+  role          Role      @default(USER)
+
+  address   Address[]
+  addressId String    @unique
+
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  wishlistItems WishlistItem[]
+  cartItems     CartItem[]
+  orders        Order[]
 }
+
+model Fragrance {
+  id          String @id @default(cuid())
+  productCode String @unique // 8-digit user-facing ID
+
+  title             String             @unique
+  rating            Float              @default(0)
+  reviews           Int                @default(0)
+  characteristics   Json
+  composition       Json
+  tags              Tag[]
+  categories        Category[]
+  fragranceVariants FragranceVariant[]
+  wishlistItems     WishlistItem[]
+
+  preiere String
+  brand   Brand  @relation(fields: [brandId], references: [id])
+  origin  String
+  gender  Gender
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  brandId   String
+  images    String[]
+}
+
+model FragranceVariant {
+  id          String    @id @default(cuid())
+  fragrance   Fragrance @relation(fields: [fragranceId], references: [id])
+  fragranceId String
+
+  volume               Volume
+  price                Int // price specific to this volume
+  images               String[]
+  quantityInStock      Int     @default(0)
+  discountPercentage   Int?
+  discountAvailability Boolean
+
+  cartItems     CartItem[]
+  orderItems    OrderItem[]
+  returnItems   ReturnItem[]
+  wishlistItems WishlistItem[]
+
+  @@unique([fragranceId, volume])
+}
+
+model Tag {
+  id          String     @id @default(cuid())
+  name        String
+  color       String
+  iconName    String
+  fragrance   Fragrance? @relation(fields: [fragranceId], references: [id])
+  fragranceId String?
+}
+
+model Category {
+  id          String     @id @default(cuid())
+  name        String
+  fragrance   Fragrance? @relation(fields: [fragranceId], references: [id])
+  fragranceId String?
+}
+
+model Brand {
+  id         String      @id @default(cuid())
+  name       String      @unique
+  // compositions Composition[]
+  fragrances Fragrance[]
+}
+
+model Address {
+  id String @id @default(cuid())
+
+  fullName   String
+  country    String
+  city       String
+  postcode   String
+  streetLine String // "Via Roma 25, Scala B, Int. 7"
+  notes      String? // optional
+
+  user User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+}
+
+model WishlistItem {
+  id String @id @default(cuid())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  fragranceVariant FragranceVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  variantId        String
+
+  createdAt   DateTime   @default(now())
+  fragrance   Fragrance? @relation(fields: [fragranceId], references: [id])
+  fragranceId String?
+
+  @@unique([userId, variantId])
+}
+
+model CartItem {
+  id String @id @default(cuid())
+
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId           String
+  fragranceVariant FragranceVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  variantId        String
+
+  quantity Int @default(1)
+  price    Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, variantId])
+}
+
+model Order {
+  id      String @id @default(cuid())
+  orderId String @unique // user-facing 8-character ID
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  items      OrderItem[]
+  status     OrderStatus @default(PENDING)
+  totalPrice Int // cents
+
+  deliveryFullName   String
+  deliveryStreetLine String
+  deliveryCity       String
+  deliveryRegion     String
+  deliveryPostcode   String
+  deliveryCountry    String
+  deliveryPhone      String?
+  deliveryEmail      String?
+  deliveryComment    String?
+
+  createdAt   DateTime  @default(now())
+  deliveredAt DateTime?
+  returns     Return[]
+}
+
+model OrderItem {
+  id String @id @default(cuid())
+
+  order            Order            @relation(fields: [orderId], references: [id])
+  orderId          String
+  fragranceVariant FragranceVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  variantId        String
+
+  quantity Int @default(1)
+  price    Int // cents
+
+  createdAt DateTime @default(now())
+
+  @@unique([orderId, variantId])
+}
+
+model Return {
+  id  String @id @default(cuid())
+  rma String @unique // RET-833291
+
+  order   Order  @relation(fields: [orderId], references: [id])
+  orderId String
+
+  items       ReturnItem[]
+  reason      String
+  comment     String?
+  imageUrls   String[]
+  status      ReturnStatus @default(PENDING)
+  returnPrice Int // cents
+
+  createdAt  DateTime  @default(now())
+  resolvedAt DateTime?
+}
+
+model ReturnItem {
+  id String @id @default(cuid())
+
+  return   Return @relation(fields: [returnId], references: [id])
+  returnId String
+
+  fragranceVariant FragranceVariant? @relation(fields: [variantId], references: [id])
+  variantId        String
+
+  quantity Int    @default(1)
+  volume   Volume
+  price    Int // cents
+
+  createdAt DateTime @default(now())
+
+  @@unique([returnId, variantId, volume])
+}
+
+// model Composition {
+//   id String @id @default(cuid())
+
+//   fragrance   Fragrance @relation(fields: [fragranceId], references: [id], onDelete: Cascade)
+//   fragranceId String    @unique
+
+//   brand        Brand?          @relation(fields: [brandId], references: [id])
+//   brandId      String?
+//   premiereYear Int?
+//   origin       String?
+//   gender       FragranceGender
+// }
+
+// model Comment {}
+
+// model PaymentMethod {
+//   id          String   @id @default(cuid())
+
+//   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   userId      String
+
+//   provider    String
+//   cardBrand   String?   // e.g., Visa, MasterCard
+//   last4       String    // last 4 digits
+//   expMonth    Int
+//   expYear     Int
+//   stripeId    String    // token/id from Stripe
+
+//   fullName    String
+
+//   country     String
+//   postcode    String
+
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+// }
