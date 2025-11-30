@@ -72,8 +72,7 @@ model User {
   password_hash String
   role          Role      @default(USER)
 
-  address   Address[]
-  addressId String    @unique
+  address Address[]
 
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -88,7 +87,8 @@ model Fragrance {
 
   title             String             @unique
   rating            Float              @default(0)
-  reviews           Int                @default(0)
+  reviewsAmount     Int                @default(0)
+  type              String
   characteristics   Json
   composition       Json
   tags              Tag[]
@@ -96,15 +96,14 @@ model Fragrance {
   fragranceVariants FragranceVariant[]
   wishlistItems     WishlistItem[]
 
-  preiere String
-  brand   Brand  @relation(fields: [brandId], references: [id])
-  origin  String
-  gender  Gender
+  premiere String
+  brand    Brand  @relation(fields: [brandId], references: [id])
+  brandId  String
+  origin   String
+  gender   Gender
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  brandId   String
-  images    String[]
 }
 
 model FragranceVariant {
@@ -115,7 +114,7 @@ model FragranceVariant {
   volume               Volume
   price                Int // price specific to this volume
   images               String[]
-  quantityInStock      Int     @default(0)
+  quantityInStock      Int      @default(0)
   discountPercentage   Int?
   discountAvailability Boolean
 
