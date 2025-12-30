@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export function Fire20SolidIcon({
+export function Bookmark20SolidIcon({
   size = 20,
   color = "currentColor",
   strokeWidth = 2,
@@ -25,7 +25,7 @@ export function Fire20SolidIcon({
       className={className}
       {...props}
     >
-      <path fillRule="evenodd" d="M13.5 4.938a7 7 0 1 1-9.006 1.737c.202-.257.59-.218.793.039q.418.53.943.954c.332.269.786-.049.773-.476L7 7c0-.919.206-1.789.575-2.567a6.03 6.03 0 0 1 2.486-2.665c.247-.14.55-.016.677.238A6.97 6.97 0 0 0 13.5 4.938M14 12a4 4 0 0 1-4 4c-1.913 0-3.52-1.398-3.91-3.182c-.093-.429.44-.643.814-.413a4 4 0 0 0 1.601.564c.303.038.531-.24.51-.544a5.98 5.98 0 0 1 1.315-4.192a.45.45 0 0 1 .431-.16A4 4 0 0 1 14 12" clipRule="evenodd"/>
+      <path fillRule="evenodd" d="M10 2q-2.575.002-5.07.31A2.213 2.213 0 0 0 3 4.517V17.25a.75.75 0 0 0 1.075.676L10 15.082l5.926 2.844A.75.75 0 0 0 17 17.25V4.517c0-1.103-.806-2.068-1.93-2.207A41 41 0 0 0 10 2" clip-rule="evenodd"/>
     </svg>
   );
 }
