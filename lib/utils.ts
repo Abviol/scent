@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { VolumeEnum, VolumeType } from "./types";
+import { AvailabilityType, VolumeEnum, VolumeType } from "./types";
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -30,4 +30,9 @@ export function getEuro(cents: number): string {
     style: 'currency', 
     currency: 'EUR' 
   }).format(cents / 100);
+}
+
+export function getAvailability(items_quantity: number): AvailabilityType {
+	if (items_quantity > 0) return "available";
+	return "not available";
 }
