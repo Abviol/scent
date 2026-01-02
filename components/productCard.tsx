@@ -14,7 +14,6 @@ export interface ProductCardProps {
 	title: string;
 	volume: VolumeEnum;
 	image_url: string;
-	image_alt: string;
 	rating: number;
 	price: number; // in cents
 	wishlist: boolean;
@@ -25,7 +24,6 @@ export default function ProductCard({
 	title,
 	volume,
 	image_url,
-	image_alt,
 	rating,
 	price,
 	wishlist,
@@ -58,7 +56,7 @@ export default function ProductCard({
 				<div className="relative overflow-hidden h-[200px] w-full aspect-square flex justify-center items-center">
 					<Image
 						src={image_url}
-						alt={image_alt}
+						alt={`${title} ${volEnumToNumber(volume)} ml`}
 						fill
 						className="object-contain"
 						loading="eager"
