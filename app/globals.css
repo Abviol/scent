@@ -127,7 +127,9 @@
 
 /* custom theme */
 @theme {
-    --color-main: #121729;
+  --color-main: #121729;
+  --color-accent: #e67f31;
+  --color-accent-light: #fcf4eb;
 }
 
 /* custom classes */
