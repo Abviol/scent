@@ -6,3 +6,5 @@
 }
 
 export type VolumeType = 30 | 50 | 100 | 200 | undefined;
+
+export type MarkerType = "hit" | undefined;
