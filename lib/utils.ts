@@ -24,3 +24,10 @@ export function volEnumToNumber(vol: VolumeEnum): VolumeType {
       return undefined;
 	}
 }
+
+export function getEuro(cents: number): string {
+  return new Intl.NumberFormat('en-IE', { 
+    style: 'currency', 
+    currency: 'EUR' 
+  }).format(cents / 100);
+}
