@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Bookmark } from "lucide-react";
 
 // Utils & Types
-import { VolumeEnum } from "@/lib/types";
-import { volEnumToNumber } from "@/lib/utils";
+import { MarkerType, VolumeEnum } from "@/lib/types";
+import { getEuro, volEnumToNumber } from "@/lib/utils";
 
 // Components
 import Marker from "./ui/marker";
@@ -16,9 +16,9 @@ export interface ProductCardProps {
 	image_url: string;
 	image_alt: string;
 	rating: number;
-	price: number;
+	price: number; // in cents
 	wishlist: boolean;
-	markers: "hit" | string;
+	markers: MarkerType[];
 }
 
 export default function ProductCard({
@@ -36,17 +36,23 @@ export default function ProductCard({
 	return (
 		<Link
 			href={"/"}
-			className="flex flex-col gap-y-5 bg-white border-gray-200 border-2 rounded-[8px] px-[30px] py-5 transition-shadow hover:drop-shadow-md hover:drop-shadow-slate-300"
+			className="flex flex-col gap-y-5 bg-white border-gray-200 border-2 rounded-[8px] px-[30px] py-5 transition-colors
+			hover:bg-accent-light hover:border-accent"
 		>
 			<div className="flex flex-col gap-y-5">
 				<div className="flex flex-row justify-between items-center">
-					<Marker name="hit" size="md" />
+					<div className="flex gap-x-1">
+						{markers.map((marker, key) => (
+							<Marker key={key} name={marker} size="md" />
+						))}
+					</div>
+					
 					<div
 						aria-label="Add to wishlist"
 						title="Add to wishlist"
 						role="button"
 					>
-						<Bookmark size={24} />
+						{wishlist ? (<Bookmark size={24} fill="#121729" stroke="#121729" />) : (<Bookmark size={24} stroke="#121729"/>)}
 					</div>
 				</div>
 				<div className="relative overflow-hidden h-[200px] w-full aspect-square flex justify-center items-center">
@@ -70,7 +76,7 @@ export default function ProductCard({
 					<Rating rating={rating} />
 				</div>
 
-				<span className="my-text-lg">{price}€</span>
+				<span className="my-text-lg">{getEuro(price)}</span>
 			</div>
 		</Link>
 	);
