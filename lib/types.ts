@@ -8,3 +8,5 @@
 export type VolumeType = 30 | 50 | 100 | 200 | undefined;
 
 export type MarkerType = "hit" | undefined;
+
+export type AvailabilityType = "available" | "not available" | undefined;
