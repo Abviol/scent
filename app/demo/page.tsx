@@ -1,9 +1,17 @@
-﻿import CartItem from "@/components/cartItem";
+﻿"use client";
+
+import CartItem from "@/components/cartItem";
 import ProductCard from "@/components/productCard";
 import SearchCard from "@/components/searchCard";
+import Stepper from "@/components/stepper";
 import Marker from "@/components/ui/marker";
+import { useState } from "react";
 
 export default function Page() {
+	const [cartQuantity1, setCartQuantity1] = useState<number>(10);
+	const [cartQuantity2, setCartQuantity2] = useState<number>(10);
+	const [cartQuantity3, setCartQuantity3] = useState<number>(10);
+	
 	return (
 		<div className="py-12 px-8">
 			<div className="flex mb-10">
@@ -87,6 +95,13 @@ export default function Page() {
 					pricePerItem={11999}
 					quantity={10}
 				></CartItem>
+			</div>
+
+			<h3 className="my-text-lg">Stepper</h3>
+			<div className="flex gap-x-8">
+				<Stepper value={cartQuantity1} onChange={(e) => setCartQuantity1(e)} max={99}></Stepper>
+				<Stepper value={cartQuantity2} onChange={(e) => setCartQuantity2(e)} max={10}></Stepper>
+				<Stepper value={cartQuantity3} onChange={(e) => setCartQuantity3(e)} max={10} disabled></Stepper>
 			</div>
 		</div>
 	);
