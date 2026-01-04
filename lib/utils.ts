@@ -20,19 +20,30 @@ export function volEnumToNumber(vol: VolumeEnum): VolumeType {
 			return 100;
 		case 3:
 			return 200;
-    default:
-      return undefined;
+		default:
+			return undefined;
 	}
 }
 
 export function getEuro(cents: number): string {
-  return new Intl.NumberFormat('en-IE', { 
-    style: 'currency', 
-    currency: 'EUR' 
-  }).format(cents / 100);
+	return new Intl.NumberFormat("en-IE", {
+		style: "currency",
+		currency: "EUR",
+	}).format(cents / 100);
 }
 
 export function getAvailability(items_quantity: number): AvailabilityType {
 	if (items_quantity > 0) return "available";
 	return "not available";
+}
+
+export function getAvailabilityClass(availability: AvailabilityType): string {
+	switch (availability) {
+		case "available":
+			return "text-accent";
+		case "not available": 
+			return "text-gray-500";
+		default:
+			return "";
+	}
 }
