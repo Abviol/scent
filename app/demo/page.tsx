@@ -80,11 +80,12 @@ export default function Page() {
 				<CartItem
 					title={"Versace Eros Flame"}
 					productId="01203213"
-					quantityInStock={10}
+					quantityInStock={11}
 					image_url={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
 					volume={0}
 					pricePerItem={4999}
-					quantity={10}
+					quantity={1}
+					onDelete={() => console.log("Deleted from cart")}
 				></CartItem>
 				<CartItem
 					title={"Versace Eros Flame"}
@@ -93,7 +94,8 @@ export default function Page() {
 					image_url={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
 					volume={2}
 					pricePerItem={11999}
-					quantity={10}
+					quantity={1}
+					onDelete={() => console.log("Deleted from cart")}
 				></CartItem>
 			</div>
 
