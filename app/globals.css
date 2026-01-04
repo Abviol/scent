@@ -139,10 +139,13 @@
 }
 
 /* utils */
-
 @utility my-text-lg {
   @apply text-lg font-semibold;
 }
 @utility my-text-p {
   @apply leading-7 [&:not(:first-child)]:mt-6;
+}
+
+@utility my-text-h4 {
+  @apply text-2xl font-semibold leading-8 tracking-[-0.6%];
 }
