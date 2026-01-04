@@ -149,3 +149,7 @@
 @utility my-text-h4 {
   @apply text-2xl font-semibold leading-8 tracking-[-0.6%];
 }
+
+@utility my-text-h5 {
+  @apply text-xl font-semibold leading-7 tracking-[-0.5%];
+}
