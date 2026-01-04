@@ -1,4 +1,5 @@
-﻿import ProductCard from "@/components/productCard";
+﻿import CartItem from "@/components/cartItem";
+import ProductCard from "@/components/productCard";
 import SearchCard from "@/components/searchCard";
 import Marker from "@/components/ui/marker";
 
@@ -64,6 +65,28 @@ export default function Page() {
 					rating={4.5}
 					price={4999}
 				></SearchCard>
+			</div>
+
+			<h3 className="my-text-lg">Cart item</h3>
+			<div className="flex flex-col gap-y-8">
+				<CartItem
+					title={"Versace Eros Flame"}
+					productId="01203213"
+					quantityInStock={10}
+					image_url={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
+					volume={0}
+					pricePerItem={4999}
+					quantity={10}
+				></CartItem>
+				<CartItem
+					title={"Versace Eros Flame"}
+					productId="01203213"
+					quantityInStock={0}
+					image_url={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
+					volume={2}
+					pricePerItem={11999}
+					quantity={10}
+				></CartItem>
 			</div>
 		</div>
 	);
