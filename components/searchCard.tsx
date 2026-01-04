@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { AvailabilityType, VolumeEnum } from "@/lib/types";
-import { getAvailability, getEuro, volEnumToNumber } from "@/lib/utils";
+import { getAvailability, getAvailabilityClass, getEuro, volEnumToNumber } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import Rating from "./ui/rating";
@@ -27,15 +27,7 @@ export default function SearchCard({
 	image_url,
 }: SearchCardProps) {
    const [availability, setAvailability] = useState<AvailabilityType>(getAvailability(quantityInStock));
-   let availabilityClass: string;
-   switch (availability) {
-      case "available":
-         availabilityClass = "text-accent";
-         break;
-      default:
-         availabilityClass = "text-gray-500";
-         break;
-   }
+   const availabilityClass: string = getAvailabilityClass(availability);
 
 	return (
 		<Link href={"/"} className="w-full max-w-[500px] flex gap-x-10 p-5 rounded-[8px] bg-white transition-colors hover:bg-accent-light">
