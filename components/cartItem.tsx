@@ -10,7 +10,7 @@ import {
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import Stepper from "./stepper";
+import Stepper from "./stepper/stepper";
 
 export interface CartItemProps {
 	image_url: string;

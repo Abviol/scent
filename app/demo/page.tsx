@@ -3,7 +3,7 @@
 import CartItem from "@/components/cartItem";
 import ProductCard from "@/components/productCard";
 import SearchCard from "@/components/searchCard";
-import Stepper from "@/components/stepper";
+import Stepper from "@/components/stepper/stepper";
 import Marker from "@/components/ui/marker";
 import { useState } from "react";
 
@@ -101,9 +101,10 @@ export default function Page() {
 
 			<h3 className="my-text-lg">Stepper</h3>
 			<div className="flex gap-x-8">
-				<Stepper value={cartQuantity1} onChange={(e) => setCartQuantity1(e)} max={99}></Stepper>
-				<Stepper value={cartQuantity2} onChange={(e) => setCartQuantity2(e)} max={10}></Stepper>
-				<Stepper value={cartQuantity3} onChange={(e) => setCartQuantity3(e)} max={10} disabled></Stepper>
+				<Stepper value={cartQuantity1} onChange={(e: number) => setCartQuantity1(e)} max={99}></Stepper>
+				<Stepper value={cartQuantity2} onChange={(e: number) => setCartQuantity2(e)} max={10}></Stepper>
+				<Stepper value={cartQuantity3} onChange={(e: number) => setCartQuantity3(e)} max={10} disabled></Stepper>
+				<Stepper value={cartQuantity1} onChange={(e: number) => setCartQuantity1(e)} max={99} size="sm"></Stepper>
 			</div>
 		</div>
 	);

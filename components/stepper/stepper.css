@@ -1,0 +1,15 @@
+﻿@reference "../../app/globals.css";
+
+.stepper_md button {
+   @apply size-10;
+}
+.stepper_sm button {
+   @apply size-[18px];
+}
+
+.stepper_md .stepper__display {
+   @apply w-[70px] my-text-h5;
+}
+.stepper_sm .stepper__display {
+   @apply w-[60px] text-xs font-semibold;
+}
