@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import CartDrawerItem from "@/components/cartDrawerItem/cartDrawerItem";
 import CartItem from "@/components/cartItem";
 import ProductCard from "@/components/productCard";
 import SearchCard from "@/components/searchCard";
@@ -97,6 +98,30 @@ export default function Page() {
 					quantity={1}
 					onDelete={() => console.log("Deleted from cart")}
 				></CartItem>
+			</div>
+
+			<h3 className="my-text-lg">Cart drawer item</h3>
+			<div className="w-[360px] flex flex-col gap-y-8">
+				<CartDrawerItem
+					title={"Versace Eros Flame"}
+					productId="01203213"
+					quantityInStock={11}
+					image_url={"https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"}
+					volume={0}
+					pricePerItem={4999}
+					quantity={1}
+					onDelete={() => console.log("Deleted from cart")}
+				></CartDrawerItem>
+				<CartDrawerItem
+					title={"Versace Eros Flame"}
+					productId="01203213"
+					quantityInStock={0}
+					image_url={"https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"}
+					volume={0}
+					pricePerItem={4999}
+					quantity={1}
+					onDelete={() => console.log("Deleted from cart")}
+				></CartDrawerItem>
 			</div>
 
 			<h3 className="my-text-lg">Stepper</h3>

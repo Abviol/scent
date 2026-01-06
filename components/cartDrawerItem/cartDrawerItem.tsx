@@ -1,0 +1,131 @@
+﻿"use client";
+
+import { AvailabilityType, VolumeEnum } from "@/lib/types";
+import {
+	getAvailability,
+	getAvailabilityClass,
+	getEuro,
+	volEnumToNumber,
+} from "@/lib/utils";
+import { Trash2 } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
+import Stepper from "../stepper/stepper";
+import "./cartDrawerItem.css";
+import Link from "next/link";
+
+export interface CartDrawerItemProps {
+	image_url: string;
+	title: string;
+	volume: VolumeEnum;
+	productId: string;
+	quantity: number;
+	quantityInStock: number;
+	pricePerItem: number; // cents
+	onDelete: () => void;
+}
+export default function CartDrawerItem({
+	image_url,
+	title,
+	volume,
+	productId,
+	quantity,
+	quantityInStock,
+	pricePerItem,
+	onDelete,
+}: CartDrawerItemProps) {
+	const [isDeleted, setIsDeleted] = useState<boolean>(false);
+	const [availability, setAvailability] = useState<AvailabilityType>(
+		getAvailability(quantityInStock)
+	);
+	const availabilityClass: string =
+		availability == "not available" ? "not-available" : "";
+
+	const [newQuantity, setNewQuantity] = useState<number>(quantity);
+	const [totalPrice, setTotalPrice] = useState<number>(
+		pricePerItem * quantity
+	);
+
+	const handleQuantity = (e: number) => {
+		setNewQuantity(e);
+		setTotalPrice(e * pricePerItem);
+	};
+
+	const handleDelete = () => {
+		setIsDeleted(true);
+		onDelete();
+	};
+
+	return (
+		<>
+			{!isDeleted && (
+				<div
+					className={`w-full p-3.5 flex gap-x-3 bg-white rounded-lg border-2 border-gray-200 items-center hover:bg-accent-light hover:border-accent-light transition-colors ${availabilityClass}`}
+				>
+					<Link
+						href={"/"}
+						className="item__image relative overflow-hidden size-18 rounded-lg aspect-square flex shrink-0 justify-center items-center"
+					>
+						<Image
+							src={image_url}
+							alt={`${title} ${volEnumToNumber(volume)} ml`}
+							fill
+							className="object-contain"
+							loading="eager"
+							priority={false}
+						></Image>
+					</Link>
+
+					<div className="w-full flex flex-col gap-5">
+						<div className="flex justify-between items-baseline">
+							<div className="item__text flex flex-col gap-y-2.5">
+								<Link href={"/"}>
+									<h4 className="font-semibold leading-3">
+										{title}
+									</h4>
+								</Link>
+								<div className="flex gap-4 text-xs font-semibold">
+									<span className="text-gray-600">
+										Product code -&nbsp;
+										<span className="text-black">
+											{productId}
+										</span>
+									</span>
+									<span className="text-gray-500">
+										{volEnumToNumber(volume)} ml
+									</span>
+								</div>
+							</div>
+
+							<button aria-label="Remove" title="remove">
+								<Trash2
+									size={20}
+									strokeWidth={1.5}
+									onClick={handleDelete}
+								></Trash2>
+							</button>
+						</div>
+
+						<div className="item__details flex justify-between items-center">
+							<div className="inline-flex items-center gap-x-3">
+								<span className="text-sm font-medium">
+									Price:
+								</span>
+								<span className="font-semibold text-accent">
+									{getEuro(totalPrice)}
+								</span>
+							</div>
+							<Stepper
+								size="sm"
+								min={1}
+								max={quantityInStock}
+								value={newQuantity}
+								onChange={(e: number) => handleQuantity(e)}
+							></Stepper>
+						</div>
+					</div>
+				</div>
+			)}
+		</>
+	);
+}

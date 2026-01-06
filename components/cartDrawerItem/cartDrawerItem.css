@@ -1,0 +1,11 @@
+﻿@reference "../../app/globals.css";
+
+.not-available {
+   @apply border-none hover:bg-[#f7f7f7];
+}
+
+.not-available .item__image,
+.not-available .item__text,
+.not-available .item__details {
+   @apply opacity-40 pointer-events-none;
+}
