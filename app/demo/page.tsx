@@ -2,6 +2,7 @@
 
 import CartDrawerItem from "@/components/cartDrawerItem/cartDrawerItem";
 import CartItem from "@/components/cartItem";
+import CommentCard from "@/components/commentCard/commentCard";
 import ProductCard from "@/components/productCard";
 import SearchCard from "@/components/searchCard";
 import Stepper from "@/components/stepper/stepper";
@@ -12,7 +13,7 @@ export default function Page() {
 	const [cartQuantity1, setCartQuantity1] = useState<number>(10);
 	const [cartQuantity2, setCartQuantity2] = useState<number>(10);
 	const [cartQuantity3, setCartQuantity3] = useState<number>(10);
-	
+
 	return (
 		<div className="py-12 px-8">
 			<div className="flex mb-10">
@@ -126,10 +127,53 @@ export default function Page() {
 
 			<h3 className="my-text-lg">Stepper</h3>
 			<div className="flex gap-x-8">
-				<Stepper value={cartQuantity1} onChange={(e: number) => setCartQuantity1(e)} max={99}></Stepper>
-				<Stepper value={cartQuantity2} onChange={(e: number) => setCartQuantity2(e)} max={10}></Stepper>
-				<Stepper value={cartQuantity3} onChange={(e: number) => setCartQuantity3(e)} max={10} disabled></Stepper>
-				<Stepper value={cartQuantity1} onChange={(e: number) => setCartQuantity1(e)} max={99} size="sm"></Stepper>
+				<Stepper
+					value={cartQuantity1}
+					onChange={(e: number) => setCartQuantity1(e)}
+					max={99}
+				></Stepper>
+				<Stepper
+					value={cartQuantity2}
+					onChange={(e: number) => setCartQuantity2(e)}
+					max={10}
+				></Stepper>
+				<Stepper
+					value={cartQuantity3}
+					onChange={(e: number) => setCartQuantity3(e)}
+					max={10}
+					disabled
+				></Stepper>
+				<Stepper
+					value={cartQuantity1}
+					onChange={(e: number) => setCartQuantity1(e)}
+					max={99}
+					size="sm"
+				></Stepper>
+			</div>
+
+			<h3 className="my-text-lg">Comment card</h3>
+			<div className="mx-auto w-[1200px] grid grid-cols-3 gap-x-[102px] gap-y-[60px]">
+				<CommentCard
+					user_avatar_url="https://lh3.googleusercontent.com/ogw/AF2bZygcwIauU2RIpsqeogK3a5zbJd53GV87qFj_i_3vm1N0nA=s32-c-mo"
+					user_name="Nazar"
+					date_comment_left="11.11"
+					rating={4.4}
+					comment_text="I am pleasantly surprised by the service and quality of the fragrances! I ordered some perfume, and it arrived very quickly and beautifully packaged — you can feel the attention to detail."
+				></CommentCard>
+				<CommentCard
+					user_avatar_url="https://lh3.googleusercontent.com/ogw/AF2bZygcwIauU2RIpsqeogK3a5zbJd53GV87qFj_i_3vm1N0nA=s32-c-mo"
+					user_name="Nazar Kyselov"
+					date_comment_left="24.12"
+					rating={4.9}
+					comment_text="With surname doesn't look good. la;sjdflkasjdfl;kjsad;lfkjsad;lkfj;laskdjf;lkasjdf;lkasjdfl;kjasd;lfkjsa;lkdfja;sldkfj;salkdjf;aslkdjf"
+				></CommentCard>
+				<CommentCard
+					user_avatar_url="https://lh3.googleusercontent.com/ogw/AF2bZygcwIauU2RIpsqeogK3a5zbJd53GV87qFj_i_3vm1N0nA=s32-c-mo"
+					user_name="Misha"
+					date_comment_left="31.12"
+					rating={4.9}
+					comment_text="Short comment."
+				></CommentCard>
 			</div>
 		</div>
 	);
