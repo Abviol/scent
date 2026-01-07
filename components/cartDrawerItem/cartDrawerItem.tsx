@@ -19,6 +19,7 @@ export interface CartDrawerItemProps {
 	title: string;
 	volume: VolumeEnum;
 	productId: string;
+	productCode: string;
 	quantity: number;
 	quantityInStock: number;
 	pricePerItem: number; // cents
@@ -29,6 +30,7 @@ export default function CartDrawerItem({
 	title,
 	volume,
 	productId,
+	productCode,
 	quantity,
 	quantityInStock,
 	pricePerItem,
@@ -41,6 +43,7 @@ export default function CartDrawerItem({
 	const availabilityClass: string =
 		availability == "not available" ? "not-available" : "";
 
+	const productLink: string = `/product/id?=${productId}`;
 	const [newQuantity, setNewQuantity] = useState<number>(quantity);
 	const [totalPrice, setTotalPrice] = useState<number>(
 		pricePerItem * quantity
@@ -63,7 +66,7 @@ export default function CartDrawerItem({
 					className={`w-full p-3.5 flex gap-x-3 bg-white rounded-lg border-2 border-gray-200 items-center hover:bg-accent-light hover:border-accent-light transition-colors ${availabilityClass}`}
 				>
 					<Link
-						href={"/"}
+						href={productLink}
 						className="item__image relative overflow-hidden size-18 rounded-lg aspect-square flex shrink-0 justify-center items-center"
 					>
 						<Image
@@ -78,24 +81,25 @@ export default function CartDrawerItem({
 
 					<div className="w-full flex flex-col gap-5">
 						<div className="flex justify-between items-baseline">
-							<div className="item__text flex flex-col gap-y-2.5">
-								<Link href={"/"}>
-									<h4 className="font-semibold leading-3">
-										{title}
-									</h4>
-								</Link>
+							<Link
+								href={productLink}
+								className="item__text flex flex-col gap-y-2.5"
+							>
+								<h4 className="font-semibold leading-3">
+									{title}
+								</h4>
 								<div className="flex gap-4 text-xs font-semibold">
 									<span className="text-gray-600">
 										Product code -&nbsp;
 										<span className="text-black">
-											{productId}
+											{productCode}
 										</span>
 									</span>
 									<span className="text-gray-500">
 										{volEnumToNumber(volume)} ml
 									</span>
 								</div>
-							</div>
+							</Link>
 
 							<button aria-label="Remove" title="remove">
 								<Trash2
