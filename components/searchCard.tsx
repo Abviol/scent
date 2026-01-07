@@ -10,6 +10,7 @@ import { useState } from "react";
 export interface SearchCardProps {
 	title: string;
 	productId: string;
+	productCode: string;
 	volume: VolumeEnum;
 	rating: number;
 	price: number; //cents
@@ -20,17 +21,19 @@ export interface SearchCardProps {
 export default function SearchCard({
 	title,
 	productId,
+	productCode,
 	volume,
 	rating,
 	price,
 	quantityInStock,
 	imageUrl,
 }: SearchCardProps) {
+	const productLink = `/product/${productId}`;
    const [availability, setAvailability] = useState<AvailabilityType>(getAvailability(quantityInStock));
    const availabilityClass: string = getAvailabilityClass(availability);
 
 	return (
-		<Link href={"/"} className="w-full max-w-[500px] flex gap-x-10 p-5 rounded-[8px] bg-white transition-colors hover:bg-accent-light">
+		<Link href={productLink} className="w-full max-w-[500px] flex gap-x-10 p-5 rounded-[8px] bg-white transition-colors hover:bg-accent-light">
 			<div className="relative overflow-hidden size-[100px] aspect-square flex shrink-0 justify-center items-center">
 				<Image
 					src={imageUrl}
@@ -45,7 +48,7 @@ export default function SearchCard({
          <div className="w-full flex flex-col justify-between">
             <div className="flex flex-row w-full justify-between">
                <h3 className="font-semibold whitespace-nowrap">{title}</h3>
-               <span className="font-semibold">{productId}</span>
+               <span className="font-semibold">{productCode}</span>
             </div>
 
             <div className="flex justify-between">

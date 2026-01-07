@@ -65,7 +65,8 @@ export default function Page() {
 			<div className="flex gap-x-4">
 				<SearchCard
 					title={"Versace Eros Flame"}
-					productId="01203213"
+					productId="clh32m980000008l6gg6s658o"
+					productCode="01203213"
 					quantityInStock={10}
 					imageUrl={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
 					volume={0}
@@ -74,7 +75,8 @@ export default function Page() {
 				></SearchCard>
 				<SearchCard
 					title={"Versace Eros Flame"}
-					productId="01203213"
+					productId="clh32m980000008l6gg6s658o"
+					productCode="01203213"
 					quantityInStock={0}
 					imageUrl={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
 					volume={0}
