@@ -3,7 +3,7 @@
 import CartDrawerItem from "@/components/cartDrawerItem/cartDrawerItem";
 import CartItem from "@/components/cartItem";
 import CommentCard from "@/components/commentCard/commentCard";
-import ProductCard from "@/components/productCard";
+import ProductCard, { ProductCardOnSaveEvent } from "@/components/productCard";
 import SearchCard from "@/components/searchCard";
 import Stepper from "@/components/stepper/stepper";
 import Marker from "@/components/ui/marker";
@@ -25,32 +25,38 @@ export default function Page() {
 				<div className="flex gap-x-4">
 					<ProductCard
 						title={"Versace Eros Flame"}
+						product_id="21234re34125derew1"
 						image_url={"https://i.makeup.it/u/uf/uf0jgxb7gg2e.jpg"}
 						markers={["hit"]}
 						wishlist={false}
 						volume={0}
 						rating={4.5}
 						price={200}
+						onSave={(e: ProductCardOnSaveEvent) => console.log(`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`, e.product_id)}
 					/>
 
 					<ProductCard
 						title={"Versace Eros Flame"}
+						product_id="21234re34125derew1"
 						image_url={"https://i.makeup.it/u/ux/uxuxdj4ehyen.jpg"}
 						markers={["hit", "hit"]}
 						wishlist={true}
 						volume={0}
 						rating={4.5}
 						price={9999}
+						onSave={(e: ProductCardOnSaveEvent) => console.log(`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`, e.product_id)}
 					/>
 
 					<ProductCard
 						title={"Versace Eros Flame"}
+						product_id="21234re34125derew1"
 						image_url={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
 						markers={[]}
 						wishlist={true}
 						volume={0}
 						rating={4.5}
 						price={200}
+						onSave={(e: ProductCardOnSaveEvent) => console.log(`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`, e.product_id)}
 					/>
 				</div>
 			</div>
