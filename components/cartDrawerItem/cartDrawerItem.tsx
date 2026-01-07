@@ -15,7 +15,7 @@ import "./cartDrawerItem.css";
 import Link from "next/link";
 
 export interface CartDrawerItemProps {
-	image_url: string;
+	imageUrl: string;
 	title: string;
 	volume: VolumeEnum;
 	productId: string;
@@ -25,7 +25,7 @@ export interface CartDrawerItemProps {
 	onDelete: () => void;
 }
 export default function CartDrawerItem({
-	image_url,
+	imageUrl,
 	title,
 	volume,
 	productId,
@@ -67,7 +67,7 @@ export default function CartDrawerItem({
 						className="item__image relative overflow-hidden size-18 rounded-lg aspect-square flex shrink-0 justify-center items-center"
 					>
 						<Image
-							src={image_url}
+							src={imageUrl}
 							alt={`${title} ${volEnumToNumber(volume)} ml`}
 							fill
 							className="object-contain"

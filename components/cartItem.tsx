@@ -13,7 +13,7 @@ import { useState } from "react";
 import Stepper from "./stepper/stepper";
 
 export interface CartItemProps {
-	image_url: string;
+	imageUrl: string;
 	title: string;
 	volume: VolumeEnum;
 	productId: string;
@@ -24,7 +24,7 @@ export interface CartItemProps {
 }
 
 export default function CartItem({
-	image_url,
+	imageUrl,
 	title,
 	volume,
 	productId,
@@ -61,7 +61,7 @@ export default function CartItem({
 					<div className="flex gap-x-10">
 						<div className="relative overflow-hidden size-[100px] aspect-square flex shrink-0 justify-center items-center">
 							<Image
-								src={image_url}
+								src={imageUrl}
 								alt={`${title} ${volEnumToNumber(volume)} ml`}
 								fill
 								className="object-contain"

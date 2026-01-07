@@ -14,14 +14,14 @@ import Rating from "./ui/rating";
 import { useState } from "react";
 
 export interface ProductCardOnSaveEvent {
-	product_id: string;
+	productId: string;
 	wishlist: boolean;
 }
 export interface ProductCardProps {
 	title: string;
-	product_id: string; // diverse from product_code
+	productId: string; // diverse from product_code
 	volume: VolumeEnum;
-	image_url: string;
+	imageUrl: string;
 	rating: number;
 	price: number; // in cents
 	wishlist: boolean;
@@ -31,16 +31,16 @@ export interface ProductCardProps {
 
 export default function ProductCard({
 	title,
-	product_id,
+	productId,
 	volume,
-	image_url,
+	imageUrl,
 	rating,
 	price,
 	wishlist,
 	markers,
 	onSave,
 }: ProductCardProps) {
-	const productLink = `/product/${product_id}`;
+	const productLink = `/product/${productId}`;
 
 	const [isSaved, setIsSaved] = useState<boolean>(wishlist);
 
@@ -49,7 +49,7 @@ export default function ProductCard({
 
 		setIsSaved(newSavedStatus);
 		onSave({
-			product_id,
+			productId,
 			wishlist: newSavedStatus,
 		});
 	};
@@ -89,7 +89,7 @@ export default function ProductCard({
 					className="relative overflow-hidden h-[200px] w-full aspect-square flex justify-center items-center"
 				>
 					<Image
-						src={image_url}
+						src={imageUrl}
 						alt={`${title} ${volEnumToNumber(volume)} ml`}
 						fill
 						className="object-contain"

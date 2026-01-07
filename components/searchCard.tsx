@@ -14,7 +14,7 @@ export interface SearchCardProps {
 	rating: number;
 	price: number; //cents
 	quantityInStock: number;
-	image_url: string;
+	imageUrl: string;
 }
 
 export default function SearchCard({
@@ -24,7 +24,7 @@ export default function SearchCard({
 	rating,
 	price,
 	quantityInStock,
-	image_url,
+	imageUrl,
 }: SearchCardProps) {
    const [availability, setAvailability] = useState<AvailabilityType>(getAvailability(quantityInStock));
    const availabilityClass: string = getAvailabilityClass(availability);
@@ -33,7 +33,7 @@ export default function SearchCard({
 		<Link href={"/"} className="w-full max-w-[500px] flex gap-x-10 p-5 rounded-[8px] bg-white transition-colors hover:bg-accent-light">
 			<div className="relative overflow-hidden size-[100px] aspect-square flex shrink-0 justify-center items-center">
 				<Image
-					src={image_url}
+					src={imageUrl}
 					alt={`${title} ${volEnumToNumber(volume)} ml`}
 					fill
 					className="object-contain"

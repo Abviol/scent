@@ -25,38 +25,38 @@ export default function Page() {
 				<div className="flex gap-x-4">
 					<ProductCard
 						title={"Versace Eros Flame"}
-						product_id="21234re34125derew1"
-						image_url={"https://i.makeup.it/u/uf/uf0jgxb7gg2e.jpg"}
+						productId="21234re34125derew1"
+						imageUrl={"https://i.makeup.it/u/uf/uf0jgxb7gg2e.jpg"}
 						markers={["hit"]}
 						wishlist={false}
 						volume={0}
 						rating={4.5}
 						price={200}
-						onSave={(e: ProductCardOnSaveEvent) => console.log(`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`, e.product_id)}
+						onSave={(e: ProductCardOnSaveEvent) => console.log(`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`, e.productId)}
 					/>
 
 					<ProductCard
 						title={"Versace Eros Flame"}
-						product_id="21234re34125derew1"
-						image_url={"https://i.makeup.it/u/ux/uxuxdj4ehyen.jpg"}
+						productId="21234re34125derew1"
+						imageUrl={"https://i.makeup.it/u/ux/uxuxdj4ehyen.jpg"}
 						markers={["hit", "hit"]}
 						wishlist={true}
 						volume={0}
 						rating={4.5}
 						price={9999}
-						onSave={(e: ProductCardOnSaveEvent) => console.log(`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`, e.product_id)}
+						onSave={(e: ProductCardOnSaveEvent) => console.log(`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`, e.productId)}
 					/>
 
 					<ProductCard
 						title={"Versace Eros Flame"}
-						product_id="21234re34125derew1"
-						image_url={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
+						productId="21234re34125derew1"
+						imageUrl={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
 						markers={[]}
 						wishlist={true}
 						volume={0}
 						rating={4.5}
 						price={200}
-						onSave={(e: ProductCardOnSaveEvent) => console.log(`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`, e.product_id)}
+						onSave={(e: ProductCardOnSaveEvent) => console.log(`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`, e.productId)}
 					/>
 				</div>
 			</div>
@@ -67,7 +67,7 @@ export default function Page() {
 					title={"Versace Eros Flame"}
 					productId="01203213"
 					quantityInStock={10}
-					image_url={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
+					imageUrl={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
 					volume={0}
 					rating={4.5}
 					price={4999}
@@ -76,7 +76,7 @@ export default function Page() {
 					title={"Versace Eros Flame"}
 					productId="01203213"
 					quantityInStock={0}
-					image_url={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
+					imageUrl={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
 					volume={0}
 					rating={4.5}
 					price={4999}
@@ -89,7 +89,7 @@ export default function Page() {
 					title={"Versace Eros Flame"}
 					productId="01203213"
 					quantityInStock={11}
-					image_url={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
+					imageUrl={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
 					volume={0}
 					pricePerItem={4999}
 					quantity={1}
@@ -99,7 +99,7 @@ export default function Page() {
 					title={"Versace Eros Flame"}
 					productId="01203213"
 					quantityInStock={0}
-					image_url={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
+					imageUrl={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
 					volume={2}
 					pricePerItem={11999}
 					quantity={1}
@@ -113,7 +113,7 @@ export default function Page() {
 					title={"Versace Eros Flame"}
 					productId="01203213"
 					quantityInStock={11}
-					image_url={"https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"}
+					imageUrl={"https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"}
 					volume={0}
 					pricePerItem={4999}
 					quantity={1}
@@ -123,7 +123,7 @@ export default function Page() {
 					title={"Versace Eros Flame"}
 					productId="01203213"
 					quantityInStock={0}
-					image_url={"https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"}
+					imageUrl={"https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"}
 					volume={0}
 					pricePerItem={4999}
 					quantity={1}
@@ -160,25 +160,25 @@ export default function Page() {
 			<h3 className="my-text-lg">Comment card</h3>
 			<div className="mx-auto w-[1200px] grid grid-cols-3 gap-x-[102px] gap-y-[60px]">
 				<CommentCard
-					user_avatar_url="https://lh3.googleusercontent.com/ogw/AF2bZygcwIauU2RIpsqeogK3a5zbJd53GV87qFj_i_3vm1N0nA=s32-c-mo"
-					user_name="Nazar"
-					date_comment_left="11.11"
+					userAvatarUrl="https://lh3.googleusercontent.com/ogw/AF2bZygcwIauU2RIpsqeogK3a5zbJd53GV87qFj_i_3vm1N0nA=s32-c-mo"
+					userName="Nazar"
+					dateCommentLeft="11.11"
 					rating={4.4}
-					comment_text="I am pleasantly surprised by the service and quality of the fragrances! I ordered some perfume, and it arrived very quickly and beautifully packaged — you can feel the attention to detail."
+					text="I am pleasantly surprised by the service and quality of the fragrances! I ordered some perfume, and it arrived very quickly and beautifully packaged — you can feel the attention to detail."
 				></CommentCard>
 				<CommentCard
-					user_avatar_url="https://lh3.googleusercontent.com/ogw/AF2bZygcwIauU2RIpsqeogK3a5zbJd53GV87qFj_i_3vm1N0nA=s32-c-mo"
-					user_name="Nazar Kyselov"
-					date_comment_left="24.12"
+					userAvatarUrl="https://lh3.googleusercontent.com/ogw/AF2bZygcwIauU2RIpsqeogK3a5zbJd53GV87qFj_i_3vm1N0nA=s32-c-mo"
+					userName="Nazar Kyselov"
+					dateCommentLeft="24.12"
 					rating={4.9}
-					comment_text="With surname doesn't look good. la;sjdflkasjdfl;kjsad;lfkjsad;lkfj;laskdjf;lkasjdf;lkasjdfl;kjasd;lfkjsa;lkdfja;sldkfj;salkdjf;aslkdjf"
+					text="With surname doesn't look good. la;sjdflkasjdfl;kjsad;lfkjsad;lkfj;laskdjf;lkasjdf;lkasjdfl;kjasd;lfkjsa;lkdfja;sldkfj;salkdjf;aslkdjf"
 				></CommentCard>
 				<CommentCard
-					user_avatar_url="https://lh3.googleusercontent.com/ogw/AF2bZygcwIauU2RIpsqeogK3a5zbJd53GV87qFj_i_3vm1N0nA=s32-c-mo"
-					user_name="Misha"
-					date_comment_left="31.12"
+					userAvatarUrl="https://lh3.googleusercontent.com/ogw/AF2bZygcwIauU2RIpsqeogK3a5zbJd53GV87qFj_i_3vm1N0nA=s32-c-mo"
+					userName="Misha"
+					dateCommentLeft="31.12"
 					rating={4.9}
-					comment_text="Short comment."
+					text="Short comment."
 				></CommentCard>
 			</div>
 		</div>
