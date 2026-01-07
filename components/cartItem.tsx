@@ -11,12 +11,14 @@ import { Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import Stepper from "./stepper/stepper";
+import Link from "next/link";
 
 export interface CartItemProps {
 	imageUrl: string;
 	title: string;
 	volume: VolumeEnum;
 	productId: string;
+	productCode: string;
 	quantity: number;
 	quantityInStock: number;
 	pricePerItem: number; // cents
@@ -28,6 +30,7 @@ export default function CartItem({
 	title,
 	volume,
 	productId,
+	productCode,
 	quantity,
 	quantityInStock,
 	pricePerItem,
@@ -38,6 +41,7 @@ export default function CartItem({
 		getAvailability(quantityInStock)
 	);
 	const availabilityClass: string = getAvailabilityClass(availability);
+	const productLink: string = `/product/${productId}`;
 
 	const [newQuantity, setNewQuantity] = useState<number>(quantity);
 	const [totalPrice, setTotalPrice] = useState<number>(
@@ -58,7 +62,7 @@ export default function CartItem({
 		<>
 			{!isDeleted && (
 				<div className="flex justify-between items-center w-full bg-white border-gray-200 border-2 p-10 rounded-[8px]">
-					<div className="flex gap-x-10">
+					<Link href={productLink} className="flex gap-x-10">
 						<div className="relative overflow-hidden size-[100px] aspect-square flex shrink-0 justify-center items-center">
 							<Image
 								src={imageUrl}
@@ -79,9 +83,9 @@ export default function CartItem({
 										{volEnumToNumber(volume)} ml
 									</span>
 									<span className="text-gray-500">
-										Product Id&nbsp;-&nbsp;
+										Product Code&nbsp;-&nbsp;
 										<span className="text-main">
-											{productId}
+											{productCode}
 										</span>
 									</span>
 								</div>
@@ -93,7 +97,7 @@ export default function CartItem({
 								{availability}
 							</span>
 						</div>
-					</div>
+					</Link>
 					<Stepper
 						value={newQuantity}
 						onChange={(e) => handleQuantity(e)}

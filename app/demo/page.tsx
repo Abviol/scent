@@ -89,7 +89,8 @@ export default function Page() {
 			<div className="flex flex-col gap-y-8">
 				<CartItem
 					title={"Versace Eros Flame"}
-					productId="01203213"
+					productId="clh32m980000008l6gg6s658o"
+					productCode="01203213"
 					quantityInStock={11}
 					imageUrl={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
 					volume={0}
@@ -99,7 +100,8 @@ export default function Page() {
 				></CartItem>
 				<CartItem
 					title={"Versace Eros Flame"}
-					productId="01203213"
+					productId="clh32m980000008l6gg6s658o"
+					productCode="01203213"
 					quantityInStock={0}
 					imageUrl={"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"}
 					volume={2}
