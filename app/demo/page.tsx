@@ -7,13 +7,22 @@ import ProductCard, { ProductCardOnSaveEvent } from "@/components/productCard";
 import SearchCard from "@/components/searchCard";
 import Stepper from "@/components/stepper/stepper";
 import Avatar from "@/components/ui/avatar";
+import Breadcrumbs from "@/components/ui/breadcrumbs";
 import Marker from "@/components/ui/marker";
 import { useState } from "react";
 
 export default function Page() {
+	// For cartItem
 	const [cartQuantity1, setCartQuantity1] = useState<number>(10);
 	const [cartQuantity2, setCartQuantity2] = useState<number>(10);
 	const [cartQuantity3, setCartQuantity3] = useState<number>(10);
+
+	// for Breadcrumbs
+	const crumbs = [
+		{ label: "Scent", href: "/" },
+		{ label: "Shop", href: "/shop" },
+		{ label: "Product X", href: "/shop/product" },
+	];
 
 	return (
 		<div className="py-12 px-8">
@@ -217,45 +226,40 @@ export default function Page() {
 			</div>
 
 			<h3 className="my-text-lg">Avatar</h3>
-			<div className="flex gap-x-4">
-				<Avatar
-					src="https://lh3.googleusercontent.com/a/ACg8ocJk8_4mB7fwyJ6lMYrJzMI2O0kAJ7svxJjIUMf0sfkEFoB1BDs=s504-c-no"
-					alt="Nazar"
-					size="xl"
-				></Avatar>
-				<Avatar
-					src="https://lh3.googleusercontent.com/a/ACg8ocJk8_4mB7fwyJ6lMYrJzMI2O0kAJ7svxJjIUMf0sfkEFoB1BDs=s504-c-no"
-					alt="Nazar"
-					size="lg"
-				></Avatar>
-				<Avatar
-					src="https://lh3.googleusercontent.com/a/ACg8ocJk8_4mB7fwyJ6lMYrJzMI2O0kAJ7svxJjIUMf0sfkEFoB1BDs=s504-c-no"
-					alt="Nazar"
-					size="md"
-				></Avatar>
-				<Avatar
-					src="https://lh3.googleusercontent.com/a/ACg8ocJk8_4mB7fwyJ6lMYrJzMI2O0kAJ7svxJjIUMf0sfkEFoB1BDs=s504-c-no"
-					alt="Nazar"
-					size="sm"
-				></Avatar>
+			<div className="flex flex-col">
+				<div className="flex gap-x-4">
+					<Avatar
+						src="https://lh3.googleusercontent.com/a/ACg8ocJk8_4mB7fwyJ6lMYrJzMI2O0kAJ7svxJjIUMf0sfkEFoB1BDs=s504-c-no"
+						alt="Nazar"
+						size="xl"
+					></Avatar>
+					<Avatar
+						src="https://lh3.googleusercontent.com/a/ACg8ocJk8_4mB7fwyJ6lMYrJzMI2O0kAJ7svxJjIUMf0sfkEFoB1BDs=s504-c-no"
+						alt="Nazar"
+						size="lg"
+					></Avatar>
+					<Avatar
+						src="https://lh3.googleusercontent.com/a/ACg8ocJk8_4mB7fwyJ6lMYrJzMI2O0kAJ7svxJjIUMf0sfkEFoB1BDs=s504-c-no"
+						alt="Nazar"
+						size="md"
+					></Avatar>
+					<Avatar
+						src="https://lh3.googleusercontent.com/a/ACg8ocJk8_4mB7fwyJ6lMYrJzMI2O0kAJ7svxJjIUMf0sfkEFoB1BDs=s504-c-no"
+						alt="Nazar"
+						size="sm"
+					></Avatar>
+				</div>
+				<div className="flex gap-x-4">
+					<Avatar alt="Misha Kulkin" size="xl"></Avatar>
+					<Avatar alt="Misha Kulkin" size="lg"></Avatar>
+					<Avatar alt="Misha Kulkin" size="md"></Avatar>
+					<Avatar alt="Misha Kulkin" size="sm"></Avatar>
+				</div>
 			</div>
+
+			<h3 className="my-text-lg">Breadcrumbs</h3>
 			<div className="flex gap-x-4">
-				<Avatar
-					alt="Misha Kulkin"
-					size="xl"
-				></Avatar>
-				<Avatar
-					alt="Misha Kulkin"
-					size="lg"
-				></Avatar>
-				<Avatar
-					alt="Misha Kulkin"
-					size="md"
-				></Avatar>
-				<Avatar
-					alt="Misha Kulkin"
-					size="sm"
-				></Avatar>
+				<Breadcrumbs items={crumbs}></Breadcrumbs>
 			</div>
 		</div>
 	);
