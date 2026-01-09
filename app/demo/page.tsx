@@ -6,6 +6,7 @@ import CommentCard from "@/components/commentCard/commentCard";
 import ProductCard, { ProductCardOnSaveEvent } from "@/components/productCard";
 import SearchCard from "@/components/searchCard";
 import Stepper from "@/components/stepper/stepper";
+import Avatar from "@/components/ui/avatar";
 import Marker from "@/components/ui/marker";
 import { useState } from "react";
 
@@ -32,7 +33,16 @@ export default function Page() {
 						volume={0}
 						rating={4.5}
 						price={200}
-						onSave={(e: ProductCardOnSaveEvent) => console.log(`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`, e.productId)}
+						onSave={(e: ProductCardOnSaveEvent) =>
+							console.log(
+								`${
+									e.wishlist
+										? "Added to wishlist"
+										: "Removed from wishlist"
+								}`,
+								e.productId
+							)
+						}
 					/>
 
 					<ProductCard
@@ -44,7 +54,16 @@ export default function Page() {
 						volume={0}
 						rating={4.5}
 						price={9999}
-						onSave={(e: ProductCardOnSaveEvent) => console.log(`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`, e.productId)}
+						onSave={(e: ProductCardOnSaveEvent) =>
+							console.log(
+								`${
+									e.wishlist
+										? "Added to wishlist"
+										: "Removed from wishlist"
+								}`,
+								e.productId
+							)
+						}
 					/>
 
 					<ProductCard
@@ -56,7 +75,16 @@ export default function Page() {
 						volume={0}
 						rating={4.5}
 						price={200}
-						onSave={(e: ProductCardOnSaveEvent) => console.log(`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`, e.productId)}
+						onSave={(e: ProductCardOnSaveEvent) =>
+							console.log(
+								`${
+									e.wishlist
+										? "Added to wishlist"
+										: "Removed from wishlist"
+								}`,
+								e.productId
+							)
+						}
 					/>
 				</div>
 			</div>
@@ -186,6 +214,48 @@ export default function Page() {
 					rating={4.9}
 					text="Short comment."
 				></CommentCard>
+			</div>
+
+			<h3 className="my-text-lg">Avatar</h3>
+			<div className="flex gap-x-4">
+				<Avatar
+					src="https://lh3.googleusercontent.com/a/ACg8ocJk8_4mB7fwyJ6lMYrJzMI2O0kAJ7svxJjIUMf0sfkEFoB1BDs=s504-c-no"
+					alt="Nazar"
+					size="xl"
+				></Avatar>
+				<Avatar
+					src="https://lh3.googleusercontent.com/a/ACg8ocJk8_4mB7fwyJ6lMYrJzMI2O0kAJ7svxJjIUMf0sfkEFoB1BDs=s504-c-no"
+					alt="Nazar"
+					size="lg"
+				></Avatar>
+				<Avatar
+					src="https://lh3.googleusercontent.com/a/ACg8ocJk8_4mB7fwyJ6lMYrJzMI2O0kAJ7svxJjIUMf0sfkEFoB1BDs=s504-c-no"
+					alt="Nazar"
+					size="md"
+				></Avatar>
+				<Avatar
+					src="https://lh3.googleusercontent.com/a/ACg8ocJk8_4mB7fwyJ6lMYrJzMI2O0kAJ7svxJjIUMf0sfkEFoB1BDs=s504-c-no"
+					alt="Nazar"
+					size="sm"
+				></Avatar>
+			</div>
+			<div className="flex gap-x-4">
+				<Avatar
+					alt="Misha Kulkin"
+					size="xl"
+				></Avatar>
+				<Avatar
+					alt="Misha Kulkin"
+					size="lg"
+				></Avatar>
+				<Avatar
+					alt="Misha Kulkin"
+					size="md"
+				></Avatar>
+				<Avatar
+					alt="Misha Kulkin"
+					size="sm"
+				></Avatar>
 			</div>
 		</div>
 	);
