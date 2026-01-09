@@ -12,6 +12,7 @@ import Stepper from "@/components/stepper/stepper";
 import Avatar from "@/components/ui/avatar";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import Marker from "@/components/ui/marker";
+import Tag from "@/components/ui/tag";
 
 // --- Helper Component for Layout ---
 const DemoSection = ({
@@ -63,10 +64,14 @@ export default function Page() {
 				</header>
 
 				{/* 1. MARKERS */}
-				<DemoSection title="Markers & Badges">
-					<div className="flex gap-4">
+				<DemoSection title="Markers & Tags">
+					<div className="flex gap-4 mb-4">
 						<Marker name="hit" size="sm" />
 						<Marker name="hit" size="md" />
+					</div>
+					<div className="flex gap-4">
+						<Tag text="Argentina" onRemove={() => {}}></Tag>
+						<Tag text="Your mamma" onRemove={() => {}}></Tag>
 					</div>
 				</DemoSection>
 
@@ -310,6 +315,7 @@ export default function Page() {
 				<DemoSection title="Navigation & Breadcrumbs">
 					<Breadcrumbs items={crumbs} />
 				</DemoSection>
+				
 			</div>
 		</div>
 	);
