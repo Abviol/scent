@@ -3,7 +3,7 @@ import { LucideIcon } from "lucide-react";
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
 	children: React.ReactNode;
-	variant?: "default" | "neutral" | "success" | "warning" | "error";
+	variant?: "default" | "neutral" | "success" | "warning" | "error" | "mystery";
 	icon?: LucideIcon;
 }
 
@@ -23,6 +23,7 @@ export default function Badge({
 		success: "bg-green-100 text-green-600",
 		warning: "bg-accent-light text-accent",
 		error: "bg-red-50 text-red-600",
+      mystery: "bg-[#eee3fd] text-[#b158f6]"
 	};
 
 	return (

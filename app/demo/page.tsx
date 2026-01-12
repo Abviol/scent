@@ -91,6 +91,9 @@ export default function Page() {
 						<Badge variant="neutral" icon={ListOrdered}>
 							Ordered
 						</Badge>
+						<Badge variant="mystery">
+							Return Received
+						</Badge>
 					</div>
 				</DemoSection>
 
