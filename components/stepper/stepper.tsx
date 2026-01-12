@@ -44,7 +44,7 @@ export default function Stepper({
 				<Minus
 					size={size == "md" ? 32 : 18}
 					strokeWidth={1.5}
-					className="stepper__icon stroke-black group-hover:stroke-accent group-disabled:stroke-gray-200 transition-colors"
+					className="stepper__icon group-hover:stroke-accent group-disabled:stroke-gray-200 transition-colors"
 				></Minus>
 			</button>
 			<div className="stepper__display h-full flex justify-center items-center">
@@ -61,7 +61,7 @@ export default function Stepper({
 				<Plus
 					size={size == "md" ? 32 : 18}
 					strokeWidth={1.5}
-					className="stroke-black group-hover:stroke-accent group-disabled:stroke-gray-200 transition-colors"
+					className="group-hover:stroke-accent group-disabled:stroke-gray-200 transition-colors"
 				></Plus>
 			</button>
 		</div>
