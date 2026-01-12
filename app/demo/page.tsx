@@ -13,6 +13,8 @@ import Avatar from "@/components/ui/avatar";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import Marker from "@/components/ui/marker";
 import Tag from "@/components/ui/tag";
+import Badge from "@/components/ui/badge";
+import { AlertTriangle, Check, ListOrdered, Truck } from "lucide-react";
 
 // --- Helper Component for Layout ---
 const DemoSection = ({
@@ -64,14 +66,31 @@ export default function Page() {
 				</header>
 
 				{/* 1. MARKERS */}
-				<DemoSection title="Markers & Tags">
+				<DemoSection title="Markers, Badges & Tags">
 					<div className="flex gap-4 mb-4">
 						<Marker name="hit" size="sm" />
 						<Marker name="hit" size="md" />
 					</div>
-					<div className="flex gap-4">
+					<div className="flex gap-4 mb-4">
 						<Tag text="Argentina" onRemove={() => {}}></Tag>
 						<Tag text="Your mamma" onRemove={() => {}}></Tag>
+					</div>
+					<div className="flex gap-4">
+						<Badge variant="warning" icon={Truck}>
+							Shipped
+						</Badge>
+						<Badge variant="warning">
+							Nº8149249
+						</Badge>
+						<Badge variant="success" icon={Check}>
+							Delivered
+						</Badge>
+						<Badge variant="error" icon={AlertTriangle}>
+							Canceled
+						</Badge>
+						<Badge variant="neutral" icon={ListOrdered}>
+							Ordered
+						</Badge>
 					</div>
 				</DemoSection>
 
@@ -315,7 +334,6 @@ export default function Page() {
 				<DemoSection title="Navigation & Breadcrumbs">
 					<Breadcrumbs items={crumbs} />
 				</DemoSection>
-				
 			</div>
 		</div>
 	);
