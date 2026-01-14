@@ -7,7 +7,7 @@ import Link from "next/link";
 import Rating from "./ui/rating";
 import { useState } from "react";
 
-export interface SearchCardProps {
+export interface SearchResultItemProps {
 	title: string;
 	productId: string;
 	productCode: string;
@@ -18,7 +18,7 @@ export interface SearchCardProps {
 	imageUrl: string;
 }
 
-export default function SearchCard({
+export default function SearchResultItem({
 	title,
 	productId,
 	productCode,
@@ -27,7 +27,7 @@ export default function SearchCard({
 	price,
 	quantityInStock,
 	imageUrl,
-}: SearchCardProps) {
+}: SearchResultItemProps) {
 	const productLink = `/product/${productId}`;
    const [availability, setAvailability] = useState<AvailabilityType>(getAvailability(quantityInStock));
    const availabilityClass: string = getAvailabilityClass(availability);

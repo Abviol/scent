@@ -7,14 +7,15 @@ import CartDrawerItem from "@/components/cartDrawerItem/cartDrawerItem";
 import CartItem from "@/components/cartItem";
 import CommentCard from "@/components/commentCard/commentCard";
 import ProductCard, { ProductCardOnSaveEvent } from "@/components/productCard";
-import SearchCard from "@/components/searchCard";
+import SearchResultItem from "@/components/searchResultItem";
 import Stepper from "@/components/stepper/stepper";
 import Avatar from "@/components/ui/avatar";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import Marker from "@/components/ui/marker";
 import Tag from "@/components/ui/tag";
 import Badge from "@/components/ui/badge";
-import { AlertTriangle, Check, ListOrdered, Truck } from "lucide-react";
+import { AlertTriangle, Check, ListOrdered, Search, Truck } from "lucide-react";
+import Header from "@/components/layout/header";
 
 // --- Helper Component for Layout ---
 const DemoSection = ({
@@ -55,6 +56,7 @@ export default function Page() {
 
 	return (
 		<div className="min-h-screen bg-white">
+			<Header></Header>
 			<div className="max-w-[1400px] mx-auto px-8 py-12">
 				<header className="mb-12">
 					<h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
@@ -79,9 +81,7 @@ export default function Page() {
 						<Badge variant="warning" icon={Truck}>
 							Shipped
 						</Badge>
-						<Badge variant="warning">
-							Nº8149249
-						</Badge>
+						<Badge variant="warning">Nº8149249</Badge>
 						<Badge variant="success" icon={Check}>
 							Delivered
 						</Badge>
@@ -91,9 +91,7 @@ export default function Page() {
 						<Badge variant="neutral" icon={ListOrdered}>
 							Ordered
 						</Badge>
-						<Badge variant="mystery">
-							Return Received
-						</Badge>
+						<Badge variant="mystery">Return Received</Badge>
 					</div>
 				</DemoSection>
 
@@ -139,7 +137,7 @@ export default function Page() {
 				{/* 3. SEARCH CARDS */}
 				<DemoSection title="Search / Horizontal Cards">
 					<div className="flex flex-wrap gap-6">
-						<SearchCard
+						<SearchResultItem
 							title="Versace Eros Flame"
 							productId="sc-001"
 							productCode="01203213"
@@ -149,7 +147,7 @@ export default function Page() {
 							rating={4.5}
 							price={4999}
 						/>
-						<SearchCard
+						<SearchResultItem
 							title="Versace Eros Flame (Out of Stock)"
 							productId="sc-002"
 							productCode="01203213"
