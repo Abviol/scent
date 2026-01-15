@@ -117,7 +117,7 @@
     @apply box-border border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-main ;
+    @apply bg-background text-foreground;
   }
 
   button {
@@ -134,7 +134,7 @@
 
 /* custom classes */
 .button-icon {
-  @apply size-12 border-2 border-transparent rounded-[8px] flex justify-center items-center;
+  @apply size-12 border-2 border-transparent rounded-[8px] flex justify-center items-center transition-colors;
   @apply hover:bg-amber-50 hover:border-amber-600
 }
 
