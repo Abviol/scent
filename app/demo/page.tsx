@@ -17,6 +17,7 @@ import Badge from "@/components/ui/badge";
 import { AlertTriangle, Check, ListOrdered, Search, Truck } from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
+import Nav from "@/components/layout/nav";
 
 // --- Helper Component for Layout ---
 const DemoSection = ({
@@ -58,15 +59,16 @@ export default function Page() {
 	return (
 		<div className="min-h-screen bg-white">
 			<Header></Header>
+			<Nav />
 			<div className="max-w-[1400px] mx-auto px-8 py-12">
-				<header className="mb-12">
+				<div className="mb-12">
 					<h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
 						UI Component Library
 					</h1>
 					<p className="mt-2 text-lg text-gray-600">
 						A visual test suite for all application components.
 					</p>
-				</header>
+				</div>
 
 				{/* 1. MARKERS */}
 				<DemoSection title="Markers, Badges & Tags">
