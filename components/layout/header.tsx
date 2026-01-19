@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Bookmark, Mail, Search, ShoppingCartIcon, X } from "lucide-react";
 
@@ -32,11 +32,24 @@ export default function Header() {
 	const closeSearch = () => setIsSearchOpen(false);
 	const handleSearchFocus = () => setIsSearchOpen(true);
 	const clearSearch = () => setSearchValue("");
-	
+	const handleBlur = (e: PointerEvent) => {
+		const target = e.target as HTMLElement;
+		if (!target.closest(".search-bar")) {
+			setIsSearchOpen(false);
+			console.log("Blurred");
+		}
+	};
+
 	useEffect(() => {
-		if (isSearchOpen && searchValue) document.body.style.overflow = "hidden";
+		if (isSearchOpen && searchValue)
+			document.body.style.overflow = "hidden";
 		else document.body.style.overflow = "visible";
 	}, [isSearchOpen, searchValue]);
+
+	useEffect(() => {
+		document.body.addEventListener("click", handleBlur);
+		return () => document.body.removeEventListener("click", handleBlur);
+	}, []);
 
 	return (
 		<>
@@ -59,23 +72,25 @@ export default function Header() {
 						Scent
 					</Link>
 
-					{/* 2. Search Bar */}
-					<div className="relative flex-1 max-w-2xl">
-						<SearchBar
-							value={searchValue}
-							isOpen={isSearchOpen}
-							onChange={setSearchValue}
-							onFocus={handleSearchFocus}
-							onClear={clearSearch}
+					<div className="flex flex-row justify-between w-full max-w-[75%] gap-x-3">
+						{/* 2. Search Bar */}
+						<div className="relative flex-1">
+							<SearchBar
+								value={searchValue}
+								isOpen={isSearchOpen}
+								onChange={setSearchValue}
+								onFocus={handleSearchFocus}
+								onClear={clearSearch}
+							/>
+						</div>
+
+						{/* 3. Actions (Cart, Wishlist, User) */}
+						<HeaderActions
+							isLoggedIn={isLoggedIn}
+							user={user}
+							itemsInCart={itemsInCart}
 						/>
 					</div>
-
-					{/* 3. Actions (Cart, Wishlist, User) */}
-					<HeaderActions
-						isLoggedIn={isLoggedIn}
-						user={user}
-						itemsInCart={itemsInCart}
-					/>
 				</div>
 
 				{/* 4. Search Results Dropdown */}
@@ -100,24 +115,54 @@ function SearchBar({
 	onFocus: () => void;
 	onClear: () => void;
 }) {
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		if (isOpen) {
+			setTimeout(() => {
+				inputRef.current?.focus();
+			}, 50);
+		}
+	}, [isOpen]);
+
+	const handleFocus = () => {
+		onFocus();
+		inputRef.current?.focus();
+	}
+
+	const handleClear = () => {
+		onClear();
+		inputRef.current?.focus();
+	};
+
 	return (
-		<div className="relative group">
-			<Input
-				type="search"
-				placeholder="Search fragrances..."
-				value={value}
-				onChange={(e) => onChange(e.target.value)}
-				onFocus={onFocus}
-				className="w-full h-12 rounded-lg border py-2 pl-6 pr-12 text-sm outline-none transition-all"
-			/>
+		<div
+			className={`search-bar relative group flex flex-row gap-x-3 ${
+				isOpen ? "justify-start" : "w-full justify-end"
+			} transition-all`}
+		>
+			{isOpen && (
+				<Input
+					ref={inputRef}
+					type="search"
+					placeholder="Search fragrances..."
+					value={value}
+					onChange={(e) => onChange(e.target.value)}
+					className="w-full max-w-xl h-12 rounded-lg border py-2 px-6 text-sm outline-none transition-all animate-in fade-in duration-200"
+				/>
+			)}
+			<div
+				className={`${isOpen ? "w-0" : "w-[20%]"} transition-all`}
+			></div>
 			<button
-				className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-main"
+				className="button-icon shrink-0"
 				aria-label={isOpen && value ? "Clear search" : "Search"}
+				onClick={isOpen && value ? handleClear : handleFocus}
 			>
 				{isOpen && value ? (
-					<X size={18} onClick={onClear} />
+					<X size={28} />
 				) : (
-					<Search size={20} />
+					<Search size={32} strokeWidth={1.5} />
 				)}
 			</button>
 		</div>
