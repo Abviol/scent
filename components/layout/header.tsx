@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import React, { MouseEvent, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Bookmark, Mail, Search, ShoppingCartIcon, X } from "lucide-react";
 
@@ -35,7 +35,7 @@ export default function Header() {
 	const handleBlur = (e: PointerEvent) => {
 		const target = e.target as HTMLElement;
 		if (!target.closest(".search-bar")) {
-			setIsSearchOpen(false);
+			closeSearch();
 			console.log("Blurred");
 		}
 	};
