@@ -16,6 +16,7 @@ import Tag from "@/components/ui/tag";
 import Badge from "@/components/ui/badge";
 import { AlertTriangle, Check, ListOrdered, Search, Truck } from "lucide-react";
 import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
 
 // --- Helper Component for Layout ---
 const DemoSection = ({
@@ -336,6 +337,7 @@ export default function Page() {
 					<Breadcrumbs items={crumbs} />
 				</DemoSection>
 			</div>
+			<Footer />
 		</div>
 	);
 }
