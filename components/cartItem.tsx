@@ -61,7 +61,7 @@ export default function CartItem({
 	return (
 		<>
 			{!isDeleted && (
-				<div className="flex justify-between items-center w-full bg-white text-main border-gray-200 border-2 p-10 rounded-[8px]">
+				<div className="grid grid-cols-[3fr_1fr_1fr] gap-x-4 items-center w-full bg-white text-main border-gray-200 border-2 p-10 rounded-[8px]">
 					<Link href={productLink} className="flex gap-x-10">
 						<div className="relative overflow-hidden size-[100px] aspect-square flex shrink-0 justify-center items-center">
 							<Image
