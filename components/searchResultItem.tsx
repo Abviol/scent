@@ -33,7 +33,7 @@ export default function SearchResultItem({
    const availabilityClass: string = getAvailabilityClass(availability);
 
 	return (
-		<Link href={productLink} className="w-full max-w-[500px] flex gap-x-10 p-5 rounded-[8px] bg-white transition-colors hover:bg-accent-light">
+		<Link href={productLink} className="w-full max-w-[500px] flex gap-x-5 p-5 rounded-[8px] bg-white transition-colors hover:bg-accent-light">
 			<div className="relative overflow-hidden size-[100px] aspect-square flex shrink-0 justify-center items-center">
 				<Image
 					src={imageUrl}
@@ -45,10 +45,10 @@ export default function SearchResultItem({
 				></Image>
 			</div>
 
-         <div className="w-full flex flex-col justify-between">
-            <div className="flex flex-row w-full justify-between">
-               <h3 className="font-semibold whitespace-nowrap">{title}</h3>
-               <span className="font-semibold">{productCode}</span>
+         <div className="w-full min-w-0 flex flex-col justify-between">
+            <div className=" flex flex-row w-full justify-between gap-2">
+               <h3 className="min-w-0 font-semibold whitespace-nowrap truncate">{title}</h3>
+               <span className="font-semibold shrink-0">{productCode}</span>
             </div>
 
             <div className="flex justify-between">
