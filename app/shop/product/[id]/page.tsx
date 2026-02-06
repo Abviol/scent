@@ -12,12 +12,7 @@ import {
 } from "@/lib/utils";
 import Link from "next/link";
 import ProductGallery from "./productGallery";
-import {
-	ProdTab,
-	ProdTabList,
-	ProdTabPanel,
-	ProdTabs,
-} from "./prodDetailTabs";
+import { ProdTab, ProdTabList, ProdTabPanel, ProdTabs } from "./prodDetailTabs";
 
 type ProductPageProps = {
 	params: Promise<{ id: string }>;
@@ -62,7 +57,8 @@ async function getProduct(id: string) {
 			"Gruppo di prodotti": "Eau de Toilette",
 			Colore: "Nero",
 		},
-		ingredients: "Alcohol Denat., Aqua (Water), Parfum (Fragrance), Coumarin, Linalool, Alpha-Isomethyl Ionone, Butyl Methoxydibenzoylmethane, Limonene, Anise Alcohol, Cinnamal, Benzyl Alcohol, Hydroxycitronellal, Citral,  Citronellol, Eugenol, Geraniol.",
+		ingredients:
+			"Alcohol Denat., Aqua (Water), Parfum (Fragrance), Coumarin, Linalool, Alpha-Isomethyl Ionone, Butyl Methoxydibenzoylmethane, Limonene, Anise Alcohol, Cinnamal, Benzyl Alcohol, Hydroxycitronellal, Citral,  Citronellol, Eugenol, Geraniol.",
 		quantityInStock: 10,
 	};
 }
@@ -79,6 +75,49 @@ export default async function ProductPage({ params }: ProductPageProps) {
 		{ label: "Shop", href: "/shop" },
 		{ label: product.title, href: "" },
 	];
+
+	const tabsConfig = [
+		product.details
+			? {
+					title: "Details",
+					content: (
+						<ul className="flex flex-col gap-3">
+							{Object.entries(product.details).map((v, i) => (
+								<li key={v[0] + i}>
+									<strong className="font-semibold">
+										{v[0]}
+									</strong>
+									:{" "}
+									<span className="text-slate-500">
+										{v[1]}
+									</span>
+								</li>
+							))}
+						</ul>
+					),
+				}
+			: null,
+		product.description
+			? {
+					title: "Description",
+					content: (
+						<p className="leading-relaxed">
+							{product.description}
+						</p>
+					),
+				}
+			: null,
+		product.ingredients
+			? {
+					title: "Ingredients",
+					content: (
+						<p >
+							{product.ingredients}
+						</p>
+					),
+				}
+			: null,
+	].filter((item) => item !== null);
 
 	return (
 		<main className="my-20">
@@ -163,28 +202,24 @@ export default async function ProductPage({ params }: ProductPageProps) {
 				</div>
 
 				{/* additional info */}
-				{(product.details ||
-					product.description ||
-					product.ingredients) && (
+				{tabsConfig.length > 0 && (
 					<ProdTabs>
 						<ProdTabList>
-							{product.details && <ProdTab title="Details" index={0} />}
-							{product.description && <ProdTab title="Description" index={1} />}
-							{product.ingredients && <ProdTab title="Ingredients" index={2} />}
+							{tabsConfig.map((tab, index) => (
+								<ProdTab
+									key={"tab" + tab.title}
+									index={index}
+									title={tab.title}
+								/>
+							))}
 						</ProdTabList>
-						{product.details && (
-							 <ProdTabPanel index={0}>
-								<ul className="flex flex-col gap-3">
-									{Object.entries(product.details).map((v, i) => (
-										<li key={v[0] + i}>
-											<strong className="font-semibold">{v[0]}</strong>{": "}<span className="text-slate-500">{v[1]}</span>
-										</li>
-									))}
-								</ul>
-							 </ProdTabPanel>
-						)}
-						{product.description && <ProdTabPanel index={1}>{product.description}</ProdTabPanel>}
-						{product.ingredients && <ProdTabPanel index={2}>{product.ingredients}</ProdTabPanel>}
+						{tabsConfig.map((tab, index) => (
+							<ProdTabPanel
+								key={"tabpanel" + tab.title}
+								index={index}
+								
+							>{tab.content}</ProdTabPanel>
+						))}
 					</ProdTabs>
 				)}
 			</section>
