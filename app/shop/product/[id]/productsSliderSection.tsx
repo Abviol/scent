@@ -2,7 +2,7 @@
 
 import ProductCard, { ProductCardOnSaveEvent } from "@/components/productCard";
 import { ProductType } from "@/lib/types";
-import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { type Swiper as SwiperType } from "swiper";
 import { useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
