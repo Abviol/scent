@@ -40,7 +40,7 @@ export default function ProductCard({
 	markers,
 	onSave,
 }: ProductCardProps) {
-	const productLink = `/product/${productId}`;
+	const productLink = `/shop/product/${productId}`;
 
 	const [isSaved, setIsSaved] = useState<boolean>(wishlist);
 
