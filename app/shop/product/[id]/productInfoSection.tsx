@@ -64,7 +64,7 @@ export default function ProductInfoSection({
 			<div className="grid grid-cols-[2fr_3fr] gap-x-6 mb-15">
 				{/* product gallery */}
 				<ProductGallery
-					imageUrls={product.variants[selectedVariant].imageUrls}
+					imageUrls={product.imageUrls}
 					title={product.title}
 				/>
 				{/* main info */}

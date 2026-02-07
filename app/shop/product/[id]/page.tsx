@@ -23,24 +23,24 @@ async function getProduct(id: string): Promise<ProductType> {
 		tags: [],
 		categories: ["men"],
 		brand: "Versace",
-
+		imageUrls: [
+			"https://i.makeup.it/9/9i/9iajbg7jxhit.jpg",
+			"https://i.makeup.it/o/oc/oct1za9lqofn.jpg",
+			"https://i.makeup.it/w/wz/wzyoa9i8eafq.jpg",
+			"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
+			"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
+			"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
+			"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
+			"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
+			"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
+		],
 		variants: [
 			{
 				volume: 30,
 				price: 4999,
 				discountedPrice: undefined,
 				wishlist: true,
-				imageUrls: [
-					"https://i.makeup.it/9/9i/9iajbg7jxhit.jpg",
-					"https://i.makeup.it/o/oc/oct1za9lqofn.jpg",
-					"https://i.makeup.it/w/wz/wzyoa9i8eafq.jpg",
-					"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
-					"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
-					"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
-					"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
-					"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
-					"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
-				],
+
 				quantityInStock: 1,
 			},
 			{
@@ -48,15 +48,7 @@ async function getProduct(id: string): Promise<ProductType> {
 				price: 6999,
 				discountedPrice: 5794,
 				wishlist: true,
-				imageUrls: [
-					"https://i.makeup.it/9/9i/9iajbg7jxhit.jpg",
-					"https://i.makeup.it/o/oc/oct1za9lqofn.jpg",
-					"https://i.makeup.it/o/oc/oct1za9lqofn.jpg",
-					"https://i.makeup.it/w/wz/wzyoa9i8eafq.jpg",
-					"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
-					"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
-					"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
-				],
+
 				quantityInStock: 0,
 			},
 			{
@@ -64,14 +56,7 @@ async function getProduct(id: string): Promise<ProductType> {
 				price: 7999,
 				wishlist: true,
 				discountedPrice: undefined,
-				imageUrls: [
-					"https://i.makeup.it/9/9i/9iajbg7jxhit.jpg",
-					"https://i.makeup.it/o/oc/oct1za9lqofn.jpg",
-					"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
-					"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
-					"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
-					"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
-				],
+
 				quantityInStock: 12,
 			},
 		],
@@ -113,8 +98,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
 		{ label: product.title, href: "" },
 	];
 
-	
-
 	return (
 		<main className="my-20">
 			<div className="mb-15 flex flex-row justify-center">
@@ -128,7 +111,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 			<ProductsSliderSection
 				title="Similar Products"
 				products={Array.from({ length: 8 }, () => product)}
-				/>
+			/>
 			{/* Specially for you products */}
 			<ProductsSliderSection
 				title="Specially for you"
