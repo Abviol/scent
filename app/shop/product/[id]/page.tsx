@@ -13,12 +13,14 @@ import {
 import Link from "next/link";
 import ProductGallery from "./productGallery";
 import { ProdTab, ProdTabList, ProdTabPanel, ProdTabs } from "./prodDetailTabs";
+import { ProductType } from "@/lib/types";
+import { ProductsSliderSection } from "./productsSliderSection";
 
 type ProductPageProps = {
 	params: Promise<{ id: string }>;
 };
 
-async function getProduct(id: string) {
+async function getProduct(id: string): Promise<ProductType> {
 	await new Promise((resolve) => setTimeout(resolve, 0));
 
 	return {
@@ -60,6 +62,7 @@ async function getProduct(id: string) {
 		ingredients:
 			"Alcohol Denat., Aqua (Water), Parfum (Fragrance), Coumarin, Linalool, Alpha-Isomethyl Ionone, Butyl Methoxydibenzoylmethane, Limonene, Anise Alcohol, Cinnamal, Benzyl Alcohol, Hydroxycitronellal, Citral,  Citronellol, Eugenol, Geraniol.",
 		quantityInStock: 10,
+		markers: ["hit"],
 	};
 }
 
@@ -101,20 +104,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
 			? {
 					title: "Description",
 					content: (
-						<p className="leading-relaxed">
-							{product.description}
-						</p>
+						<p className="leading-relaxed">{product.description}</p>
 					),
 				}
 			: null,
 		product.ingredients
 			? {
 					title: "Ingredients",
-					content: (
-						<p >
-							{product.ingredients}
-						</p>
-					),
+					content: <p>{product.ingredients}</p>,
 				}
 			: null,
 	].filter((item) => item !== null);
@@ -217,12 +214,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
 							<ProdTabPanel
 								key={"tabpanel" + tab.title}
 								index={index}
-								
-							>{tab.content}</ProdTabPanel>
+							>
+								{tab.content}
+							</ProdTabPanel>
 						))}
 					</ProdTabs>
 				)}
 			</section>
+
+			{/* similar products NOTE: skipped in beta */}
+			<ProductsSliderSection title="Similar Products" products={Array.from({length: 8}, () => product)} />
+			<ProductsSliderSection title="Specially for you" products={Array.from({length: 8}, () => product)} />
 		</main>
 	);
 }
