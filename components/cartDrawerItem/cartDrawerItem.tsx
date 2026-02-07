@@ -42,7 +42,7 @@ export default function CartDrawerItem({
 	const availabilityClass: string =
 		availability == "not available" ? "not-available" : "";
 
-	const productLink: string = `/product/id?=${productId}`;
+	const productLink: string = `/shop/product/${productId}`;
 	const [newQuantity, setNewQuantity] = useState<number>(quantity);
 	const [totalPrice, setTotalPrice] = useState<number>(
 		pricePerItem * quantity

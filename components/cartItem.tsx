@@ -40,7 +40,7 @@ export default function CartItem({
 		getAvailability(quantityInStock)
 	);
 	const availabilityClass: string = getAvailabilityClass(availability);
-	const productLink: string = `/product/${productId}`;
+	const productLink: string = `/shop/product/${productId}`;
 
 	const [newQuantity, setNewQuantity] = useState<number>(quantity);
 	const [totalPrice, setTotalPrice] = useState<number>(

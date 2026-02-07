@@ -28,7 +28,7 @@ export default function SearchResultItem({
 	quantityInStock,
 	imageUrl,
 }: SearchResultItemProps) {
-	const productLink = `/product/${productId}`;
+	const productLink = `/shop/product/${productId}`;
    const [availability, setAvailability] = useState<AvailabilityType>(getAvailability(quantityInStock));
    const availabilityClass: string = getAvailabilityClass(availability);
 
