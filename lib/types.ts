@@ -15,18 +15,20 @@ export interface ProductType {
 	tags: string[];
 	categories: string[];
 	brand: string;
-	imageUrls: string[];
-	variants: number[];
-	selectedVariant: number;
-	wishlist: boolean;
-	price: number;
-	discounted: boolean;
-	discountedPrice: number;
+	variants: VariantType[];
 	description: string;
 	details: Record<string, string | number>;
 	ingredients: string;
+	markers: MarkerType[];
+}
+
+export interface VariantType {
+	volume: VolumeEnum;
+  imageUrls: string[];
+	price: number;
+	discountedPrice: number | undefined;
+	wishlist: boolean;
 	quantityInStock: number;
-  markers: MarkerType[]
 }
 
 export type VolumeType = 30 | 50 | 100 | 200 | undefined;
