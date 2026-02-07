@@ -63,12 +63,12 @@ export function ProductsSliderSection({ products, title }: ProductsSliderSection
 						<ProductCard
 							title={prod.title}
 							productId={prod.id}
-							imageUrl={prod.imageUrls[0]}
+							imageUrl={prod.variants[0].imageUrls[0]}
 							markers={prod.markers}
-							wishlist={prod.wishlist}
-							volume={prod.variants[0]}
+							wishlist={prod.variants[0].wishlist}
+							volume={prod.variants[0].volume}
 							rating={prod.rating}
-							price={prod.price}
+							price={prod.variants[0].price}
 							onSave={handleSave}
 						/>
 					</SwiperSlide>
