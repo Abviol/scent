@@ -12,6 +12,7 @@ import { getEuro } from "@/lib/utils";
 import Marker from "./ui/marker";
 import Rating from "./ui/rating";
 import { useState } from "react";
+import BookmarkButton from "./bookmarkButton";
 
 export interface ProductCardOnSaveEvent {
 	productId: string;
@@ -26,7 +27,6 @@ export interface ProductCardProps {
 	price: number; // in cents
 	wishlist: boolean;
 	markers: MarkerType[];
-	onSave: (e: ProductCardOnSaveEvent) => void;
 }
 
 export default function ProductCard({
@@ -38,21 +38,8 @@ export default function ProductCard({
 	price,
 	wishlist,
 	markers,
-	onSave,
 }: ProductCardProps) {
 	const productLink = `/shop/product/${productId}`;
-
-	const [isSaved, setIsSaved] = useState<boolean>(wishlist);
-
-	const handleSave = () => {
-		const newSavedStatus = !isSaved;
-
-		setIsSaved(newSavedStatus);
-		onSave({
-			productId,
-			wishlist: newSavedStatus,
-		});
-	};
 
 	return (
 		<div
@@ -67,22 +54,7 @@ export default function ProductCard({
 						))}
 					</div>
 
-					<button
-						aria-label="Add to wishlist"
-						title="Add to wishlist"
-						role="button"
-						onClick={handleSave}
-						className="text-main"
-					>
-						{isSaved ? (
-							<Bookmark
-								size={24}
-								className="fill-current stroke-current"
-							/>
-						) : (
-							<Bookmark size={24} className="stroke-current" />
-						)}
-					</button>
+					<BookmarkButton productId={productId} wishlist={wishlist} />
 				</div>
 				<Link
 					href={productLink}

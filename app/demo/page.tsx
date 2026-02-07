@@ -49,12 +49,12 @@ export default function Page() {
 		{ label: "Product X", href: "/shop/product" },
 	];
 
-	const handleSave = (e: ProductCardOnSaveEvent) => {
-		console.log(
-			`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`,
-			e.productId
-		);
-	};
+	// const handleSave = (e: ProductCardOnSaveEvent) => {
+	// 	console.log(
+	// 		`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`,
+	// 		e.productId
+	// 	);
+	// };
 
 	return (
 		<div className="min-h-screen bg-white">
@@ -110,7 +110,6 @@ export default function Page() {
 							volume={2}
 							rating={4.5}
 							price={200}
-							onSave={handleSave}
 						/>
 						<ProductCard
 							title="Dior Sauvage Elixir"
@@ -121,7 +120,6 @@ export default function Page() {
 							volume={1}
 							rating={5.0}
 							price={9999}
-							onSave={handleSave}
 						/>
 						<ProductCard
 							title="Chanel Bleu"
@@ -132,7 +130,6 @@ export default function Page() {
 							volume={1}
 							rating={4.2}
 							price={200}
-							onSave={handleSave}
 						/>
 					</div>
 				</DemoSection>
