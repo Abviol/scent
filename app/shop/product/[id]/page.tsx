@@ -138,7 +138,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 							</h1>
 							<div className="flex flex-row shrink-0 gap-x-2 ml-3">
 								<Rating rating={product.rating} />
-								<BookmarkButton />
+								<BookmarkButton productId={product.id} wishlist={product.wishlist} />
 							</div>
 						</div>
 
