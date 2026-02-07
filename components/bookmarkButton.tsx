@@ -26,7 +26,7 @@ export default function BookmarkButton({ productId, wishlist }: BookmarkButtonPr
 			title="Add to wishlist"
 			role="button"
 			onClick={handleSave}
-			className="text-main"
+			className="text-foreground"
 		>
 			{isSaved ? (
 				<Bookmark size={24} className="fill-current stroke-current" />

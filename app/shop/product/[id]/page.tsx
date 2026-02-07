@@ -26,7 +26,7 @@ async function getProduct(id: string): Promise<ProductType> {
 	return {
 		id,
 		code: 123456,
-		title: "Versace Eros Flame",
+		title: "Jean Paul Gaultier Le Beau",
 		rating: 4.4,
 		reviewsAmount: 100,
 		type: "Eau de Toilette",
@@ -34,7 +34,7 @@ async function getProduct(id: string): Promise<ProductType> {
 		categories: ["men"],
 		brand: "Versace",
 		imageUrls: [
-			"https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg",
+			"https://i.makeup.it/9/9i/9iajbg7jxhit.jpg",
 			"https://i.makeup.it/o/oc/oct1za9lqofn.jpg",
 			"https://i.makeup.it/w/wz/wzyoa9i8eafq.jpg",
 			"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
@@ -45,23 +45,36 @@ async function getProduct(id: string): Promise<ProductType> {
 			"https://i.makeup.it/7/7u/7ukogdy4r4na.jpg",
 		],
 		variants: [0, 1, 2],
-		selectedVariant: 0,
-		wishlist: false,
+		selectedVariant: 2,
+		wishlist: true,
 		price: 4999,
-		discounted: true,
+		discounted: false,
 		discountedPrice: 2999,
 		description:
 			"L'eau de toilette Jean Paul Gaultier Le Beau è un’originale fragranza maschile legnosa-fougère rilasciata nel 2019. È un vero e proprio elisir perfetto per gli uomini seducenti e sexy. L'individualità e la rara esclusività del carattere della composizione sono evidenziate anche dal design del flacone, creato dai migliori designer del marchio. La fragranza è presentata in un'elegante bottiglia di vetro verde scuro, seguendo le linee di un torso maestoso e coraggioso, simile ai dipinti raffiguranti il ​​dio greco Apollo. I creatori hanno deciso di non aggiungere alcun tapo per non distrarre l'attenzione dal design del flacone. L'insolita fragranza si apre con note di bergamotto, che incanta con il suono verde, floreale e leggermente fruttato. Quando le note di testa si dissolvono, il cuore del profumo si rivela con la piacevole nota esotica di cocco. La scia finale avvolge a lungo con note di fava tonka, che esalta la profondità del suono, conferendo alla composizione un suono incredibilmente persistente.",
 		details: {
-			"Lanciato sul mercato": 2015,
-			Marchio: "Armaf",
-			Serie: "Club De Nuit Intense Man",
+			"Lanciato sul mercato": 2019,
+			Marchio: "Jean Paul Gaultier",
+			Serie: "Le Beau",
 			"Gruppo di prodotti": "Eau de Toilette",
-			Colore: "Nero",
+			Classificazione: "Di lusso",
+			Volume: "75 ml",
+			"Paese TM": "Francia",
+			Produttore:
+				"PUIG, Plaza Europa, 46-48, 08902 – L’Hospitalet de Llobregat, Barcellona, Spagna, consumercare@puig.com",
+			"Precauzioni d'uso":
+				"Evitare il contatto con gli occhi, Facilmente infiammabile, Non utilizzare vicino al fuoco o a sostanze infiammabili, Tenere fuori dalla portata dei bambini",
+			Profumiere: "Quentin Bisch",
+			"Made in": "Francia, Spania",
+			Sesso: "Uomo",
+			"Tipo di aroma": "Aromatico, Legnoso",
+			"Note di testa": "Bergamotto",
+			"Note di cuore": "Noce di cocco",
+			"Note di base": "Fava tonka",
 		},
 		ingredients:
 			"Alcohol Denat., Aqua (Water), Parfum (Fragrance), Coumarin, Linalool, Alpha-Isomethyl Ionone, Butyl Methoxydibenzoylmethane, Limonene, Anise Alcohol, Cinnamal, Benzyl Alcohol, Hydroxycitronellal, Citral,  Citronellol, Eugenol, Geraniol.",
-		quantityInStock: 10,
+		quantityInStock: 1,
 		markers: ["hit"],
 	};
 }
@@ -117,7 +130,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 	].filter((item) => item !== null);
 
 	return (
-		<main className="mt-12 mb-20">
+		<main className="my-20">
 			<div className="mb-15 flex flex-row justify-center">
 				<Breadcrumbs items={breadcrumbsItems} />
 			</div>
@@ -137,8 +150,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
 								{product.title}
 							</h1>
 							<div className="flex flex-row shrink-0 gap-x-2 ml-3">
-								<Rating rating={product.rating} reviewsAmount={product.reviewsAmount} />
-								<BookmarkButton productId={product.id} wishlist={product.wishlist} />
+								<Rating
+									rating={product.rating}
+									reviewsAmount={product.reviewsAmount}
+								/>
+								<BookmarkButton
+									productId={product.id}
+									wishlist={product.wishlist}
+								/>
 							</div>
 						</div>
 
@@ -151,7 +170,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 									<Link
 										key={i}
 										href={"/shop/product/new-id"}
-										className={`flex justify-center w-[100px] py-0.5 rounded-sm text-lg font-semibold border-2 ${variant == product.selectedVariant ? "bg-accent text-white border-accent" : "bg-white  border-slate-200 text-foreground"}`}
+										className={`flex justify-center w-[100px] py-0.5 rounded-sm text-lg font-semibold border-2 ${variant == product.selectedVariant ? "bg-accent text-white border-accent" : "bg-white  border-slate-200 text-foreground hover:bg-slate-200"}`}
 									>
 										{volEnumToNumber(variant)}ml
 									</Link>
@@ -191,6 +210,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 							<Button
 								size="lg"
 								className="h-15 w-full max-w-[260px] text-2xl font-semibold"
+								disabled={product.quantityInStock == 0}
 							>
 								Buy
 							</Button>
@@ -223,8 +243,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
 			</section>
 
 			{/* similar products NOTE: skipped in beta */}
-			<ProductsSliderSection title="Similar Products" products={Array.from({length: 8}, () => product)} />
-			<ProductsSliderSection title="Specially for you" products={Array.from({length: 8}, () => product)} />
+			<ProductsSliderSection
+				title="Similar Products"
+				products={Array.from({ length: 8 }, () => product)}
+			/>
+			<ProductsSliderSection
+				title="Specially for you"
+				products={Array.from({ length: 8 }, () => product)}
+			/>
 		</main>
 	);
 }

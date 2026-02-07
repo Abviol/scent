@@ -35,7 +35,7 @@ export function ProductsSliderSection({ products, title }: ProductsSliderSection
 					>
 						<ArrowLeft
 							size={28}
-							className="text-main hover:text-slate-500"
+							className="text-main hover:text-slate-500 transition-all"
 							onClick={() => swiperInstance?.slidePrev()}
 						/>
 					</button>
@@ -45,7 +45,7 @@ export function ProductsSliderSection({ products, title }: ProductsSliderSection
 					>
 						<ArrowRight
 							size={28}
-							className="text-main hover:text-slate-500"
+							className="text-main hover:text-slate-500 transition-all"
 							onClick={() => swiperInstance?.slideNext()}
 						/>
 					</button>
@@ -54,6 +54,7 @@ export function ProductsSliderSection({ products, title }: ProductsSliderSection
 
 			<Swiper
 				slidesPerView={4}
+				slidesPerGroup={4}
 				spaceBetween={32}
 				onSwiper={setSwiperInstance}
 			>
