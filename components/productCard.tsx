@@ -5,8 +5,8 @@ import Link from "next/link";
 import { Bookmark } from "lucide-react";
 
 // Utils & Types
-import { MarkerType, VolumeEnum } from "@/lib/types";
-import { getEuro, volEnumToNumber } from "@/lib/utils";
+import { MarkerType } from "@/lib/types";
+import { getEuro } from "@/lib/utils";
 
 // Components
 import Marker from "./ui/marker";
@@ -20,7 +20,7 @@ export interface ProductCardOnSaveEvent {
 export interface ProductCardProps {
 	title: string;
 	productId: string; // diverse from product_code
-	volume: VolumeEnum;
+	volume: number;
 	imageUrl: string;
 	rating: number;
 	price: number; // in cents
@@ -90,7 +90,7 @@ export default function ProductCard({
 				>
 					<Image
 						src={imageUrl}
-						alt={`${title} ${volEnumToNumber(volume)} ml`}
+						alt={`${title} ${volume} ml`}
 						fill
 						className="object-contain"
 						priority={false}
@@ -103,7 +103,7 @@ export default function ProductCard({
 					<h3 className="my-text-lg">{title}</h3>
 					<div className="flex flex-row gap-x-10 mb-8">
 						<span className="my-text-p gap-x-10 items-center">
-							{volEnumToNumber(volume)} ml
+							{volume} ml
 						</span>
 						<Rating rating={rating} />
 					</div>

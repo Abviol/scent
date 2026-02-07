@@ -26,7 +26,7 @@ async function getProduct(id: string): Promise<ProductType> {
 
 		variants: [
 			{
-				volume: 0,
+				volume: 30,
 				price: 4999,
 				discountedPrice: undefined,
 				wishlist: true,
@@ -44,7 +44,7 @@ async function getProduct(id: string): Promise<ProductType> {
 				quantityInStock: 1,
 			},
 			{
-				volume: 1,
+				volume: 50,
 				price: 6999,
 				discountedPrice: 5794,
 				wishlist: true,
@@ -60,7 +60,7 @@ async function getProduct(id: string): Promise<ProductType> {
 				quantityInStock: 0,
 			},
 			{
-				volume: 2,
+				volume: 75,
 				price: 7999,
 				wishlist: true,
 				discountedPrice: undefined,

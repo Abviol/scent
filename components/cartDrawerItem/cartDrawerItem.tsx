@@ -1,11 +1,10 @@
 ﻿"use client";
 
-import { AvailabilityType, VolumeEnum } from "@/lib/types";
+import { AvailabilityType } from "@/lib/types";
 import {
 	getAvailability,
 	getAvailabilityClass,
 	getEuro,
-	volEnumToNumber,
 } from "@/lib/utils";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
@@ -17,7 +16,7 @@ import Link from "next/link";
 export interface CartDrawerItemProps {
 	imageUrl: string;
 	title: string;
-	volume: VolumeEnum;
+	volume: number;
 	productId: string;
 	productCode: string;
 	quantity: number;
@@ -71,7 +70,7 @@ export default function CartDrawerItem({
 					>
 						<Image
 							src={imageUrl}
-							alt={`${title} ${volEnumToNumber(volume)} ml`}
+							alt={`${title} ${volume} ml`}
 							fill
 							className="object-contain"
 							loading="eager"
@@ -96,7 +95,7 @@ export default function CartDrawerItem({
 										</span>
 									</span>
 									<span className="text-gray-500">
-										{volEnumToNumber(volume)} ml
+										{volume} ml
 									</span>
 								</div>
 							</Link>

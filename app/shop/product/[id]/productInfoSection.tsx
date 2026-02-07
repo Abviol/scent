@@ -1,17 +1,11 @@
 ﻿"use client";
 
 import { ProductType } from "@/lib/types";
-import {
-	getAvailability,
-	getAvailabilityClass,
-	getEuro,
-	volEnumToNumber,
-} from "@/lib/utils";
+import { getAvailability, getAvailabilityClass, getEuro } from "@/lib/utils";
 import { useState } from "react";
 import ProductGallery from "./productGallery";
 import Rating from "@/components/ui/rating";
 import BookmarkButton from "@/components/bookmarkButton";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ProdTab, ProdTabList, ProdTabPanel, ProdTabs } from "./prodDetailTabs";
 
@@ -95,10 +89,7 @@ export default function ProductInfoSection({
 
 					<div className="flex flex-row justify-between items-center">
 						<span className="text-2xl font-semibold">
-							{volEnumToNumber(
-								product.variants[selectedVariant].volume,
-							)}{" "}
-							ml
+							{product.variants[selectedVariant].volume} ml
 						</span>
 						<div className="flex flex-row gap-x-3">
 							{product.variants.map((variant, i) => (
@@ -107,7 +98,7 @@ export default function ProductInfoSection({
 									onClick={() => setSelectedVariant(i)}
 									className={`flex justify-center w-[100px] py-0.5 rounded-sm text-lg font-semibold border-2 ${variant.volume == product.variants[selectedVariant].volume ? "bg-accent text-white border-accent" : "bg-white  border-slate-200 text-foreground hover:bg-slate-200"}`}
 								>
-									{volEnumToNumber(variant.volume)}ml
+									{variant.volume}ml
 								</button>
 							))}
 						</div>

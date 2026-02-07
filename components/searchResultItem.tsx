@@ -1,7 +1,7 @@
 ﻿"use client";
 
-import { AvailabilityType, VolumeEnum } from "@/lib/types";
-import { getAvailability, getAvailabilityClass, getEuro, volEnumToNumber } from "@/lib/utils";
+import { AvailabilityType } from "@/lib/types";
+import { getAvailability, getAvailabilityClass, getEuro } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import Rating from "./ui/rating";
@@ -11,7 +11,7 @@ export interface SearchResultItemProps {
 	title: string;
 	productId: string;
 	productCode: string;
-	volume: VolumeEnum;
+	volume: number;
 	rating: number;
 	price: number; //cents
 	quantityInStock: number;
@@ -37,7 +37,7 @@ export default function SearchResultItem({
 			<div className="relative overflow-hidden size-[100px] aspect-square flex shrink-0 justify-center items-center">
 				<Image
 					src={imageUrl}
-					alt={`${title} ${volEnumToNumber(volume)} ml`}
+					alt={`${title} ${volume} ml`}
 					fill
 					className="object-contain"
 					loading="eager"
@@ -53,7 +53,7 @@ export default function SearchResultItem({
 
             <div className="flex justify-between">
                <span className="font-[14px] gap-x-10 items-center">
-						{volEnumToNumber(volume)} ml
+						{volume} ml
 					</span>
                <Rating rating={rating}></Rating>
             </div>
