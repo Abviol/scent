@@ -117,7 +117,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 	].filter((item) => item !== null);
 
 	return (
-		<main className="my-20">
+		<main className="mt-12 mb-20">
 			<div className="mb-15 flex flex-row justify-center">
 				<Breadcrumbs items={breadcrumbsItems} />
 			</div>
@@ -137,7 +137,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 								{product.title}
 							</h1>
 							<div className="flex flex-row shrink-0 gap-x-2 ml-3">
-								<Rating rating={product.rating} />
+								<Rating rating={product.rating} reviewsAmount={product.reviewsAmount} />
 								<BookmarkButton productId={product.id} wishlist={product.wishlist} />
 							</div>
 						</div>
