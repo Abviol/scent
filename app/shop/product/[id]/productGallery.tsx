@@ -1,12 +1,12 @@
 ﻿"use client";
 
 import Image from "next/image";
-import { ReactNode, useState } from "react";
+import { KeyboardEventHandler, ReactNode, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { type Swiper as SwiperType } from "swiper";
-import { Mousewheel } from "swiper/modules";
+import { Keyboard, Mousewheel } from "swiper/modules";
 
 import "swiper/css";
 
@@ -50,7 +50,7 @@ export default function ProductGallery({
 					<ChevronUp size={16} color="currentColor" />
 				</NavButton>
 
-				<div className="flex-1 min-h-0 overflow-hidden">
+				<div className="min-h-0 max-h-[430px] overflow-hidden">
 					<Swiper
 						direction="vertical"
 						spaceBetween={8}
@@ -60,9 +60,11 @@ export default function ProductGallery({
 							handleSlideChange(swiper);
 						}}
 						onSlideChange={handleSlideChange} 
-						modules={[Mousewheel]}
+						modules={[Mousewheel, Keyboard]}
 						mousewheel={true}
 						className="h-full w-full"
+						keyboard={{enabled: true}}
+						
 					>
 						{imageUrls.map((img, index) => (
 							<SwiperSlide
