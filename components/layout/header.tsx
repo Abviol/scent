@@ -36,7 +36,6 @@ export default function Header() {
 		const target = e.target as HTMLElement;
 		if (!target.closest(".search-bar")) {
 			closeSearch();
-			console.log("Blurred");
 		}
 	};
 
