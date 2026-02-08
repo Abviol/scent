@@ -2,7 +2,7 @@
 	id: string;
 	code: number;
 	title: string;
-  imageUrls: string[];
+	imageUrls: string[];
 	rating: number;
 	reviewsAmount: number;
 	type: string;
