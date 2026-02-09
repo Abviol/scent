@@ -35,3 +35,10 @@ export interface FilterState {
 	markers: string[]; // ["New", "Sale"]
 	concentrations: string[];
 }
+
+
+export interface FilterTag {
+	id: keyof FilterState;
+	value: string | number;
+	label: string;
+};
