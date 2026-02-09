@@ -2,9 +2,9 @@
 
 import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { ProductType } from "@/lib/types";
-import { ProductsSliderSection } from "./productsSliderSection";
-import ProductInfoSection from "./productInfoSection";
 import { PRODUCTS } from "@/lib/data";
+import ProductInfoSection from "@/components/shop/product/productInfoSection";
+import { ProductsSliderSection } from "@/components/shop/product/productsSliderSection";
 
 type ProductPageProps = {
 	params: Promise<{ id: string }>;
