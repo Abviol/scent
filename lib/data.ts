@@ -1,4 +1,4 @@
-﻿import { ProductType } from "./types";
+﻿import { FilterState, ProductType } from "./types";
 
 const PRODUCTS: ProductType[] = [
 	{
@@ -208,4 +208,60 @@ const PRODUCTS: ProductType[] = [
 	},
 ];
 
-export { PRODUCTS };
+const MOCK_SHOP_FILTERS: FilterState = {
+	// Min/Max for the slider
+	priceRange: [0, 600],
+
+	// Checkbox Options (Strings as they appear in DB)
+	brands: [
+		"Versace",
+		"Jean Paul Gaultier",
+		"Giorgio Armani",
+		"Dior",
+		"Yves Saint Laurent",
+		"Montblanc",
+		"Paco Rabanne",
+		"Chanel",
+		"Tom Ford",
+		"Creed",
+		"Hermès",
+		"Dolce & Gabbana",
+		"Hugo Boss",
+		"Gucci",
+		"Prada",
+		"Valentino",
+		"Givenchy",
+	],
+
+	categories: ["Men", "Women", "Unisex", "Niche Perfumery", "Gift Sets"],
+
+	volumes: [
+		"30",
+		"50",
+		"75",
+		"90",
+		"100",
+		"125",
+		"150",
+		"200",
+	],
+
+	markers: [
+		"hot",
+		"Bestseller",
+		"Discounted",
+		"Limited Edition",
+		"Staff Pick",
+	],
+
+	// Bonus: If you want to filter by concentration (EDT/EDP)
+	concentrations: [
+		"Eau de Toilette",
+		"Eau de Parfum",
+		"Parfum",
+		"Extrait de Parfum",
+		"Eau de Cologne",
+	],
+};
+
+export { PRODUCTS, MOCK_SHOP_FILTERS };
