@@ -71,8 +71,8 @@ export default function ProductCard({
 			</div>
 
 			<Link href={productLink}>
-				<div className="flex flex-col items-center">
-					<h3 className="my-text-lg">{title}</h3>
+				<div className="flex flex-col justify-between items-center">
+					<h3 className="my-text-lg text-center">{title}</h3>
 					<div className="flex flex-row gap-x-10 mb-8">
 						<span className="my-text-p gap-x-10 items-center">
 							{volume} ml
