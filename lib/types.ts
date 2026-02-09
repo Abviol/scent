@@ -27,3 +27,11 @@ export interface VariantType {
 export type MarkerType = "hit" | undefined;
 
 export type AvailabilityType = "available" | "not available" | undefined;
+export interface FilterState {
+	priceRange: [number, number]; // [min, max]
+	brands: string[]; // ["Versace", "Dior"]
+	categories: string[]; // ["men", "women"]
+	volumes: string[]; // ["50 ml", "100 ml"]
+	markers: string[]; // ["New", "Sale"]
+	concentrations: string[];
+}
