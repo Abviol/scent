@@ -113,7 +113,7 @@ export default function ShopPage({ params }: ShopPageProps) {
 
 			<div className="grid grid-cols-[300px_1fr] gap-x-8">
 				{/* --- SIDEBAR FILTERS SECTION --- */}
-				<div className="flex flex-col gap-8">
+				<aside className="flex flex-col gap-8">
 					<FiltersDropdown
 						isOpen={true}
 						id="price"
@@ -187,7 +187,7 @@ export default function ShopPage({ params }: ShopPageProps) {
 					>
 						Clear All Filters
 					</Button>
-				</div>
+				</aside>
 
 				{/* --- MAIN CONTENT AREA --- */}
 				<div className="">
