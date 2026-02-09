@@ -6,8 +6,8 @@ import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { Button } from "@/components/ui/button";
 import Tag from "@/components/ui/tag";
 import { MOCK_SHOP_FILTERS, PRODUCTS } from "@/lib/data";
-import { FilterState } from "@/lib/types";
-import { ChevronDown } from "lucide-react";
+import { FilterState, ProductType } from "@/lib/types";
+import { ChevronDown, Frown } from "lucide-react";
 import { useState } from "react";
 
 // const getProducts = async (): Promise<ProductType[]> => {
@@ -113,119 +113,24 @@ export default function ShopPage({ params }: ShopPageProps) {
 
 			<div className="grid grid-cols-[300px_1fr] gap-x-8">
 				{/* --- SIDEBAR FILTERS SECTION --- */}
-				<aside className="flex flex-col gap-8">
-					<FiltersDropdown
-						isOpen={true}
-						id="price"
-						title="Price"
-						type="range"
-						min={MOCK_SHOP_FILTERS.priceRange[0]}
-						max={MOCK_SHOP_FILTERS.priceRange[1]}
-						rangeValue={filters.priceRange}
-						onChange={(id, val) => updateFilter("priceRange", val)}
-					/>
-
-					{/* Note: Using helper 'toOptions' to format string arrays into {label, value} */}
-					<FiltersDropdown
-						isOpen={true}
-						id="volume"
-						title="Volume"
-						type="checkbox"
-						options={toOptions(MOCK_SHOP_FILTERS.volumes, " ml")}
-						selectedValues={filters.volumes}
-						onChange={(id, val) => updateFilter("volumes", val)}
-					/>
-
-					<FiltersDropdown
-						isOpen={true}
-						id="brands"
-						title="Brands"
-						type="checkbox"
-						options={toOptions(MOCK_SHOP_FILTERS.brands, "")}
-						selectedValues={filters.brands}
-						onChange={(id, val) => updateFilter("brands", val)}
-					/>
-					<FiltersDropdown
-						id="categories"
-						title="Categoies"
-						type="checkbox"
-						options={toOptions(MOCK_SHOP_FILTERS.categories, "")}
-						selectedValues={filters.categories}
-						onChange={(id, val) => updateFilter("categories", val)}
-					/>
-					<FiltersDropdown
-						id="markers"
-						title="Markers"
-						type="checkbox"
-						options={toOptions(MOCK_SHOP_FILTERS.markers, "")}
-						selectedValues={filters.markers}
-						onChange={(id, val) => updateFilter("markers", val)}
-					/>
-					<FiltersDropdown
-						id="concentrations"
-						title="Concentrations"
-						type="checkbox"
-						options={toOptions(
-							MOCK_SHOP_FILTERS.concentrations,
-							"",
-						)}
-						selectedValues={filters.concentrations}
-						onChange={(id, val) =>
-							updateFilter("concentrations", val)
-						}
-					/>
-
-					{/* Sidebar 'Clear All' Button (only clickable if filters exist) */}
-					<Button
-						size="lg"
-						className="mt-10 mx-auto h-12  w-full max-w-[260px] text-lg"
-						onClick={() => {
-							resetFilters();
-							window.scrollTo({ top: 0, behavior: "smooth" });
-						}}
-						disabled={activeTags.length == 0}
-					>
-						Clear All Filters
-					</Button>
-				</aside>
+				<ShopSidebar
+					filters={filters}
+					onUpdate={updateFilter}
+					onReset={resetFilters}
+					hasActiveFilters={activeTags.length > 0}
+				/>
 
 				{/* --- MAIN CONTENT AREA --- */}
 				<div className="">
 					{/* Active Filter Tags Display */}
-					{activeTags.length > 0 && (
-						<div className="selected-filters flex flex-row flex-wrap gap-5 mb-6">
-							{activeTags.map((tag, idx) => (
-								<Tag
-									key={`${tag.id}-${tag.value}`}
-									label={tag.label}
-									id={tag.id}
-									onClick={() =>
-										removeFilter(tag.id, tag.value)
-									}
-								/>
-							))}
-							<Button onClick={() => resetFilters()}>
-								Clear All
-							</Button>
-						</div>
-					)}
+					<ActiveFilters
+						tags={activeTags}
+						onRemove={removeFilter}
+						onClear={resetFilters}
+					/>
 
 					{/* Product Grid */}
-					<div className="grid grid-cols-4 gap-x-5 gap-y-12">
-						{products.map((prod, i) => (
-							<ProductCard
-								key={prod.title + i}
-								title={prod.title}
-								productId={prod.id}
-								imageUrl={prod.imageUrls[0]}
-								markers={prod.markers}
-								wishlist={prod.variants[0].wishlist}
-								volume={prod.variants[0].volume}
-								rating={prod.rating}
-								price={prod.variants[0].price}
-							/>
-						))}
-					</div>
+					<ProductGrid products={products} />
 
 					<div className="mt-20 flex flex-row flex-1 justify-center">
 						<Button
@@ -238,6 +143,198 @@ export default function ShopPage({ params }: ShopPageProps) {
 					</div>
 				</div>
 			</div>
+		</div>
+	);
+}
+
+// Sub-components
+
+// --- 1. SIDEBAR COMPONENT ---
+
+interface ShopSidebarProps {
+	/** Current state of all filters to determine checked/active status */
+	filters: FilterState;
+	/** Handler to lift state changes back to the parent page */
+	onUpdate: (key: keyof FilterState, value: any) => void;
+	/** Handler to clear all filters */
+	onReset: () => void;
+	/** Boolean flag to enable/disable the 'Clear All' button */
+	hasActiveFilters: boolean;
+}
+
+/**
+ * ShopSidebar
+ * Renders the stack of filter dropdowns.
+ */
+export function ShopSidebar({
+	filters,
+	onUpdate,
+	onReset,
+	hasActiveFilters,
+}: ShopSidebarProps) {
+	return (
+		<aside className="flex flex-col gap-8">
+			{/* Price Range Slider 
+             Note: Price is unique as it passes a tuple [min, max] rather than an array of strings 
+         */}
+			<FiltersDropdown
+				isOpen={true}
+				id="price"
+				title="Price"
+				type="range"
+				min={MOCK_SHOP_FILTERS.priceRange[0]}
+				max={MOCK_SHOP_FILTERS.priceRange[1]}
+				rangeValue={filters.priceRange}
+				onChange={(id, val) => onUpdate("priceRange", val)}
+			/>
+
+			{/* Volume Checkboxes
+             Note: Using helper 'toOptions' to append units (e.g., "50" -> "50 ml") 
+         */}
+			<FiltersDropdown
+				isOpen={true}
+				id="volume"
+				title="Volume"
+				type="checkbox"
+				options={toOptions(MOCK_SHOP_FILTERS.volumes, " ml")}
+				selectedValues={filters.volumes}
+				onChange={(id, val) => onUpdate("volumes", val)}
+			/>
+
+			{/* Brand Selection */}
+			<FiltersDropdown
+				isOpen={true}
+				id="brands"
+				title="Brands"
+				type="checkbox"
+				options={toOptions(MOCK_SHOP_FILTERS.brands, "")}
+				selectedValues={filters.brands}
+				onChange={(id, val) => onUpdate("brands", val)}
+			/>
+
+			{/* Category Selection */}
+			<FiltersDropdown
+				id="categories"
+				title="Categoies"
+				type="checkbox"
+				options={toOptions(MOCK_SHOP_FILTERS.categories, "")}
+				selectedValues={filters.categories}
+				onChange={(id, val) => onUpdate("categories", val)}
+			/>
+
+			{/* Markers (e.g., 'New', 'Best Seller') */}
+			<FiltersDropdown
+				id="markers"
+				title="Markers"
+				type="checkbox"
+				options={toOptions(MOCK_SHOP_FILTERS.markers, "")}
+				selectedValues={filters.markers}
+				onChange={(id, val) => onUpdate("markers", val)}
+			/>
+
+			{/* Concentration (e.g., 'EDP', 'EDT') */}
+			<FiltersDropdown
+				id="concentrations"
+				title="Concentrations"
+				type="checkbox"
+				options={toOptions(MOCK_SHOP_FILTERS.concentrations, "")}
+				selectedValues={filters.concentrations}
+				onChange={(id, val) => onUpdate("concentrations", val)}
+			/>
+
+			{/* Global Reset Button 
+            UX: Scrolls to top to ensure user sees the reset results.
+            Disabled visually if no filters are currently active.
+         */}
+			<Button
+				size="lg"
+				className="mt-10 mx-auto h-12  w-full max-w-[260px] text-lg"
+				onClick={() => {
+					onReset();
+					window.scrollTo({ top: 0, behavior: "smooth" });
+				}}
+				disabled={!hasActiveFilters}
+			>
+				Clear All Filters
+			</Button>
+		</aside>
+	);
+}
+
+// --- 2. ACTIVE FILTERS COMPONENT ---
+
+interface ActiveFiltersProps {
+	/** Array of derived tag objects (label, id, value) */
+	tags: FilterTag[];
+	/** Handler to remove a specific single tag */
+	onRemove: (id: keyof FilterState, value: string | number) => void;
+	/** Handler to clear everything */
+	onClear: () => void;
+}
+
+/**
+ * ActiveFilters
+ * Displays the row of Tags above the product grid.
+ * It handles the visual feedback of what filters are currently applied.
+ */
+export function ActiveFilters({ tags, onRemove, onClear }: ActiveFiltersProps) {
+	if (tags.length === 0) return null;
+
+	return (
+		<div className="selected-filters flex flex-row flex-wrap gap-5 mb-6">
+			{tags.map((tag, idx) => (
+				<Tag
+					key={`${tag.id}-${tag.value}`}
+					label={tag.label}
+					id={tag.id}
+					onClick={() => onRemove(tag.id, tag.value)}
+				/>
+			))}
+			<Button onClick={() => onClear()}>Clear All</Button>
+		</div>
+	);
+}
+
+// --- 3. PRODUCT GRID COMPONENT ---
+
+interface ProductGridProps {
+	products: ProductType[];
+}
+
+/**
+ * ProductGrid
+ * Responsible for rendering the list of products or the "Empty State"
+ */
+export function ProductGrid({ products }: ProductGridProps) {
+	// Empty State: Crucial for UX when filters are too restrictive
+	if (products.length === 0) {
+		return (
+			<div className="flex flex-col items-center justify-center py-20 text-center text-muted-foreground">
+				<Frown className="h-10 w-10 mb-4 opacity-50" />
+				<h3 className="text-lg font-semibold">No products found</h3>
+				<p>Try adjusting your filters or search criteria.</p>
+			</div>
+		);
+	}
+
+	// Render the Grid
+	return (
+		<div className="grid grid-cols-4 gap-x-5 gap-y-12">
+			{products.map((prod, i) => (
+				<ProductCard
+					// Ideally use prod.id for key if available, fallback to composite title+index
+					key={prod.title + i}
+					title={prod.title}
+					productId={prod.id}
+					imageUrl={prod.imageUrls[0]}
+					markers={prod.markers}
+					// Accessing the first variant for price/volume display logic
+					wishlist={prod.variants[0].wishlist}
+					volume={prod.variants[0].volume}
+					rating={prod.rating}
+					price={prod.variants[0].price}
+				/>
+			))}
 		</div>
 	);
 }
