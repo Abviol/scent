@@ -1,16 +1,13 @@
 ﻿"use client";
 
-import { FiltersDropdown } from "@/components/filterDropdown";
-import ProductCard from "@/components/productCard";
 import { ActiveFilters } from "@/components/shop/activeFilters";
 import { ProductGrid } from "@/components/shop/productGrid";
 import { ShopSidebar } from "@/components/shop/shopSidebar";
 import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { Button } from "@/components/ui/button";
-import Tag from "@/components/ui/tag";
 import { MOCK_SHOP_FILTERS, PRODUCTS } from "@/lib/data";
-import { FilterState, FilterTag, ProductType } from "@/lib/types";
-import { ChevronDown, Frown } from "lucide-react";
+import { FilterState, FilterTag } from "@/lib/types";
+import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 // const getProducts = async (): Promise<ProductType[]> => {
