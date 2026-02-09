@@ -77,8 +77,8 @@ export default function Page() {
 						<Marker name="hit" size="md" />
 					</div>
 					<div className="flex gap-4 mb-4">
-						<Tag text="Argentina" onRemove={() => {}}></Tag>
-						<Tag text="Your mamma" onRemove={() => {}}></Tag>
+						<Tag label="Argentina" onClick={() => {}} id="argentina"></Tag>
+						<Tag label="Your mamma" onClick={() => {}} id="your_mamma"></Tag>
 					</div>
 					<div className="flex gap-4">
 						<Badge variant="warning" icon={Truck}>
