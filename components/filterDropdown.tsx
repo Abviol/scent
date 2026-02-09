@@ -11,6 +11,7 @@ interface BaseFilterProps {
 	id: string;
 	title: string;
 	className?: string;
+	isOpen?: boolean;
 }
 
 interface Option {
@@ -43,10 +44,10 @@ interface RangeFilterProps extends BaseFilterProps {
 
 type FiltersDropdownProps = CheckboxFilterProps | RangeFilterProps;
 
-export function FiltersDropdown(props: FiltersDropdownProps) {
-	const [isOpen, setIsOpen] = useState(true);
+export function FiltersDropdown({ isOpen = false, ...props }: FiltersDropdownProps) {
+	const [isDropdownOpen, setIsDropdownOpen] = useState(isOpen);
 
-	const toggleOpen = () => setIsOpen((prev) => !prev);
+	const toggleOpen = () => setIsDropdownOpen((prev) => !prev);
 
 	return (
 		<div className={cn("w-full", props.className)}>
@@ -58,11 +59,11 @@ export function FiltersDropdown(props: FiltersDropdownProps) {
 					{props.title}
 				</h3>
 				<div className="text-foreground transition-colors">
-					{isOpen ? <Minus size={28} /> : <Plus size={28} />}
+					{isDropdownOpen ? <Minus size={28} /> : <Plus size={28} />}
 				</div>
 			</div>
 
-			{isOpen && (
+			{isDropdownOpen && (
 				<div className="mt-6">
 					{props.type === "checkbox" ? (
 						<CheckboxList
