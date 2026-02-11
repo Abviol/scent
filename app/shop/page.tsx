@@ -137,7 +137,7 @@ export default function ShopPage({ params }: ShopPageProps) {
 					<div className="mt-20 flex flex-row flex-1 justify-center">
 						<Button
 							size="lg"
-							variant="outline"
+							variant="default"
 							className="h-[60px] w-full max-w-[400px] text-xl font-medium p-3 rounded-md"
 						>
 							More Products
