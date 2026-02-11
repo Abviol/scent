@@ -100,6 +100,7 @@ export function ShopSidebar({
          */}
 			<Button
 				size="lg"
+				variant="outline"
 				className="mt-10 mx-auto h-12  w-full max-w-[260px] text-lg"
 				onClick={() => {
 					onReset();
