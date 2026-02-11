@@ -353,7 +353,7 @@ export default function Page() {
 				</DemoSection>
 				{/* 9. Sorting Dropdown */}
 				<DemoSection title="Sorting Dropdown">
-					<div className="flex justify-end h-[500px]">
+					<div className="flex justify-end h-[220px]">
 						<Sorting criteria={sorting.criteria} onChange={(criteria, order) => {console.log(criteria, order); setSorting({criteria, order})}} order={sorting.order} />
 					</div>
 				</DemoSection>
