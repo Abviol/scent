@@ -3,7 +3,7 @@
 import { SortingOrderType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { ChevronDown, SortAsc, SortDesc } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface SortingDropdownProps {
 	criteria: string;
@@ -16,20 +16,42 @@ const SORTING_CRITERIAS: string[] = ["price", "name", "popularity", "date"];
 
 export default function SortingDropdown(props: SortingDropdownProps) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const containerRef = useRef<HTMLDivElement>(null);
 
 	const handleOptionChange = (option: string) => {
 		props.onChange(option, props.order);
 		setIsOpen(false);
 	};
 
-	const handleOrderChange = (order: SortingOrderType) =>
-		props.onChange(props.criteria, order);
+	const toggleOrder = () => {
+		const newOrder = props.order === "DESC" ? "ASC" : "DESC";
+		props.onChange(props.criteria, newOrder);
+	};
+
+	//  Handle Click Outside to close dropdown
+	useEffect(() => {
+		function handleClickOutside(event: MouseEvent) {
+			if (
+				containerRef.current &&
+				!containerRef.current.contains(event.target as Node)
+			) {
+				setIsOpen(false);
+			}
+		}
+		document.addEventListener("mousedown", handleClickOutside);
+		return () =>
+			document.removeEventListener("mousedown", handleClickOutside);
+	}, []);
 
 	return (
-		<div className={cn("block relative py-2 ", props.className)}>
+		<div
+			ref={containerRef}
+			className={cn("block relative py-2 ", props.className)}
+		>
 			<DropdownDisplay
-				selectedCriteria={props.criteria}
-				onOrderChange={handleOrderChange}
+				selectedOrder={props.order}
+				criteria={props.criteria}
+				onOrderChange={toggleOrder}
 				onOpen={() => setIsOpen((prev) => !prev)}
 			/>
 			<DropdownContent
@@ -44,32 +66,27 @@ export default function SortingDropdown(props: SortingDropdownProps) {
 // --- Sub-components
 
 interface DropdownDisplayProps {
-	onOrderChange: (order: SortingOrderType) => void;
+	onOrderChange: () => void;
 	onOpen: () => void;
-	selectedCriteria: string;
+	criteria: string;
+	selectedOrder: SortingOrderType;
 }
 
 function DropdownDisplay({
 	onOrderChange,
 	onOpen,
-	selectedCriteria,
+	criteria,
+	selectedOrder,
 }: DropdownDisplayProps) {
-	const [order, setOrder] = useState<SortingOrderType>("DESC");
-
-	const handleOrder = () => {
-		const newOrder = order === "DESC" ? "ASC" : "DESC";
-		setOrder(newOrder);
-		onOrderChange(newOrder);
-	};
 
 	return (
 		<div className="sorting-display flex flex-row items-center gap-x-2">
 			<button
 				aria-label="Descending"
-				onClick={handleOrder}
+				onClick={() => onOrderChange()}
 				className="text-gray-600 hover:text-foreground"
 			>
-				{order === "DESC" ? (
+				{selectedOrder === "DESC" ? (
 					<SortDesc size={16} />
 				) : (
 					<SortAsc size={16} />
@@ -82,7 +99,7 @@ function DropdownDisplay({
 				<span className="text-gray-600">
 					Sort by:{" "}
 					<span className="font-semibold text-foreground">
-						{selectedCriteria}
+						{criteria}
 					</span>
 				</span>
 				<ChevronDown size={16} />
@@ -104,22 +121,23 @@ function DropdownContent({
 	if (!isOpen) return null;
 
 	return (
-		<div className="sorting-content absolute top-10 right-0 w-[160px] py-4 px-8 bg-white rounded-md drop-shadow-md">
+		<div className="sorting-content absolute top-10 right-0 w-[160px] py-4 px-8 bg-white rounded-md drop-shadow-md z-50">
 			<ul className="flex flex-col">
 				{SORTING_CRITERIAS.map((v, k) => {
 					const isSelected = v === selectedOption;
 					return (
-						<label
-							tabIndex={isOpen ? 1 : 0}
-							key={`${v}-${k}`}
-							className={cn(
-								"py-2 cursor-pointer hover:font-semibold transition-all",
-								isSelected && "text-accent font-semibold",
-							)}
-							onClick={() => onChange(v)}
-						>
-							{v}
-						</label>
+						<li key={`${v}-${k}`} className="flex-1">
+							<button
+								className={cn(
+									"w-full text-left py-2 cursor-pointer transition-all",
+									"hover:font-semibold",
+									isSelected && "text-accent font-semibold",
+								)}
+								onClick={() => onChange(v)}
+							>
+								{v}
+							</button>
+						</li>
 					);
 				})}
 			</ul>
