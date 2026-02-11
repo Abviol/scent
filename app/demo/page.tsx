@@ -18,7 +18,7 @@ import { AlertTriangle, Check, ListOrdered, Search, Truck } from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import Nav from "@/components/layout/nav";
-import { SortingOrderType } from "@/lib/types";
+import { SortingOrderType, SortingType } from "@/lib/types";
 import Sorting from "@/components/shop/sorting";
 
 // --- Helper Component for Layout ---
@@ -39,10 +39,7 @@ const DemoSection = ({
 );
 
 
-interface Sorting {
-	criteria: string;
-	order: SortingOrderType;
-}
+
 
 export default function Page() {
 	// State for Steppers
@@ -58,7 +55,7 @@ export default function Page() {
 	];
 
 	// State for sorting
-	const [sorting, setSorting] = useState<Sorting>({ criteria: "name", order: "DESC" });
+	const [sorting, setSorting] = useState<SortingType>({ criteria: "name", order: "DESC" });
 
 	// const handleSave = (e: ProductCardOnSaveEvent) => {
 	// 	console.log(

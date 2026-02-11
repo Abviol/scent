@@ -1,25 +1,25 @@
 ﻿"use client";
 
-import { SortingOrderType } from "@/lib/types";
+import { SortingCriteriaType, SortingOrderType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { ChevronDown, SortAsc, SortDesc } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 interface SortingDropdownProps {
-	criteria: string;
+	criteria: SortingCriteriaType;
 	order: SortingOrderType;
-	onChange: (criteria: string, order: SortingOrderType) => void;
+	onChange: (criteria: SortingCriteriaType, order: SortingOrderType) => void;
 	className?: string;
 }
 
-const SORTING_CRITERIAS: string[] = ["price", "name", "popularity", "date"];
+const SORTING_CRITERIAS: SortingCriteriaType[] = ["price", "name", "popularity", "date"];
 
 export default function Sorting(props: SortingDropdownProps) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const containerRef = useRef<HTMLDivElement>(null);
 
-	const handleOptionChange = (option: string) => {
-		props.onChange(option, props.order);
+	const handleCriteriaChange = (criteria: SortingCriteriaType) => {
+		props.onChange(criteria, props.order);
 		setIsOpen(false);
 	};
 
@@ -55,9 +55,9 @@ export default function Sorting(props: SortingDropdownProps) {
 				onOpen={() => setIsOpen((prev) => !prev)}
 			/>
 			<DropdownContent
-				selectedOption={props.criteria}
+				selectedCriteria={props.criteria}
 				isOpen={isOpen}
-				onChange={handleOptionChange}
+				onChange={handleCriteriaChange}
 			/>
 		</div>
 	);
@@ -109,12 +109,12 @@ function DropdownDisplay({
 }
 
 interface DropdownContentProps {
-	selectedOption: string;
+	selectedCriteria: SortingCriteriaType;
 	isOpen: boolean;
-	onChange: (option: string) => void;
+	onChange: (criteria: SortingCriteriaType) => void;
 }
 function DropdownContent({
-	selectedOption,
+	selectedCriteria,
 	isOpen,
 	onChange,
 }: DropdownContentProps) {
@@ -124,7 +124,7 @@ function DropdownContent({
 		<div className="sorting-content absolute top-10 right-0 w-[160px] py-4 px-8 bg-white rounded-md drop-shadow-md z-50">
 			<ul className="flex flex-col">
 				{SORTING_CRITERIAS.map((v, k) => {
-					const isSelected = v === selectedOption;
+					const isSelected = v === selectedCriteria;
 					return (
 						<li key={`${v}-${k}`} className="flex-1">
 							<button

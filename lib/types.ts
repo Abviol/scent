@@ -44,3 +44,10 @@ export interface FilterTag {
 };
 
 export type SortingOrderType = "ASC" | "DESC";
+
+export type SortingCriteriaType = "price" | "name" | "popularity" | "date";
+
+export interface SortingType {
+	criteria: SortingCriteriaType;
+	order: SortingOrderType;
+}
