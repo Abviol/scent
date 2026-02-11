@@ -7,8 +7,7 @@ import Sorting from "@/components/shop/sorting";
 import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { Button } from "@/components/ui/button";
 import { MOCK_SHOP_FILTERS, PRODUCTS } from "@/lib/data";
-import { FilterState, FilterTag, SortingCriteriaType, SortingOrderType, SortingType } from "@/lib/types";
-import { ChevronDown } from "lucide-react";
+import { FilterState, FilterTag, FilterValuesType, SortingType } from "@/lib/types";
 import { useState } from "react";
 
 // const getProducts = async (): Promise<ProductType[]> => {
@@ -57,7 +56,7 @@ export default function ShopPage({ params }: ShopPageProps) {
 	 * Updates a specific filter category by key.
 	 * Used primarily by the Sidebar Dropdowns.
 	 */
-	const updateFilter = (key: keyof FilterState, value: any) => {
+	const updateFilter = (key: keyof FilterState, value: FilterValuesType) => {
 		setFilters((prev) => ({ ...prev, [key]: value }));
 	};
 

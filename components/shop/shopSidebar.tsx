@@ -1,13 +1,13 @@
 ﻿import { MOCK_SHOP_FILTERS } from "@/lib/data";
 import { FiltersDropdown } from "../filterDropdown";
 import { Button } from "../ui/button";
-import { FilterState } from "@/lib/types";
+import { FilterState, FilterValuesType } from "@/lib/types";
 
 interface ShopSidebarProps {
 	/** Current state of all filters to determine checked/active status */
 	filters: FilterState;
 	/** Handler to lift state changes back to the parent page */
-	onUpdate: (key: keyof FilterState, value: any) => void;
+	onUpdate: (key: keyof FilterState, value: FilterValuesType) => void;
 	/** Handler to clear all filters */
 	onReset: () => void;
 	/** Boolean flag to enable/disable the 'Clear All' button */
