@@ -27,6 +27,8 @@ export interface VariantType {
 export type MarkerType = "hit" | undefined;
 
 export type AvailabilityType = "available" | "not available" | undefined;
+
+export type FilterValuesType = (string | number)[] | [number, number];
 export interface FilterState {
 	priceRange: [number, number]; // [min, max]
 	brands: string[]; // ["Versace", "Dior"]
@@ -35,8 +37,6 @@ export interface FilterState {
 	markers: string[]; // ["New", "Sale"]
 	concentrations: string[];
 }
-
-
 export interface FilterTag {
 	id: keyof FilterState;
 	value: string | number;
