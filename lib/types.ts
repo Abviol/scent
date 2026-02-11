@@ -42,3 +42,5 @@ export interface FilterTag {
 	value: string | number;
 	label: string;
 };
+
+export type SortingOrderType = "ASC" | "DESC";

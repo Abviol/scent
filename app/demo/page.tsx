@@ -18,6 +18,8 @@ import { AlertTriangle, Check, ListOrdered, Search, Truck } from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import Nav from "@/components/layout/nav";
+import SortingDropdown from "@/components/shop/sorting";
+import { SortingOrderType } from "@/lib/types";
 
 // --- Helper Component for Layout ---
 const DemoSection = ({
@@ -36,6 +38,12 @@ const DemoSection = ({
 	</section>
 );
 
+
+interface Sorting {
+	criteria: string;
+	order: SortingOrderType;
+}
+
 export default function Page() {
 	// State for Steppers
 	const [cartQuantity1, setCartQuantity1] = useState<number>(10);
@@ -48,6 +56,9 @@ export default function Page() {
 		{ label: "Shop", href: "/shop" },
 		{ label: "Product X", href: "/shop/product" },
 	];
+
+	// State for sorting
+	const [sorting, setSorting] = useState<Sorting>({ criteria: "name", order: "DESC" });
 
 	// const handleSave = (e: ProductCardOnSaveEvent) => {
 	// 	console.log(
@@ -77,8 +88,16 @@ export default function Page() {
 						<Marker name="hit" size="md" />
 					</div>
 					<div className="flex gap-4 mb-4">
-						<Tag label="Argentina" onClick={() => {}} id="argentina"></Tag>
-						<Tag label="Your mamma" onClick={() => {}} id="your_mamma"></Tag>
+						<Tag
+							label="Argentina"
+							onClick={() => {}}
+							id="argentina"
+						></Tag>
+						<Tag
+							label="Your mamma"
+							onClick={() => {}}
+							id="your_mamma"
+						></Tag>
 					</div>
 					<div className="flex gap-4">
 						<Badge variant="warning" icon={Truck}>
@@ -334,6 +353,12 @@ export default function Page() {
 				{/* 9. NAVIGATION */}
 				<DemoSection title="Navigation & Breadcrumbs">
 					<Breadcrumbs items={crumbs} />
+				</DemoSection>
+				{/* 9. Sorting Dropdown */}
+				<DemoSection title="Sorting Dropdown">
+					<div className="flex justify-end h-[500px]">
+						<SortingDropdown criteria={sorting.criteria} onChange={(criteria, order) => {console.log(criteria, order); setSorting({criteria, order})}} order={sorting.order} />
+					</div>
 				</DemoSection>
 			</div>
 			<Footer />
