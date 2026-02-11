@@ -3,10 +3,11 @@
 import { ActiveFilters } from "@/components/shop/activeFilters";
 import { ProductGrid } from "@/components/shop/productGrid";
 import { ShopSidebar } from "@/components/shop/shopSidebar";
+import Sorting from "@/components/shop/sorting";
 import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { Button } from "@/components/ui/button";
 import { MOCK_SHOP_FILTERS, PRODUCTS } from "@/lib/data";
-import { FilterState, FilterTag } from "@/lib/types";
+import { FilterState, FilterTag, SortingCriteriaType, SortingOrderType, SortingType } from "@/lib/types";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
@@ -34,6 +35,9 @@ export default function ShopPage({ params }: ShopPageProps) {
 		{ label: "Scent", href: "/" },
 		{ label: "Shop", href: "" },
 	];
+
+	// Sorting state
+	const [sorting, setSorting] = useState<SortingType>({ criteria: "date", order: "DESC"});
 
 	/**
 	 * Centralized Filter State
@@ -105,9 +109,7 @@ export default function ShopPage({ params }: ShopPageProps) {
 				<h1 className="text-[40px] font-semibold">Shop</h1>
 				<div className="flex flex-row justify-between items-center">
 					<Breadcrumbs items={breadcrumbsItems} />
-					<span className="inline-flex items-center">
-						Sort: By default <ChevronDown size={16} />
-					</span>
+					<Sorting criteria={sorting.criteria} order={sorting.order} onChange={(criteria, order) => setSorting({criteria, order})} />
 				</div>
 			</div>
 
