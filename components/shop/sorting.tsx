@@ -14,7 +14,7 @@ interface SortingDropdownProps {
 
 const SORTING_CRITERIAS: string[] = ["price", "name", "popularity", "date"];
 
-export default function SortingDropdown(props: SortingDropdownProps) {
+export default function Sorting(props: SortingDropdownProps) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const containerRef = useRef<HTMLDivElement>(null);
 

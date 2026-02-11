@@ -18,8 +18,8 @@ import { AlertTriangle, Check, ListOrdered, Search, Truck } from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import Nav from "@/components/layout/nav";
-import SortingDropdown from "@/components/shop/sorting";
 import { SortingOrderType } from "@/lib/types";
+import Sorting from "@/components/shop/sorting";
 
 // --- Helper Component for Layout ---
 const DemoSection = ({
@@ -357,7 +357,7 @@ export default function Page() {
 				{/* 9. Sorting Dropdown */}
 				<DemoSection title="Sorting Dropdown">
 					<div className="flex justify-end h-[500px]">
-						<SortingDropdown criteria={sorting.criteria} onChange={(criteria, order) => {console.log(criteria, order); setSorting({criteria, order})}} order={sorting.order} />
+						<Sorting criteria={sorting.criteria} onChange={(criteria, order) => {console.log(criteria, order); setSorting({criteria, order})}} order={sorting.order} />
 					</div>
 				</DemoSection>
 			</div>
