@@ -1,22 +1,25 @@
-﻿import { FilterState, FilterTag } from "@/lib/types";
+﻿"use client";
+
+import { FilterState, FilterTag } from "@/lib/types";
 import { Button } from "../ui/button";
 import Tag from "../ui/tag";
+import { useShopFilters } from "@/hooks/use-shop-filters";
+import { MOCK_SHOP_FILTERS } from "@/lib/data";
+import { convertFilterToTags } from "@/lib/utils";
 
 interface ActiveFiltersProps {
-	/** Array of derived tag objects (label, id, value) */
-	tags: FilterTag[];
-	/** Handler to remove a specific single tag */
-	onRemove: (id: keyof FilterState, value: string | number) => void;
-	/** Handler to clear everything */
-	onClear: () => void;
+	filters: FilterState;
 }
 
 /**
- * ActiveFilters
  * Displays the row of Tags above the product grid.
  * It handles the visual feedback of what filters are currently applied.
  */
-export function ActiveFilters({ tags, onRemove, onClear }: ActiveFiltersProps) {
+export function ActiveFilters({ filters }: ActiveFiltersProps) {
+	const { toggleFilter, resetFilters } = useShopFilters();
+
+	const tags = convertFilterToTags(filters);
+
 	if (tags.length === 0) return null;
 
 	return (
@@ -26,10 +29,10 @@ export function ActiveFilters({ tags, onRemove, onClear }: ActiveFiltersProps) {
 					key={`${tag.id}-${tag.value}`}
 					label={tag.label}
 					id={tag.id}
-					onClick={() => onRemove(tag.id, tag.value)}
+					onClick={() => toggleFilter(tag.id, tag.value)}
 				/>
 			))}
-			<Button onClick={() => onClear()}>Clear All</Button>
+			<Button onClick={() => resetFilters()}>Clear All</Button>
 		</div>
 	);
 }
