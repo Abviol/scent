@@ -1,14 +1,14 @@
 ﻿export interface ProductType {
 	id: string;
 	code: number;
-	title: string;
+	name: string;
 	imageUrls: string[];
 	rating: number;
 	reviewsAmount: number;
 	type: string;
 	tags: string[];
-	categories: string[];
 	brand: string;
+	gender: GenderType;
 	variants: VariantType[];
 	description: string | undefined;
 	details: Record<string, string | number> | undefined;
@@ -24,6 +24,8 @@ export interface VariantType {
 	quantityInStock: number;
 }
 
+export type GenderType = "men" | "women" | "unisex" | "boys" | "girls" | "kids_unisex";
+
 export type MarkerType = "hit" | undefined;
 
 export type AvailabilityType = "available" | "not available" | undefined;
@@ -32,10 +34,10 @@ export type FilterValuesType = (string | number)[] | [number, number];
 export interface FilterState {
 	priceRange: [number, number]; // [min, max]
 	brands: string[]; // ["Versace", "Dior"]
-	categories: string[]; // ["men", "women"]
+	genders: GenderType[]; // ["men", "women"]
 	volumes: string[]; // ["50 ml", "100 ml"]
 	markers: string[]; // ["New", "Sale"]
-	concentrations: string[];
+	types: string[]; // ["Eau de Toilette, Eau de Parfum"]
 }
 export interface FilterTag {
 	id: keyof FilterState;
@@ -45,7 +47,8 @@ export interface FilterTag {
 
 export type SortingOrderType = "ASC" | "DESC";
 
-export type SortingCriteriaType = "price" | "name" | "popularity" | "date";
+export const SORTING_CRITERIAS = ["price", "name", "popularity", "date"] as const;
+export type SortingCriteriaType = (typeof SORTING_CRITERIAS)[number];
 
 export interface SortingType {
 	criteria: SortingCriteriaType;
