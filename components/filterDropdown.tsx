@@ -25,7 +25,7 @@ interface CheckboxFilterProps extends BaseFilterProps {
 	type: "checkbox";
 	options: Option[];
 	selectedValues: (string | number)[];
-	onChange: (id: string, values: (string | number)[]) => void;
+	onChange: (id: string, values: (string | number)) => void;
 	min?: never;
 	max?: never;
 	rangeValue?: never;
@@ -59,7 +59,7 @@ export function FiltersDropdown({ isOpen = false, ...props }: FiltersDropdownPro
 					{props.title}
 				</h3>
 				<div className="text-foreground transition-colors">
-					{isDropdownOpen ? <Minus size={28} /> : <Plus size={28} />}
+					{isDropdownOpen ? <Minus size={28} strokeWidth={1.5} /> : <Plus size={28} strokeWidth={1.5} />}
 				</div>
 			</div>
 
@@ -69,8 +69,8 @@ export function FiltersDropdown({ isOpen = false, ...props }: FiltersDropdownPro
 						<CheckboxList
 							options={props.options}
 							selectedValues={props.selectedValues}
-							onChange={(newValues) =>
-								props.onChange(props.id, newValues)
+							onChange={(updatedValue) =>
+								props.onChange(props.id, updatedValue)
 							}
 						/>
 					) : (
@@ -93,7 +93,7 @@ export function FiltersDropdown({ isOpen = false, ...props }: FiltersDropdownPro
 interface CheckboxListProps {
 	options: Option[];
 	selectedValues: (string | number)[];
-	onChange: (values: (string | number)[]) => void;
+	onChange: (value: (string | number)) => void;
 }
 
 function CheckboxList({
@@ -105,11 +105,7 @@ function CheckboxList({
 		checked: boolean | string,
 		itemValue: string | number,
 	) => {
-		if (checked) {
-			onChange([...selectedValues, itemValue]);
-		} else {
-			onChange(selectedValues.filter((v) => v !== itemValue));
-		}
+		onChange(itemValue);
 	};
 
 	return (
