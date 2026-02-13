@@ -1,17 +1,15 @@
-﻿import { MOCK_SHOP_FILTERS } from "@/lib/data";
+﻿"use client";
+
+import { MOCK_SHOP_FILTERS } from "@/lib/data";
 import { FiltersDropdown } from "../filterDropdown";
 import { Button } from "../ui/button";
 import { FilterState, FilterValuesType } from "@/lib/types";
+import { useShopFilters } from "@/hooks/use-shop-filters";
+import { convertFilterToTags } from "@/lib/utils";
 
 interface ShopSidebarProps {
 	/** Current state of all filters to determine checked/active status */
 	filters: FilterState;
-	/** Handler to lift state changes back to the parent page */
-	onUpdate: (key: keyof FilterState, value: FilterValuesType) => void;
-	/** Handler to clear all filters */
-	onReset: () => void;
-	/** Boolean flag to enable/disable the 'Clear All' button */
-	hasActiveFilters: boolean;
 }
 
 /**
@@ -20,10 +18,9 @@ interface ShopSidebarProps {
  */
 export function ShopSidebar({
 	filters,
-	onUpdate,
-	onReset,
-	hasActiveFilters,
-}: ShopSidebarProps) {
+}: ShopSidebarProps) {	
+	const sf = useShopFilters();
+	
 	return (
 		<aside className="flex flex-col gap-8">
 			{/* Price Range Slider 
@@ -37,7 +34,7 @@ export function ShopSidebar({
 				min={MOCK_SHOP_FILTERS.priceRange[0]}
 				max={MOCK_SHOP_FILTERS.priceRange[1]}
 				rangeValue={filters.priceRange}
-				onChange={(id, val) => onUpdate("priceRange", val)}
+				onChange={(id, val) => sf.setPriceRange(val)}
 			/>
 
 			{/* Volume Checkboxes
@@ -50,7 +47,7 @@ export function ShopSidebar({
 				type="checkbox"
 				options={toOptions(MOCK_SHOP_FILTERS.volumes, " ml")}
 				selectedValues={filters.volumes}
-				onChange={(id, val) => onUpdate("volumes", val)}
+				onChange={(id, val) => sf.toggleFilter("volumes", val)}
 			/>
 
 			{/* Brand Selection */}
@@ -61,17 +58,17 @@ export function ShopSidebar({
 				type="checkbox"
 				options={toOptions(MOCK_SHOP_FILTERS.brands, "")}
 				selectedValues={filters.brands}
-				onChange={(id, val) => onUpdate("brands", val)}
+				onChange={(id, val) => sf.toggleFilter("brands", val)}
 			/>
 
 			{/* Category Selection */}
 			<FiltersDropdown
-				id="categories"
+				id="genders"
 				title="Categoies"
 				type="checkbox"
-				options={toOptions(MOCK_SHOP_FILTERS.categories, "")}
-				selectedValues={filters.categories}
-				onChange={(id, val) => onUpdate("categories", val)}
+				options={toOptions(MOCK_SHOP_FILTERS.genders, "")}
+				selectedValues={filters.genders}
+				onChange={(id, val) => sf.toggleFilter("genders", val)}
 			/>
 
 			{/* Markers (e.g., 'New', 'Best Seller') */}
@@ -81,17 +78,17 @@ export function ShopSidebar({
 				type="checkbox"
 				options={toOptions(MOCK_SHOP_FILTERS.markers, "")}
 				selectedValues={filters.markers}
-				onChange={(id, val) => onUpdate("markers", val)}
+				onChange={(id, val) => sf.toggleFilter("markers", val)}
 			/>
 
 			{/* Concentration (e.g., 'EDP', 'EDT') */}
 			<FiltersDropdown
-				id="concentrations"
-				title="Concentrations"
+				id="types"
+				title="types"
 				type="checkbox"
-				options={toOptions(MOCK_SHOP_FILTERS.concentrations, "")}
-				selectedValues={filters.concentrations}
-				onChange={(id, val) => onUpdate("concentrations", val)}
+				options={toOptions(MOCK_SHOP_FILTERS.types, "")}
+				selectedValues={filters.types}
+				onChange={(id, val) => sf.toggleFilter("types", val)}
 			/>
 
 			{/* Global Reset Button 
@@ -103,10 +100,10 @@ export function ShopSidebar({
 				variant="outline"
 				className="mt-10 mx-auto h-12  w-full max-w-[260px] text-lg"
 				onClick={() => {
-					onReset();
+					sf.resetFilters();
 					window.scrollTo({ top: 0, behavior: "smooth" });
 				}}
-				disabled={!hasActiveFilters}
+				disabled={convertFilterToTags(filters).length == 0}
 			>
 				Clear All Filters
 			</Button>
