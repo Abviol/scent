@@ -4,7 +4,7 @@ const PRODUCTS: ProductType[] = [
 	{
 		id: "asdf-werg-cfad",
 		code: 123456,
-		title: "Jean Paul Gaultier Le Beau",
+		name: "Jean Paul Gaultier Le Beau",
 		imageUrls: [
 			"https://i.makeup.it/9/9i/9iajbg7jxhit.jpg",
 			"https://i.makeup.it/o/oc/oct1za9lqofn.jpg",
@@ -15,7 +15,7 @@ const PRODUCTS: ProductType[] = [
 		reviewsAmount: 100,
 		type: "Eau de Toilette",
 		tags: [],
-		categories: ["men"],
+		gender: "men",
 		brand: "Versace",
 		variants: [
 			{
@@ -69,12 +69,12 @@ const PRODUCTS: ProductType[] = [
 	{
 		id: "asdf-werg-cfad",
 		code: 529683,
-		title: "Yves Saint Laurent Libre Intense",
+		name: "Yves Saint Laurent Libre Intense",
 		rating: 4.9,
 		reviewsAmount: 142,
 		type: "Eau de Parfum",
 		tags: [],
-		categories: ["women"],
+		gender: "women",
 		brand: "Yves Saint Laurent",
 		imageUrls: [
 			"https://i.makeup.it/l/l7/l7yfzcx8yetn.png",
@@ -140,12 +140,12 @@ const PRODUCTS: ProductType[] = [
 	{
 		id: "asdf-wedg-cfad",
 		code: 422454,
-		title: "Montblanc Explorer",
+		name: "Montblanc Explorer",
 		rating: 4.9,
 		reviewsAmount: 352,
 		type: "Eau de Parfum",
 		tags: [],
-		categories: ["men"],
+		gender: "men",
 		brand: "Montblanc",
 		imageUrls: [
 			"https://i.makeup.it/2/2h/2h0tbxmkoqlr.jpg",
@@ -233,7 +233,7 @@ const MOCK_SHOP_FILTERS: FilterState = {
 		"Givenchy",
 	],
 
-	categories: ["Men", "Women", "Unisex", "Niche Perfumery", "Gift Sets"],
+	genders: ["men", "women", "unisex", "boys", "girls", "kids_unisex"],
 
 	volumes: [
 		"30",
@@ -255,7 +255,7 @@ const MOCK_SHOP_FILTERS: FilterState = {
 	],
 
 	// Bonus: If you want to filter by concentration (EDT/EDP)
-	concentrations: [
+	types: [
 		"Eau de Toilette",
 		"Eau de Parfum",
 		"Parfum",
