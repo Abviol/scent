@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import { useShopFilters } from "@/hooks/use-shop-filters";
 import { SortingCriteriaType, SortingOrderType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { ChevronDown, SortAsc, SortDesc } from "lucide-react";
@@ -8,7 +9,6 @@ import { useEffect, useRef, useState } from "react";
 interface SortingDropdownProps {
 	criteria: SortingCriteriaType;
 	order: SortingOrderType;
-	onChange: (criteria: SortingCriteriaType, order: SortingOrderType) => void;
 	className?: string;
 }
 
@@ -18,14 +18,16 @@ export default function Sorting(props: SortingDropdownProps) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const containerRef = useRef<HTMLDivElement>(null);
 
+	const { setSorting }= useShopFilters();
+
 	const handleCriteriaChange = (criteria: SortingCriteriaType) => {
-		props.onChange(criteria, props.order);
+		setSorting(criteria, props.order);
 		setIsOpen(false);
 	};
 
 	const toggleOrder = () => {
 		const newOrder = props.order === "DESC" ? "ASC" : "DESC";
-		props.onChange(props.criteria, newOrder);
+		setSorting(props.criteria, newOrder);
 	};
 
 	//  Handle Click Outside to close dropdown
