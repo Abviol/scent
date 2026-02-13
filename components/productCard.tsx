@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Bookmark } from "lucide-react";
 
 // Utils & Types
 import { MarkerType } from "@/lib/types";
@@ -11,7 +10,6 @@ import { getEuro } from "@/lib/utils";
 // Components
 import Marker from "./ui/marker";
 import Rating from "./ui/rating";
-import { useState } from "react";
 import BookmarkButton from "./bookmarkButton";
 
 export interface ProductCardOnSaveEvent {
@@ -19,7 +17,7 @@ export interface ProductCardOnSaveEvent {
 	wishlist: boolean;
 }
 export interface ProductCardProps {
-	title: string;
+	name: string;
 	productId: string; // diverse from product_code
 	volume: number;
 	imageUrl: string;
@@ -30,7 +28,7 @@ export interface ProductCardProps {
 }
 
 export default function ProductCard({
-	title,
+	name,
 	productId,
 	volume,
 	imageUrl,
@@ -62,7 +60,7 @@ export default function ProductCard({
 				>
 					<Image
 						src={imageUrl}
-						alt={`${title} ${volume} ml`}
+						alt={`${name} ${volume} ml`}
 						fill
 						className="object-contain"
 						priority={false}
@@ -72,7 +70,7 @@ export default function ProductCard({
 
 			<Link href={productLink}>
 				<div className="flex flex-col justify-between items-center">
-					<h3 className="my-text-lg text-center">{title}</h3>
+					<h3 className="my-text-lg text-center">{name}</h3>
 					<div className="flex flex-row gap-x-10 mb-8">
 						<span className="my-text-p gap-x-10 items-center">
 							{volume} ml
