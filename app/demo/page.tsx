@@ -118,7 +118,7 @@ export default function Page() {
 				<DemoSection title="Product Cards">
 					<div className="flex flex-wrap gap-6 items-start">
 						<ProductCard
-							title="Versace Eros Flame"
+							name="Versace Eros Flame"
 							productId="prod-001"
 							imageUrl="https://i.makeup.it/u/uf/uf0jgxb7gg2e.jpg"
 							markers={["hit"]}
@@ -128,7 +128,7 @@ export default function Page() {
 							price={200}
 						/>
 						<ProductCard
-							title="Dior Sauvage Elixir"
+							name="Dior Sauvage Elixir"
 							productId="prod-002"
 							imageUrl="https://i.makeup.it/u/ux/uxuxdj4ehyen.jpg"
 							markers={["hit", "hit"]}
@@ -138,7 +138,7 @@ export default function Page() {
 							price={9999}
 						/>
 						<ProductCard
-							title="Chanel Bleu"
+							name="Chanel Bleu"
 							productId="prod-003"
 							imageUrl="https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"
 							markers={[]}
@@ -354,7 +354,7 @@ export default function Page() {
 				{/* 9. Sorting Dropdown */}
 				<DemoSection title="Sorting Dropdown">
 					<div className="flex justify-end h-[220px]">
-						<Sorting criteria={sorting.criteria} onChange={(criteria, order) => {console.log(criteria, order); setSorting({criteria, order})}} order={sorting.order} />
+						<Sorting criteria={sorting.criteria} order={sorting.order} />
 					</div>
 				</DemoSection>
 			</div>
