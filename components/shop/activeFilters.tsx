@@ -1,10 +1,9 @@
 ﻿"use client";
 
-import { FilterState, FilterTag } from "@/lib/types";
+import { FilterState } from "@/lib/types";
 import { Button } from "../ui/button";
 import Tag from "../ui/tag";
 import { useShopFilters } from "@/hooks/use-shop-filters";
-import { MOCK_SHOP_FILTERS } from "@/lib/data";
 import { convertFilterToTags } from "@/lib/utils";
 
 interface ActiveFiltersProps {
@@ -16,7 +15,7 @@ interface ActiveFiltersProps {
  * It handles the visual feedback of what filters are currently applied.
  */
 export function ActiveFilters({ filters }: ActiveFiltersProps) {
-	const { toggleFilter, resetFilters } = useShopFilters();
+	const { toggleFilter, setPriceRange, resetFilters } = useShopFilters();
 
 	const tags = convertFilterToTags(filters);
 

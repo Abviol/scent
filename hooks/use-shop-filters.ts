@@ -36,16 +36,18 @@ export function useShopFilters() {
 			params.delete(key);
 
 			if (currentValues.includes(value)) {
-				// Re-add all EXCEPT the one we are removing
 				currentValues
 					.filter((v) => v !== value)
 					.forEach((v) => params.append(key, v.toString()));
+			} else if (key === "priceRange" && value === "price_reset") {
+				params.delete("minPrice");
+				params.delete("maxPrice");
 			} else {
 				// Re-add all PLUS the new one
 				[...currentValues, value].forEach((v) => params.append(key, v.toString()));
 			}
 
-			// Reset page to 1 on filter change
+			// Reset page on filter change
 			params.delete("page");
 		});
 	};
