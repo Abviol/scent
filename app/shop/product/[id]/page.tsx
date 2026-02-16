@@ -24,7 +24,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 	const breadcrumbsItems: BreadcrumbItem[] = [
 		{ label: "Scent", href: "/" },
 		{ label: "Shop", href: "/shop" },
-		{ label: product.title, href: "" },
+		{ label: product.name, href: "" },
 	];
 
 	return (

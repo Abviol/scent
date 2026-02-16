@@ -65,13 +65,13 @@ export default function ProductInfoSection({
 				{/* product gallery */}
 				<ProductGallery
 					imageUrls={product.imageUrls}
-					title={product.title}
+					title={product.name}
 				/>
 				{/* main info */}
 				<div className="w-full flex flex-col gap-y-8">
 					<div className="flex flex-row justify-between items-center">
 						<h1 className="text-3xl leading-12 font-semibold whitespace-normal">
-							{product.title}
+							{product.name}
 						</h1>
 						<div className="flex flex-row shrink-0 gap-x-2 ml-3">
 							<Rating
