@@ -109,7 +109,15 @@ export function parseSearchParams(params: {
 		return fallback;
 	};
 
+	// Helper for strings
+	const getString = (key: string, fallback: ""): string => {
+		const val = params[key];
+		if (typeof val === "string") return val;
+		return fallback;
+	}
+
 	const filters: FilterState = {
+		searchQuery: getString("q", ""),
 		brands: getArray("brands"),
 		genders: getArray("genders") as GenderType[],
 		volumes: getArray("volumes"),

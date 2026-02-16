@@ -32,6 +32,7 @@ export type AvailabilityType = "available" | "not available" | undefined;
 
 export type FilterValuesType = (string | number)[] | [number, number];
 export interface FilterState {
+	searchQuery: string;
 	priceRange: [number, number]; // [min, max]
 	brands: string[]; // ["Versace", "Dior"]
 	genders: GenderType[]; // ["men", "women"]

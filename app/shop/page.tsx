@@ -32,12 +32,22 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 			{/* Page Header & Breadcrumbs */}
 			<div className="grid grid-cols-[300px_1fr] gap-x-8 mb-10">
 				<h1 className="text-[40px] font-semibold">Shop</h1>
-				<div className="flex flex-row justify-between items-center">
-					<Breadcrumbs items={breadcrumbsItems} />
-					<Sorting
-						criteria={sorting.criteria}
-						order={sorting.order}
-					/>
+				<div className="flex flex-col gap-2">
+					<div className="flex flex-row justify-between items-center">
+						<Breadcrumbs items={breadcrumbsItems} />
+						<Sorting
+							criteria={sorting.criteria}
+							order={sorting.order}
+						/>
+					</div>
+					{filters.searchQuery && (
+						<p className="text-lg text-center">
+							Results for:{" "}
+							<span className="text-accent font-medium">
+								&#34;{filters.searchQuery}&#34;
+							</span>
+						</p>
+					)}
 				</div>
 			</div>
 

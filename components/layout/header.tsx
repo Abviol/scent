@@ -9,6 +9,7 @@ import { Button } from "../ui/button";
 import Avatar from "../ui/avatar";
 import { Input } from "../ui/input";
 import SearchResultItem from "../searchResultItem";
+import { useRouter } from "next/navigation";
 
 // Types
 interface User {
@@ -19,7 +20,8 @@ interface User {
 // Main Component
 export default function Header() {
 	const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
-	const [searchValue, setSearchValue] = useState<string>("");
+	const [searchQuery, setSearchQuery] = useState<string>("");
+	const router = useRouter();
 
 	// Mock Data
 	const isLoggedIn: boolean = false;
@@ -31,19 +33,28 @@ export default function Header() {
 
 	const closeSearch = () => setIsSearchOpen(false);
 	const handleSearchFocus = () => setIsSearchOpen(true);
-	const clearSearch = () => setSearchValue("");
+	const clearSearch = () => setSearchQuery("");
 	const handleBlur = (e: PointerEvent) => {
 		const target = e.target as HTMLElement;
 		if (!target.closest(".search-bar")) {
 			closeSearch();
 		}
 	};
+	const applySearchQuery = () => {
+		router.push(`/shop?q=${encodeURIComponent(searchQuery.trim())}`);
+		closeSearch();
+		setSearchQuery("");
+	}
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key !== "Enter") return;
+		applySearchQuery();
+	};
 
 	useEffect(() => {
-		if (isSearchOpen && searchValue)
+		if (isSearchOpen && searchQuery)
 			document.body.style.overflow = "hidden";
 		else document.body.style.overflow = "visible";
-	}, [isSearchOpen, searchValue]);
+	}, [isSearchOpen, searchQuery]);
 
 	useEffect(() => {
 		document.body.addEventListener("click", handleBlur);
@@ -53,7 +64,7 @@ export default function Header() {
 	return (
 		<>
 			{/* Backdrop Overlay */}
-			{isSearchOpen && searchValue && (
+			{isSearchOpen && searchQuery && (
 				<div
 					className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm transition-all"
 					onClick={closeSearch}
@@ -75,11 +86,12 @@ export default function Header() {
 						{/* 2. Search Bar */}
 						<div className="relative flex-1">
 							<SearchBar
-								value={searchValue}
+								value={searchQuery}
 								isOpen={isSearchOpen}
-								onChange={setSearchValue}
+								onChange={setSearchQuery}
 								onFocus={handleSearchFocus}
 								onClear={clearSearch}
+								onKeyDown={handleKeyDown}
 							/>
 						</div>
 
@@ -93,7 +105,7 @@ export default function Header() {
 				</div>
 
 				{/* 4. Search Results Dropdown */}
-				<SearchDropdown isOpen={isSearchOpen} query={searchValue} />
+				<SearchDropdown isOpen={isSearchOpen} query={searchQuery} />
 			</header>
 		</>
 	);
@@ -107,12 +119,14 @@ function SearchBar({
 	onChange,
 	onFocus,
 	onClear,
+	onKeyDown,
 }: {
 	value: string;
 	isOpen: boolean;
 	onChange: (val: string) => void;
 	onFocus: () => void;
 	onClear: () => void;
+	onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -127,7 +141,7 @@ function SearchBar({
 	const handleFocus = () => {
 		onFocus();
 		inputRef.current?.focus();
-	}
+	};
 
 	const handleClear = () => {
 		onClear();
@@ -147,6 +161,7 @@ function SearchBar({
 					placeholder="Search fragrances..."
 					value={value}
 					onChange={(e) => onChange(e.target.value)}
+					onKeyDown={onKeyDown}
 					className="w-full max-w-xl h-12 rounded-lg border py-2 px-6 text-sm outline-none transition-all animate-in fade-in duration-200"
 				/>
 			)}
@@ -230,7 +245,7 @@ function SearchDropdown({ isOpen, query }: { isOpen: boolean; query: string }) {
 						))}
 					</div>
 					<Link
-						href={"/search"}
+						href={`/shop?q=${encodeURIComponent(query)}`}
 						className="w-fit text-slate-500 font-semibold capitalize hover:text-main transition-colors"
 					>
 						View All Results

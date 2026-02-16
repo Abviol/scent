@@ -66,6 +66,13 @@ export function useShopFilters() {
 		});
 	}
 
+	// Handle search
+	const setSearchQuery = (query: string) => {
+		applyUpdate((params) => {
+			params.set("q", query);
+		})
+	}
+
 	// Handle sorting
 	const setSorting = (criteria: string, order: SortingOrderType) => {
 		applyUpdate((params) => {
@@ -100,6 +107,7 @@ export function useShopFilters() {
 		setPriceRange, // For Slider
 		setPage, // For Pagination
 		setSorting, // For Sort Dropdown
+		setSearchQuery,
 		resetFilters, // For "Clear All"
 		isFilterActive, // To check checkbox state
 		// Return current parsed values for UI sync

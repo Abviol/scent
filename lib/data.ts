@@ -209,6 +209,8 @@ const PRODUCTS: ProductType[] = [
 ];
 
 const MOCK_SHOP_FILTERS: FilterState = {
+	searchQuery: "",
+
 	// Min/Max for the slider
 	priceRange: [0, 600],
 
