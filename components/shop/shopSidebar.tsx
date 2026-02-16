@@ -3,7 +3,7 @@
 import { MOCK_SHOP_FILTERS } from "@/lib/data";
 import { FiltersDropdown } from "../filterDropdown";
 import { Button } from "../ui/button";
-import { FilterState, FilterValuesType } from "@/lib/types";
+import { FilterState } from "@/lib/types";
 import { useShopFilters } from "@/hooks/use-shop-filters";
 import { convertFilterToTags } from "@/lib/utils";
 
