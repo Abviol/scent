@@ -15,7 +15,7 @@ interface ActiveFiltersProps {
  * It handles the visual feedback of what filters are currently applied.
  */
 export function ActiveFilters({ filters }: ActiveFiltersProps) {
-	const { toggleFilter, setPriceRange, resetFilters } = useShopFilters();
+	const { toggleFilter, resetFilters } = useShopFilters();
 
 	const tags = convertFilterToTags(filters);
 
