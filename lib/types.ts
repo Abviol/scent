@@ -38,6 +38,7 @@ export interface FilterState {
 	volumes: string[]; // ["50 ml", "100 ml"]
 	markers: string[]; // ["New", "Sale"]
 	types: string[]; // ["Eau de Toilette, Eau de Parfum"]
+	page: number;
 }
 export interface FilterTag {
 	id: keyof FilterState;

@@ -1,16 +1,23 @@
-﻿import { Frown } from "lucide-react";
+﻿"use client";
+
+import { Frown } from "lucide-react";
 import ProductCard from "../productCard";
 import { ProductType } from "@/lib/types";
+import { Button } from "../ui/button";
+import { useShopFilters } from "@/hooks/use-shop-filters";
 
 interface ProductGridProps {
 	products: ProductType[];
+	page: number;
 }
 
 /**
  * ProductGrid
  * Responsible for rendering the list of products or the "Empty State"
  */
-export function ProductGrid({ products }: ProductGridProps) {
+export function ProductGrid({ products, page }: ProductGridProps) {
+	const { setPage } = useShopFilters();
+
 	if (products.length === 0) {
 		return (
 			<div className="flex flex-col items-center justify-center py-20 text-center text-muted-foreground">
@@ -22,20 +29,32 @@ export function ProductGrid({ products }: ProductGridProps) {
 	}
 
 	return (
-		<div className="grid grid-cols-4 gap-x-5 gap-y-12">
-			{products.map((prod, i) => (
-				<ProductCard
-					key={prod.id + i}
-					name={prod.name}
-					productId={prod.id}
-					imageUrl={prod.imageUrls[0]}
-					markers={prod.markers}
-					wishlist={prod.variants[0].wishlist}
-					volume={prod.variants[0].volume}
-					rating={prod.rating}
-					price={prod.variants[0].price}
-				/>
-			))}
-		</div>
+		<>
+			<div className="grid grid-cols-4 gap-x-5 gap-y-12">
+				{products.map((prod, i) => (
+					<ProductCard
+						key={prod.id + i}
+						name={prod.name}
+						productId={prod.id}
+						imageUrl={prod.imageUrls[0]}
+						markers={prod.markers}
+						wishlist={prod.variants[0].wishlist}
+						volume={prod.variants[0].volume}
+						rating={prod.rating}
+						price={prod.variants[0].price}
+					/>
+				))}
+			</div>
+			<div className="mt-20 flex flex-row flex-1 justify-center">
+				<Button
+					size="lg"
+					variant="default"
+					className="h-[60px] w-full max-w-[400px] text-xl font-medium p-3 rounded-md"
+					onClick={() => setPage(page + 1)}
+				>
+					More Products
+				</Button>
+			</div>
+		</>
 	);
 }

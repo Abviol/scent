@@ -5,7 +5,6 @@ import { ProductGrid } from "@/components/shop/productGrid";
 import { ShopSidebar } from "@/components/shop/shopSidebar";
 import Sorting from "@/components/shop/sorting";
 import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
-import { Button } from "@/components/ui/button";
 import { getProducts } from "@/lib/api/products";
 import { parseSearchParams } from "@/lib/utils";
 interface ShopPageProps {
@@ -47,23 +46,13 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 				<ShopSidebar filters={filters} />
 
 				{/* --- MAIN CONTENT AREA --- */}
-				<div className="">
+				<main className="">
 					{/* Active Filter Tags Display */}
 					<ActiveFilters filters={filters} />
 
 					{/* Product Grid */}
-					<ProductGrid products={products} />
-
-					<div className="mt-20 flex flex-row flex-1 justify-center">
-						<Button
-							size="lg"
-							variant="default"
-							className="h-[60px] w-full max-w-[400px] text-xl font-medium p-3 rounded-md"
-						>
-							More Products
-						</Button>
-					</div>
-				</div>
+					<ProductGrid products={products} page={filters.page} />
+				</main>
 			</div>
 		</div>
 	);

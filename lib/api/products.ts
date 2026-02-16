@@ -5,7 +5,6 @@ import { FilterState, ProductType, SortingType } from "@/lib/types";
 interface GetProductsParams {
 	filters: FilterState;
 	sorting: SortingType;
-	page?: number;
 }
 
 export async function getProducts({ filters, sorting }: GetProductsParams) {
@@ -13,7 +12,7 @@ export async function getProducts({ filters, sorting }: GetProductsParams) {
 	await new Promise((resolve) => setTimeout(resolve, 500));
 
 	let results: ProductType[] = [];
-   for (let i = 0; i < 10; i++) {
+   for (let i = 0; i < 40; i++) {
       results = [...results, ...PRODUCTS];
    }
 
@@ -111,5 +110,8 @@ export async function getProducts({ filters, sorting }: GetProductsParams) {
 	// const startIndex = ((page || 1) - 1) * pageSize;
 	// return results.slice(startIndex, startIndex + pageSize);
 
-	return results;
+	const defaultAmount = 24;
+	const loadMoreAmout = 12;
+	const endIndex = defaultAmount + loadMoreAmout * (filters.page || 0); 
+	return results.slice(0, endIndex);
 }

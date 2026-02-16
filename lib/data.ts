@@ -262,6 +262,8 @@ const MOCK_SHOP_FILTERS: FilterState = {
 		"Extrait de Parfum",
 		"Eau de Cologne",
 	],
+
+	page: 1,
 };
 
 export { PRODUCTS, MOCK_SHOP_FILTERS };

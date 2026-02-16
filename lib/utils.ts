@@ -119,6 +119,7 @@ export function parseSearchParams(params: {
 			getNumber("minPrice", MOCK_SHOP_FILTERS.priceRange[0]),
 			getNumber("maxPrice", MOCK_SHOP_FILTERS.priceRange[1]),
 		],
+		page: getNumber("page", 0),
 	};
 
 	const rawSort = typeof params.sortBy === "string" ? params.sortBy : "";

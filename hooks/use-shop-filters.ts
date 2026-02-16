@@ -59,6 +59,13 @@ export function useShopFilters() {
 		});
 	};
 
+	// Handle pagination
+	const setPage = (page: number) => {
+		applyUpdate((params) => {
+			params.set("page", page.toString());
+		});
+	}
+
 	// Handle sorting
 	const setSorting = (criteria: string, order: SortingOrderType) => {
 		applyUpdate((params) => {
@@ -91,6 +98,7 @@ export function useShopFilters() {
 		isPending, // True while the server is re-rendering the product grid
 		toggleFilter, // For Checkboxes
 		setPriceRange, // For Slider
+		setPage, // For Pagination
 		setSorting, // For Sort Dropdown
 		resetFilters, // For "Clear All"
 		isFilterActive, // To check checkbox state
