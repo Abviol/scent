@@ -16,6 +16,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ProductsSliderSection } from "@/components/productsSliderSection";
+import { PRODUCTS } from "@/lib/data";
 
 export default function Home() {
 	const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
@@ -99,7 +101,26 @@ export default function Home() {
 							</button>
 						</div>
 					</section>
-
+					{/* new products section */}
+					<ProductsSliderSection
+						title="New products"
+						id="new-products"
+						titlePosition="center"
+						products={Array.from(
+							{ length: 10 },
+							(v, k) => PRODUCTS[(k + 1) % 3],
+						)}
+					/>
+					{/* brand offers section */}
+					<ProductsSliderSection
+						title="Brand offers"
+						id="brand-offers"
+						titlePosition="center"
+						products={Array.from(
+							{ length: 10 },
+							(v, k) => PRODUCTS[k % 3],
+						)}
+					/>
 				</main>
 			</div>
 			<Footer />
