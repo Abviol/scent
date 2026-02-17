@@ -4,7 +4,7 @@ import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { ProductType } from "@/lib/types";
 import { PRODUCTS } from "@/lib/data";
 import ProductInfoSection from "@/components/shop/product/productInfoSection";
-import { ProductsSliderSection } from "@/components/shop/product/productsSliderSection";
+import { ProductsSliderSection } from "@/components/productsSliderSection";
 
 type ProductPageProps = {
 	params: Promise<{ id: string }>;
