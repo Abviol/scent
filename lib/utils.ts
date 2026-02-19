@@ -1,6 +1,11 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { AvailabilityType, FilterTag, GenderType, SORTING_CRITERIAS } from "./types";
+import {
+	AvailabilityType,
+	FilterTag,
+	GenderType,
+	SORTING_CRITERIAS,
+} from "./types";
 import { FilterState, SortingType, SortingCriteriaType } from "@/lib/types";
 import { MOCK_SHOP_FILTERS } from "./data";
 
@@ -114,7 +119,7 @@ export function parseSearchParams(params: {
 		const val = params[key];
 		if (typeof val === "string") return val;
 		return fallback;
-	}
+	};
 
 	const filters: FilterState = {
 		searchQuery: getString("q", ""),
@@ -145,3 +150,16 @@ export function parseSearchParams(params: {
 
 	return { filters, sorting };
 }
+
+// export function convertSecondsToTime(seconds: number): {
+// 	d: number;
+// 	h: number;
+// 	m: number;
+// 	s: number;
+// } {
+// 	const d = Math.floor(seconds / (60 * 60 * 24));
+// 	const h = ((seconds % (60 * 60 * 24)) / 60) * 60;
+// 	const m = (seconds % (60 * 60)) / 60;
+// 	const s = seconds % 60;
+// 	return { d, h, m, s };
+// }

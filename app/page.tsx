@@ -3,12 +3,14 @@
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import Nav from "@/components/layout/nav";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import Banner1 from "@/assets/images/banner-1.png";
-import Banner2 from "@/assets/images/banner-2.png";
-import Banner3 from "@/assets/images/banner-3.png";
+import Hero1 from "@/assets/images/home/hero-1.png";
+import Hero2 from "@/assets/images/home/hero-2.png";
+import Hero3 from "@/assets/images/home/hero-3.png";
+import Banner1 from "@/assets/images/home/banner-1.png";
+import Banner2 from "@/assets/images/home/banner-2.png";
 
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -18,6 +20,8 @@ import { useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { ProductsSliderSection } from "@/components/productsSliderSection";
 import { PRODUCTS } from "@/lib/data";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
 	const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
@@ -56,25 +60,13 @@ export default function Home() {
 							className="[&_.swiper-slide>img]:w-full"
 						>
 							<SwiperSlide>
-								<Image
-									src={Banner1}
-									alt="Banner 1"
-									className=""
-								/>
+								<Image src={Hero1} alt="Hero 1" className="" />
 							</SwiperSlide>
 							<SwiperSlide>
-								<Image
-									src={Banner2}
-									alt="Banner 2"
-									className=""
-								/>
+								<Image src={Hero2} alt="Hero 2" className="" />
 							</SwiperSlide>
 							<SwiperSlide>
-								<Image
-									src={Banner3}
-									alt="Banner 3"
-									className=""
-								/>
+								<Image src={Hero3} alt="Hero 3" className="" />
 							</SwiperSlide>
 						</Swiper>
 
@@ -121,9 +113,114 @@ export default function Home() {
 							(v, k) => PRODUCTS[k % 3],
 						)}
 					/>
+					{/* banner section */}
+					<section id="banner" className="mt-28">
+						<div className="grid grid-cols-2">
+							<BannerCard
+								imageUrl={Banner1}
+								title="Perfumed water “Noir Élégance”"
+								caption="50 ml.  for her"
+								productLink="/shop/product/111"
+								color="#32665A"
+								promotionDeadline="4 days 08:23:12"
+							/>
+							<BannerCard
+								imageUrl={Banner2}
+								title="Perfumed water “Noir Élégance”"
+								caption="50 ml.  for her"
+								productLink="/shop/product/222"
+								color="#86804C"
+								promotionDeadline="4 days 08:23:12"
+							/>
+						</div>
+					</section>
 				</main>
 			</div>
 			<Footer />
 		</>
 	);
 }
+
+interface BannerCardProps {
+	imageUrl: StaticImageData;
+	title: string;
+	caption: string;
+	productLink: string;
+	color: string;
+	promotionDeadline: string;
+}
+
+function BannerCard(props: BannerCardProps) {
+	// const [timeRemaining, setTimeRemaining] = useState<{
+	// 	d: number;
+	// 	h: number;
+	// 	m: number;
+	// 	s: number;
+	// }>({
+	// 	d: 0,
+	// 	h: 0,
+	// 	m: 0,
+	// 	s: 0,
+	// });
+
+	// setTimeout(function () {
+
+	// }, 1000)
+
+	return (
+		<div className="">
+			<div className="group h-[600px] overflow-hidden">
+				<div className="relative h-[70%] group-hover:h-1/2 transition-all ease-in-out duration-500">
+					<Image
+						src={props.imageUrl}
+						alt={props.title + " banner"}
+						className="absolute w-full bottom-0 group-hover:translate-y-[20%] transition-all ease-in-out duration-500"
+					/>
+				</div>
+				<div className="relative h-[30%] overflow-hidden group-hover:h-[50%] transition-all ease-in-out duration-500">
+					<div
+						className={`relative w-full h-full flex flex-col justify-center items-center backdrop-blur-sm z-20`}
+						style={{
+							background: `color-mix(in oklab, ${props.color} 52%, transparent)`,
+						}}
+					>
+						<div className="text-white font-semibold">
+							<p className="text-2xl mb-5">{props.title}</p>
+							<p className="text-lg">{props.caption}</p>
+							<div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all ease-in-out opacity-0 group-hover:opacity-100 duration-500">
+								<div className="overflow-hidden">
+									<Button
+										asChild
+										className="mt-6 px-8 py-2 h-max! bg-white/10 text-xl font-medium uppercase tracking-wider hover:bg-white/20 transition-colors rounded-sm border border-white/20"
+									>
+										<Link href={props.productLink}>
+											Buy Now
+										</Link>
+									</Button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<Image
+						src={props.imageUrl}
+						alt={props.title + " banner reflected"}
+						className="absolute top-0 z-10 w-full rotate-x-180 group-hover:-translate-y-[20%] transition-transform duration-500"
+					/>
+				</div>
+			</div>
+			<p className="mt-5 text-center">
+				<i>
+					&quot;Until the end of the promotion:{" "}
+					{props.promotionDeadline}&quot;
+				</i>
+			</p>
+		</div>
+	);
+}
+
+// export function countDown(deadline: Date) {
+// 	const currentDate = Date.now();
+// 	const deadlineTime = deadline.getSeconds();
+// 	const secondsRemaining = deadlineTime - currentDate;
+// 	return convertSecondsToTime(secondsRemaining);
+// }
