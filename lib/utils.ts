@@ -151,15 +151,26 @@ export function parseSearchParams(params: {
 	return { filters, sorting };
 }
 
-// export function convertSecondsToTime(seconds: number): {
-// 	d: number;
-// 	h: number;
-// 	m: number;
-// 	s: number;
-// } {
-// 	const d = Math.floor(seconds / (60 * 60 * 24));
-// 	const h = ((seconds % (60 * 60 * 24)) / 60) * 60;
-// 	const m = (seconds % (60 * 60)) / 60;
-// 	const s = seconds % 60;
-// 	return { d, h, m, s };
-// }
+export function convertSecondsToTime(seconds: number): {
+	d: number;
+	h: number;
+	m: number;
+	s: number;
+} {
+	const d = Math.floor(seconds / (60 * 60 * 24));
+	const h = Math.floor((seconds % (60 * 60 * 24)) / (60 * 60));
+	const m = Math.floor((seconds % (60 * 60)) / 60);
+	const s = Math.floor(seconds % 60);
+	return { d, h, m, s };
+}
+
+export function getTimeRemaining(deadline: Date) {
+	const totalMilliseconds = deadline.getTime() - Date.now();
+	if (totalMilliseconds <= 0) return { d: 0, h: 0, m: 0, s: 0 };
+	const totalSeconds = Math.floor(totalMilliseconds / 1000);
+	return convertSecondsToTime(totalSeconds);
+}
+
+export function formatTime(time: number): string {
+	return time / 10 < 1 ? `0${time}` : time.toString();
+}

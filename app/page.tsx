@@ -22,6 +22,8 @@ import { ProductsSliderSection } from "@/components/productsSliderSection";
 import { PRODUCTS } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { formatTime } from "@/lib/utils";
+import { useCountdown } from "@/hooks/use-countdown";
 
 export default function Home() {
 	const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
@@ -122,7 +124,7 @@ export default function Home() {
 								caption="50 ml.  for her"
 								productLink="/shop/product/111"
 								color="#32665A"
-								promotionDeadline="4 days 08:23:12"
+								promotionDeadline={new Date("2026-03-01T23:59:59Z")}
 							/>
 							<BannerCard
 								imageUrl={Banner2}
@@ -130,7 +132,7 @@ export default function Home() {
 								caption="50 ml.  for her"
 								productLink="/shop/product/222"
 								color="#86804C"
-								promotionDeadline="4 days 08:23:12"
+								promotionDeadline={new Date("2026-03-01T23:59:59Z")}
 							/>
 						</div>
 					</section>
@@ -147,25 +149,11 @@ interface BannerCardProps {
 	caption: string;
 	productLink: string;
 	color: string;
-	promotionDeadline: string;
+	promotionDeadline: Date;
 }
 
 function BannerCard(props: BannerCardProps) {
-	// const [timeRemaining, setTimeRemaining] = useState<{
-	// 	d: number;
-	// 	h: number;
-	// 	m: number;
-	// 	s: number;
-	// }>({
-	// 	d: 0,
-	// 	h: 0,
-	// 	m: 0,
-	// 	s: 0,
-	// });
-
-	// setTimeout(function () {
-
-	// }, 1000)
+	const cd = useCountdown(props.promotionDeadline);
 
 	return (
 		<div className="">
@@ -211,16 +199,12 @@ function BannerCard(props: BannerCardProps) {
 			<p className="mt-5 text-center">
 				<i>
 					&quot;Until the end of the promotion:{" "}
-					{props.promotionDeadline}&quot;
+					{cd.isMounted ? `${cd.d} days ${formatTime(cd.h)}:${formatTime(cd.m)}:${formatTime(cd.s)}` : "0 days 00:00:00"}
+					&quot;
 				</i>
 			</p>
 		</div>
 	);
 }
 
-// export function countDown(deadline: Date) {
-// 	const currentDate = Date.now();
-// 	const deadlineTime = deadline.getSeconds();
-// 	const secondsRemaining = deadlineTime - currentDate;
-// 	return convertSecondsToTime(secondsRemaining);
 // }
