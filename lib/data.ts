@@ -262,13 +262,23 @@ const MOCK_SHOP_FILTERS: FilterState = {
 
 const HOME_COMMENTS: CommentCardProps[] = Array.from(
 	{ length: 12 },
-	(v, _) => ({
-		userAvatarUrl: "https://github.com/shadcn.png",
-		userName: "Nazar",
-		dateCommentLeft: "11.11",
-		rating: 4.4,
-		text: "I am pleasantly surprised by the service and quality of the fragrances! I ordered some perfume, and it arrived very quickly.",
-	}),
+	(v, key) => {
+		return key % 2 == 0
+			? {
+					userAvatarUrl: "https://github.com/shadcn.png",
+					userName: "Nazar",
+					dateCommentLeft: "11.11",
+					rating: 4.4,
+					text: "I am pleasantly surprised by the service and quality of the fragrances! I ordered some perfume, and it arrived very quickly.",
+				}
+			: {
+					userAvatarUrl: "",
+					userName: "Misha",
+					dateCommentLeft: "02.01",
+					rating: 4.9,
+					text: "Satisfied.",
+				};
+	},
 );
 
 export { PRODUCTS, MOCK_SHOP_FILTERS, HOME_COMMENTS };
