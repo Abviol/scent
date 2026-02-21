@@ -104,7 +104,7 @@ export default function Home() {
 					</section>
 					{/* New products section */}
 					<ProductsSliderSection
-						title="New Products"
+						title="New products"
 						id="new-products"
 						titlePosition="center"
 						products={Array.from(
@@ -114,7 +114,7 @@ export default function Home() {
 					/>
 					{/* Brand offers section */}
 					<ProductsSliderSection
-						title="Brand Offers"
+						title="Brand offers"
 						id="brand-offers"
 						titlePosition="center"
 						products={Array.from(
