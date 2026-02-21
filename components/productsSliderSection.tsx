@@ -16,38 +16,68 @@ interface ProductsSliderSectionProps {
 	titlePosition?: "left" | "center";
 }
 
-export function ProductsSliderSection({ products, title, className, id, titlePosition = "left" }: ProductsSliderSectionProps) {
+export function ProductsSliderSection({
+	products,
+	title,
+	className,
+	id,
+	titlePosition = "left",
+}: ProductsSliderSectionProps) {
 	const [swiperInstance, setSwiperInstance] = useState<
 		SwiperType | undefined
 	>(undefined);
 
+	const [slideStatus, setSlideStatus] = useState({
+		isBeginning: true,
+		isEnd: false,
+	});
+
+	const handleSlideChange = (swiper: SwiperType) => {
+		setSlideStatus({
+			isBeginning: swiper.isBeginning,
+			isEnd: swiper.isEnd,
+		});
+	};
+
 	return (
 		<section id={id || "products"} className={cn("mt-20", className)}>
-			<div className={cn("section-container flex flex-row mb-[60px]", 
-				titlePosition === "left" ? "justify-between" : "relative justify-center",
- 			)}>
+			<div
+				className={cn(
+					"section-container flex flex-row mb-[60px]",
+					titlePosition === "left"
+						? "justify-between"
+						: "relative justify-center",
+				)}
+			>
 				<h2 className="title text-[40px] font-semibold">{title}</h2>
-				<div className={cn("nav-buttons flex flex-row gap-4",
-					titlePosition === "left" ? "" : "absolute right-0 top-1/2 -translate-y-1/2",
-				)}>
+				<div
+					className={cn(
+						"nav-buttons flex flex-row gap-4",
+						titlePosition === "left"
+							? ""
+							: "absolute right-0 top-1/2 -translate-y-1/2",
+					)}
+				>
 					<button
 						aria-label="Prev slide"
-						className="prev-button size-8 flex justify-center items-center"
+						className="prev-button size-8 flex justify-center items-center text-main disabled:text-slate-300"
+						disabled={slideStatus.isBeginning}
+						onClick={() => swiperInstance?.slidePrev()}
 					>
 						<ArrowLeft
 							size={28}
-							className="prev-icon text-main hover:text-slate-500 transition-all"
-							onClick={() => swiperInstance?.slidePrev()}
+							className="prev-icon   transition-all"
 						/>
 					</button>
 					<button
 						aria-label="Next slide"
-						className="next-button size-8 flex justify-center items-center"
+						className="next-button size-8 flex justify-center items-center text-main disabled:text-slate-300"
+						disabled={slideStatus.isEnd}
+						onClick={() => swiperInstance?.slideNext()}
 					>
 						<ArrowRight
 							size={28}
-							className="next-icon text-main hover:text-slate-500 transition-all"
-							onClick={() => swiperInstance?.slideNext()}
+							className="next-icon  transition-all"
 						/>
 					</button>
 				</div>
@@ -58,6 +88,7 @@ export function ProductsSliderSection({ products, title, className, id, titlePos
 				slidesPerGroup={4}
 				spaceBetween={32}
 				onSwiper={setSwiperInstance}
+				onSlideChange={handleSlideChange}
 			>
 				{products.map((prod, i) => (
 					<SwiperSlide className="h-full" key={i}>
