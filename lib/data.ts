@@ -1,4 +1,5 @@
-﻿import { FilterState, ProductType } from "./types";
+﻿import { CommentCardProps } from "@/components/commentCard/commentCard";
+import { FilterState, ProductType } from "./types";
 
 const PRODUCTS: ProductType[] = [
 	{
@@ -237,16 +238,7 @@ const MOCK_SHOP_FILTERS: FilterState = {
 
 	genders: ["men", "women", "unisex", "boys", "girls", "kids_unisex"],
 
-	volumes: [
-		"30",
-		"50",
-		"75",
-		"90",
-		"100",
-		"125",
-		"150",
-		"200",
-	],
+	volumes: ["30", "50", "75", "90", "100", "125", "150", "200"],
 
 	markers: [
 		"hot",
@@ -268,4 +260,15 @@ const MOCK_SHOP_FILTERS: FilterState = {
 	page: 1,
 };
 
-export { PRODUCTS, MOCK_SHOP_FILTERS };
+const HOME_COMMENTS: CommentCardProps[] = Array.from(
+	{ length: 12 },
+	(v, _) => ({
+		userAvatarUrl: "https://github.com/shadcn.png",
+		userName: "Nazar",
+		dateCommentLeft: "11.11",
+		rating: 4.4,
+		text: "I am pleasantly surprised by the service and quality of the fragrances! I ordered some perfume, and it arrived very quickly.",
+	}),
+);
+
+export { PRODUCTS, MOCK_SHOP_FILTERS, HOME_COMMENTS };

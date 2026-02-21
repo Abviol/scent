@@ -226,4 +226,25 @@ function BannerCard(props: BannerCardProps) {
 	);
 }
 
-// }
+function CommentsSlider() {
+	return (
+		<div className="h-[560px] w-full overflow-hidden relative">
+			{/* The animated wrapper */}
+			<div className="animate-marquee-up flex flex-col gap-4">
+				{[1, 2].map((iteration) => (
+					<div key={iteration} className="grid grid-cols-3 gap-8">
+						{HOME_COMMENTS.map((c, i) => (
+							<CommentCard
+								key={`comment-${iteration}-${i}`}
+								{...c}
+							/>
+						))}
+					</div>
+				))}
+			</div>
+			{/* gradients */}
+			<div className="absolute top-0 h-1/3 w-full bg-linear-to-b from-white to-white/0 z-10 pointer-events-none"></div>
+			<div className="absolute bottom-0 h-1/3 w-full bg-linear-to-b from-white/0 to-white z-10 pointer-events-none"></div>
+		</div>
+	);
+}
