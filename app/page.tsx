@@ -1,29 +1,36 @@
 "use client";
 
+/* Next/React */
+import Link from "next/link";
+import Image, { StaticImageData } from "next/image";
+/* hooks */
+import { useCountdown } from "@/hooks/use-countdown";
+import { useState } from "react";
+/* Components */
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import Nav from "@/components/layout/nav";
-import Image, { StaticImageData } from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-
+import { Button } from "@/components/ui/button";
+import CommentCard from "@/components/commentCard/commentCard";
+import { ProductsSliderSection } from "@/components/productsSliderSection";
+/* Images */
 import Hero1 from "@/assets/images/home/hero-1.png";
 import Hero2 from "@/assets/images/home/hero-2.png";
 import Hero3 from "@/assets/images/home/hero-3.png";
 import Banner1 from "@/assets/images/home/banner-1.png";
 import Banner2 from "@/assets/images/home/banner-2.png";
-
+/* Swiper */
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { useState } from "react";
+/* Icons */
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { ProductsSliderSection } from "@/components/productsSliderSection";
-import { PRODUCTS } from "@/lib/data";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+/* data */
+import { HOME_COMMENTS, PRODUCTS } from "@/lib/data";
+/* utils */
 import { formatTime } from "@/lib/utils";
-import { useCountdown } from "@/hooks/use-countdown";
 
 export default function Home() {
 	const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
@@ -95,7 +102,7 @@ export default function Home() {
 							</button>
 						</div>
 					</section>
-					{/* new products section */}
+					{/* New products section */}
 					<ProductsSliderSection
 						title="New products"
 						id="new-products"
@@ -105,7 +112,7 @@ export default function Home() {
 							(v, k) => PRODUCTS[(k + 1) % 3],
 						)}
 					/>
-					{/* brand offers section */}
+					{/* Brand offers section */}
 					<ProductsSliderSection
 						title="Brand offers"
 						id="brand-offers"
@@ -114,9 +121,10 @@ export default function Home() {
 							{ length: 10 },
 							(v, k) => PRODUCTS[k % 3],
 						)}
+						className="mb-28"
 					/>
-					{/* banner section */}
-					<section id="banner" className="mt-28">
+					{/* Banner section */}
+					<section id="banner" className="mb-28">
 						<div className="grid grid-cols-2">
 							<BannerCard
 								imageUrl={Banner1}
@@ -124,7 +132,9 @@ export default function Home() {
 								caption="50 ml.  for her"
 								productLink="/shop/product/111"
 								color="#32665A"
-								promotionDeadline={new Date("2026-03-01T23:59:59Z")}
+								promotionDeadline={
+									new Date("2026-03-01T23:59:59Z")
+								}
 							/>
 							<BannerCard
 								imageUrl={Banner2}
@@ -132,9 +142,16 @@ export default function Home() {
 								caption="50 ml.  for her"
 								productLink="/shop/product/222"
 								color="#86804C"
-								promotionDeadline={new Date("2026-03-01T23:59:59Z")}
+								promotionDeadline={
+									new Date("2026-03-01T23:59:59Z")
+								}
 							/>
 						</div>
+					</section>
+
+					{/* Comments section */}
+					<section id="comments" className="relative mb-28">
+						<CommentsSlider />
 					</section>
 				</main>
 			</div>
@@ -199,7 +216,9 @@ function BannerCard(props: BannerCardProps) {
 			<p className="mt-5 text-center">
 				<i>
 					&quot;Until the end of the promotion:{" "}
-					{cd.isMounted ? `${cd.d} days ${formatTime(cd.h)}:${formatTime(cd.m)}:${formatTime(cd.s)}` : "0 days 00:00:00"}
+					{cd.isMounted
+						? `${cd.d} days ${formatTime(cd.h)}:${formatTime(cd.m)}:${formatTime(cd.s)}`
+						: "0 days 00:00:00"}
 					&quot;
 				</i>
 			</p>
