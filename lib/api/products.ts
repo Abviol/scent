@@ -5,9 +5,14 @@ import { FilterState, ProductType, SortingType } from "@/lib/types";
 interface GetProductsParams {
 	filters: FilterState;
 	sorting: SortingType;
+	baseGender?: string;
 }
 
-export async function getProducts({ filters, sorting }: GetProductsParams) {
+export async function getProducts({
+	filters,
+	sorting,
+	baseGender,
+}: GetProductsParams) {
 	// 1. Simulate DB Network Delay (Realism)
 	await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -104,6 +109,11 @@ export async function getProducts({ filters, sorting }: GetProductsParams) {
 	// 			return 0;
 	// 	}
 	// });
+	if (baseGender) {
+		results = results.filter(
+			(p) => p.gender.toLowerCase() === baseGender.toLowerCase(),
+		);
+	}
 
 	// --- PAGINATION (Optional - The "LIMIT/OFFSET" Clause) ---
 	// const pageSize = 12;

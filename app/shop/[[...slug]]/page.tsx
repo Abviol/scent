@@ -7,25 +7,36 @@ import Sorting from "@/components/shop/sorting";
 import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { getProducts } from "@/lib/api/products";
 import { parseSearchParams } from "@/lib/utils";
+import { notFound } from "next/navigation";
+
 interface ShopPageProps {
+	params: Promise<{ slug?: string[]}>;
 	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
+
+const ALLOWED_GENDERS = ["men", "women", "unisex"];
 
 /**
  * Main Shop Page Component
  * Renders the product grid, sidebar filters, and active filter tags.
  */
-export default async function ShopPage({ searchParams }: ShopPageProps) {
-	const resolvedParams = await searchParams;
+export default async function ShopPage(props: ShopPageProps) {
+	const params = await props.params;
+	const searchParams = await props.searchParams;
 
-	const { filters, sorting } = parseSearchParams(resolvedParams);
+	const pathGender = params.slug?.[0]?.toLowerCase();
+	if (pathGender && !ALLOWED_GENDERS.includes(pathGender)) notFound();
 
-	const products = await getProducts({ filters, sorting });
+	const { filters, sorting } = parseSearchParams(searchParams);
 
-	const breadcrumbsItems: BreadcrumbItem[] = [
+	const products = await getProducts({ filters, sorting, baseGender: pathGender });
+
+	const defaultBreadcrumbsItems: BreadcrumbItem[] = [
 		{ label: "Scent", href: "/" },
-		{ label: "Shop", href: "" },
+		{ label: "Shop", href: pathGender ? "/shop" : "" },
 	];
+	const categoryBreadcrumbsItem: BreadcrumbItem[] = pathGender ? [{ label: pathGender, href: ""}]: [];
+	const breadcrumbsItems: BreadcrumbItem[] = [...defaultBreadcrumbsItems, ...categoryBreadcrumbsItem]
 
 	return (
 		<div className="mt-14 mb-20">
