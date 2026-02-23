@@ -17,7 +17,7 @@ const PRODUCTS: ProductType[] = [
 		type: "Eau de Toilette",
 		tags: [],
 		gender: "men",
-		brand: "Versace",
+		brand: "Jean Paul Gaultier",
 		variants: [
 			{
 				volume: 30,
@@ -236,7 +236,7 @@ const MOCK_SHOP_FILTERS: FilterState = {
 		"Givenchy",
 	],
 
-	genders: ["men", "women", "unisex", "boys", "girls", "kids_unisex"],
+	genders: ["men", "women", "unisex"],
 
 	volumes: ["30", "50", "75", "90", "100", "125", "150", "200"],
 
