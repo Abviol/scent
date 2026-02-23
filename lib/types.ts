@@ -24,7 +24,7 @@ export interface VariantType {
 	quantityInStock: number;
 }
 
-export type GenderType = "men" | "women" | "unisex" | "boys" | "girls" | "kids_unisex";
+export type GenderType = "men" | "women" | "unisex";
 
 export type MarkerType = "hit" | undefined;
 
