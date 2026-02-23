@@ -1,5 +1,4 @@
-﻿// lib/api/products.ts
-import { PRODUCTS } from "@/lib/data";
+﻿import { PRODUCTS } from "@/lib/data";
 import { FilterState, ProductType, SortingType } from "@/lib/types";
 
 interface GetProductsParams {
@@ -17,103 +16,103 @@ export async function getProducts({
 	await new Promise((resolve) => setTimeout(resolve, 500));
 
 	let results: ProductType[] = [];
-   for (let i = 0; i < 40; i++) {
-      results = [...results, ...PRODUCTS];
-   }
+	for (let i = 0; i < 40; i++) {
+		results = [...results, ...PRODUCTS];
+	}
 
 	// --- FILTERING ---
-
-	// 1. Search Query (Optional - if you have a search bar)
-	// if (searchQuery) {
-	//    results = results.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()));
-	// }
+	// 1. Search Query
+	if (filters.searchQuery) {
+		results = results.filter((p) =>
+			p.name.toLowerCase().includes(filters.searchQuery.toLowerCase()),
+		);
+	}
 
 	// 2. Price Range
-	// if (filters.priceRange) {
-	// 	const [min, max] = filters.priceRange;
-	// 	results = results.filter((p) => {
-	// 		const price = p.variants[0]?.price || 0;
-	// 		return price >= min && price <= max;
-	// 	});
-	// }
+	if (filters.priceRange) {
+		const [min, max] = filters.priceRange.map((cents) => cents * 100);
+		results = results.filter((p) => {
+			const price = p.variants[0]?.price || 0;
+			console.log(price);
+			return price >= min && price <= max;
+		});
+	}
 
-	// // 3. Brands (OR Logic: Show products that match ANY of selected brands)
-	// if (filters.brands.length > 0) {
-	// 	results = results.filter((p) => filters.brands.includes(p.brand));
-	// }
+	// 3. Brands
+	if (filters.brands.length > 0) {
+		results = results.filter((p) => filters.brands.includes(p.brand));
+	}
 
-	// // 4. Genders
+	// 4. Genders
 	// if (filters.genders.length > 0) {
 	// 	results = results.filter((p) =>
 	// 		filters.genders.includes(p.gender),
 	// 	);
 	// }
-
-	// // 5. Types (e.g., 'Eau de Toilette', 'Eau de Parfum')
-	// if (filters.types.length > 0) {
-	// 	results = results.filter((p) =>
-	// 		filters.types.includes(p.type),
-	// 	);
-	// }
-
-	// // 6. Markers (e.g., 'New', 'Sale', 'Bestseller')
-	// // Logic: Does the product have AT LEAST ONE of the selected markers?
-	// if (filters.markers.length > 0) {
-	// 	results = results.filter((p) =>
-	// 		p.markers.some((m) => filters.markers.includes(m || "")),
-	// 	);
-	// }
-
-	// // 7. Volumes (e.g., 50ml, 100ml)
-	// // Logic: Does the product have ANY variant with the selected volume?
-	// if (filters.volumes.length > 0) {
-	// 	results = results.filter((p) =>
-	// 		p.variants.some((v) => filters.volumes.includes(v.volume.toString())),
-	// 	);
-	// }
-
-	// // --- SORTING (The "ORDER BY" Clause) ---
-
-	// const { criteria, order } = sorting;
-	// const isAsc = order === "ASC";
-
-	// results.sort((a, b) => {
-	// 	switch (criteria) {
-	// 		case "price": {
-	// 			const priceA = a.variants[0]?.price || 0;
-	// 			const priceB = b.variants[0]?.price || 0;
-	// 			return isAsc ? priceA - priceB : priceB - priceA;
-	// 		}
-
-	// 		case "name": {
-	// 			return isAsc
-	// 				? a.name.localeCompare(b.name)
-	// 				: b.name.localeCompare(a.name);
-	// 		}
-
-	// 		case "popularity": {
-	// 			// Assuming 'popularity' or 'rating' is a number on your product
-	// 			const valA = a.rating || 0;
-	// 			const valB = b.rating || 0;
-	// 			return isAsc ? valA - valB : valB - valA;
-	// 		}
-
-	// 		// case "date": {
-	// 		// 	// Assuming 'createdAt' or 'releaseDate' string/date object
-	// 		// 	const dateA = new Date(a.createdAt || 0).getTime();
-	// 		// 	const dateB = new Date(b.createdAt || 0).getTime();
-	// 		// 	return isAsc ? dateA - dateB : dateB - dateA;
-	// 		// }
-
-	// 		default:
-	// 			return 0;
-	// 	}
-	// });
 	if (baseGender) {
 		results = results.filter(
 			(p) => p.gender.toLowerCase() === baseGender.toLowerCase(),
 		);
 	}
+
+	// 5. Types (e.g., 'Eau de Toilette', 'Eau de Parfum')
+	if (filters.types.length > 0) {
+		results = results.filter((p) => filters.types.includes(p.type));
+	}
+
+	// 6. Markers
+	if (filters.markers.length > 0) {
+		results = results.filter((p) =>
+			p.markers.some((m) => filters.markers.includes(m || "")),
+		);
+	}
+
+	// 7. Volumes (e.g., 50ml, 100ml)
+	// Logic: Does the product have ANY variant with the selected volume?
+	if (filters.volumes.length > 0) {
+		results = results.filter((p) =>
+			p.variants.some((v) =>
+				filters.volumes.includes(v.volume.toString()),
+			),
+		);
+	}
+
+	// --- SORTING  ---
+	const { criteria, order } = sorting;
+	const isAsc = order === "ASC";
+
+	results.sort((a, b) => {
+		switch (criteria) {
+			case "price": {
+				const priceA = a.variants[0]?.price || 0;
+				const priceB = b.variants[0]?.price || 0;
+				return isAsc ? priceA - priceB : priceB - priceA;
+			}
+
+			case "name": {
+				return isAsc
+					? a.name.localeCompare(b.name)
+					: b.name.localeCompare(a.name);
+			}
+
+			case "popularity": {
+				// Assuming 'popularity' or 'rating' is a number on your product
+				const valA = a.rating || 0;
+				const valB = b.rating || 0;
+				return isAsc ? valA - valB : valB - valA;
+			}
+
+			// case "date": {
+			// 	// Assuming 'createdAt' or 'releaseDate' string/date object
+			// 	const dateA = new Date(a.createdAt || 0).getTime();
+			// 	const dateB = new Date(b.createdAt || 0).getTime();
+			// 	return isAsc ? dateA - dateB : dateB - dateA;
+			// }
+
+			default:
+				return 0;
+		}
+	});
 
 	// --- PAGINATION (Optional - The "LIMIT/OFFSET" Clause) ---
 	// const pageSize = 12;
@@ -122,6 +121,6 @@ export async function getProducts({
 
 	const defaultAmount = 24;
 	const loadMoreAmout = 12;
-	const endIndex = defaultAmount + loadMoreAmout * (filters.page || 0); 
+	const endIndex = defaultAmount + loadMoreAmout * (filters.page || 0);
 	return results.slice(0, endIndex);
 }
