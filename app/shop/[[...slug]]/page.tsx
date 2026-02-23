@@ -39,7 +39,7 @@ export default async function ShopPage(props: ShopPageProps) {
 	const breadcrumbsItems: BreadcrumbItem[] = [...defaultBreadcrumbsItems, ...categoryBreadcrumbsItem]
 
 	return (
-		<div className="mt-14 mb-20">
+		<main className="mt-14 mb-20">
 			{/* Page Header & Breadcrumbs */}
 			<div className="grid grid-cols-[300px_1fr] gap-x-8 mb-10">
 				<h1 className="text-[40px] font-semibold">Shop</h1>
@@ -75,6 +75,6 @@ export default async function ShopPage(props: ShopPageProps) {
 					<ProductGrid products={products} page={filters.page} />
 				</main>
 			</div>
-		</div>
+		</main>
 	);
 }
