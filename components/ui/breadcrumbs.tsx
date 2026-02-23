@@ -1,4 +1,5 @@
-﻿import Link from "next/link";
+﻿import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { Fragment } from "react";
 
 export interface BreadcrumbItem {
@@ -25,9 +26,11 @@ export default function Breadcrumbs({
 						<Fragment key={item.href}>
 							<li
 								className={
-									isLast
+									cn("capitalize",
+										isLast
 										? "text-main" // Dark color for current page (Active)
 										: "text-slate-300 hover:text-slate-500 transition-colors" // Light gray for parents
+									)
 								}
 							>
 								{isLast ? (
