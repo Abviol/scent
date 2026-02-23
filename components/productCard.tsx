@@ -5,7 +5,7 @@ import Link from "next/link";
 
 // Utils & Types
 import { MarkerType } from "@/lib/types";
-import { getEuro } from "@/lib/utils";
+import { cn, getEuro } from "@/lib/utils";
 
 // Components
 import Marker from "./ui/marker";
@@ -25,6 +25,7 @@ export interface ProductCardProps {
 	price: number; // in cents
 	wishlist: boolean;
 	markers: MarkerType[];
+	className?: string;
 }
 
 export default function ProductCard({
@@ -36,13 +37,16 @@ export default function ProductCard({
 	price,
 	wishlist,
 	markers,
+	className,
 }: ProductCardProps) {
 	const productLink = `/shop/product/${productId}`;
 
 	return (
 		<div
-			className="flex flex-col gap-y-5 bg-white border-gray-200 border-2 rounded-[8px] px-[30px] py-5 transition-colors
-			hover:bg-accent-light hover:border-accent"
+			className={cn(
+				"flex flex-col grow gap-y-5 bg-white border-gray-200 border-2 rounded-[8px] px-[30px] py-5 transition-colors hover:bg-accent-light hover:border-accent",
+				className,
+			)}
 		>
 			<div className="flex flex-col gap-y-5">
 				<div className="flex flex-row justify-between items-center">
@@ -68,18 +72,20 @@ export default function ProductCard({
 				</Link>
 			</div>
 
-			<Link href={productLink}>
-				<div className="flex flex-col justify-between items-center">
-					<h3 className="my-text-lg text-center">{name}</h3>
-					<div className="flex flex-row gap-x-10 mb-8">
-						<span className="my-text-p gap-x-10 items-center">
-							{volume} ml
-						</span>
-						<Rating rating={rating} />
-					</div>
-
-					<span className="my-text-lg">{getEuro(price)}</span>
+			<Link
+				href={productLink}
+				className="flex flex-col items-center"
+			>
+				<h3 className="my-text-lg text-center">{name}</h3>
+				<div className="flex flex-row gap-x-10">
+					<span className="my-text-p gap-x-10 items-center">
+						{volume} ml
+					</span>
+					<Rating rating={rating} />
 				</div>
+			</Link>
+			<Link href={productLink} className="flex grow items-end justify-center">
+				<span className="my-text-lg">{getEuro(price)}</span>
 			</Link>
 		</div>
 	);

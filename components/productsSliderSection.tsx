@@ -89,9 +89,10 @@ export function ProductsSliderSection({
 				spaceBetween={32}
 				onSwiper={setSwiperInstance}
 				onSlideChange={handleSlideChange}
+				className="[&_.swiper-wrapper]:items-stretch"
 			>
 				{products.map((prod, i) => (
-					<SwiperSlide className="h-full" key={i}>
+					<SwiperSlide className="h-auto! flex" key={i}>
 						<ProductCard
 							name={prod.name}
 							productId={prod.id}
@@ -101,6 +102,7 @@ export function ProductsSliderSection({
 							volume={prod.variants[0].volume}
 							rating={prod.rating}
 							price={prod.variants[0].price}
+							className="w-full h-full flex flex-col"
 						/>
 					</SwiperSlide>
 				))}
