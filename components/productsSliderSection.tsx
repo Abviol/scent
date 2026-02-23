@@ -84,9 +84,9 @@ export function ProductsSliderSection({
 			</div>
 
 			<Swiper
-				slidesPerView={4}
-				slidesPerGroup={4}
-				spaceBetween={32}
+				slidesPerView={5}
+				slidesPerGroup={5}
+				spaceBetween={20}
 				onSwiper={setSwiperInstance}
 				onSlideChange={handleSlideChange}
 				className="[&_.swiper-wrapper]:items-stretch"
