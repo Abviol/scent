@@ -175,7 +175,9 @@ function BannerCard(props: BannerCardProps) {
 
 	return (
 		<div className="">
-			<div className="group h-[600px] overflow-hidden">
+			<div className="group h-[600px] overflow-hidden" style={{
+							background: props.color,
+						}}>
 				<div className="relative h-[70%] group-hover:h-1/2 transition-all ease-in-out duration-500">
 					<Image
 						src={props.imageUrl}
