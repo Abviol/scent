@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import {
 	AvailabilityType,
+	BrandsType,
 	FilterTag,
 	GenderType,
 	SORTING_CRITERIAS,
@@ -174,3 +175,4 @@ export function getTimeRemaining(deadline: Date) {
 export function formatTime(time: number): string {
 	return time / 10 < 1 ? `0${time}` : time.toString();
 }
+

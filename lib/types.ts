@@ -45,14 +45,24 @@ export interface FilterTag {
 	id: keyof FilterState;
 	value: string | number;
 	label: string;
-};
+}
 
 export type SortingOrderType = "ASC" | "DESC";
 
-export const SORTING_CRITERIAS = ["price", "name", "popularity", "date"] as const;
+export const SORTING_CRITERIAS = [
+	"price",
+	"name",
+	"popularity",
+	"date",
+] as const;
 export type SortingCriteriaType = (typeof SORTING_CRITERIAS)[number];
 
 export interface SortingType {
 	criteria: SortingCriteriaType;
 	order: SortingOrderType;
+}
+
+export interface BrandsType {
+	name: string;
+	id: string;
 }

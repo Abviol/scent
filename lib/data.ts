@@ -1,5 +1,5 @@
 ﻿import { CommentCardProps } from "@/components/commentCard/commentCard";
-import { FilterState, ProductType } from "./types";
+import { BrandsType, FilterState, ProductType } from "./types";
 
 const PRODUCTS: ProductType[] = [
 	{
@@ -281,4 +281,28 @@ const HOME_COMMENTS: CommentCardProps[] = Array.from(
 	},
 );
 
-export { PRODUCTS, MOCK_SHOP_FILTERS, HOME_COMMENTS };
+const BRANDS: BrandsType[] = [
+		"Versace",
+		"Jean Paul Gaultier",
+		"Giorgio Armani",
+		"Dior",
+		"Yves Saint Laurent",
+		"Montblanc",
+		"Paco Rabanne",
+		"Chanel",
+		"Tom Ford",
+		"Creed",
+		"Hermès",
+		"Dolce & Gabbana",
+		"Hugo Boss",
+		"Gucci",
+		"Prada",
+		"Valentino",
+		"Givenchy",
+		"1million",
+		"2million",
+		"3million",
+		"1hundred"
+	].map((b, i) => ({id: b, name: b}));
+
+export { PRODUCTS, MOCK_SHOP_FILTERS, HOME_COMMENTS, BRANDS };
