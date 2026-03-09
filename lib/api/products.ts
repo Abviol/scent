@@ -33,7 +33,6 @@ export async function getProducts({
 		const [min, max] = filters.priceRange.map((cents) => cents * 100);
 		results = results.filter((p) => {
 			const price = p.variants[0]?.price || 0;
-			console.log(price);
 			return price >= min && price <= max;
 		});
 	}
