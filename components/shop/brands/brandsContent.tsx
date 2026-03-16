@@ -1,10 +1,9 @@
-﻿import { BrandGroupType, BrandType } from "@/lib/types";
+﻿import { BrandGroupType } from "@/lib/types";
 import Link from "next/link";
 
 // ===== MAIN COMPONENT =====
 
 // Renders the brand groups
-
 interface BrandsContentProps {
 	selectedChar: string;
 	brandGroups: BrandGroupType[];

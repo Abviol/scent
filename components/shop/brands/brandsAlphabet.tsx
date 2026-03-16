@@ -1,48 +1,39 @@
 ﻿"use client";
 
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 interface BrandsAlphabetProps {
 	chars: string[];
 	selectedChar: string;
+	onChange: (char: string) => void;
 }
 
 export default function BrandsAlphabet({
 	chars,
 	selectedChar,
+	onChange,
 }: BrandsAlphabetProps) {
-	const router = useRouter();
-	const pathname = usePathname();
-	const searchParams = useSearchParams();
+	const items: AlphabetItemProps[] = chars.map((c) =>
+		convertCharToAlphabetItem(c),
+	);
 
-	const handleCharClick = (char: string) => {
-		const params = new URLSearchParams(searchParams.toString());
-
-		if (char === "ALL") {
-			params.delete("char");
-		} else {
-			params.delete("char");
-			params.set("char", char);
-		}
-
-		router.push(`${pathname}?${params.toString()}`);
-	}
-	const items: AlphabetItemProps[] = chars.map(c => convertCharToAlphabetItem(c));
-	
 	return (
 		<div className="max-w-[800px] flex flex-wrap gap-5 justify-center items-center">
-			<AlphabetItem label="All" value="ALL" onClick={() => handleCharClick("ALL")} />
+			{/* Reset selection - ALL button */}
+			<AlphabetItem
+				label="All"
+				value="ALL"
+				onClick={() => onChange("ALL")}
+			/>
 			{items.map((item) => (
 				<AlphabetItem
 					key={`char-${item.value}`}
 					{...item}
-					onClick={handleCharClick}
+					onClick={onChange}
 				/>
 			))}
 		</div>
 	);
 }
-
 
 interface AlphabetItemProps {
 	label: string;

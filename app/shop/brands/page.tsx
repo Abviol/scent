@@ -1,30 +1,15 @@
 ﻿"use server";
 
-import BrandsAlphabet from "@/components/shop/brands/brandsAlphabet";
-import BrandsContent from "@/components/shop/brands/brandsContent";
+import BrandsClientWrapper from "@/components/shop/brands/brandsClientWrapper";
 import getBrands from "@/lib/api/brands";
 import { BrandGroupType, BrandType } from "@/lib/types";
 
-interface BrandsPageProps {
-	searchParams: {[key: string]: string | string[] | undefined};
-}
-
-export default async function BrandsPage({ searchParams }: BrandsPageProps) {
-	// const [selectedChar, setSelectedChar] = useState<string>("ALL");
-	const params = await searchParams;
-	const selectedChar = typeof params.char === 'string' ? params.char : "ALL";
+export default async function BrandsPage() {
 	const rawBrands = await getBrands();
 	const {brandGroups, uniqueChars} = groupBrands(rawBrands);
 
 	return (
-		<main className="mt-20">
-			<div className="mx-auto w-fit mb-30">
-				<BrandsAlphabet chars={uniqueChars.sort((a, b) => a.localeCompare(b))} selectedChar={selectedChar} />
-			</div>
-			<div className="mb-28">
-				<BrandsContent brandGroups={sortBrandGroups(brandGroups)} selectedChar={selectedChar} />
-			</div>
-		</main>
+		<BrandsClientWrapper brandGroups={brandGroups} uniqueChars={uniqueChars} />
 	);
 }
 
@@ -53,25 +38,4 @@ function groupBrands(brands: BrandType[]) {
 	});
 
 	return {brandGroups, uniqueChars};
-}
-
-// Sorts brands groups in alphabetical order
-function sortBrandGroups(
-	brandGroups: BrandGroupType[],
-): BrandGroupType[] {
-	return [...brandGroups]
-		.sort((a, b) => {
-			if (a.char === "number" || a.char === "0-9") return -1;
-			if (b.char === "number" || b.char === "0-9") return 1;
-
-			return a.char.localeCompare(b.char);
-		})
-		.map((group) => {
-			return {
-				...group,
-				brands: [...group.brands].sort((brandA, brandB) =>
-					brandA.name.localeCompare(brandB.name),
-				),
-			};
-		});
 }
