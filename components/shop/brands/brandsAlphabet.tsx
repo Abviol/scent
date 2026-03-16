@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import { cn } from "@/lib/utils";
 
 interface BrandsAlphabetProps {
 	chars: string[];
@@ -22,12 +23,14 @@ export default function BrandsAlphabet({
 			<AlphabetItem
 				label="All"
 				value="ALL"
+				isSelected={selectedChar === "ALL"}
 				onClick={() => onChange("ALL")}
 			/>
 			{items.map((item) => (
 				<AlphabetItem
 					key={`char-${item.value}`}
 					{...item}
+					isSelected={selectedChar === item.value}
 					onClick={onChange}
 				/>
 			))}
@@ -38,12 +41,14 @@ export default function BrandsAlphabet({
 interface AlphabetItemProps {
 	label: string;
 	value: string;
+	isSelected?: boolean;
 	onClick?: (value: string) => void;
 }
 
 function AlphabetItem({
 	label,
 	value,
+	isSelected = false,
 	onClick = (): void => {},
 }: AlphabetItemProps) {
 	const handleClick = () => onClick(value);
@@ -51,7 +56,10 @@ function AlphabetItem({
 	return (
 		<button
 			type="button"
-			className="flex justify-center items-center h-8 min-w-8 px-2 py-0.5 rounded-md bg-transparent cursor-pointer hover:bg-accent-light hover:text-accent transition-all"
+			className={cn(
+				"flex justify-center items-center h-8 min-w-8 px-2 py-0.5 rounded-md cursor-pointer hover:bg-accent-light hover:text-accent transition-all",
+				isSelected ? "bg-accent-light text-accent" : "bg-transparent",
+			)}
 			onClick={handleClick}
 		>
 			<span className="text-xl font-semibold">{label}</span>
@@ -60,28 +68,6 @@ function AlphabetItem({
 }
 
 // helper functions
-function charsToAlphabeItems(chars: string[]): AlphabetItemProps[] {
-	const uniqueChars = Array.from(new Set(chars));
-	// sort in alphabetic order
-	const sortedChars = uniqueChars.sort((a, b) => a.localeCompare(b));
-
-	let hasNumbers = false;
-	const items: AlphabetItemProps[] = [];
-
-	sortedChars.forEach((c, _) => {
-		const code = c.charCodeAt(0);
-		const isNumber = code >= 48 && code <= 57;
-
-		if (isNumber) {
-			if (hasNumbers) return;
-			hasNumbers = true;
-		}
-		items.push(convertCharToAlphabetItem(c));
-	});
-
-	return items;
-}
-
 function convertCharToAlphabetItem(char: string): AlphabetItemProps {
 	const charCode = char.charCodeAt(0);
 	const isNumber = charCode >= 48 && charCode <= 57;
