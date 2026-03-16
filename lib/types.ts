@@ -62,7 +62,12 @@ export interface SortingType {
 	order: SortingOrderType;
 }
 
-export interface BrandsType {
+export interface BrandType {
 	name: string;
 	id: string;
+}
+
+export interface BrandGroupType {
+	char: string;
+	brands: BrandType[];
 }

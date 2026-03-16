@@ -1,28 +1,48 @@
 ﻿"use client";
+
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+
 interface BrandsAlphabetProps {
 	chars: string[];
-	onChange: (value: string) => void;
+	selectedChar: string;
 }
 
 export default function BrandsAlphabet({
 	chars,
-	onChange,
+	selectedChar,
 }: BrandsAlphabetProps) {
-	const items = charsToAlphabeItems(chars);
+	const router = useRouter();
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
 
+	const handleCharClick = (char: string) => {
+		const params = new URLSearchParams(searchParams.toString());
+
+		if (char === "ALL") {
+			params.delete("char");
+		} else {
+			params.delete("char");
+			params.set("char", char);
+		}
+
+		router.push(`${pathname}?${params.toString()}`);
+	}
+	const items: AlphabetItemProps[] = chars.map(c => convertCharToAlphabetItem(c));
+	
 	return (
 		<div className="max-w-[800px] flex flex-wrap gap-5 justify-center items-center">
-			<AlphabetItem label="All" value="all" onClick={onChange} />
+			<AlphabetItem label="All" value="ALL" onClick={() => handleCharClick("ALL")} />
 			{items.map((item) => (
 				<AlphabetItem
 					key={`char-${item.value}`}
 					{...item}
-					onClick={onChange}
+					onClick={handleCharClick}
 				/>
 			))}
 		</div>
 	);
 }
+
 
 interface AlphabetItemProps {
 	label: string;
@@ -76,6 +96,6 @@ function convertCharToAlphabetItem(char: string): AlphabetItemProps {
 	const isNumber = charCode >= 48 && charCode <= 57;
 
 	return isNumber
-		? { label: "0-9", value: "number" }
+		? { label: "0-9", value: "0-9" }
 		: { label: char.toUpperCase(), value: char.toUpperCase() };
 }
