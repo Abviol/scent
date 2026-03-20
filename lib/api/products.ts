@@ -2,8 +2,8 @@
 import { FilterState, ProductType, SortingType } from "@/lib/types";
 
 interface GetProductsParams {
-	filters: FilterState;
-	sorting: SortingType;
+	filters?: FilterState;
+	sorting?: SortingType;
 	baseGender?: string;
 }
 
@@ -22,14 +22,14 @@ export async function getProducts({
 
 	// --- FILTERING ---
 	// 1. Search Query
-	if (filters.searchQuery) {
+	if (filters?.searchQuery) {
 		results = results.filter((p) =>
 			p.name.toLowerCase().includes(filters.searchQuery.toLowerCase()),
 		);
 	}
 
 	// 2. Price Range
-	if (filters.priceRange) {
+	if (filters?.priceRange) {
 		const [min, max] = filters.priceRange.map((cents) => cents * 100);
 		results = results.filter((p) => {
 			const price = p.variants[0]?.price || 0;
@@ -38,8 +38,8 @@ export async function getProducts({
 	}
 
 	// 3. Brands
-	if (filters.brands.length > 0) {
-		results = results.filter((p) => filters.brands.includes(p.brand));
+	if (filters?.brands && filters.brands.length > 0) {
+		results = results.filter((p) => filters?.brands.includes(p.brand));
 	}
 
 	// 4. Genders
@@ -55,12 +55,12 @@ export async function getProducts({
 	}
 
 	// 5. Types (e.g., 'Eau de Toilette', 'Eau de Parfum')
-	if (filters.types.length > 0) {
+	if (filters?.types && filters.types.length > 0) {
 		results = results.filter((p) => filters.types.includes(p.type));
 	}
 
 	// 6. Markers
-	if (filters.markers.length > 0) {
+	if (filters?.markers && filters.markers.length > 0) {
 		results = results.filter((p) =>
 			p.markers.some((m) => filters.markers.includes(m || "")),
 		);
@@ -68,7 +68,7 @@ export async function getProducts({
 
 	// 7. Volumes (e.g., 50ml, 100ml)
 	// Logic: Does the product have ANY variant with the selected volume?
-	if (filters.volumes.length > 0) {
+	if (filters?.volumes && filters.volumes.length > 0) {
 		results = results.filter((p) =>
 			p.variants.some((v) =>
 				filters.volumes.includes(v.volume.toString()),
@@ -77,7 +77,7 @@ export async function getProducts({
 	}
 
 	// --- SORTING  ---
-	const { criteria, order } = sorting;
+	const { criteria, order } = sorting ? sorting : {};
 	const isAsc = order === "ASC";
 
 	results.sort((a, b) => {
@@ -120,6 +120,6 @@ export async function getProducts({
 
 	const defaultAmount = 24;
 	const loadMoreAmout = 12;
-	const endIndex = defaultAmount + loadMoreAmout * (filters.page || 0);
+	const endIndex = defaultAmount + loadMoreAmout * (filters?.page || 0);
 	return results.slice(0, endIndex);
 }
