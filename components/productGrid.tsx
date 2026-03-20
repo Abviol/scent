@@ -5,7 +5,6 @@ import ProductCard from "./productCard";
 import { ProductType } from "@/lib/types";
 import { Button } from "./ui/button";
 import { useShopFilters } from "@/hooks/use-shop-filters";
-import { ReactNode } from "react";
 
 interface ProductGridProps {
 	products: ProductType[];
