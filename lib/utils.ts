@@ -2,7 +2,6 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import {
 	AvailabilityType,
-	BrandsType,
 	FilterTag,
 	GenderType,
 	SORTING_CRITERIAS,

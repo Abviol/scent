@@ -3,7 +3,7 @@
 import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { ProductType } from "@/lib/types";
 import { PRODUCTS } from "@/lib/data";
-import ProductInfoSection from "@/components/shop/product/productInfoSection";
+import ProductInfoSection from "@/components/pages/shop/product/productInfoSection";
 import { ProductsSliderSection } from "@/components/productsSliderSection";
 
 type ProductPageProps = {

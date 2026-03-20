@@ -1,8 +1,8 @@
 ﻿"use client";
 
 import { FilterState } from "@/lib/types";
-import { Button } from "../ui/button";
-import Tag from "../ui/tag";
+import { Button } from "../../ui/button";
+import Tag from "../../ui/tag";
 import { useShopFilters } from "@/hooks/use-shop-filters";
 import { convertFilterToTags } from "@/lib/utils";
 

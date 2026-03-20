@@ -1,9 +1,9 @@
 ﻿"use server";
 
-import { ActiveFilters } from "@/components/shop/activeFilters";
-import { ProductGrid } from "@/components/shop/productGrid";
-import { ShopSidebar } from "@/components/shop/shopSidebar";
-import Sorting from "@/components/shop/sorting";
+import { ActiveFilters } from "@/components/pages/shop/activeFilters";
+import { ProductGrid } from "@/components/productGrid";
+import { ShopSidebar } from "@/components/pages/shop/shopSidebar";
+import Sorting from "@/components/pages/shop/sorting";
 import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { getProducts } from "@/lib/api/products";
 import { parseSearchParams } from "@/lib/utils";
