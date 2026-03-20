@@ -5,21 +5,23 @@ import ProductCard from "./productCard";
 import { ProductType } from "@/lib/types";
 import { Button } from "./ui/button";
 import { useShopFilters } from "@/hooks/use-shop-filters";
+import { ReactNode } from "react";
 
 interface ProductGridProps {
 	products: ProductType[];
 	page: number;
+	emptyState?: React.ReactNode; //  If specified, is shown instead of the default one
 }
 
 /**
  * ProductGrid
  * Responsible for rendering the list of products or the "Empty State"
  */
-export function ProductGrid({ products, page }: ProductGridProps) {
+export function ProductGrid({ products, page, emptyState }: ProductGridProps) {
 	const { setPage } = useShopFilters();
 
 	if (products.length === 0) {
-		return (
+		return emptyState ? emptyState : (
 			<div className="flex flex-col items-center justify-center py-20 text-center text-muted-foreground">
 				<Frown className="h-10 w-10 mb-4 opacity-50" />
 				<h3 className="text-lg font-semibold">No products found</h3>
