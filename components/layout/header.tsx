@@ -196,7 +196,7 @@ function HeaderActions({
 		<div className="flex items-center gap-x-10 shrink-0">
 			<div className="flex gap-x-3">
 				<Link
-					href={"/wishlist"}
+					href={"/account/wishlist"}
 					aria-label="Go to wishlist"
 					className="button-icon flex items-center justify-center"
 				>
