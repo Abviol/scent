@@ -355,7 +355,7 @@ export default function Page() {
 				<DemoSection title="Sorting Dropdown">
 					<div className="flex justify-end h-[220px]">
 						<Suspense>
-							<Sorting criteria={sorting.criteria} order={sorting.order} />
+							{/* <Sorting criteria={sorting.criteria} order={sorting.order} /> */}
 						</Suspense>
 					</div>
 				</DemoSection>
