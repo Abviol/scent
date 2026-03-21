@@ -42,6 +42,7 @@ export default async function WishlistPage(props: WishlistPageProps) {
 						order={sorting.order}
 					/>
 				</div>
+				{/*  */}
 
 				{/* Product grid */}
 				<ProductGrid
