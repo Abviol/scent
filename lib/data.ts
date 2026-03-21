@@ -1,5 +1,5 @@
 ﻿import { CommentCardProps } from "@/components/commentCard/commentCard";
-import { BrandsType, FilterState, ProductType } from "./types";
+import { BrandType, FilterState, ProductType } from "./types";
 
 const PRODUCTS: ProductType[] = [
 	{
@@ -281,7 +281,7 @@ const HOME_COMMENTS: CommentCardProps[] = Array.from(
 	},
 );
 
-const BRANDS: BrandsType[] = [
+const BRANDS: BrandType[] = [
 		"Versace",
 		"Jean Paul Gaultier",
 		"Giorgio Armani",

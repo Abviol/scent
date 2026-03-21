@@ -1,12 +1,12 @@
 ﻿"use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
 // Components
 import CartDrawerItem from "@/components/cartDrawerItem/cartDrawerItem";
 import CartItem from "@/components/cartItem";
 import CommentCard from "@/components/commentCard/commentCard";
-import ProductCard, { ProductCardOnSaveEvent } from "@/components/productCard";
+import ProductCard from "@/components/productCard";
 import SearchResultItem from "@/components/searchResultItem";
 import Stepper from "@/components/stepper/stepper";
 import Avatar from "@/components/ui/avatar";
@@ -14,12 +14,12 @@ import Breadcrumbs from "@/components/ui/breadcrumbs";
 import Marker from "@/components/ui/marker";
 import Tag from "@/components/ui/tag";
 import Badge from "@/components/ui/badge";
-import { AlertTriangle, Check, ListOrdered, Search, Truck } from "lucide-react";
+import { AlertTriangle, Check, ListOrdered, Truck } from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import Nav from "@/components/layout/nav";
-import { SortingOrderType, SortingType } from "@/lib/types";
-import Sorting from "@/components/shop/sorting";
+import { SortingType } from "@/lib/types";
+import Sorting from "@/components/pages/shop/sorting";
 
 // --- Helper Component for Layout ---
 const DemoSection = ({
@@ -354,7 +354,9 @@ export default function Page() {
 				{/* 9. Sorting Dropdown */}
 				<DemoSection title="Sorting Dropdown">
 					<div className="flex justify-end h-[220px]">
-						<Sorting criteria={sorting.criteria} order={sorting.order} />
+						<Suspense>
+							<Sorting criteria={sorting.criteria} order={sorting.order} />
+						</Suspense>
 					</div>
 				</DemoSection>
 			</div>
