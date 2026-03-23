@@ -15,10 +15,9 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
-      - name: Install pnpm
-        run: |
-          npm install -g pnpm
-          echo "$(npm bin -g)" >> $GITHUB_PATH
+      - name: Install pnpm 
+        run: | 
+          npm install -g pnpm export PATH="(npmbin−g):PATH"
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Run ESLint
