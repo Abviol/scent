@@ -133,7 +133,7 @@ export default function Home() {
 								productLink="/shop/product/111"
 								color="#32665A"
 								promotionDeadline={
-									new Date("2026-03-01T23:59:59Z")
+									new Date("2026-06-01T23:59:59Z")
 								}
 							/>
 							<BannerCard
@@ -143,7 +143,7 @@ export default function Home() {
 								productLink="/shop/product/222"
 								color="#86804C"
 								promotionDeadline={
-									new Date("2026-03-01T23:59:59Z")
+									new Date("2026-05-04T23:59:59Z")
 								}
 							/>
 						</div>
@@ -218,11 +218,7 @@ function BannerCard(props: BannerCardProps) {
 			</div>
 			<p className="mt-5 text-center">
 				<i>
-					&quot;Until the end of the promotion:{" "}
-					{cd.isMounted
-						? `${cd.d} days ${formatTime(cd.h)}:${formatTime(cd.m)}:${formatTime(cd.s)}`
-						: "0 days 00:00:00"}
-					&quot;
+					&quot;Until the end of the promotion: {cd.d} days {formatTime(cd.h)}:{formatTime(cd.m)}:{formatTime(cd.s)}&quot;
 				</i>
 			</p>
 		</div>
