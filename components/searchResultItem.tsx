@@ -29,7 +29,7 @@ export default function SearchResultItem({
 	imageUrl,
 }: SearchResultItemProps) {
 	const productLink = `/shop/product/${productId}`;
-   const [availability, setAvailability] = useState<AvailabilityType>(getAvailability(quantityInStock));
+   const [availability] = useState<AvailabilityType>(getAvailability(quantityInStock));
    const availabilityClass: string = getAvailabilityClass(availability);
 
 	return (
