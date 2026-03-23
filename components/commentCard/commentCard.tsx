@@ -1,5 +1,4 @@
-﻿import Image from "next/image";
-import Rating from "../ui/rating";
+﻿import Rating from "../ui/rating";
 import Avatar from "../ui/avatar";
 
 export interface CommentCardProps {

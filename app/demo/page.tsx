@@ -55,7 +55,7 @@ export default function Page() {
 	];
 
 	// State for sorting
-	const [sorting, setSorting] = useState<SortingType>({ criteria: "name", order: "DESC" });
+	const [sorting] = useState<SortingType>({ criteria: "name", order: "DESC" });
 
 	// const handleSave = (e: ProductCardOnSaveEvent) => {
 	// 	console.log(
@@ -355,7 +355,7 @@ export default function Page() {
 				<DemoSection title="Sorting Dropdown">
 					<div className="flex justify-end h-[220px]">
 						<Suspense>
-							{/* <Sorting criteria={sorting.criteria} order={sorting.order} /> */}
+							 <Sorting criteria={sorting.criteria} order={sorting.order} />
 						</Suspense>
 					</div>
 				</DemoSection>

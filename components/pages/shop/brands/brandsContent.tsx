@@ -13,7 +13,7 @@ export default function BrandsContent({ selectedChar = "ALL", brandGroups }: Bra
 	
 	return (
 		<div className="px-40 flex flex-col gap-20">
-			{groupsToShow.map((b, i) => (
+			{groupsToShow.map((b) => (
 				<BrandsGroup key={`${b.char}-set`} {...b} />
 			))}
 		</div>
@@ -33,7 +33,7 @@ function BrandsGroup({ char, brands }: BrandGroupType) {
 				</h2>
 			</div>
 			<ul className="grid grid-cols-3 gap-x-8 gap-y-2">
-				{brands.map((b, i) => (
+				{brands.map((b) => (
 					<li key={b.id}>
 						<Link href={`/shop?brands=${b.id}`} className="text-xl hover:text-accent">{b.name}</Link>
 					</li>
