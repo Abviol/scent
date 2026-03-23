@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import { Bookmark, Mail, Search, ShoppingCartIcon, X } from "lucide-react";
 
@@ -34,12 +34,12 @@ export default function Header() {
 	const closeSearch = () => setIsSearchOpen(false);
 	const handleSearchFocus = () => setIsSearchOpen(true);
 	const clearSearch = () => setSearchQuery("");
-	const handleBlur = (e: PointerEvent) => {
+	const handleBlur = useCallback((e: PointerEvent) => {
 		const target = e.target as HTMLElement;
 		if (!target.closest(".search-bar")) {
 			closeSearch();
 		}
-	};
+	}, []);
 	const applySearchQuery = () => {
 		router.push(`/shop?q=${encodeURIComponent(searchQuery.trim())}`);
 		closeSearch();
@@ -59,7 +59,7 @@ export default function Header() {
 	useEffect(() => {
 		document.body.addEventListener("click", handleBlur);
 		return () => document.body.removeEventListener("click", handleBlur);
-	}, []);
+	}, [handleBlur]);
 
 	return (
 		<>
