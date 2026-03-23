@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c77c5e76-00dd-45ef-8fd8-99b5753db9c2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/app/demo/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/demo/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/shop/product/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/shop/product/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/cartDrawerItem/cartDrawerItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/cartDrawerItem/cartDrawerItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/cartItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/cartItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/commentCard/commentCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/commentCard/commentCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layout/footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layout/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/pages/shop/activeFilters.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/pages/shop/activeFilters.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/pages/shop/brands/brandsContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/pages/shop/brands/brandsContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/pages/shop/product/productGallery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/pages/shop/product/productGallery.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/searchResultItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/searchResultItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/marker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/marker.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/use-countdown.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/use-countdown.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Abviol&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:Abviol/scent.git&quot;,
+    &quot;accountId&quot;: &quot;37551f6c-7b25-4992-94b9-e3f695799567&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="3BLWWeIzTHewEYSdKvLBFAdShQb" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JavaScript Debug.localhost:3000.executor": "Debug",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "#3 on feature/actions",
+    "javascript.preferred.runtime.type.id": "node",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "nodejs_package_manager_path": "pnpm",
+    "settings.editor.selected.configurable": "editor.preferences.import",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2025.3.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="JavaScript Debug.localhost:3000">
+    <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
+      <method v="2" />
+    </configuration>
+    <configuration name="localhost:3000" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="Next.js: server-side" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.localhost:3000" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.32098.39" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c77c5e76-00dd-45ef-8fd8-99b5753db9c2" name="Changes" comment="" />
+      <created>1774268865826</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1774268865826</updated>
+      <workItem from="1774268867497" duration="8742000" />
+      <workItem from="1774293509699" duration="120000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/components/pages/shop/product/productGallery.tsx</url>
+          <line>2</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/components/layout/header.tsx</url>
+          <line>2</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
