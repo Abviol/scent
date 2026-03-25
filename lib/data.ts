@@ -303,6 +303,6 @@ const BRANDS: BrandType[] = [
 		"2million",
 		"3million",
 		"1hundred"
-	].map((b, i) => ({id: b, name: b}));
+	].map((b) => ({id: b, name: b}));
 
 export { PRODUCTS, MOCK_SHOP_FILTERS, HOME_COMMENTS, BRANDS };

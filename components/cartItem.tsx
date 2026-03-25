@@ -36,7 +36,7 @@ export default function CartItem({
 	onDelete,
 }: CartItemProps) {
 	const [isDeleted, setIsDeleted] = useState<boolean>(false);
-	const [availability, setAvailability] = useState<AvailabilityType>(
+	const [availability] = useState<AvailabilityType>(
 		getAvailability(quantityInStock)
 	);
 	const availabilityClass: string = getAvailabilityClass(availability);

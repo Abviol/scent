@@ -23,7 +23,7 @@ export function ActiveFilters({ filters }: ActiveFiltersProps) {
 
 	return (
 		<div className="selected-filters flex flex-row flex-wrap gap-5 mb-6">
-			{tags.map((tag, idx) => (
+			{tags.map((tag) => (
 				<Tag
 					key={`${tag.id}-${tag.value}`}
 					label={tag.label}

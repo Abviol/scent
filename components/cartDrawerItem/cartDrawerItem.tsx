@@ -3,7 +3,6 @@
 import { AvailabilityType } from "@/lib/types";
 import {
 	getAvailability,
-	getAvailabilityClass,
 	getEuro,
 } from "@/lib/utils";
 import { Trash2 } from "lucide-react";
@@ -36,7 +35,7 @@ export default function CartDrawerItem({
 	onDelete,
 }: CartDrawerItemProps) {
 	const [isDeleted, setIsDeleted] = useState<boolean>(false);
-	const [availability, setAvailability] = useState<AvailabilityType>(
+	const [availability] = useState<AvailabilityType>(
 		getAvailability(quantityInStock)
 	);
 	const availabilityClass: string =

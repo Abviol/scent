@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import Image from "next/image";
-import { KeyboardEventHandler, ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 import { Swiper, SwiperSlide } from "swiper/react";

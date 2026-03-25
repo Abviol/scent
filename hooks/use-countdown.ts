@@ -2,23 +2,15 @@
 import { useEffect, useState } from "react";
 
 export function useCountdown(deadline: Date) {
-   const [isMounted, setIsMounted] = useState(false);
-   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
+    const [, forceUpdate] = useState(0);
 
-   useEffect(() => {
-      setIsMounted(true);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            forceUpdate(t => t + 1);
+        }, 1000);
 
-      setTimeLeft(getTimeRemaining(deadline));
+        return () => clearInterval(interval);
+    }, []);
 
-      const interval = setInterval(() => {
-         setTimeLeft(getTimeRemaining(deadline));
-      }, 1000);
-
-      return () => clearInterval(interval);
-   }, [deadline])
-
-   return {
-      ...timeLeft,
-      isMounted,
-   };
+    return getTimeRemaining(deadline);
 }

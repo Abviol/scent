@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import Link from "next/link";
-import { Facebook, Instagram, Twitter, Send } from "lucide-react";
+import { Send } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { TelegramIcon } from "../icons/telegram";
