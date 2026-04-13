@@ -24,7 +24,7 @@ const DELIVERY_COST = 0;
 export default function CartPageClient({cartItems}: CartPageClientProps) {
     const [items, setItems] = useState<CartItemType[]>(cartItems);
     const orderPrice = useMemo(() => items.reduce((sum, item) => sum + item.variant.price * item.quantity, 0), [items]);
-    const totalPrice = useMemo(() => orderPrice + DELIVERY_COST, [items])
+    const totalPrice = useMemo(() => orderPrice + DELIVERY_COST, [orderPrice]);
 
     const updateQuantity = (id: string, newValue: number) => {
         setItems((prev) =>

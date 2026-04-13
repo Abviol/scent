@@ -1,6 +1,5 @@
 ﻿import {CommentCardProps} from "@/components/commentCard/commentCard";
 import {BrandType, CartItemType, FilterState, ProductType} from "./types";
-import {CartItemProps} from "@/components/cartItem";
 
 const PRODUCTS: ProductType[] = [
     {
