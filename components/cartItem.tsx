@@ -22,7 +22,7 @@ export interface CartItemProps {
     quantityInStock: number;
     pricePerItem: number; // cents
     onDelete: (id: string) => void;
-    onQuantityChange: (id: string, delta: number) => void;
+    onQuantityChange: (id: string, newValue: number) => void;
 }
 
 export default function CartItem({
