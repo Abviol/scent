@@ -280,7 +280,7 @@ function SearchDropdown({ isOpen, query }: { isOpen: boolean; query: string }) {
 function CartLink({ items = 0 }: { items?: number }) {
 	return (
 		<Link
-			href={"/cart"}
+			href={"/account/cart"}
 			aria-label="Go to cart"
 			className="relative button-icon flex items-center justify-center"
 		>
