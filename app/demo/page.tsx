@@ -180,7 +180,7 @@ export default function Page() {
 				<DemoSection title="Cart Items (Main)">
 					<div className="flex flex-col gap-6">
 						<CartItem
-							title="Versace Eros Flame"
+							name="Versace Eros Flame"
 							productId="cart-001"
 							productCode="01203213"
 							quantityInStock={11}
@@ -189,9 +189,10 @@ export default function Page() {
 							pricePerItem={4999}
 							quantity={1}
 							onDelete={() => console.log("Deleted")}
+							onQuantityChange={() => console.log("QuantityChange")}
 						/>
 						<CartItem
-							title="Expensive Limited Edition"
+							name="Expensive Limited Edition"
 							productId="cart-002"
 							productCode="01203213"
 							quantityInStock={0}
@@ -200,6 +201,7 @@ export default function Page() {
 							pricePerItem={11999}
 							quantity={1}
 							onDelete={() => console.log("Deleted")}
+							onQuantityChange={() => console.log("QuantityChange")}
 						/>
 					</div>
 				</DemoSection>
