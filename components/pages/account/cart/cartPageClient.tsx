@@ -1,0 +1,83 @@
+"use client";
+
+/* React */
+import {useMemo, useState} from "react";
+
+/* Next.js */
+import Link from "next/link";
+
+/* Components */
+import CartItem from "@/components/cartItem";
+import {Button} from "@/components/ui/button";
+
+/* Lib */
+import {CartItemType} from "@/lib/types";
+import {getEuro} from "@/lib/utils";
+
+interface CartPageClientProps {
+    cartItems: CartItemType[];
+}
+
+const DELIVERY_COST = 0;
+
+export default function CartPageClient({cartItems}: CartPageClientProps) {
+    const [items, setItems] = useState<CartItemType[]>(cartItems);
+    const orderPrice = useMemo(() => items.reduce((sum, item) => sum + item.variant.price * item.quantity, 0), [items]);
+    const totalPrice = useMemo(() => orderPrice + DELIVERY_COST, [orderPrice, DELIVERY_COST])
+
+    const updateQuantity = (id: string, delta: number) => {
+        setItems((prev) =>
+            prev.map((item) => {
+                if (item.productId === id) {
+                    const newQuantity = Math.max(1, item.quantity + delta);
+                    return {...item, quantity: newQuantity};
+                }
+                return item;
+            })
+        );
+    };
+
+    const removeItem = (id: string) => {
+        setItems((prev) => prev.filter((item) => item.productId !== id));
+    };
+
+    return (
+        <>
+            <div className="w-full flex flex-col gap-y-8">
+                {items.length > 0 && items.map((item, index) => (
+                    <CartItem
+                        key={item.productId + index}
+                        imageUrl={item.imageUrl}
+                        name={item.name}
+                        volume={item.variant.volume}
+                        productId={item.productId}
+                        productCode={item.productCode}
+                        quantity={item.quantity}
+                        quantityInStock={item.variant.quantityInStock}
+                        pricePerItem={item.variant.price}
+                        onDelete={removeItem}
+                        onQuantityChange={updateQuantity}
+                    />
+                ))}
+            </div>
+
+            <div className="flex flex-col mt-[100px] mx-auto max-w-[800px] p-[60px] rounded-[8px] border-2 border-gray-200">
+                <div className="flex justify-between text-2xl text-slate-500 font-semibold mb-3">
+                    <span>Order price</span>
+                    <span>{getEuro(orderPrice)}</span>
+                </div>
+                <div className="flex justify-between text-2xl text-slate-500 font-semibold mb-10">
+                    <span>Estimated delivery price</span>
+                    <span>{getEuro(DELIVERY_COST)}</span>
+                </div>
+                <div className="flex justify-between text-4xl text-main font-semibold mb-20">
+                    <span>Total</span>
+                    <span>{getEuro(totalPrice)}</span>
+                </div>
+                <Button className="h-[60px] w-full max-w-[496px] mx-auto text-[20px] font-medium" asChild>
+                    <Link href={"/checkout"}>Checkout</Link>
+                </Button>
+            </div>
+        </>
+    );
+}
