@@ -8,7 +8,6 @@ import {
 } from "@/lib/utils";
 import {Trash2} from "lucide-react";
 import Image from "next/image";
-import {useState} from "react";
 import Stepper from "./stepper/stepper";
 import Link from "next/link";
 
@@ -37,7 +36,7 @@ export default function CartItem({
                                      onDelete,
                                      onQuantityChange,
                                  }: CartItemProps) {
-    const availability = getAvailability(quantityInStock);
+    const availability: AvailabilityType = getAvailability(quantityInStock);
     const availabilityClass: string = getAvailabilityClass(availability);
     const productLink: string = `/shop/product/${productId}`;
 
