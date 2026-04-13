@@ -15,15 +15,16 @@ export default function Stepper({
 	value,
 	min = 1,
 	max = 99,
+	step = 1,
 	disabled = false,
 	size = "md",
 	onChange,
 }: StepperProps) {
 	const handleDecrement = (): void => {
-		if (value > min) onChange(value - 1);
+		onChange(Math.max(min, value - step));
 	};
 	const handleIncrement = (): void => {
-		if (value < max) onChange(value + 1);
+		onChange(Math.min(max, value + step));
 	};
 
 	const sizeClass = {

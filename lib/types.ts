@@ -1,6 +1,6 @@
 ﻿export interface ProductType {
 	id: string;
-	code: number;
+	code: number; //! convert to a string
 	name: string;
 	imageUrls: string[];
 	rating: number;
@@ -70,4 +70,13 @@ export interface BrandType {
 export interface BrandGroupType {
 	char: string;
 	brands: BrandType[];
+}
+
+export interface CartItemType {
+	imageUrl: string;
+	name: string;
+	variant: VariantType;
+	productId: string;
+	productCode: string;
+	quantity: number;
 }
