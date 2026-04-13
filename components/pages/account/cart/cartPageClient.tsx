@@ -25,13 +25,10 @@ export default function CartPageClient({cartItems}: CartPageClientProps) {
     const orderPrice = useMemo(() => items.reduce((sum, item) => sum + item.variant.price * item.quantity, 0), [items]);
     const totalPrice = useMemo(() => orderPrice + DELIVERY_COST, [orderPrice, DELIVERY_COST])
 
-    const updateQuantity = (id: string, delta: number) => {
+    const updateQuantity = (id: string, newValue: number) => {
         setItems((prev) =>
             prev.map((item) => {
-                if (item.productId === id) {
-                    const newQuantity = Math.max(1, item.quantity + delta);
-                    return {...item, quantity: newQuantity};
-                }
+                if (item.productId === id) return {...item, quantity: newValue};
                 return item;
             })
         );
@@ -61,7 +58,8 @@ export default function CartPageClient({cartItems}: CartPageClientProps) {
                 ))}
             </div>
 
-            <div className="flex flex-col mt-[100px] mx-auto max-w-[800px] p-[60px] rounded-[8px] border-2 border-gray-200">
+            <div
+                className="flex flex-col mt-[100px] mx-auto max-w-[800px] p-[60px] rounded-[8px] border-2 border-gray-200">
                 <div className="flex justify-between text-2xl text-slate-500 font-semibold mb-3">
                     <span>Order price</span>
                     <span>{getEuro(orderPrice)}</span>
