@@ -13,6 +13,7 @@ import {Button} from "@/components/ui/button";
 /* Lib */
 import {CartItemType} from "@/lib/types";
 import {getEuro} from "@/lib/utils";
+import {Search} from "lucide-react";
 
 interface CartPageClientProps {
     cartItems: CartItemType[];
@@ -37,6 +38,27 @@ export default function CartPageClient({cartItems}: CartPageClientProps) {
     const removeItem = (id: string) => {
         setItems((prev) => prev.filter((item) => item.productId !== id));
     };
+
+    if (items.length === 0) return (
+        <div className="my-[120px] flex flex-col justify-center items-center">
+            <div className="flex gap-5 items-center mb-8">
+                <p className="text-3xl font-semibold text-slate-500">
+                    Your cart is empty{" "}
+                </p>{" "}
+                <Search
+                    color="#697489"
+                    strokeWidth={2}
+                    size={28}
+                />{" "}
+            </div>
+            <p className="text-xl font-semibold text-slate-500 mb-10">
+                You will find something you like in the shop!
+            </p>
+            <Button size="lg" className="px-10" asChild>
+                <Link href={"/shop"}>Shop Now</Link>
+            </Button>
+        </div>
+    );
 
     return (
         <>
