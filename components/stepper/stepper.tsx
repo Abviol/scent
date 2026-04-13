@@ -8,22 +8,23 @@ export interface StepperProps {
 	step?: number;
 	disabled?: boolean;
 	size?: "md" | "sm";
-	onChange: (newValue: number) => void;
+	onChange: (delta: number) => void;
 }
 
 export default function Stepper({
 	value,
 	min = 1,
 	max = 99,
+	step = 1,
 	disabled = false,
 	size = "md",
 	onChange,
 }: StepperProps) {
 	const handleDecrement = (): void => {
-		if (value > min) onChange(value - 1);
+		onChange(-step);
 	};
 	const handleIncrement = (): void => {
-		if (value < max) onChange(value + 1);
+		onChange(step);
 	};
 
 	const sizeClass = {
