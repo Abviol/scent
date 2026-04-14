@@ -8,7 +8,7 @@ import {
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import Stepper from "../stepper/stepper";
+import Stepper from "../../stepper/stepper";
 import "./cartDrawerItem.css";
 import Link from "next/link";
 
