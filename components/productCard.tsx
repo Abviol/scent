@@ -66,6 +66,7 @@ export default function ProductCard({
 						src={imageUrl}
 						alt={`${name} ${volume} ml`}
 						fill
+						sizes={"200px"}
 						className="object-contain"
 						priority={false}
 					/>
