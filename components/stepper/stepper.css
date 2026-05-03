@@ -11,5 +11,5 @@
    @apply h-10 w-[70px] my-text-h5;
 }
 .stepper_sm .stepper__display {
-   @apply h-[18px] w-[60px] text-xs font-semibold;
+   @apply h-[18px] w-[40px] text-xs font-semibold;
 }
