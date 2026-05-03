@@ -3,11 +3,23 @@
 .dialog__overlay {
     @apply fixed bg-black/30 backdrop-blur-md inset-0;
 }
+.dialog__overlay[data-state="open"] {
+    @apply animate-in fade-in duration-300;
+}
+.dialog__overlay[data-state="closed"] {
+    @apply animate-out fade-out duration-300;
+}
 
 .dialog__content {
     @apply fixed h-full w-full max-w-[440px] flex flex-col gap-y-6 top-0 right-0;
     @apply bg-white px-8 pt-10 pb-[168px];
     @apply focus:outline-none
+}
+.dialog__content[data-state="open"] {
+    @apply animate-in slide-in-from-right duration-300;
+}
+.dialog__content[data-state="closed"] {
+    @apply animate-out slide-out-to-right duration-300;
 }
 
 .dialog__scrollable-container {
