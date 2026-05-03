@@ -77,18 +77,17 @@ export default function CartDrawerItem({
 						></Image>
 					</Link>
 
-					<div className="w-full flex flex-col gap-5">
+					<div className="w-full overflow-hidden flex flex-col gap-5">
 						<div className="flex justify-between items-baseline">
 							<Link
 								href={productLink}
-								className="item__text flex flex-col gap-y-2.5"
+								className="overflow-hidden item__text flex flex-col gap-y-2.5"
 							>
-								<h4 className="font-semibold leading-3">
+								<h4 className="font-semibold leading-3 overflow-hidden truncate">
 									{title}
 								</h4>
 								<div className="flex gap-4 text-xs font-semibold">
 									<span className="text-gray-600">
-										Product code -&nbsp;
 										<span className="text-black">
 											{productCode}
 										</span>
