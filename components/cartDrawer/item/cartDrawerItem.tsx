@@ -71,6 +71,7 @@ export default function CartDrawerItem({
 							src={imageUrl}
 							alt={`${title} ${volume} ml`}
 							fill
+							sizes={"72px"}
 							className="object-contain"
 							loading="eager"
 							priority={false}
