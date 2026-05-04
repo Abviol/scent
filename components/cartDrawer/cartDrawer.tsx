@@ -1,7 +1,7 @@
 "use client";
 
 // import {useRef, useState} from "react";
-import {Check, ShoppingCart, X, Lock} from "lucide-react";
+import {Check, ShoppingCart, X, Lock, Search} from "lucide-react";
 import {Dialog} from "radix-ui";
 import "./styles.css";
 import {Button} from "@/components/ui/button";
@@ -74,52 +74,65 @@ export default function CartDrawer() {
                             </Dialog.Close>
                         </div>
 
-                        {/* Scrollable content */}
-                        <div className="dialog__scrollable-container">
-
-                            {/* Added item */}
-                            <div className="flex flex-col gap-y-6">
-                                <div className="dialog__banner">
-                                    <Check className={"class-6"} strokeWidth={1.5}></Check>
-                                    1 product added to cart
-                                </div>
-
-                                <CartDrawerItem
-                                    title={recentlyAddedItem.title}
-                                    productId={recentlyAddedItem.productId}
-                                    productCode={recentlyAddedItem.productCode}
-                                    quantityInStock={recentlyAddedItem.quantityInStock}
-                                    imageUrl={recentlyAddedItem.imageUrl}
-                                    volume={recentlyAddedItem.volume}
-                                    pricePerItem={recentlyAddedItem.pricePerItem}
-                                    quantity={recentlyAddedItem.quantity}
-                                    onDelete={recentlyAddedItem.onDelete}
-                                />
+                        {/* Conditional Rendering */}
+                        {/* Handle empty and full cart states */}
+                        {items.length === 0 ? (
+                            <div className={"dialog__banner h-12 justify-center items-center gap-x-3 bg-gray-100! text-slate-500!"}>
+                                <Search strokeWidth={2}></Search>
+                                <span>
+                                    Shopping cart is empty for now.
+                                </span>
                             </div>
+                        ) : (
+                            <>
+                                {/* Scrollable content */}
+                                <div className="dialog__scrollable-container">
 
-                            {/* All cart items */}
-                            <div className="flex flex-col gap-y-6">
-                                <h3 className={"text-xl leading-7 font-semibold"}>
-                                    All products ({items.length})
-                                </h3>
-                                <div className="flex flex-col gap-y-2">
-                                    {items.map((item, index) => (
+                                    {/* Added item */}
+                                    <div className="flex flex-col gap-y-6">
+                                        <div className="dialog__banner">
+                                            <Check className={"class-6"} strokeWidth={1.5}></Check>
+                                            1 product added to cart
+                                        </div>
+
                                         <CartDrawerItem
-                                            key={item.productCode + index}
-                                            title={item.title}
-                                            productId={item.productId}
-                                            productCode={item.productCode}
-                                            quantityInStock={item.quantityInStock}
-                                            imageUrl={item.imageUrl}
-                                            volume={item.volume}
-                                            pricePerItem={item.pricePerItem}
-                                            quantity={item.quantity}
-                                            onDelete={item.onDelete}
+                                            title={recentlyAddedItem.title}
+                                            productId={recentlyAddedItem.productId}
+                                            productCode={recentlyAddedItem.productCode}
+                                            quantityInStock={recentlyAddedItem.quantityInStock}
+                                            imageUrl={recentlyAddedItem.imageUrl}
+                                            volume={recentlyAddedItem.volume}
+                                            pricePerItem={recentlyAddedItem.pricePerItem}
+                                            quantity={recentlyAddedItem.quantity}
+                                            onDelete={recentlyAddedItem.onDelete}
                                         />
-                                    ))}
+                                    </div>
+
+                                    {/* All cart items */}
+                                    <div className="flex flex-col gap-y-6">
+                                        <h3 className={"text-xl leading-7 font-semibold"}>
+                                            All products ({items.length})
+                                        </h3>
+                                        <div className="flex flex-col gap-y-2">
+                                            {items.map((item, index) => (
+                                                <CartDrawerItem
+                                                    key={item.productCode + index}
+                                                    title={item.title}
+                                                    productId={item.productId}
+                                                    productCode={item.productCode}
+                                                    quantityInStock={item.quantityInStock}
+                                                    imageUrl={item.imageUrl}
+                                                    volume={item.volume}
+                                                    pricePerItem={item.pricePerItem}
+                                                    quantity={item.quantity}
+                                                    onDelete={item.onDelete}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                            </>
+                        )}
 
                         {/* Total */}
                         <div className="dialog__total">
