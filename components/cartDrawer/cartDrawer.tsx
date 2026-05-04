@@ -5,7 +5,7 @@ import {Check, ShoppingCart, X, Lock} from "lucide-react";
 import {Dialog} from "radix-ui";
 import "./styles.css";
 import {Button} from "@/components/ui/button";
-import CartDrawerItem from "@/components/cartDrawer/item/cartDrawerItem";
+import CartDrawerItem, {CartDrawerItemProps} from "@/components/cartDrawer/item/cartDrawerItem";
 import Link from "next/link";
 
 export default function CartDrawer() {
@@ -13,6 +13,32 @@ export default function CartDrawer() {
     // const quantityRef = useRef(null);
     // const openCart = () => setIsOpen(true);
     // const closeCart = () => setIsOpen(false);
+
+    const recentlyAddedItem: CartDrawerItemProps = {
+        title: "Versace Eros Flame",
+        productId: "drawer-001",
+        productCode: "01203213",
+        quantityInStock: 11,
+        imageUrl: "https://i.makeup.it/1/1x/1xkz6atfgthd.jpg",
+        volume: 30,
+        pricePerItem: 4999,
+        quantity: 1,
+        onDelete: () => console.log("Deleted"),
+    };
+    const items: CartDrawerItemProps[] = [
+        recentlyAddedItem,
+        ...Array.from({length: 4}, () => ({
+            title: "Versace Eros Flame",
+            productId: "drawer-001",
+            productCode: "01203213",
+            quantityInStock: 11,
+            imageUrl: "https://i.makeup.it/1/1x/1xkz6atfgthd.jpg",
+            volume: 30,
+            pricePerItem: 4999,
+            quantity: 1,
+            onDelete: () => console.log("Deleted"),
+        }))
+    ];
 
     return (
         <>
@@ -48,7 +74,8 @@ export default function CartDrawer() {
 
                         {/* Scrollable content */}
                         <div className="dialog__scrollable-container">
-                            {/* Added items */}
+
+                            {/* Added item */}
                             <div className="flex flex-col gap-y-6">
                                 <div className="dialog__banner">
                                     <Check className={"class-6"} strokeWidth={1.5}></Check>
@@ -56,15 +83,15 @@ export default function CartDrawer() {
                                 </div>
 
                                 <CartDrawerItem
-                                    title="Versace Eros Flame"
-                                    productId="drawer-001"
-                                    productCode="01203213"
-                                    quantityInStock={11}
-                                    imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
-                                    volume={30}
-                                    pricePerItem={4999}
-                                    quantity={1}
-                                    onDelete={() => console.log("Deleted")}
+                                    title={recentlyAddedItem.title}
+                                    productId={recentlyAddedItem.productId}
+                                    productCode={recentlyAddedItem.productCode}
+                                    quantityInStock={recentlyAddedItem.quantityInStock}
+                                    imageUrl={recentlyAddedItem.imageUrl}
+                                    volume={recentlyAddedItem.volume}
+                                    pricePerItem={recentlyAddedItem.pricePerItem}
+                                    quantity={recentlyAddedItem.quantity}
+                                    onDelete={recentlyAddedItem.onDelete}
                                 />
                             </div>
 
@@ -72,19 +99,20 @@ export default function CartDrawer() {
                             <div className="flex flex-col gap-y-6">
                                 <h3 className={"text-xl leading-7 font-semibold"}>All products (4)</h3>
                                 <div className="flex flex-col gap-y-2">
-                                    {Array.from({length: 6}).map((item, i) => (
+                                    {items.map((item, index) => (
                                         <CartDrawerItem
-                                            key={i}
-                                            title="Versace Eros Flame"
-                                            productId="drawer-001"
-                                            productCode="01203213"
-                                            quantityInStock={11}
-                                            imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
-                                            volume={30}
-                                            pricePerItem={4999}
-                                            quantity={1}
-                                            onDelete={() => console.log("Deleted")}
-                                        />))}
+                                            key={item.productCode + index}
+                                            title={item.title}
+                                            productId={item.productId}
+                                            productCode={item.productCode}
+                                            quantityInStock={item.quantityInStock}
+                                            imageUrl={item.imageUrl}
+                                            volume={item.volume}
+                                            pricePerItem={item.pricePerItem}
+                                            quantity={item.quantity}
+                                            onDelete={item.onDelete}
+                                        />
+                                    ))}
                                 </div>
                             </div>
 
