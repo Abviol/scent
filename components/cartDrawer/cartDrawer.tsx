@@ -58,7 +58,9 @@ export default function CartDrawer() {
                             <div className="flex gap-10 items-center">
                                 <Dialog.Title className="dialog__title">Shopping Cart</Dialog.Title>
                                 {/* Quantity */}
-                                <span className="p-2 bg-slate-600 rounded-[8px] text-base text-white leading-3">5</span>
+                                <span className="p-2 bg-slate-600 rounded-[8px] text-base text-white leading-3">
+                                    {items.length}
+                                </span>
                             </div>
 
                             {/* Close button */}
@@ -97,7 +99,9 @@ export default function CartDrawer() {
 
                             {/* All cart items */}
                             <div className="flex flex-col gap-y-6">
-                                <h3 className={"text-xl leading-7 font-semibold"}>All products (4)</h3>
+                                <h3 className={"text-xl leading-7 font-semibold"}>
+                                    All products ({items.length})
+                                </h3>
                                 <div className="flex flex-col gap-y-2">
                                     {items.map((item, index) => (
                                         <CartDrawerItem
