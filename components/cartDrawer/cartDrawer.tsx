@@ -119,39 +119,39 @@ export default function CartDrawer() {
                                     ))}
                                 </div>
                             </div>
+                        </div>
 
-                            {/* Total */}
-                            <div className="dialog__total">
-                                <div className="w-full flex flex-col gap-y-4">
-                                    <div className="total__row">
-                                        <span className={"font-semibold"}>Total:</span>
-                                        <span className={"text-xl font-semibold"}>€8256.99</span>
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-2">
-                                        <Button
-                                            size="lg"
-                                            variant="outline"
-                                            className="h-[44px] w-full text-base"
-                                            asChild
-                                        >
-                                            <Link href={"/account/cart"}>
-                                                <ShoppingCart size={16} strokeWidth={2}></ShoppingCart>
-                                                {" "}
-                                                <span>View Cart</span>
-                                            </Link>
-                                        </Button>
-                                        <Button
-                                            size={"lg"}
-                                            className={"w-full h-[44px] text-base bg-main"}
-                                            asChild
-                                        >
-                                            <Link href={"/account/checkout"}>
-                                                <Lock size={16} strokeWidth={2}></Lock>
-                                                {" "}
-                                                <span>Checkout</span>
-                                            </Link>
-                                        </Button>
-                                    </div>
+                        {/* Total */}
+                        <div className="dialog__total">
+                            <div className="w-full flex flex-col gap-y-4">
+                                <div className="total__row">
+                                    <span className={"font-semibold"}>Total:</span>
+                                    <span className={"text-xl font-semibold"}>€8256.99</span>
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Button
+                                        size="lg"
+                                        variant="outline"
+                                        className="h-[44px] w-full text-base"
+                                        asChild
+                                    >
+                                        <Link href={"/account/cart"}>
+                                            <ShoppingCart size={16} strokeWidth={2}></ShoppingCart>
+                                            {" "}
+                                            <span>View Cart</span>
+                                        </Link>
+                                    </Button>
+                                    <Button
+                                        size={"lg"}
+                                        className={"w-full h-[44px] text-base bg-main"}
+                                        asChild
+                                    >
+                                        <Link href={"/account/checkout"}>
+                                            <Lock size={16} strokeWidth={2}></Lock>
+                                            {" "}
+                                            <span>Checkout</span>
+                                        </Link>
+                                    </Button>
                                 </div>
                             </div>
                         </div>
