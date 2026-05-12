@@ -62,6 +62,7 @@ export default function CartItem({
                             src={imageUrl}
                             alt={`${name} ${volume} ml`}
                             fill
+                            sizes={"100px"}
                             className="object-contain"
                             loading="eager"
                             priority={false}

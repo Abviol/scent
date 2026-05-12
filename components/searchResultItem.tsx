@@ -39,6 +39,7 @@ export default function SearchResultItem({
 					src={imageUrl}
 					alt={`${title} ${volume} ml`}
 					fill
+					sizes={"100px"}
 					className="object-contain"
 					loading="eager"
 					priority={false}

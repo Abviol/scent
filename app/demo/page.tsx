@@ -3,7 +3,7 @@
 import { Suspense, useState } from "react";
 
 // Components
-import CartDrawerItem from "@/components/cartDrawerItem/cartDrawerItem";
+import CartDrawerItem from "@/components/cartDrawer/item/cartDrawerItem";
 import CartItem from "@/components/cartItem";
 import CommentCard from "@/components/commentCard/commentCard";
 import ProductCard from "@/components/productCard";
@@ -20,6 +20,7 @@ import Footer from "@/components/layout/footer";
 import Nav from "@/components/layout/nav";
 import { SortingType } from "@/lib/types";
 import Sorting from "@/components/pages/shop/sorting";
+import CartDrawer from "@/components/cartDrawer/cartDrawer";
 
 // --- Helper Component for Layout ---
 const DemoSection = ({
@@ -360,6 +361,10 @@ export default function Page() {
 							 <Sorting criteria={sorting.criteria} order={sorting.order} />
 						</Suspense>
 					</div>
+				</DemoSection>
+
+				<DemoSection title={"Cart drawer"}>
+					<CartDrawer></CartDrawer>
 				</DemoSection>
 			</div>
 			<Footer />

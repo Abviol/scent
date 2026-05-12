@@ -165,10 +165,6 @@ interface RangeSliderProps {
 function RangeSlider({ min, max, value, onChange }: RangeSliderProps) {
 	const [localValue, setLocalValue] = useState(value);
 
-	useEffect(() => {
-		setLocalValue(value);
-	}, [value]);
-
 	const handleInputChange = (index: 0 | 1, newValue: string) => {
 		const num = parseInt(newValue);
 		if (isNaN(num)) return;
