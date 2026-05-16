@@ -17,7 +17,7 @@ Describe how this was tested.
 - [ ] Tested locally
 - [ ] No ESLint errors
 - [ ] No console errors
-- [ ] Responsive\
+- [ ] Responsive
 - [ ] No new accessibility violations
 - [ ] Types are correct
 - [ ] Documentation/comments updated
