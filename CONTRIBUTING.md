@@ -6,17 +6,26 @@ This document outlines the development workflow and rules to keep the codebase c
 
 ## 📦 Project Setup
 
-### Clone repository
+### Clone the repository
+
 ```bash
 git clone https://github.com/Abviol/scent.git
 ```
 
+### Copy variables from .env.example to .env
+
+```bash
+cp .env.example .env
+```
+
 ### Install dependencies
+
 ```bash
 pnpm install
 ```
 
-### Run development server
+### Start development server
+
 ```bash
 pnpm dev
 ```
