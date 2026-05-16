@@ -155,24 +155,31 @@ Additional engineering targets for production readiness:
 ## Tech Stack
 
 ### Frontend
-- Next.js v16
+
 - React v19
+- Next.js v16
 - TypeScript v5
 - Tailwind CSS v4
+
+### UI & Component Libraries
+
 - Shadcn/ui
 - Radix UI
 - Lucide React
 - Swiper
 
-### Tooling
-- pnpm
-- ESLint
-- Prettier
-
 ### Backend & Infrastructure
-- Prisma
-- Vercel
 
+- Prisma (ORM)
+- PostgreSQL (database)
+- Vercel (hosting & deployment)
+
+
+### Tooling & Developer Experience
+
+- pnpm (package manager)
+- ESLint (linting)
+- Prettier (code formatting)
 ---
 
 ## Project Structure
