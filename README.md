@@ -278,10 +278,10 @@ pnpm lint
 
 ## Screenshots
 
-![Homepage](https://raw.githubusercontent.com/Abviol/scent/main/docs/images/home.png)
-![Shop page](https://raw.githubusercontent.com/Abviol/scent/main/docs/images/shop.png)
-![Cart page](https://raw.githubusercontent.com/Abviol/scent/main/docs/images/cart.png)
-![Wishlist page](https://raw.githubusercontent.com/Abviol/scent/main/docs/images/wishlist.png)
+![Homepage](https://github.com/Abviol/scent/blob/dev/docs/images/home.png)
+![Shop page](https://github.com/Abviol/scent/blob/dev/docs/images/shop.png)
+![Cart page](https://github.com/Abviol/scent/blob/dev/docs/images/cart.png)
+![Wishlist page](https://github.com/Abviol/scent/blob/dev/docs/images/wishlist.png)
 
 ---
 
