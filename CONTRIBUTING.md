@@ -1,4 +1,4 @@
-# Contributing to The Scents
+# Contributing to Scent
 
 This document outlines the development workflow and rules to keep the codebase consistent and maintainable.
 
