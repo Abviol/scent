@@ -4,7 +4,21 @@ This document outlines the development workflow and rules to keep the codebase c
 
 ---
 
-## 📦 Project Setup
+## Navigation
+
+1. [Project Setup](#project-setup)
+2. [Development Flow](#development-flow)
+3. [Branch Naming](#branch-naming)
+4. [Branch Strategy](#branch-strategy)
+5. [Commit Convention](#commit-convention)
+6. [Pull Requests](#pull-requests)
+7. [Code Style](#code-style)
+8. [Definition of Done](#definition-of-done)
+9. [Notes](#notes)
+
+---
+
+## Project Setup
 
 ### Clone the repository
 
@@ -42,7 +56,7 @@ pnpm lint
 
 ---
 
-## 🔄 Development Flow
+## Development Flow
 
 1. Create branch from `dev`
 2. Implement changes
@@ -52,7 +66,7 @@ pnpm lint
 
 ---
 
-## 🌿 Branch Naming
+## Branch Naming
 
 Use the following convention:
 
@@ -77,14 +91,14 @@ type/short-description
 
 ---
 
-## 🌳 Branch Strategy
+## Branch Strategy
 
 - master → production
 - dev → active development
 
 ---
 
-## 💬 Commit Convention
+## Commit Convention
 
 We use Conventional Commits:
 
@@ -167,7 +181,7 @@ Improves accessibility and aligns with design specs.
 Closes #18
 ```
 
-### 🚫 What should NOT be committed
+### What should NOT be committed
 
 - console.log left in code
 - commented-out code
@@ -175,7 +189,7 @@ Closes #18
 - debug flags
 ---
 
-## 🔀 Pull Requests
+## Pull Requests
 
 Before opening a PR:
 
@@ -200,7 +214,7 @@ See [/.github/pull_request_template.md](https://github.com/Abviol/scent/blob/dev
 
 ---
 
-## 🎨 Code Style
+## Code Style
 
 - Use TypeScript strictly
 - Prefer functional components
@@ -211,7 +225,7 @@ See [/.github/pull_request_template.md](https://github.com/Abviol/scent/blob/dev
 
 ---
 
-## ✅ Definition of Done
+## Definition of Done
 
 A task is considered complete when:
 
@@ -226,7 +240,7 @@ A task is considered complete when:
 
 ---
 
-## 📌 Notes
+## Notes
 
 This project is designed as a portfolio-level production simulation.  
 Quality, consistency, and clarity matter more than speed.
