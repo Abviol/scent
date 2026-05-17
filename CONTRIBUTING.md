@@ -196,7 +196,7 @@ type(scope): short description
 - Screenshots (if UI changes)
 - All checklist (applicable) items completed
 
-See `/.github/pull_request_template.md`.
+See [/.github/pull_request_template.md](https://github.com/Abviol/scent/blob/dev/.github/pull_request_template.md)
 
 ---
 
