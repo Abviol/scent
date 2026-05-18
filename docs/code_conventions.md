@@ -1,6 +1,6 @@
 # Code Conventions
 
-This document outlines the code conventions upon writing code in `Next.js`, `React`, `TypeScript`, and `Tailwind CSS`.
+This document defines the coding conventions applied across the `Next.js`, `React`, `TypeScript`, and `Tailwind CSS` codebase.
 
 ---
 
@@ -26,45 +26,45 @@ This document outlines the code conventions upon writing code in `Next.js`, `Rea
 
 #### File Architecture
 
-Each reusable component must be put inside a dedicates `.tsx` 
-file with a `lowerCamelCase` name:
+Each reusable component must reside in a dedicated `.tsx` file named in `kebab-case`:
+
 ```txt
 ../
-├── productCart.tsx
-├── searchResultItem.tsx
+├── product-card.tsx
+├── search-result-item.tsx
 └── ...
 ```
 
-If some of the component's styling is put inside a corresponding `styles.css` 
-file according to the [styling conventions](#styling), the component must have the following file architecture:
+If a component's styling is extracted into a dedicated `styles.css` file in accordance with the [styling conventions](#styling), the component must follow this structure:
+
 ```txt
 ../
-└── myComponent/                         
-    ├── index.tsx               # The component
-    └── styles.css              # Its styles 
+└── my-component/
+    ├── index.tsx       # Component definition
+    └── styles.css      # Component styles
 ```
-
 
 #### Declaration
 
-The React components must be given the same name as the file/directory
-they are put inside using the `UpperCamelCase`:
+Components must be named using `PascalCase`, matching the name of the file or directory they reside in:
 
 ```tsx
-// myComponent.tsx 
-// or 
-// ../myComponent/index.tsx
+// my-component.tsx
+// or
+// ../my-component/index.tsx
 
 function MyComponent() {
     return (<></>);
 }
 ```
 
+---
+
 ### Custom Hooks
 
 #### File Naming
 
-Use the `kebab-case` starting with the "use" word for naming files for custom react hooks:
+Custom hook files must be named in `kebab-case`, prefixed with `use-`:
 
 ```txt
 hooks/
@@ -73,7 +73,7 @@ hooks/
 
 #### Declaration
 
-Use `lowerCamelCase` starting with the "use" word using `regular function declaration` for declaring custom hooks:
+Custom hooks must be declared using a regular function declaration and named in `camelCase`, prefixed with `use`:
 
 ```ts
 function useMyHook() {}
@@ -85,14 +85,16 @@ function useMyHook() {}
 
 ### Variables
 
-Use `lowerCamelCase` for variables:
+Variables must be named in `camelCase`:
+
 ```ts
 let myVariable;
 ```
 
 ### Constants
 
-Use `UPPER_SNAKE_CASE` for primitive constants and configuration values:
+Primitive constants and configuration values must be named in `UPPER_SNAKE_CASE`:
+
 ```ts
 const MAX_ITEMS = 10;
 const API_BASE_URL = "https://api.example.com";
@@ -100,26 +102,28 @@ const API_BASE_URL = "https://api.example.com";
 
 ### Functions
 
-Use `lowerCamelCase` for functions:
+Functions must be named in `camelCase`:
+
 ```ts
 function myFunction() {}
 ```
-or
+
 ```ts
-const myArrowFunction = () => {}
+const myArrowFunction = () => {};
 ```
 
-#### Regular VS Arrow Function Declarations
+#### Regular vs Arrow Function Declarations
 
-Use `regular function declaration` for the utilities. 
+Regular function declarations must be used for utility functions:
+
 ```ts
 // ./lib/utils.ts
 
 function myUtilityFunction() {}
 ```
 
-Use `arrow function declaration` for event handlers inside React components and call them handle[EventName] following the
-[function naming convention](#functions):
+Arrow function declarations must be used for event handlers inside React components. Event handlers must be named using the `handle` prefix followed by the action name, in accordance with the [function naming convention](#functions):
+
 ```tsx
 function MyComponent() {
     const handleClick = () => {};
@@ -127,39 +131,44 @@ function MyComponent() {
 
     return (
         <button onClick={handleClick}></button>
-    )
+    );
 }
 ```
 
 ### Interfaces
 
-Use `UpperCamelCase` for interfaces:
+Interfaces must be named in `PascalCase`:
+
 ```ts
 interface MyInterface {}
 ```
 
 ### Types
 
-Use `UpperCamelCase` for custom TS types ending with the "Type" word:
+Custom type aliases must be named in `PascalCase`, suffixed with `Type`:
+
 ```ts
 type MyCustomType = number;
 ```
 
-Use `lower_snake_case` for types with custom string values:
+Types representing a set of string literal values must use `snake_case` for the values:
+
 ```ts
-type MyCustomType = "value_1" | "value_2";
+type StatusType = "value_one" | "value_two";
 ```
 
-### Interface VS Type
+### Interface vs Type
 
 #### Interface
 
-Use `interface` for defining function parameters giving it a name starting with the name of the component and ending with the "Props" word according to the [interface naming convention](#interfaces):
+Use `interface` for component props, following the naming pattern `[ComponentName]Props`:
+
 ```ts
 interface MyComponentProps {}
 ```
 
-Use `interface` for defining types with the object structure:
+Use `interface` for types that describe an object structure:
+
 ```ts
 interface MyObjectType {
     key1: number;
@@ -170,7 +179,8 @@ interface MyObjectType {
 
 #### Type
 
-Use `type` for defining types dedicated to variables, constants:
+Use `type` for aliases assigned to variables or constants:
+
 ```ts
 type MyCustomType = "my_custom_type_value";
 
@@ -181,26 +191,22 @@ let array: MyCustomType[] = [];
 
 ## Styling
 
-We use **Tailwind CSS** for styling React components. The classes must be 
-put inside curly braces with double quotes `{""}`:
+Tailwind CSS is used as the primary styling solution. Class names must be defined as a plain string inside the `className` attribute:
+
 ```tsx
-    <div className={"relative bg-red-200 text-base text-black ..."}></div>
+<div className={"relative bg-red-200 text-base text-black ..."}></div>
 ```
 
-If, inside a React component, a styling is used in multiple HTML elements, the styling must be
-replaced with a CSS class giving it a name following the **BEM methodology** 
-and put inside a `styles.css` file dedicated to the component:
+When the same styling is applied across multiple elements within a component, the repeated classes must be extracted into a dedicated CSS class following the **BEM methodology**, placed in a `styles.css` file co-located with the component:
 
 ```css
-/* 
-    ../myComponent/styles.css
-*/
+/* ../my-component/styles.css */
 
 .block-name__element-name {
     @apply relative bg-red-200;
 }
 
-.block-name__element-name_modifier-name {
+.block-name__element-name--modifier-name {
     @apply bg-red-400;
 }
 ```
