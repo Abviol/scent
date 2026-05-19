@@ -96,6 +96,8 @@ type/short-description
 - master → production
 - dev → active development
 
+PRs target dev; dev is merged into master only for releases.
+
 ---
 
 ## Commit Convention
@@ -181,14 +183,6 @@ Improves accessibility and aligns with design specs.
 Closes #18
 ```
 
-### What should NOT be committed
-
-- console.log left in code
-- commented-out code
-- unused imports
-- debug flags
----
-
 ## Pull Requests
 
 Before opening a PR:
@@ -214,14 +208,21 @@ See [/.github/pull_request_template.md](https://github.com/Abviol/scent/blob/dev
 
 ---
 
+## What should NOT be committed
+
+- console.log left in code
+- commented-out code
+- unused imports
+- debug flags
+
+---
+
 ## Code Style
 
-- Use TypeScript strictly
-- Prefer functional components
-- Use Tailwind CSS for styling
-- Avoid inline styles
-- Keep components small and reusable
-- Prefer server components when possible (Next.js App Router)
+## Code Style
+
+See [Code Conventions](./docs/code_conventions.md) for the full coding 
+standards applied across the codebase.
 
 ---
 
@@ -232,7 +233,7 @@ A task is considered complete when:
 - [ ] Feature works as expected
 - [ ] No ESLint errors
 - [ ] No console errors
-- [ ] Fully responsive
+- [ ] Fully responsive (obligatory after the Phase 5 is reached, see [README.md](https://github.com/Abviol/scent/blob/dev/README.md))
 - [ ] Accessible (keyboard + ARIA where needed)
 - [ ] Types are correct
 - [ ] UI matches design
