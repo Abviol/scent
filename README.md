@@ -286,10 +286,10 @@ pnpm lint
 
 ## Screenshots
 
-![Homepage](https://github.com/Abviol/scent/blob/dev/docs/images/home.png)
-![Shop page](https://github.com/Abviol/scent/blob/dev/docs/images/shop.png)
-![Cart page](https://github.com/Abviol/scent/blob/dev/docs/images/cart.png)
-![Wishlist page](https://github.com/Abviol/scent/blob/dev/docs/images/wishlist.png)
+![Homepage](./docs/images/home.png)
+![Shop page](./docs/images/shop.png)
+![Cart page](./docs/images/cart.png)
+![Wishlist page](./docs/images/wishlist.png)
 
 ---
 
