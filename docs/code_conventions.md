@@ -12,13 +12,16 @@ This document defines the coding conventions applied across the `Next.js`, `Reac
    - [Exports](#exports)
    - [Folder Colocation](#folder-colocation)
 2. [TypeScript](#typescript)
-    - [Variables](#variables)
-    - [Constants](#constants)
-    - [Functions](#functions)
-    - [Interfaces](#interfaces)
-    - [Types](#types)
-    - [Interface vs Type](#interface-vs-type)
-3. [Styling](#styling)
+   - [Variables](#variables)
+   - [Constants](#constants)
+   - [Functions](#functions)
+   - [Interfaces](#interfaces)
+   - [Types](#types)
+   - [Interface vs Type](#interface-vs-type)
+   - [Enum vs Const](#enum-vs-const)
+   - [Explicit Return Types](#explicit-return-types-on-functions)
+   - [null vs undefined](#null-vs-undefined)
+4. [Styling](#styling)
 
 ---
 
@@ -230,7 +233,6 @@ Regular function declarations must be used for utility functions:
 
 ```ts
 // ./lib/utils.ts
-
 function myUtilityFunction() {}
 ```
 
@@ -242,7 +244,7 @@ function MyComponent() {
     const handleSubmit = () => {};
 
     return (
-        <button onClick={handleClick}></button>
+        <button onClick={handleClick} />
     );
 }
 ```
@@ -297,6 +299,72 @@ Use `type` for aliases assigned to variables or constants:
 type MyCustomType = "my_custom_type_value";
 
 let array: MyCustomType[] = [];
+```
+
+### Enum vs Const
+
+Avoid `enum` in favour of `as const` objects:
+
+```ts
+const Direction = {
+    Up: "UP",
+    Down: "DOWN",
+    Left: "LEFT",
+    Right: "RIGHT",
+} as const;
+
+type DirectionType = typeof Direction[keyof typeof Direction];
+
+const move = (direction: DirectionType) => {};
+move(Direction.Up);
+```
+
+### Explicit Return Types on Functions
+
+Define explicit return types for utilities and hooks:
+
+```ts
+function myUtility(): number {
+    return 1;
+}
+
+function useMyHook(): boolean {
+    return true;
+}
+```
+
+Define explicit return types for components using `React.ReactNode`:
+
+```tsx
+function MyComponent(): React.ReactNode {
+    return <div />;
+}
+```
+
+Return types for event handlers are optional, as they always return `void` and are inferred correctly by TypeScript:
+
+```tsx
+function MyComponent(): React.ReactNode {
+    const handleClick = () => {};
+
+    return <button onClick={handleClick} />;
+}
+```
+
+### `null` vs `undefined`
+
+Prefer `undefined` over `null`:
+
+```ts
+const myVariable: string | undefined = undefined;
+```
+
+This also applies to optional props in component interfaces:
+
+```ts
+interface MyComponentProps {
+    title?: string; // equivalent to string | undefined
+}
 ```
 
 ---
