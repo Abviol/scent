@@ -204,7 +204,7 @@ type(scope): short description
 - Screenshots (if UI changes)
 - All checklist (applicable) items completed
 
-See [/.github/pull_request_template.md](https://github.com/Abviol/scent/blob/dev/.github/pull_request_template.md)
+See [/.github/pull_request_template.md](./.github/pull_request_template.md)
 
 ---
 
@@ -233,7 +233,7 @@ A task is considered complete when:
 - [ ] Feature works as expected
 - [ ] No ESLint errors
 - [ ] No console errors
-- [ ] Fully responsive (obligatory after the Phase 5 is reached, see [README.md](https://github.com/Abviol/scent/blob/dev/README.md))
+- [ ] Fully responsive (obligatory after the Phase 5 is reached, see [README.md](./README.md))
 - [ ] Accessible (keyboard + ARIA where needed)
 - [ ] Types are correct
 - [ ] UI matches design
