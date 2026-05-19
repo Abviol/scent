@@ -25,6 +25,9 @@ This document defines the coding conventions applied across the `Next.js`, `Reac
    - [Import Ordering](#import-ordering)
    - [Absolute vs Relative Imports](#absolute-vs-relative-imports)
 4. [Styling](#styling)
+5. [General](#general)
+   - [Comment Conventions](#comment-conventions)
+   - [console.log Policy](#consolelog-policy)
 
 ---
 
@@ -444,3 +447,37 @@ When the same styling is applied across multiple elements within a component, th
     @apply bg-red-400;
 }
 ```
+
+---
+
+## General
+
+### Comment Conventions
+
+We follow a **self-documenting code first, comments only when necessary** approach:
+
+- No comments for obvious code — if the code is readable, a comment adds noise
+- Inline comments for non-obvious logic — explain *why*, not *what*
+- JSDoc for all exported utilities and hooks — provides IDE tooltips and a clearer API surface
+
+```ts
+// ❌ Unnecessary — the code already says this
+// Increment counter
+const handleClick = () => setCount(prev => prev + 1);
+
+// ✅ Explains the why, not the what
+// Prices are stored in cents to avoid floating point precision issues
+const price = amount * 100;
+
+// ✅ JSDoc for exported utilities
+/**
+ * Converts a price from cents to a formatted euro string.
+ * @param amount - Price in cents
+ * @returns Formatted string, e.g. "€12.99"
+ */
+export function getEuro(amount: number): string {}
+```
+
+### `console.log` Policy
+
+`console.log` is forbidden in committed code. It may be used freely during development but must be removed before committing.
