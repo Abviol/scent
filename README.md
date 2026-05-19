@@ -286,9 +286,20 @@ pnpm lint
 
 ## Screenshots
 
+### Home Page
+
 ![Homepage](./docs/images/home.png)
+
+### Shop Page
+
 ![Shop page](./docs/images/shop.png)
+
+### Cart Page
+
 ![Cart page](./docs/images/cart.png)
+
+
+### Wishlist Page
 ![Wishlist page](./docs/images/wishlist.png)
 
 ---
