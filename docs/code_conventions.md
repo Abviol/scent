@@ -21,6 +21,9 @@ This document defines the coding conventions applied across the `Next.js`, `Reac
    - [Enum vs Const](#enum-vs-const)
    - [Explicit Return Types](#explicit-return-types-on-functions)
    - [null vs undefined](#null-vs-undefined)
+3. [Imports](#imports)
+   - [Import Ordering](#import-ordering)
+   - [Absolute vs Relative Imports](#absolute-vs-relative-imports)
 4. [Styling](#styling)
 
 ---
@@ -365,6 +368,57 @@ This also applies to optional props in component interfaces:
 interface MyComponentProps {
     title?: string; // equivalent to string | undefined
 }
+```
+
+---
+
+## Imports
+
+### Import Ordering
+
+Imports must be grouped in the following order, with each group preceded by a descriptive comment:
+
+React → Next.js → Components → Hooks → Lib → Icons → Styles
+
+```ts
+/* React */
+import { useMemo, useState } from "react";
+
+/* Next.js */
+import Link from "next/link";
+
+/* Components */
+import CartItem from "@/components/cart-item";
+import { Button } from "@/components/ui/button";
+
+/* Hooks */
+import { useMyHook } from "@/hooks/use-my-hook";
+
+/* Lib */
+import { CartItemType } from "@/lib/types";
+import { getEuro } from "@/lib/utils";
+
+/* Icons */
+import { Search } from "lucide-react";
+
+/* Styles */
+import "./styles.css";
+```
+
+### Absolute vs Relative Imports
+
+Use a **relative import** when the imported file resides in the same directory as the origin file:
+
+```ts
+// ./components/cart-drawer/index.tsx
+import "./styles.css";
+```
+
+Use an **absolute import** in all other cases:
+
+```ts
+// ./components/pages/account/cart/cart-page-client.tsx
+import CartItem from "@/components/cart-item";
 ```
 
 ---
