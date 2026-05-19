@@ -215,6 +215,7 @@ src/
 │   └── pages/                   # Page-specific components
 ├── hooks/                       # Custom React hooks
 └── lib/                         # Shared utilities and types
+    ├── data.ts
     ├── types.ts
     └── utils.ts 
 ```
