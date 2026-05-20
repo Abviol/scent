@@ -12,10 +12,10 @@ This document outlines the development workflow and rules to keep the codebase c
 4. [Branch Strategy](#branch-strategy)
 5. [Commit Convention](#commit-convention)
 6. [Pull Requests](#pull-requests)
-7. [Code Style](#code-style)
-8. [Definition of Done](#definition-of-done)
-9. [Notes](#notes)
-
+7. [What Should Not Be Committed](#what-should-not-be-committed)
+8. [Code Style](#code-style)
+9. [Definition of Done](#definition-of-done)
+10. [Notes](#notes)
 ---
 
 ## Project Setup
@@ -202,7 +202,7 @@ type(scope): short description
 ### PR requirements:
 - Clear description
 - Screenshots (if UI changes)
-- All checklist (applicable) items completed
+- All (applicable) checklist items completed
 
 See [/.github/pull_request_template.md](./.github/pull_request_template.md)
 
@@ -216,8 +216,6 @@ See [/.github/pull_request_template.md](./.github/pull_request_template.md)
 - debug flags
 
 ---
-
-## Code Style
 
 ## Code Style
 
