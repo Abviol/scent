@@ -214,7 +214,7 @@ src/
 │   │   └── nav.tsx
 │   └── pages/                   # Page-specific components
 ├── hooks/                       # Custom React hooks
-└── lib/                         # Shared utilities and types
+└── lib/                         # Shared data, utilities and types
     ├── data.ts
     ├── types.ts
     └── utils.ts 
@@ -306,7 +306,7 @@ pnpm lint
 
 ## Deployment
 
-The application is deployed on Vercel automatically on push to `main`.
+The application is deployed on Vercel automatically on push to `dev`.
 
 ---
 
