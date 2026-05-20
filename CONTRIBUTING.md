@@ -93,10 +93,10 @@ type/short-description
 
 ## Branch Strategy
 
-- master → production
+- main → production
 - dev → active development
 
-PRs target dev; dev is merged into master only for releases.
+PRs target dev; dev is merged into main only for releases.
 
 ---
 
