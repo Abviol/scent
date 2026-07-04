@@ -3,11 +3,11 @@
 import { ProductType } from "@/lib/types";
 import { getAvailability, getAvailabilityClass, getEuro } from "@/lib/utils";
 import { useState } from "react";
-import ProductGallery from "./productGallery";
+import ProductGallery from "./product-gallery";
 import Rating from "@/components/ui/rating";
-import BookmarkButton from "@/components/bookmarkButton";
+import BookmarkButton from "@/components/bookmark-button";
 import { Button } from "@/components/ui/button";
-import { ProdTab, ProdTabList, ProdTabPanel, ProdTabs } from "./prodDetailTabs";
+import { ProdTab, ProdTabList, ProdTabPanel, ProdTabs } from "./product-detail-tabs";
 
 interface ProductInfoSectionProps {
 	product: ProductType;

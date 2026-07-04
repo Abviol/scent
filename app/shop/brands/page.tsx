@@ -1,6 +1,6 @@
 ﻿"use server";
 
-import BrandsClientWrapper from "@/components/pages/shop/brands/brandsClientWrapper";
+import BrandsClientWrapper from "@/components/pages/shop/brands/brands-client-wrapper";
 import getBrands from "@/lib/api/brands";
 import { BrandGroupType, BrandType } from "@/lib/types";
 

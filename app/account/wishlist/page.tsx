@@ -1,7 +1,7 @@
 ﻿"use server";
 
 import Nav from "@/components/layout/nav";
-import { ProductGrid } from "@/components/productGrid";
+import { ProductGrid } from "@/components/product-grid";
 import Sorting from "@/components/pages/shop/sorting";
 import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { getProducts } from "@/lib/api/products";

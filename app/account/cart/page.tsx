@@ -2,7 +2,7 @@
 
 /* Components */
 import Breadcrumbs, {BreadcrumbItem} from "@/components/ui/breadcrumbs";
-import CartPageClient from "@/components/pages/account/cart/cartPageClient";
+import CartPageClient from "@/components/pages/account/cart";
 import Nav from "@/components/layout/nav";
 
 /* Lib */

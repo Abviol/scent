@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import ProductCard from "@/components/productCard";
+import ProductCard from "@/components/product-card";
 import { ProductType } from "@/lib/types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { type Swiper as SwiperType } from "swiper";

@@ -5,7 +5,7 @@ import {Check, ShoppingCart, X, Lock, Search} from "lucide-react";
 import {Dialog} from "radix-ui";
 import "./styles.css";
 import {Button} from "@/components/ui/button";
-import CartDrawerItem, {CartDrawerItemProps} from "@/components/cartDrawer/item/cartDrawerItem";
+import CartDrawerItem, {CartDrawerItemProps} from "./item";
 import Link from "next/link";
 
 export default function CartDrawer() {

@@ -8,7 +8,7 @@ import {
 } from "@/lib/utils";
 import {Trash2} from "lucide-react";
 import Image from "next/image";
-import Stepper from "./stepper/stepper";
+import Stepper from "./stepper";
 import Link from "next/link";
 
 export interface CartItemProps {

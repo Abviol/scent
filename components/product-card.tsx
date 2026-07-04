@@ -10,7 +10,7 @@ import { cn, getEuro } from "@/lib/utils";
 // Components
 import Marker from "./ui/marker";
 import Rating from "./ui/rating";
-import BookmarkButton from "./bookmarkButton";
+import BookmarkButton from "./bookmark-button";
 
 export interface ProductCardOnSaveEvent {
 	productId: string;

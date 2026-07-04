@@ -3,12 +3,12 @@
 import { Suspense, useState } from "react";
 
 // Components
-import CartDrawerItem from "@/components/cartDrawer/item/cartDrawerItem";
-import CartItem from "@/components/cartItem";
-import CommentCard from "@/components/commentCard/commentCard";
-import ProductCard from "@/components/productCard";
-import SearchResultItem from "@/components/searchResultItem";
-import Stepper from "@/components/stepper/stepper";
+import CartDrawerItem from "@/components/cart-drawer/item";
+import CartItem from "@/components/cart-item";
+import CommentCard from "@/components/comment-card";
+import ProductCard from "@/components/product-card";
+import SearchResultItem from "@/components/search-result-item";
+import Stepper from "@/components/stepper";
 import Avatar from "@/components/ui/avatar";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import Marker from "@/components/ui/marker";
@@ -20,7 +20,7 @@ import Footer from "@/components/layout/footer";
 import Nav from "@/components/layout/nav";
 import { SortingType } from "@/lib/types";
 import Sorting from "@/components/pages/shop/sorting";
-import CartDrawer from "@/components/cartDrawer/cartDrawer";
+import CartDrawer from "@/components/cart-drawer";
 
 // --- Helper Component for Layout ---
 const DemoSection = ({

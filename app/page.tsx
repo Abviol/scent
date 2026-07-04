@@ -11,8 +11,8 @@ import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import Nav from "@/components/layout/nav";
 import { Button } from "@/components/ui/button";
-import CommentCard from "@/components/commentCard/commentCard";
-import { ProductsSliderSection } from "@/components/productsSliderSection";
+import CommentCard from "@/components/comment-card";
+import { ProductsSliderSection } from "@/components/products-slider-section";
 /* Images */
 import Hero1 from "@/assets/images/home/hero-1.png";
 import Hero2 from "@/assets/images/home/hero-2.png";

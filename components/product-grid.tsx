@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { Frown } from "lucide-react";
-import ProductCard from "./productCard";
+import ProductCard from "./product-card";
 import { ProductType } from "@/lib/types";
 import { Button } from "./ui/button";
 import { useShopFilters } from "@/hooks/use-shop-filters";

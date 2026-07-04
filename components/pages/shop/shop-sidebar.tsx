@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { MOCK_SHOP_FILTERS } from "@/lib/data";
-import { FiltersDropdown } from "../../filterDropdown";
+import { FiltersDropdown } from "../../filter-dropdown";
 import { Button } from "../../ui/button";
 import { FilterState } from "@/lib/types";
 import { useShopFilters } from "@/hooks/use-shop-filters";
