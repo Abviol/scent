@@ -1,17 +1,18 @@
 "use server";
 
 /* Components */
-import Breadcrumbs, {BreadcrumbItem} from "@/components/ui/breadcrumbs";
+import Breadcrumbs from "@/components/ui/breadcrumbs";
 import CartPageClient from "@/components/pages/account/cart";
 import Nav from "@/components/layout/nav";
 
 /* Lib */
 import getCartItems from "@/lib/api/cart-items";
+import { BreadcrumbsItemType } from "@/lib/types";
 
 export default async function CartPage() {
     const cartItems = await getCartItems("12344321");
 
-    const breadcrumbsItems: BreadcrumbItem[] = [
+    const breadcrumbsItems: BreadcrumbsItemType[] = [
         { label: "Scent", href: "/" },
         { label: "Cart", href: "/account/cart" },
     ];

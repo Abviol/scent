@@ -11,7 +11,7 @@ import Rating from "./ui/rating";
 import { AvailabilityType } from "@/lib/types";
 import { getAvailability, getAvailabilityClass, getEuro } from "@/lib/utils";
 
-export interface SearchResultItemProps {
+interface SearchResultItemProps {
 	title: string;
 	productId: string;
 	productCode: string;

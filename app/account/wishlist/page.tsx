@@ -6,11 +6,12 @@ import Link from "next/link";
 import Nav from "@/components/layout/nav";
 import { ProductGrid } from "@/components/product-grid";
 import Sorting from "@/components/pages/shop/sorting";
-import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
+import Breadcrumbs from "@/components/ui/breadcrumbs";
 import { Button } from "@/components/ui/button";
 /* lib*/
 import { getProducts } from "@/lib/api/products";
 import { parseSearchParams } from "@/lib/utils";
+import { BreadcrumbsItemType } from "@/lib/types";
 /* icons */
 import { Search } from "lucide-react";
 
@@ -24,7 +25,7 @@ export default async function WishlistPage(props: WishlistPageProps) {
 	const { filters, sorting } = parseSearchParams(searchParams);
 	const products = await getProducts({ filters, sorting });
 
-	const breadcrumbsItems: BreadcrumbItem[] = [
+	const breadcrumbsItems: BreadcrumbsItemType[] = [
 		{ label: "Scent", href: "/" },
 		{ label: "Wishlist", href: "/account/wishlist" },
 	];

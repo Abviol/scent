@@ -80,3 +80,16 @@ export interface CartItemType {
 	productCode: string;
 	quantity: number;
 }
+
+export interface BreadcrumbsItemType {
+	label: string;
+	href: string;
+}
+
+export interface CommentCardType {
+	userAvatarUrl: string;
+	userName: string;
+	dateCommentLeft: string;
+	rating: number;
+	text: string;
+}

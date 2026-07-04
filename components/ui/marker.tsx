@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 /* icons */
 import { FireIcon } from "../icons/fireIcon";
 
-export interface MarkerProps {
+interface MarkerProps {
    name: 'hit' | undefined;
    size: 'md' | 'sm' | undefined;
 }

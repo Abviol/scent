@@ -1,6 +1,5 @@
-﻿/* components */
-import {CommentCardProps} from "@/components/comment-card"; // interface
-/* card*/
+﻿/* lib */
+import {CommentCardType} from "./types";
 import {BrandType, CartItemType, FilterState, ProductType} from "./types";
 
 const PRODUCTS: ProductType[] = [
@@ -262,7 +261,7 @@ const MOCK_SHOP_FILTERS: FilterState = {
     page: 1,
 };
 
-const HOME_COMMENTS: CommentCardProps[] = Array.from(
+const HOME_COMMENTS: CommentCardType[] = Array.from(
     {length: 12},
     (v, key) => {
         return key % 2 == 0

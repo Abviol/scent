@@ -3,7 +3,7 @@ import React from "react";
 /* icons */
 import { X } from "lucide-react";
 
-export interface TagProps {
+interface TagProps {
 	label: string;
   id: string;
 	onClick: (id: string) => void;

@@ -6,8 +6,9 @@ import Link from "next/link";
 /* components*/
 import {Dialog} from "radix-ui";
 import {Button} from "@/components/ui/button";
-import CartDrawerItem, {CartDrawerItemProps} from "./item";
-
+import CartDrawerItem from "./item";
+/* lib */
+import {CartItemType} from "@/lib/types";
 /* icons */
 import {Check, ShoppingCart, X, Lock, Search} from "lucide-react";
 /* styles */
@@ -15,29 +16,35 @@ import "./styles.css";
 
 export default function CartDrawer() {
 
-    const recentlyAddedItem: CartDrawerItemProps = {
-        title: "Versace Eros Flame",
+    const recentlyAddedItem: CartItemType = {
+        name: "Versace Eros Flame",
         productId: "drawer-001",
         productCode: "01203213",
-        quantityInStock: 11,
         imageUrl: "https://i.makeup.it/1/1x/1xkz6atfgthd.jpg",
-        volume: 30,
-        pricePerItem: 4999,
         quantity: 1,
-        onDelete: () => {},
+        variant: {
+            volume: 30,
+            price: 4999,
+            discountedPrice: undefined,
+            wishlist: true,
+            quantityInStock: 1,
+        },
     };
-    const items: CartDrawerItemProps[] = [
+    const items: CartItemType[] = [
         recentlyAddedItem,
         ...Array.from({length: 4}, () => ({
-            title: "Versace Eros Flame",
+            name: "Versace Eros Flame",
             productId: "drawer-001",
             productCode: "01203213",
-            quantityInStock: 11,
             imageUrl: "https://i.makeup.it/1/1x/1xkz6atfgthd.jpg",
-            volume: 30,
-            pricePerItem: 4999,
             quantity: 1,
-            onDelete: () => {},
+            variant: {
+                volume: 30,
+                price: 4999,
+                discountedPrice: undefined,
+                wishlist: true,
+                quantityInStock: 1,
+            },
         }))
     ];
 
@@ -97,15 +104,13 @@ export default function CartDrawer() {
                                         </div>
 
                                         <CartDrawerItem
-                                            title={recentlyAddedItem.title}
+                                            name={recentlyAddedItem.name}
                                             productId={recentlyAddedItem.productId}
                                             productCode={recentlyAddedItem.productCode}
-                                            quantityInStock={recentlyAddedItem.quantityInStock}
+                                            variant={recentlyAddedItem.variant}
                                             imageUrl={recentlyAddedItem.imageUrl}
-                                            volume={recentlyAddedItem.volume}
-                                            pricePerItem={recentlyAddedItem.pricePerItem}
                                             quantity={recentlyAddedItem.quantity}
-                                            onDelete={recentlyAddedItem.onDelete}
+                                            onDelete={() => {}}
                                         />
                                     </div>
 
@@ -118,15 +123,13 @@ export default function CartDrawer() {
                                             {items.map((item, index) => (
                                                 <CartDrawerItem
                                                     key={item.productCode + index}
-                                                    title={item.title}
+                                                    name={item.name}
                                                     productId={item.productId}
                                                     productCode={item.productCode}
-                                                    quantityInStock={item.quantityInStock}
+                                                    variant={item.variant}
                                                     imageUrl={item.imageUrl}
-                                                    volume={item.volume}
-                                                    pricePerItem={item.pricePerItem}
                                                     quantity={item.quantity}
-                                                    onDelete={item.onDelete}
+                                                    onDelete={() => {}}
                                                 />
                                             ))}
                                         </div>

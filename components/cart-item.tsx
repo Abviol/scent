@@ -15,7 +15,7 @@ import {
 /* icons */
 import {Trash2} from "lucide-react";
 
-export interface CartItemProps {
+interface CartItemProps {
     imageUrl: string;
     name: string;
     volume: number;

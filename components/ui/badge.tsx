@@ -3,7 +3,7 @@ import React from "react";
 /* icons */
 import { LucideIcon } from "lucide-react";
 
-export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
 	children: React.ReactNode;
 	variant?: "default" | "neutral" | "success" | "warning" | "error" | "mystery";
 	icon?: LucideIcon;

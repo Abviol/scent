@@ -206,24 +206,32 @@ export default function Page() {
 					{/* Simulating a narrow drawer container */}
 					<div className="w-[360px] bg-white p-4 border border-gray-200 shadow-sm flex flex-col gap-6">
 						<CartDrawerItem
-							title="Versace Eros Flame"
+							name="Versace Eros Flame"
 							productId="drawer-001"
 							productCode="01203213"
-							quantityInStock={11}
+							variant={{
+								volume: 30,
+								price: 4999,
+								discountedPrice: undefined,
+								wishlist: true,
+								quantityInStock: 1,
+							}}
 							imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
-							volume={2}
-							pricePerItem={4999}
 							quantity={1}
 							onDelete={() => {}}
 						/>
 						<CartDrawerItem
-							title="Versace Eros Flame"
+							name="Versace Eros Flame"
 							productId="drawer-002"
 							productCode="01203213"
-							quantityInStock={0}
+							variant={{
+								volume: 30,
+								price: 4999,
+								discountedPrice: undefined,
+								wishlist: true,
+								quantityInStock: 1,
+							}}
 							imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
-							volume={2}
-							pricePerItem={4999}
 							quantity={1}
 							onDelete={() => {}}
 						/>

@@ -11,11 +11,11 @@ import BookmarkButton from "./bookmark-button";
 import { MarkerType } from "@/lib/types";
 import { cn, getEuro } from "@/lib/utils";
 
-export interface ProductCardOnSaveEvent {
+interface ProductCardOnSaveEvent {
 	productId: string;
 	wishlist: boolean;
 }
-export interface ProductCardProps {
+interface ProductCardProps {
 	name: string;
 	productId: string; // diverse from product_code
 	volume: number;

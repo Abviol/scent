@@ -1,10 +1,12 @@
 ﻿"use server";
 
-import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
-import { ProductType } from "@/lib/types";
-import { PRODUCTS } from "@/lib/data";
+/* components */
+import Breadcrumbs from "@/components/ui/breadcrumbs";
 import ProductInfoSection from "@/components/pages/shop/product/product-info-section";
 import { ProductsSliderSection } from "@/components/products-slider-section";
+/* lib */
+import {BreadcrumbsItemType, ProductType} from "@/lib/types";
+import { PRODUCTS } from "@/lib/data";
 
 type ProductPageProps = {
 	params: Promise<{ id: string }>;
@@ -21,7 +23,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 	const { id } = await params;
 	const product = await getProduct(id);
 
-	const breadcrumbsItems: BreadcrumbItem[] = [
+	const breadcrumbsItems: BreadcrumbsItemType[] = [
 		{ label: "Scent", href: "/" },
 		{ label: "Shop", href: "/shop" },
 		{ label: product.name, href: "" },
