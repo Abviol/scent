@@ -47,7 +47,6 @@ export default function CartItem({
     const totalPrice = pricePerItem * quantity;
 
     const handleQuantityChange = (delta: number) => {
-        console.log("Changed value by:", delta);
         onQuantityChange(productId, delta);
     };
 

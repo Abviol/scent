@@ -24,7 +24,7 @@ export default function CartDrawer() {
         volume: 30,
         pricePerItem: 4999,
         quantity: 1,
-        onDelete: () => console.log("Deleted"),
+        onDelete: () => {},
     };
     const items: CartDrawerItemProps[] = [
         recentlyAddedItem,
@@ -37,7 +37,7 @@ export default function CartDrawer() {
             volume: 30,
             pricePerItem: 4999,
             quantity: 1,
-            onDelete: () => console.log("Deleted"),
+            onDelete: () => {},
         }))
     ];
 

@@ -17,7 +17,6 @@ export default function Footer() {
 	const currentYear = new Date().getFullYear();
 	const handleSubscribe = (e: FormEvent) => {
 		e.preventDefault();
-		console.log("Subscribed");
 	};
 
 	return (

@@ -15,10 +15,6 @@ export default function BookmarkButton({ productId, wishlist }: BookmarkButtonPr
 	const handleSave = () => {
 		const newSavedStatus = !isSaved;
 		setIsSaved(newSavedStatus);
-		console.log(
-			`${isSaved ? "Added to wishlist" : "Removed from wishlist"}`,
-			productId,
-		);
 	};
 
 

@@ -183,8 +183,8 @@ export default function Page() {
 							volume={2}
 							pricePerItem={4999}
 							quantity={1}
-							onDelete={() => console.log("Deleted")}
-							onQuantityChange={() => console.log("QuantityChange")}
+							onDelete={() => {}}
+							onQuantityChange={() => {}}
 						/>
 						<CartItem
 							name="Expensive Limited Edition"
@@ -195,8 +195,8 @@ export default function Page() {
 							volume={2}
 							pricePerItem={11999}
 							quantity={1}
-							onDelete={() => console.log("Deleted")}
-							onQuantityChange={() => console.log("QuantityChange")}
+							onDelete={() => {}}
+							onQuantityChange={() => {}}
 						/>
 					</div>
 				</DemoSection>
@@ -214,7 +214,7 @@ export default function Page() {
 							volume={2}
 							pricePerItem={4999}
 							quantity={1}
-							onDelete={() => console.log("Deleted")}
+							onDelete={() => {}}
 						/>
 						<CartDrawerItem
 							title="Versace Eros Flame"
@@ -225,7 +225,7 @@ export default function Page() {
 							volume={2}
 							pricePerItem={4999}
 							quantity={1}
-							onDelete={() => console.log("Deleted")}
+							onDelete={() => {}}
 						/>
 					</div>
 				</DemoSection>

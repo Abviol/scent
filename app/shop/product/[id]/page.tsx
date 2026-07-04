@@ -13,7 +13,6 @@ type ProductPageProps = {
 // Mimic a DB-request
 async function getProduct(id: string): Promise<ProductType> {
 	await new Promise((resolve) => setTimeout(resolve, 0));
-	console.log("Got product with id ", id);
 
 	return PRODUCTS[0];
 }
