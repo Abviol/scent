@@ -8,6 +8,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { MOCK_SHOP_FILTERS } from "@/lib/data";
 import { FilterState, FilterValuesType, SortingOrderType } from "@/lib/types";
 
+/**
+ * Manages shop filter, sorting, and pagination state via URL search parameters.
+ * Each update is wrapped in a transition to avoid blocking the UI during server re-renders.
+ * @remarks Requires a Client Component — uses useRouter, useSearchParams, and useTransition internally.
+ * @returns An object containing the current filter state and handlers for updating each filter type
+ */
 export function useShopFilters() {
 	const router = useRouter();
 	const searchParams = useSearchParams();
