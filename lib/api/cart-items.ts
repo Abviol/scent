@@ -1,3 +1,4 @@
+/* lib */
 import {CART_ITEMS} from "../data";
 
 export default async function getCartItems(userId: string) {
