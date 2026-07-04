@@ -1,11 +1,8 @@
 "use client";
 
-/* Next/React */
+/* next.js */
 import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
-/* hooks */
-import { useCountdown } from "@/hooks/use-countdown";
-import { useState } from "react";
 /* Components */
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
@@ -13,24 +10,27 @@ import Nav from "@/components/layout/nav";
 import { Button } from "@/components/ui/button";
 import CommentCard from "@/components/comment-card";
 import { ProductsSliderSection } from "@/components/products-slider-section";
+/* hooks */
+import { useCountdown } from "@/hooks/use-countdown";
+import { useState } from "react";
 /* Images */
 import Hero1 from "@/assets/images/home/hero-1.png";
 import Hero2 from "@/assets/images/home/hero-2.png";
 import Hero3 from "@/assets/images/home/hero-3.png";
 import Banner1 from "@/assets/images/home/banner-1.png";
 import Banner2 from "@/assets/images/home/banner-2.png";
+/* Icons */
+import { ArrowLeft, ArrowRight } from "lucide-react";
+/* data */
+import { HOME_COMMENTS, PRODUCTS } from "@/lib/data";
+/* lib */
+import { formatTime } from "@/lib/utils";
 /* Swiper */
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-/* Icons */
-import { ArrowLeft, ArrowRight } from "lucide-react";
-/* data */
-import { HOME_COMMENTS, PRODUCTS } from "@/lib/data";
-/* utils */
-import { formatTime } from "@/lib/utils";
 
 export default function Home() {
 	const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);

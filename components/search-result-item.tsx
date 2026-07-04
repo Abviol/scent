@@ -1,11 +1,15 @@
 ﻿"use client";
 
-import { AvailabilityType } from "@/lib/types";
-import { getAvailability, getAvailabilityClass, getEuro } from "@/lib/utils";
+/* react */
+import { useState } from "react";
+/* next.js */
 import Image from "next/image";
 import Link from "next/link";
+/* components */
 import Rating from "./ui/rating";
-import { useState } from "react";
+/* lib */
+import { AvailabilityType } from "@/lib/types";
+import { getAvailability, getAvailabilityClass, getEuro } from "@/lib/utils";
 
 export interface SearchResultItemProps {
 	title: string;

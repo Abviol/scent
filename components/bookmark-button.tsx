@@ -1,7 +1,9 @@
 ﻿"use client";
 
-import { Bookmark } from "lucide-react";
+/* react */
 import { useState } from "react";
+/* icons */
+import { Bookmark } from "lucide-react";
 
 interface BookmarkButtonProps {
 	productId: string;

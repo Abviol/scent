@@ -1,4 +1,5 @@
-﻿import { BRANDS } from "../data";
+﻿/* lib */
+import { BRANDS } from "../data";
 
 export default async function getBrands() {
    // Simulatel DB network delay

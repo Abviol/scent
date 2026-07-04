@@ -6,7 +6,7 @@ import CartPageClient from "@/components/pages/account/cart";
 import Nav from "@/components/layout/nav";
 
 /* Lib */
-import getCartItems from "@/lib/api/cartItems";
+import getCartItems from "@/lib/api/cart-items";
 
 export default async function CartPage() {
     const cartItems = await getCartItems("12344321");

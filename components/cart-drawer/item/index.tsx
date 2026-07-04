@@ -1,16 +1,27 @@
 ﻿"use client";
+/* react */
+import { useState } from "react";
 
+/* next.js */
+import Link from "next/link";
+
+/* components */
+import Stepper from "../../stepper";
+
+/* lib */
 import { AvailabilityType } from "@/lib/types";
 import {
 	getAvailability,
 	getEuro,
 } from "@/lib/utils";
+
+/* icons */
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
-import Stepper from "../../stepper";
+
+/* styles */
 import "./styles.css";
-import Link from "next/link";
+
 
 export interface CartDrawerItemProps {
 	imageUrl: string;

@@ -1,10 +1,14 @@
 ﻿"use client";
 
-import { Frown } from "lucide-react";
+/* components */
 import ProductCard from "./product-card";
-import { ProductType } from "@/lib/types";
 import { Button } from "./ui/button";
+/* hooks */
 import { useShopFilters } from "@/hooks/use-shop-filters";
+/* lib */
+import { ProductType } from "@/lib/types";
+/* icons */
+import { Frown } from "lucide-react";
 
 interface ProductGridProps {
 	products: ProductType[];

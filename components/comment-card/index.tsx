@@ -1,4 +1,5 @@
-﻿import Rating from "../ui/rating";
+﻿/* icons */
+import Rating from "../ui/rating";
 import Avatar from "../ui/avatar";
 
 export interface CommentCardProps {

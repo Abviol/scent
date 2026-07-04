@@ -1,4 +1,5 @@
-﻿import { Star } from "lucide-react";
+﻿/* icons */
+import { Star } from "lucide-react";
 
 export interface RatingProps {
    rating: number;

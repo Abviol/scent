@@ -1,4 +1,6 @@
-﻿import React from "react";
+﻿/* react */
+import React from "react";
+/* icons */
 import { LucideIcon } from "lucide-react";
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {

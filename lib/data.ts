@@ -1,4 +1,6 @@
-﻿import {CommentCardProps} from "@/components/commentCard/commentCard";
+﻿/* components */
+import {CommentCardProps} from "@/components/comment-card"; // interface
+/* card*/
 import {BrandType, CartItemType, FilterState, ProductType} from "./types";
 
 const PRODUCTS: ProductType[] = [

@@ -1,10 +1,14 @@
 ﻿"use client";
 
+/* react */
+import { useEffect, useRef, useState } from "react";
+/* hooks */
 import { useShopFilters } from "@/hooks/use-shop-filters";
+/* lib */
 import { SortingCriteriaType, SortingOrderType } from "@/lib/types";
 import { cn } from "@/lib/utils";
+/* icons */
 import { ChevronDown, SortAsc, SortDesc } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
 
 interface SortingDropdownProps {
 	criteria: SortingCriteriaType;

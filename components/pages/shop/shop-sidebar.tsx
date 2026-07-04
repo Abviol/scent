@@ -1,10 +1,13 @@
 ﻿"use client";
 
-import { MOCK_SHOP_FILTERS } from "@/lib/data";
+/* components */
 import { FiltersDropdown } from "../../filter-dropdown";
 import { Button } from "../../ui/button";
-import { FilterState } from "@/lib/types";
+/* hooks */
 import { useShopFilters } from "@/hooks/use-shop-filters";
+/* lib */
+import { MOCK_SHOP_FILTERS } from "@/lib/data";
+import { FilterState } from "@/lib/types";
 import { convertFilterToTags } from "@/lib/utils";
 
 interface ShopSidebarProps {

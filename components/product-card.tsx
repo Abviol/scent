@@ -1,16 +1,15 @@
 ﻿"use client";
 
+/* next.js */
 import Image from "next/image";
 import Link from "next/link";
-
-// Utils & Types
-import { MarkerType } from "@/lib/types";
-import { cn, getEuro } from "@/lib/utils";
-
-// Components
+/* components */
 import Marker from "./ui/marker";
 import Rating from "./ui/rating";
 import BookmarkButton from "./bookmark-button";
+/* lib */
+import { MarkerType } from "@/lib/types";
+import { cn, getEuro } from "@/lib/utils";
 
 export interface ProductCardOnSaveEvent {
 	productId: string;

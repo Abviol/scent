@@ -1,9 +1,12 @@
 ﻿"use client";
 
+/* react*/
+import { useCallback, useTransition } from "react";
+/* next.js */
+import { useRouter, useSearchParams } from "next/navigation";
+/* lib */
 import { MOCK_SHOP_FILTERS } from "@/lib/data";
 import { FilterState, FilterValuesType, SortingOrderType } from "@/lib/types";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useTransition } from "react";
 
 export function useShopFilters() {
 	const router = useRouter();

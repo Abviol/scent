@@ -1,5 +1,7 @@
-﻿import { getTimeRemaining } from "@/lib/utils";
+﻿/* react */
 import { useEffect, useState } from "react";
+/* lib */
+import { getTimeRemaining } from "@/lib/utils";
 
 export function useCountdown(deadline: Date) {
     const [, forceUpdate] = useState(0);

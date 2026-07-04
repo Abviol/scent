@@ -1,5 +1,6 @@
 ﻿"use client";
 
+/* react */
 import { ReactNode, useState, createContext, useContext } from "react";
 
 interface TabsContextType {

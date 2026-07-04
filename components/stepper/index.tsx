@@ -1,4 +1,6 @@
-﻿import { Minus, Plus } from "lucide-react";
+﻿/* icons */
+import { Minus, Plus } from "lucide-react";
+/* styles */
 import "./styles.css";
 
 export interface StepperProps {

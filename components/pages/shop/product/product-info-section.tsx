@@ -1,13 +1,16 @@
 ﻿"use client";
 
-import { ProductType } from "@/lib/types";
-import { getAvailability, getAvailabilityClass, getEuro } from "@/lib/utils";
+/* react*/
 import { useState } from "react";
+/* components*/
 import ProductGallery from "./product-gallery";
 import Rating from "@/components/ui/rating";
 import BookmarkButton from "@/components/bookmark-button";
 import { Button } from "@/components/ui/button";
 import { ProdTab, ProdTabList, ProdTabPanel, ProdTabs } from "./product-detail-tabs";
+/* lib */
+import { ProductType } from "@/lib/types";
+import { getAvailability, getAvailabilityClass, getEuro } from "@/lib/utils";
 
 interface ProductInfoSectionProps {
 	product: ProductType;

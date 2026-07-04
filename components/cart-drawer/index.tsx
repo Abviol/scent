@@ -1,12 +1,17 @@
 "use client";
 
-// import {useRef, useState} from "react";
-import {Check, ShoppingCart, X, Lock, Search} from "lucide-react";
+/* next.js*/
+import Link from "next/link";
+
+/* components*/
 import {Dialog} from "radix-ui";
-import "./styles.css";
 import {Button} from "@/components/ui/button";
 import CartDrawerItem, {CartDrawerItemProps} from "./item";
-import Link from "next/link";
+
+/* icons */
+import {Check, ShoppingCart, X, Lock, Search} from "lucide-react";
+/* styles */
+import "./styles.css";
 
 export default function CartDrawer() {
     // const [isOpen, setIsOpen] = useState<boolean>(false);

@@ -1,4 +1,6 @@
-﻿import React from "react";
+﻿/* react */
+import React from "react";
+/* icons */
 import { X } from "lucide-react";
 
 export interface TagProps {

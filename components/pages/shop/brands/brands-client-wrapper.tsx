@@ -1,9 +1,12 @@
 ﻿"use client";
 
-import { BrandGroupType } from "@/lib/types";
+/* react */
+import { useState } from "react";
+/* components */
 import BrandsAlphabet from "./brands-alphabet";
 import BrandsContent from "./brands-content";
-import { useState } from "react";
+/* lib */
+import { BrandGroupType } from "@/lib/types";
 
 interface BrandsClientWrapperProps {
    brandGroups: BrandGroupType[];

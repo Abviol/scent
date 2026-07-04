@@ -1,13 +1,17 @@
 ﻿"use client";
 
+/* react*/
+import { FormEvent } from "react";
+/* next.js */
 import Link from "next/link";
-import { Send } from "lucide-react";
+/* components*/
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+/* icons */
 import { TelegramIcon } from "../icons/telegram";
 import { InstagramIcon } from "../icons/instagram";
 import { TiktokIcon } from "../icons/tiktok";
-import { FormEvent } from "react";
+import { Send } from "lucide-react";
 
 export default function Footer() {
 	const currentYear = new Date().getFullYear();

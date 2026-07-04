@@ -1,13 +1,16 @@
 ﻿"use server";
 
+/* next.js */
+import { notFound } from "next/navigation";
+/* components */
 import { ActiveFilters } from "@/components/pages/shop/active-filters";
 import { ProductGrid } from "@/components/product-grid";
 import { ShopSidebar } from "@/components/pages/shop/shop-sidebar";
 import Sorting from "@/components/pages/shop/sorting";
 import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
+/* lib */
 import { getProducts } from "@/lib/api/products";
 import { parseSearchParams } from "@/lib/utils";
-import { notFound } from "next/navigation";
 
 interface ShopPageProps {
 	params: Promise<{ slug?: string[]}>;
