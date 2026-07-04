@@ -1,13 +1,8 @@
-﻿import Rating from "../ui/rating";
+﻿/* lib */
+import {CommentCardType} from "@/lib/types";
+/* icons */
+import Rating from "../ui/rating";
 import Avatar from "../ui/avatar";
-
-export interface CommentCardProps {
-	userAvatarUrl: string;
-	userName: string;
-	dateCommentLeft: string;
-	rating: number;
-	text: string;
-}
 
 export default function CommentCard({
 	userAvatarUrl,
@@ -15,7 +10,7 @@ export default function CommentCard({
 	dateCommentLeft,
 	rating,
 	text,
-}: CommentCardProps) {
+}: CommentCardType) {
 	return (
 		<div className="w-full flex flex-col gap-y-5 py-[46px] px-8 bg-white border-2 border-gray-200 rounded-lg">
 			<div className="flex gap-x-4 justify-between items-center">

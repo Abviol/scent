@@ -1,4 +1,5 @@
-﻿import { PRODUCTS } from "@/lib/data";
+﻿/* lib */
+import { PRODUCTS } from "@/lib/data";
 import { FilterState, ProductType, SortingType } from "@/lib/types";
 
 interface GetProductsParams {

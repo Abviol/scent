@@ -7,7 +7,7 @@ import {useMemo, useState} from "react";
 import Link from "next/link";
 
 /* Components */
-import CartItem from "@/components/cartItem";
+import CartItem from "@/components/cart-item";
 import {Button} from "@/components/ui/button";
 
 /* Lib */

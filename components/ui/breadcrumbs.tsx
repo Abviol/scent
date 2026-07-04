@@ -1,14 +1,15 @@
-﻿import { cn } from "@/lib/utils";
-import Link from "next/link";
+﻿/* react*/
 import { Fragment } from "react";
+/* next.js */
+import Link from "next/link";
+/* lib */
+import { cn } from "@/lib/utils";
+import {BreadcrumbsItemType} from "@/lib/types";
 
-export interface BreadcrumbItem {
-	label: string;
-	href: string;
-}
 
-export interface BreadcrumbsProps {
-	items: BreadcrumbItem[];
+
+interface BreadcrumbsProps {
+	items: BreadcrumbsItemType[];
 	className?: string;
 }
 

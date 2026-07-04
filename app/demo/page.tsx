@@ -1,14 +1,15 @@
 ﻿"use client";
 
+/* react */
 import { Suspense, useState } from "react";
 
 // Components
-import CartDrawerItem from "@/components/cartDrawer/item/cartDrawerItem";
-import CartItem from "@/components/cartItem";
-import CommentCard from "@/components/commentCard/commentCard";
-import ProductCard from "@/components/productCard";
-import SearchResultItem from "@/components/searchResultItem";
-import Stepper from "@/components/stepper/stepper";
+import CartDrawerItem from "@/components/cart-drawer/item";
+import CartItem from "@/components/cart-item";
+import CommentCard from "@/components/comment-card";
+import ProductCard from "@/components/product-card";
+import SearchResultItem from "@/components/search-result-item";
+import Stepper from "@/components/stepper";
 import Avatar from "@/components/ui/avatar";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import Marker from "@/components/ui/marker";
@@ -20,7 +21,7 @@ import Footer from "@/components/layout/footer";
 import Nav from "@/components/layout/nav";
 import { SortingType } from "@/lib/types";
 import Sorting from "@/components/pages/shop/sorting";
-import CartDrawer from "@/components/cartDrawer/cartDrawer";
+import CartDrawer from "@/components/cart-drawer";
 
 // --- Helper Component for Layout ---
 const DemoSection = ({
@@ -57,13 +58,6 @@ export default function Page() {
 
 	// State for sorting
 	const [sorting] = useState<SortingType>({ criteria: "name", order: "DESC" });
-
-	// const handleSave = (e: ProductCardOnSaveEvent) => {
-	// 	console.log(
-	// 		`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`,
-	// 		e.productId
-	// 	);
-	// };
 
 	return (
 		<div className="min-h-screen bg-white">
@@ -189,8 +183,8 @@ export default function Page() {
 							volume={2}
 							pricePerItem={4999}
 							quantity={1}
-							onDelete={() => console.log("Deleted")}
-							onQuantityChange={() => console.log("QuantityChange")}
+							onDelete={() => {}}
+							onQuantityChange={() => {}}
 						/>
 						<CartItem
 							name="Expensive Limited Edition"
@@ -201,8 +195,8 @@ export default function Page() {
 							volume={2}
 							pricePerItem={11999}
 							quantity={1}
-							onDelete={() => console.log("Deleted")}
-							onQuantityChange={() => console.log("QuantityChange")}
+							onDelete={() => {}}
+							onQuantityChange={() => {}}
 						/>
 					</div>
 				</DemoSection>
@@ -212,26 +206,34 @@ export default function Page() {
 					{/* Simulating a narrow drawer container */}
 					<div className="w-[360px] bg-white p-4 border border-gray-200 shadow-sm flex flex-col gap-6">
 						<CartDrawerItem
-							title="Versace Eros Flame"
+							name="Versace Eros Flame"
 							productId="drawer-001"
 							productCode="01203213"
-							quantityInStock={11}
+							variant={{
+								volume: 30,
+								price: 4999,
+								discountedPrice: undefined,
+								wishlist: true,
+								quantityInStock: 1,
+							}}
 							imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
-							volume={2}
-							pricePerItem={4999}
 							quantity={1}
-							onDelete={() => console.log("Deleted")}
+							onDelete={() => {}}
 						/>
 						<CartDrawerItem
-							title="Versace Eros Flame"
+							name="Versace Eros Flame"
 							productId="drawer-002"
 							productCode="01203213"
-							quantityInStock={0}
+							variant={{
+								volume: 30,
+								price: 4999,
+								discountedPrice: undefined,
+								wishlist: true,
+								quantityInStock: 1,
+							}}
 							imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
-							volume={2}
-							pricePerItem={4999}
 							quantity={1}
-							onDelete={() => console.log("Deleted")}
+							onDelete={() => {}}
 						/>
 					</div>
 				</DemoSection>

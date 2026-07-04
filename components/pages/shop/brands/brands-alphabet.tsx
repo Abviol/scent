@@ -1,5 +1,6 @@
 ﻿"use client";
 
+/* lib */
 import { cn } from "@/lib/utils";
 
 interface BrandsAlphabetProps {

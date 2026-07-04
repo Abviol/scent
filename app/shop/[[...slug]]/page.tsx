@@ -1,13 +1,17 @@
 ﻿"use server";
 
-import { ActiveFilters } from "@/components/pages/shop/activeFilters";
-import { ProductGrid } from "@/components/productGrid";
-import { ShopSidebar } from "@/components/pages/shop/shopSidebar";
+/* next.js */
+import { notFound } from "next/navigation";
+/* components */
+import { ActiveFilters } from "@/components/pages/shop/active-filters";
+import { ProductGrid } from "@/components/product-grid";
+import { ShopSidebar } from "@/components/pages/shop/shop-sidebar";
 import Sorting from "@/components/pages/shop/sorting";
-import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
+import Breadcrumbs from "@/components/ui/breadcrumbs";
+/* lib */
 import { getProducts } from "@/lib/api/products";
 import { parseSearchParams } from "@/lib/utils";
-import { notFound } from "next/navigation";
+import { BreadcrumbsItemType } from "@/lib/types";
 
 interface ShopPageProps {
 	params: Promise<{ slug?: string[]}>;
@@ -31,12 +35,12 @@ export default async function ShopPage(props: ShopPageProps) {
 
 	const products = await getProducts({ filters, sorting, baseGender: pathGender });
 
-	const defaultBreadcrumbsItems: BreadcrumbItem[] = [
+	const defaultBreadcrumbsItems: BreadcrumbsItemType[] = [
 		{ label: "Scent", href: "/" },
 		{ label: "Shop", href: pathGender ? "/shop" : "" },
 	];
-	const categoryBreadcrumbsItem: BreadcrumbItem[] = pathGender ? [{ label: pathGender, href: ""}]: [];
-	const breadcrumbsItems: BreadcrumbItem[] = [...defaultBreadcrumbsItems, ...categoryBreadcrumbsItem]
+	const categoryBreadcrumbsItem: BreadcrumbsItemType[] = pathGender ? [{ label: pathGender, href: ""}]: [];
+	const breadcrumbsItems: BreadcrumbsItemType[] = [...defaultBreadcrumbsItems, ...categoryBreadcrumbsItem]
 
 	return (
 		<main className="mt-14 mb-20">

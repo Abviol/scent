@@ -1,13 +1,16 @@
 ﻿"use client";
 
+/* react*/
+import { useState } from "react";
+/* components*/
+import ProductGallery from "./product-gallery";
+import Rating from "@/components/ui/rating";
+import BookmarkButton from "@/components/bookmark-button";
+import { Button } from "@/components/ui/button";
+import { ProdTab, ProdTabList, ProdTabPanel, ProdTabs } from "./product-detail-tabs";
+/* lib */
 import { ProductType } from "@/lib/types";
 import { getAvailability, getAvailabilityClass, getEuro } from "@/lib/utils";
-import { useState } from "react";
-import ProductGallery from "./productGallery";
-import Rating from "@/components/ui/rating";
-import BookmarkButton from "@/components/bookmarkButton";
-import { Button } from "@/components/ui/button";
-import { ProdTab, ProdTabList, ProdTabPanel, ProdTabs } from "./prodDetailTabs";
 
 interface ProductInfoSectionProps {
 	product: ProductType;

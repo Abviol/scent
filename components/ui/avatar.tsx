@@ -1,6 +1,8 @@
 ﻿"use client";
 
+/* react */
 import { useState } from "react";
+/* next.js */
 import Image from "next/image";
 
 type AvatarSize = "sm" | "md" | "lg" | "xl";

@@ -1,11 +1,15 @@
 ﻿"use client";
 
+/* react */
 import { useState } from "react";
-import { Minus, Plus } from "lucide-react";
+/* components */
 import { Slider } from "@/components/ui/slider";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+/* lib */
 import { cn } from "@/lib/utils";
+/* icons */
+import { Minus, Plus } from "lucide-react";
 
 interface BaseFilterProps {
 	id: string;

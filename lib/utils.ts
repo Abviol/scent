@@ -1,3 +1,4 @@
+/* lib */
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import {
@@ -13,6 +14,11 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
+/**
+* Converts a price from cents to a formatted euro string.
+* @param cents - Price in cents
+* @returns Formatted string, e.g. "€12.99"
+* */
 export function getEuro(cents: number): string {
 	return new Intl.NumberFormat("en-IE", {
 		style: "currency",
@@ -20,16 +26,26 @@ export function getEuro(cents: number): string {
 	}).format(cents / 100);
 }
 
+/**
+* Detects availability based on items quantity.
+* @param items_quantity - Items quantity
+* @returns Availability type value: "available" of "not_available"
+* */
 export function getAvailability(items_quantity: number): AvailabilityType {
 	if (items_quantity > 0) return "available";
-	return "not available";
+	return "not_available";
 }
 
+/**
+* Converts AvailabilityType to a Tailwind CSS class
+* @params availability - Availability type
+* @returns Tailwind CSS styling based on availability
+*  */
 export function getAvailabilityClass(availability: AvailabilityType): string {
 	switch (availability) {
 		case "available":
 			return "text-accent";
-		case "not available":
+		case "not_available":
 			return "text-gray-500";
 		default:
 			return "";
@@ -37,8 +53,11 @@ export function getAvailabilityClass(availability: AvailabilityType): string {
 }
 
 /**
- * Generates a specific tag for the Price Range.
- * Returns null if the price is at the default [0, max] state.
+ * Generates a filter tag for the selected price range.
+ * Returns null if the range matches the default [0, max] state,
+ * indicating no active price filter.
+ * @param priceRange - Tuple representing the selected [min, max] price range in cents
+ * @returns A FilterTag object if the range is non-default, otherwise null
  */
 function getPriceTag(priceRange: [number, number]): FilterTag | null {
 	const [min, max] = priceRange;
@@ -58,8 +77,10 @@ function getPriceTag(priceRange: [number, number]): FilterTag | null {
 }
 
 /**
- * Iterates through all array-based filters (Brands, Volumes, etc.)
- * and converts selected values into Tag objects.
+ * Converts all array-based filter selections (e.g. brands, volumes)
+ * into a flat list of FilterTag objects, skipping the price range filter.
+ * @param filters - The current filter state containing all active filter selections
+ * @returns An array of FilterTag objects representing each selected filter value
  */
 function getArrayTags(filters: FilterState): FilterTag[] {
 	const tags: FilterTag[] = [];
@@ -86,6 +107,8 @@ function getArrayTags(filters: FilterState): FilterTag[] {
 /**
  * Main orchestrator to get all active filter tags.
  * Combines the Price tag (if active) with array tags.
+ * @param filters - The current filter state containing all active filter selections
+ * @returns An array of FilterTag objects
  */
 export function convertFilterToTags(filters: FilterState): FilterTag[] {
 	const priceTag = getPriceTag(filters.priceRange);
@@ -94,6 +117,13 @@ export function convertFilterToTags(filters: FilterState): FilterTag[] {
 	return priceTag ? [priceTag, ...arrayTags] : arrayTags;
 }
 
+/**
+ * Parses raw URL search parameters into a structured filter and sorting state.
+ * Handles type coercion for arrays, numbers, and strings,
+ * falling back to default values for missing or invalid parameters.
+ * @param params - Raw Next.js search params object from the page props
+ * @returns An object containing the parsed FilterState and SortingType
+ */
 export function parseSearchParams(params: {
 	[key: string]: string | string[] | undefined;
 }): { filters: FilterState; sorting: SortingType } {
@@ -151,6 +181,11 @@ export function parseSearchParams(params: {
 	return { filters, sorting };
 }
 
+/**
+ * Converts a duration in seconds into its days, hours, minutes, and seconds components.
+ * @param seconds - Total duration in seconds
+ * @returns An object containing the broken-down time components { d, h, m, s }
+ */
 export function convertSecondsToTime(seconds: number): {
 	d: number;
 	h: number;
@@ -164,6 +199,12 @@ export function convertSecondsToTime(seconds: number): {
 	return { d, h, m, s };
 }
 
+/**
+ * Calculates the time remaining until a given deadline.
+ * Returns zeroed components if the deadline has already passed.
+ * @param deadline - The target date to count down to
+ * @returns An object containing the remaining time as { d, h, m, s }
+ */
 export function getTimeRemaining(deadline: Date) {
 	const totalMilliseconds = deadline.getTime() - Date.now();
 	if (totalMilliseconds <= 0) return { d: 0, h: 0, m: 0, s: 0 };
@@ -171,6 +212,11 @@ export function getTimeRemaining(deadline: Date) {
 	return convertSecondsToTime(totalSeconds);
 }
 
+/**
+ * Formats a time component as a zero-padded two-digit string.
+ * @param time - A non-negative integer representing a time unit (e.g. hours, minutes, seconds)
+ * @returns A string padded with a leading zero if the value is less than 10
+ */
 export function formatTime(time: number): string {
 	return time / 10 < 1 ? `0${time}` : time.toString();
 }

@@ -1,13 +1,15 @@
 ﻿"use client";
 
-import Image from "next/image";
+/* react */
 import { ReactNode, useState } from "react";
+/* next.js*/
+import Image from "next/image";
+/* icons */
 import { ChevronDown, ChevronUp } from "lucide-react";
-
+/* swiper */
 import { Swiper, SwiperSlide } from "swiper/react";
 import { type Swiper as SwiperType } from "swiper";
 import { Keyboard, Mousewheel } from "swiper/modules";
-
 import "swiper/css";
 
 interface ProductGalleryProps {

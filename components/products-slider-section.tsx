@@ -1,12 +1,17 @@
 ﻿"use client";
 
-import ProductCard from "@/components/productCard";
+/* react */
+import { useState } from "react";
+/* components */
+import ProductCard from "@/components/product-card";
+/* lib */
+import { cn } from "@/lib/utils";
 import { ProductType } from "@/lib/types";
+/* icons */
+import { ArrowLeft, ArrowRight } from "lucide-react";
+/* swiper */
 import { Swiper, SwiperSlide } from "swiper/react";
 import { type Swiper as SwiperType } from "swiper";
-import { useState } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface ProductsSliderSectionProps {
 	title: string;

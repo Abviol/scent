@@ -1,14 +1,17 @@
 ﻿"use client";
 
+/* react */
 import React, { useEffect, useRef, useState, useCallback } from "react";
+/* next.js */
 import Link from "next/link";
+/* icons */
 import { Bookmark, Mail, Search, ShoppingCartIcon, X } from "lucide-react";
 
 // UI Components
 import { Button } from "../ui/button";
 import Avatar from "../ui/avatar";
 import { Input } from "../ui/input";
-import SearchResultItem from "../searchResultItem";
+import SearchResultItem from "../search-result-item";
 import { useRouter } from "next/navigation";
 
 // Types

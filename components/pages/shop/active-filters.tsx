@@ -1,9 +1,12 @@
 ﻿"use client";
 
-import { FilterState } from "@/lib/types";
+/* components*/
 import { Button } from "../../ui/button";
 import Tag from "../../ui/tag";
+/* hooks */
 import { useShopFilters } from "@/hooks/use-shop-filters";
+/* lib */
+import { FilterState } from "@/lib/types";
 import { convertFilterToTags } from "@/lib/utils";
 
 interface ActiveFiltersProps {

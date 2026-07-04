@@ -1,16 +1,23 @@
 ﻿"use client";
 
-import { BrandGroupType } from "@/lib/types";
-import BrandsAlphabet from "./brandsAlphabet";
-import BrandsContent from "./brandsContent";
+/* react */
 import { useState } from "react";
+/* components */
+import BrandsAlphabet from "./brands-alphabet";
+import BrandsContent from "./brands-content";
+/* lib */
+import { BrandGroupType } from "@/lib/types";
 
 interface BrandsClientWrapperProps {
    brandGroups: BrandGroupType[];
    uniqueChars: string[];
 }
 
-// Gets data from the parent server component and manages it between Brands Alphabet and Brands Content
+/**
+ * Client wrapper that manages the selected alphabet character state,
+ * coordinating between the BrandsAlphabet selector and BrandsContent display.
+ * @remarks Requires a Client Component — uses useState internally.
+ */
 export default function BrandsClientWrapper(props: BrandsClientWrapperProps) {
    const [selectedChar, setSelectedChar] = useState<string | "ALL">("ALL");
 
@@ -26,7 +33,8 @@ export default function BrandsClientWrapper(props: BrandsClientWrapperProps) {
       );
 }
 
-// Sorts brands groups in alphabetical order
+// Sorts brands groups
+// in alphabetical order
 function sortBrandGroupsByChar(
 	brandGroups: BrandGroupType[],
 ): BrandGroupType[] {

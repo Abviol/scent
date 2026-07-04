@@ -1,55 +1,56 @@
 ﻿"use client";
+/* react */
+import { useState } from "react";
 
-import { AvailabilityType } from "@/lib/types";
+/* next.js */
+import Link from "next/link";
+
+/* components */
+import Stepper from "../../stepper";
+
+/* lib */
+import {AvailabilityType, CartItemType} from "@/lib/types";
 import {
 	getAvailability,
 	getEuro,
 } from "@/lib/utils";
+
+/* icons */
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
-import Stepper from "../../stepper/stepper";
-import "./cartDrawerItem.css";
-import Link from "next/link";
 
-export interface CartDrawerItemProps {
-	imageUrl: string;
-	title: string;
-	volume: number;
-	productId: string;
-	productCode: string;
-	quantity: number;
-	quantityInStock: number;
-	pricePerItem: number; // cents
+/* styles */
+import "./styles.css";
+
+
+interface CartDrawerItemProps extends CartItemType {
 	onDelete: () => void;
 }
 export default function CartDrawerItem({
 	imageUrl,
-	title,
-	volume,
+	name,
+	variant,
 	productId,
 	productCode,
 	quantity,
-	quantityInStock,
-	pricePerItem,
 	onDelete,
 }: CartDrawerItemProps) {
 	const [isDeleted, setIsDeleted] = useState<boolean>(false);
 	const [availability] = useState<AvailabilityType>(
-		getAvailability(quantityInStock)
+		getAvailability(variant.quantityInStock)
 	);
 	const availabilityClass: string =
-		availability == "not available" ? "not-available" : "";
+		availability == "not_available" ? "not-available" : "";
 
 	const productLink: string = `/shop/product/${productId}`;
 	const [newQuantity, setNewQuantity] = useState<number>(quantity);
 	const [totalPrice, setTotalPrice] = useState<number>(
-		pricePerItem * quantity
+		variant.price * quantity
 	);
 
 	const handleQuantity = (e: number) => {
 		setNewQuantity(e);
-		setTotalPrice(e * pricePerItem);
+		setTotalPrice(e * variant.price);
 	};
 
 	const handleDelete = () => {
@@ -69,7 +70,7 @@ export default function CartDrawerItem({
 					>
 						<Image
 							src={imageUrl}
-							alt={`${title} ${volume} ml`}
+							alt={`${name} ${variant.volume} ml`}
 							fill
 							sizes={"72px"}
 							className="object-contain"
@@ -85,7 +86,7 @@ export default function CartDrawerItem({
 								className="overflow-hidden item__text flex flex-col gap-y-2.5"
 							>
 								<h4 className="font-semibold leading-3 overflow-hidden truncate">
-									{title}
+									{name}
 								</h4>
 								<div className="flex gap-4 text-xs font-semibold">
 									<span className="text-gray-600">
@@ -94,12 +95,12 @@ export default function CartDrawerItem({
 										</span>
 									</span>
 									<span className="text-gray-500">
-										{volume} ml
+										{variant.volume} ml
 									</span>
 								</div>
 							</Link>
 
-							<button aria-label="Remove" title="remove">
+							<button aria-label="Remove" name="remove">
 								<Trash2
 									size={20}
 									strokeWidth={1.5}
@@ -120,7 +121,7 @@ export default function CartDrawerItem({
 							<Stepper
 								size="sm"
 								min={1}
-								max={quantityInStock}
+								max={variant.quantityInStock}
 								value={newQuantity}
 								onChange={(e: number) => handleQuantity(e)}
 							></Stepper>

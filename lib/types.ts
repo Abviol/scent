@@ -28,7 +28,7 @@ export type GenderType = "men" | "women" | "unisex";
 
 export type MarkerType = "hit" | undefined;
 
-export type AvailabilityType = "available" | "not available" | undefined;
+export type AvailabilityType = "available" | "not_available" | undefined;
 
 export type FilterValuesType = (string | number)[] | [number, number];
 export interface FilterState {
@@ -79,4 +79,17 @@ export interface CartItemType {
 	productId: string;
 	productCode: string;
 	quantity: number;
+}
+
+export interface BreadcrumbsItemType {
+	label: string;
+	href: string;
+}
+
+export interface CommentCardType {
+	userAvatarUrl: string;
+	userName: string;
+	dateCommentLeft: string;
+	rating: number;
+	text: string;
 }

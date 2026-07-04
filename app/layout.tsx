@@ -1,5 +1,8 @@
+/* next.js */
 import type { Metadata } from "next";
+/* styles*/
 import "./globals.css";
+/* fonts*/
 import { inter } from "@/assets/fonts";
 
 export const metadata: Metadata = {

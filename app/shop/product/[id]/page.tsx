@@ -1,28 +1,24 @@
 ﻿"use server";
 
-import Breadcrumbs, { BreadcrumbItem } from "@/components/ui/breadcrumbs";
-import { ProductType } from "@/lib/types";
+/* components */
+import Breadcrumbs from "@/components/ui/breadcrumbs";
+import ProductInfoSection from "@/components/pages/shop/product/product-info-section";
+import { ProductsSliderSection } from "@/components/products-slider-section";
+/* lib */
+import {BreadcrumbsItemType, ProductType} from "@/lib/types";
 import { PRODUCTS } from "@/lib/data";
-import ProductInfoSection from "@/components/pages/shop/product/productInfoSection";
-import { ProductsSliderSection } from "@/components/productsSliderSection";
-
-type ProductPageProps = {
-	params: Promise<{ id: string }>;
-};
 
 // Mimic a DB-request
-async function getProduct(id: string): Promise<ProductType> {
+async function getProduct(): Promise<ProductType> {
 	await new Promise((resolve) => setTimeout(resolve, 0));
-	console.log("Got product with id ", id);
 
 	return PRODUCTS[0];
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
-	const { id } = await params;
-	const product = await getProduct(id);
+export default async function ProductPage() {
+	const product = await getProduct();
 
-	const breadcrumbsItems: BreadcrumbItem[] = [
+	const breadcrumbsItems: BreadcrumbsItemType[] = [
 		{ label: "Scent", href: "/" },
 		{ label: "Shop", href: "/shop" },
 		{ label: product.name, href: "" },

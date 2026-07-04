@@ -1,5 +1,7 @@
-﻿import { BrandGroupType } from "@/lib/types";
+﻿/* next.js */
 import Link from "next/link";
+/* lib */
+import { BrandGroupType } from "@/lib/types";
 
 // ===== MAIN COMPONENT =====
 

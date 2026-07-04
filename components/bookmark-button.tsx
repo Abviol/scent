@@ -1,22 +1,20 @@
 ﻿"use client";
 
-import { Bookmark } from "lucide-react";
+/* react */
 import { useState } from "react";
+/* icons */
+import { Bookmark } from "lucide-react";
 
 interface BookmarkButtonProps {
 	productId: string;
 	wishlist: boolean;
 }
 
-export default function BookmarkButton({ productId, wishlist }: BookmarkButtonProps) {
+export default function BookmarkButton({ wishlist }: BookmarkButtonProps) {
 	const [isSaved, setIsSaved] = useState<boolean>(wishlist);
 	const handleSave = () => {
 		const newSavedStatus = !isSaved;
 		setIsSaved(newSavedStatus);
-		console.log(
-			`${isSaved ? "Added to wishlist" : "Removed from wishlist"}`,
-			productId,
-		);
 	};
 
 
