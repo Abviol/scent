@@ -10,7 +10,7 @@ import getCartItems from "@/lib/api/cart-items";
 import { BreadcrumbsItemType } from "@/lib/types";
 
 export default async function CartPage() {
-    const cartItems = await getCartItems("12344321");
+    const cartItems = await getCartItems();
 
     const breadcrumbsItems: BreadcrumbsItemType[] = [
         { label: "Scent", href: "/" },

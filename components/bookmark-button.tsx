@@ -10,7 +10,7 @@ interface BookmarkButtonProps {
 	wishlist: boolean;
 }
 
-export default function BookmarkButton({ productId, wishlist }: BookmarkButtonProps) {
+export default function BookmarkButton({ wishlist }: BookmarkButtonProps) {
 	const [isSaved, setIsSaved] = useState<boolean>(wishlist);
 	const handleSave = () => {
 		const newSavedStatus = !isSaved;

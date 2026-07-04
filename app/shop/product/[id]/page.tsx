@@ -8,20 +8,15 @@ import { ProductsSliderSection } from "@/components/products-slider-section";
 import {BreadcrumbsItemType, ProductType} from "@/lib/types";
 import { PRODUCTS } from "@/lib/data";
 
-type ProductPageProps = {
-	params: Promise<{ id: string }>;
-};
-
 // Mimic a DB-request
-async function getProduct(id: string): Promise<ProductType> {
+async function getProduct(): Promise<ProductType> {
 	await new Promise((resolve) => setTimeout(resolve, 0));
 
 	return PRODUCTS[0];
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
-	const { id } = await params;
-	const product = await getProduct(id);
+export default async function ProductPage() {
+	const product = await getProduct();
 
 	const breadcrumbsItems: BreadcrumbsItemType[] = [
 		{ label: "Scent", href: "/" },

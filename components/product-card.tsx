@@ -11,10 +11,6 @@ import BookmarkButton from "./bookmark-button";
 import { MarkerType } from "@/lib/types";
 import { cn, getEuro } from "@/lib/utils";
 
-interface ProductCardOnSaveEvent {
-	productId: string;
-	wishlist: boolean;
-}
 interface ProductCardProps {
 	name: string;
 	productId: string; // diverse from product_code
