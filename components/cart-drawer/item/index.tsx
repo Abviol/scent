@@ -50,7 +50,7 @@ export default function CartDrawerItem({
 		getAvailability(quantityInStock)
 	);
 	const availabilityClass: string =
-		availability == "not available" ? "not-available" : "";
+		availability == "not_available" ? "not-available" : "";
 
 	const productLink: string = `/shop/product/${productId}`;
 	const [newQuantity, setNewQuantity] = useState<number>(quantity);

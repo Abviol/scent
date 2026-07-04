@@ -23,14 +23,14 @@ export function getEuro(cents: number): string {
 
 export function getAvailability(items_quantity: number): AvailabilityType {
 	if (items_quantity > 0) return "available";
-	return "not available";
+	return "not_available";
 }
 
 export function getAvailabilityClass(availability: AvailabilityType): string {
 	switch (availability) {
 		case "available":
 			return "text-accent";
-		case "not available":
+		case "not_available":
 			return "text-gray-500";
 		default:
 			return "";

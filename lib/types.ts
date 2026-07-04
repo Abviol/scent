@@ -28,7 +28,7 @@ export type GenderType = "men" | "women" | "unisex";
 
 export type MarkerType = "hit" | undefined;
 
-export type AvailabilityType = "available" | "not available" | undefined;
+export type AvailabilityType = "available" | "not_available" | undefined;
 
 export type FilterValuesType = (string | number)[] | [number, number];
 export interface FilterState {
