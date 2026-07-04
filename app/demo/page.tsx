@@ -59,13 +59,6 @@ export default function Page() {
 	// State for sorting
 	const [sorting] = useState<SortingType>({ criteria: "name", order: "DESC" });
 
-	// const handleSave = (e: ProductCardOnSaveEvent) => {
-	// 	console.log(
-	// 		`${e.wishlist ? "Added to wishlist" : "Removed from wishlist"}`,
-	// 		e.productId
-	// 	);
-	// };
-
 	return (
 		<div className="min-h-screen bg-white">
 			<Header></Header>

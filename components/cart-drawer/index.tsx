@@ -14,10 +14,6 @@ import {Check, ShoppingCart, X, Lock, Search} from "lucide-react";
 import "./styles.css";
 
 export default function CartDrawer() {
-    // const [isOpen, setIsOpen] = useState<boolean>(false);
-    // const quantityRef = useRef(null);
-    // const openCart = () => setIsOpen(true);
-    // const closeCart = () => setIsOpen(false);
 
     const recentlyAddedItem: CartDrawerItemProps = {
         title: "Versace Eros Flame",
