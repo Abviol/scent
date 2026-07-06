@@ -1,4 +1,4 @@
-import {asyncThunkCreator, PayloadAction} from "@reduxjs/toolkit";
+import {PayloadAction} from "@reduxjs/toolkit";
 import {createAppSlice} from "@/lib/createAppSlice";
 import {fetchCount} from "@/lib/features/counter/counterAPI";
 import {AppThunk} from "@/lib/store";
