@@ -1,4 +1,9 @@
-import {configureStore} from "@reduxjs/toolkit";
+import {Action, combineSlices, configureStore, ThunkAction} from "@reduxjs/toolkit";
+import {counterSlice} from "@/lib/features/counter/counterSlice";
+
+// `combineSlices` automatically combines the reducers using
+// their `reducerPath`s, therefore we no longer need to call `combineReducers`.
+const rootReducer = combineSlices(counterSlice);
 
 /**
 * Function for creating a new store instance per-request (instead of global singleton)
@@ -6,12 +11,18 @@ import {configureStore} from "@reduxjs/toolkit";
 * */
 export const makeStore = () => {
     return configureStore({
-        reducer: {},
+        reducer: rootReducer,
     })
 }
 
 // Infer the type of makeStore
 export type AppStore = ReturnType<typeof makeStore>;
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<AppStore['getState']>;
+// Infer the `RootState` type from the root reducer
+export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = AppStore['dispatch'];
+export type AppThunk<ThunkReturnType = void> = ThunkAction<
+    ThunkReturnType,
+    RootState,
+    unknown,
+    Action
+>;
