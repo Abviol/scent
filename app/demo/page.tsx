@@ -1,7 +1,7 @@
 ﻿"use client";
 
 /* react */
-import { Suspense, useState } from "react";
+import {Suspense, useState} from "react";
 
 // Components
 import CartDrawerItem from "@/components/cart-drawer/item";
@@ -15,361 +15,449 @@ import Breadcrumbs from "@/components/ui/breadcrumbs";
 import Marker from "@/components/ui/marker";
 import Tag from "@/components/ui/tag";
 import Badge from "@/components/ui/badge";
-import { AlertTriangle, Check, ListOrdered, Truck } from "lucide-react";
+import {AlertTriangle, Check, ListOrdered, Truck} from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import Nav from "@/components/layout/nav";
-import { SortingType } from "@/lib/types";
+import {SortingType} from "@/lib/types";
 import Sorting from "@/components/pages/shop/sorting";
 import CartDrawer from "@/components/cart-drawer";
 
+/* hooks*/
+import {useAppDispatch} from "@/hooks/use-app-dispatch";
+import {useAppSelector} from "@/hooks/use-app-selector";
+
+/* lib */
+import {
+    decrement,
+    increment,
+    incrementAsync,
+    incrementByAmount,
+    selectCount,
+    selectStatus,
+    incrementIfOdd
+} from "@/lib/features/counter/counterSlice";
+
+/* styles */
+import "./styles.css";
+
 // --- Helper Component for Layout ---
 const DemoSection = ({
-	title,
-	children,
-}: {
-	title: string;
-	children: React.ReactNode;
+                         title,
+                         children,
+                     }: {
+    title: string;
+    children: React.ReactNode;
 }) => (
-	<section className="py-10 border-b border-gray-200 last:border-0">
-		<h2 className="text-2xl font-bold text-gray-900 mb-6">{title}</h2>
-		{/* This inner div acts as a "canvas" for the components */}
-		<div className="p-8 bg-slate-50 border border-dashed border-slate-300 rounded-xl overflow-x-auto">
-			{children}
-		</div>
-	</section>
+    <section className="py-10 border-b border-gray-200 last:border-0">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">{title}</h2>
+        {/* This inner div acts as a "canvas" for the components */}
+        <div className="p-8 bg-slate-50 border border-dashed border-slate-300 rounded-xl overflow-x-auto">
+            {children}
+        </div>
+    </section>
 );
 
 
-
-
 export default function Page() {
-	// State for Steppers
-	const [cartQuantity1, setCartQuantity1] = useState<number>(10);
-	const [cartQuantity2, setCartQuantity2] = useState<number>(10);
-	const [cartQuantity3, setCartQuantity3] = useState<number>(10);
+    // State for Steppers
+    const [cartQuantity1, setCartQuantity1] = useState<number>(10);
+    const [cartQuantity2, setCartQuantity2] = useState<number>(10);
+    const [cartQuantity3, setCartQuantity3] = useState<number>(10);
 
-	// Data for Breadcrumbs
-	const crumbs = [
-		{ label: "Scent", href: "/" },
-		{ label: "Shop", href: "/shop" },
-		{ label: "Product X", href: "/shop/product" },
-	];
+    // Data for Breadcrumbs
+    const crumbs = [
+        {label: "Scent", href: "/"},
+        {label: "Shop", href: "/shop"},
+        {label: "Product X", href: "/shop/product"},
+    ];
 
-	// State for sorting
-	const [sorting] = useState<SortingType>({ criteria: "name", order: "DESC" });
+    // State for sorting
+    const [sorting] = useState<SortingType>({criteria: "name", order: "DESC"});
 
-	return (
-		<div className="min-h-screen bg-white">
-			<Header></Header>
-			<Nav />
-			<div className="max-w-[1400px] mx-auto px-8 py-12">
-				<div className="mb-12">
-					<h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
-						UI Component Library
-					</h1>
-					<p className="mt-2 text-lg text-gray-600">
-						A visual test suite for all application components.
-					</p>
-				</div>
+    // Redux usage example: Counter
+    const dispatch = useAppDispatch();
+    const count = useAppSelector(selectCount);
+    const status = useAppSelector(selectStatus);
+    const [incrementAmount, setIncrementAmount] = useState("2");
 
-				{/* 1. MARKERS */}
-				<DemoSection title="Markers, Badges & Tags">
-					<div className="flex gap-4 mb-4">
-						<Marker name="hit" size="sm" />
-						<Marker name="hit" size="md" />
-					</div>
-					<div className="flex gap-4 mb-4">
-						<Tag
-							label="Argentina"
-							onClick={() => {}}
-							id="argentina"
-						></Tag>
-						<Tag
-							label="Your mamma"
-							onClick={() => {}}
-							id="your_mamma"
-						></Tag>
-					</div>
-					<div className="flex gap-4">
-						<Badge variant="warning" icon={Truck}>
-							Shipped
-						</Badge>
-						<Badge variant="warning">Nº8149249</Badge>
-						<Badge variant="success" icon={Check}>
-							Delivered
-						</Badge>
-						<Badge variant="error" icon={AlertTriangle}>
-							Canceled
-						</Badge>
-						<Badge variant="neutral" icon={ListOrdered}>
-							Ordered
-						</Badge>
-						<Badge variant="mystery">Return Received</Badge>
-					</div>
-				</DemoSection>
+    const incrementValue = Number(incrementAmount) || 0;
 
-				{/* 2. PRODUCT CARDS */}
-				<DemoSection title="Product Cards">
-					<div className="flex flex-wrap gap-6 items-start">
-						<ProductCard
-							name="Versace Eros Flame"
-							productId="prod-001"
-							imageUrl="https://i.makeup.it/u/uf/uf0jgxb7gg2e.jpg"
-							markers={["hit"]}
-							wishlist={false}
-							volume={2}
-							rating={4.5}
-							price={200}
-						/>
-						<ProductCard
-							name="Dior Sauvage Elixir"
-							productId="prod-002"
-							imageUrl="https://i.makeup.it/u/ux/uxuxdj4ehyen.jpg"
-							markers={["hit", "hit"]}
-							wishlist={true}
-							volume={1}
-							rating={5.0}
-							price={9999}
-						/>
-						<ProductCard
-							name="Chanel Bleu"
-							productId="prod-003"
-							imageUrl="https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"
-							markers={[]}
-							wishlist={true}
-							volume={1}
-							rating={4.2}
-							price={200}
-						/>
-					</div>
-				</DemoSection>
+    return (
+        <div className="min-h-screen bg-white">
+            <Header></Header>
+            <Nav/>
+            <div className="max-w-[1400px] mx-auto px-8 py-12">
+                <div className="mb-12">
+                    <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
+                        UI Component Library
+                    </h1>
+                    <p className="mt-2 text-lg text-gray-600">
+                        A visual test suite for all application components.
+                    </p>
+                </div>
 
-				{/* 3. SEARCH CARDS */}
-				<DemoSection title="Search / Horizontal Cards">
-					<div className="flex flex-wrap gap-6">
-						<SearchResultItem
-							title="Versace Eros Flame"
-							productId="sc-001"
-							productCode="01203213"
-							quantityInStock={10}
-							imageUrl="https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"
-							volume={2}
-							rating={4.5}
-							price={4999}
-						/>
-						<SearchResultItem
-							title="Versace Eros Flame (Out of Stock)"
-							productId="sc-002"
-							productCode="01203213"
-							quantityInStock={0}
-							imageUrl="https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"
-							volume={2}
-							rating={4.5}
-							price={4999}
-						/>
-					</div>
-				</DemoSection>
+                {/* 1. MARKERS */}
+                <DemoSection title="Markers, Badges & Tags">
+                    <div className="flex gap-4 mb-4">
+                        <Marker name="hit" size="sm"/>
+                        <Marker name="hit" size="md"/>
+                    </div>
+                    <div className="flex gap-4 mb-4">
+                        <Tag
+                            label="Argentina"
+                            onClick={() => {
+                            }}
+                            id="argentina"
+                        ></Tag>
+                        <Tag
+                            label="Your mamma"
+                            onClick={() => {
+                            }}
+                            id="your_mamma"
+                        ></Tag>
+                    </div>
+                    <div className="flex gap-4">
+                        <Badge variant="warning" icon={Truck}>
+                            Shipped
+                        </Badge>
+                        <Badge variant="warning">Nº8149249</Badge>
+                        <Badge variant="success" icon={Check}>
+                            Delivered
+                        </Badge>
+                        <Badge variant="error" icon={AlertTriangle}>
+                            Canceled
+                        </Badge>
+                        <Badge variant="neutral" icon={ListOrdered}>
+                            Ordered
+                        </Badge>
+                        <Badge variant="mystery">Return Received</Badge>
+                    </div>
+                </DemoSection>
 
-				{/* 4. CART ITEMS (Main Page) */}
-				<DemoSection title="Cart Items (Main)">
-					<div className="flex flex-col gap-6">
-						<CartItem
-							name="Versace Eros Flame"
-							productId="cart-001"
-							productCode="01203213"
-							quantityInStock={11}
-							imageUrl="https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"
-							volume={2}
-							pricePerItem={4999}
-							quantity={1}
-							onDelete={() => {}}
-							onQuantityChange={() => {}}
-						/>
-						<CartItem
-							name="Expensive Limited Edition"
-							productId="cart-002"
-							productCode="01203213"
-							quantityInStock={0}
-							imageUrl="https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"
-							volume={2}
-							pricePerItem={11999}
-							quantity={1}
-							onDelete={() => {}}
-							onQuantityChange={() => {}}
-						/>
-					</div>
-				</DemoSection>
+                {/* 2. PRODUCT CARDS */}
+                <DemoSection title="Product Cards">
+                    <div className="flex flex-wrap gap-6 items-start">
+                        <ProductCard
+                            name="Versace Eros Flame"
+                            productId="prod-001"
+                            imageUrl="https://i.makeup.it/u/uf/uf0jgxb7gg2e.jpg"
+                            markers={["hit"]}
+                            wishlist={false}
+                            volume={2}
+                            rating={4.5}
+                            price={200}
+                        />
+                        <ProductCard
+                            name="Dior Sauvage Elixir"
+                            productId="prod-002"
+                            imageUrl="https://i.makeup.it/u/ux/uxuxdj4ehyen.jpg"
+                            markers={["hit", "hit"]}
+                            wishlist={true}
+                            volume={1}
+                            rating={5.0}
+                            price={9999}
+                        />
+                        <ProductCard
+                            name="Chanel Bleu"
+                            productId="prod-003"
+                            imageUrl="https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"
+                            markers={[]}
+                            wishlist={true}
+                            volume={1}
+                            rating={4.2}
+                            price={200}
+                        />
+                    </div>
+                </DemoSection>
 
-				{/* 5. CART DRAWER ITEMS */}
-				<DemoSection title="Cart Drawer Items (Sidebar)">
-					{/* Simulating a narrow drawer container */}
-					<div className="w-[360px] bg-white p-4 border border-gray-200 shadow-sm flex flex-col gap-6">
-						<CartDrawerItem
-							name="Versace Eros Flame"
-							productId="drawer-001"
-							productCode="01203213"
-							variant={{
-								volume: 30,
-								price: 4999,
-								discountedPrice: undefined,
-								wishlist: true,
-								quantityInStock: 1,
-							}}
-							imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
-							quantity={1}
-							onDelete={() => {}}
-						/>
-						<CartDrawerItem
-							name="Versace Eros Flame"
-							productId="drawer-002"
-							productCode="01203213"
-							variant={{
-								volume: 30,
-								price: 4999,
-								discountedPrice: undefined,
-								wishlist: true,
-								quantityInStock: 1,
-							}}
-							imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
-							quantity={1}
-							onDelete={() => {}}
-						/>
-					</div>
-				</DemoSection>
+                {/* 3. SEARCH CARDS */}
+                <DemoSection title="Search / Horizontal Cards">
+                    <div className="flex flex-wrap gap-6">
+                        <SearchResultItem
+                            title="Versace Eros Flame"
+                            productId="sc-001"
+                            productCode="01203213"
+                            quantityInStock={10}
+                            imageUrl="https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"
+                            volume={2}
+                            rating={4.5}
+                            price={4999}
+                        />
+                        <SearchResultItem
+                            title="Versace Eros Flame (Out of Stock)"
+                            productId="sc-002"
+                            productCode="01203213"
+                            quantityInStock={0}
+                            imageUrl="https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"
+                            volume={2}
+                            rating={4.5}
+                            price={4999}
+                        />
+                    </div>
+                </DemoSection>
 
-				{/* 6. STEPPERS */}
-				<DemoSection title="Steppers & Inputs">
-					<div className="flex gap-8 items-center">
-						<div className="flex flex-col gap-2">
+                {/* 4. CART ITEMS (Main Page) */}
+                <DemoSection title="Cart Items (Main)">
+                    <div className="flex flex-col gap-6">
+                        <CartItem
+                            name="Versace Eros Flame"
+                            productId="cart-001"
+                            productCode="01203213"
+                            quantityInStock={11}
+                            imageUrl="https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"
+                            volume={2}
+                            pricePerItem={4999}
+                            quantity={1}
+                            onDelete={() => {
+                            }}
+                            onQuantityChange={() => {
+                            }}
+                        />
+                        <CartItem
+                            name="Expensive Limited Edition"
+                            productId="cart-002"
+                            productCode="01203213"
+                            quantityInStock={0}
+                            imageUrl="https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"
+                            volume={2}
+                            pricePerItem={11999}
+                            quantity={1}
+                            onDelete={() => {
+                            }}
+                            onQuantityChange={() => {
+                            }}
+                        />
+                    </div>
+                </DemoSection>
+
+                {/* 5. CART DRAWER ITEMS */}
+                <DemoSection title="Cart Drawer Items (Sidebar)">
+                    {/* Simulating a narrow drawer container */}
+                    <div className="w-[360px] bg-white p-4 border border-gray-200 shadow-sm flex flex-col gap-6">
+                        <CartDrawerItem
+                            name="Versace Eros Flame"
+                            productId="drawer-001"
+                            productCode="01203213"
+                            variant={{
+                                volume: 30,
+                                price: 4999,
+                                discountedPrice: undefined,
+                                wishlist: true,
+                                quantityInStock: 1,
+                            }}
+                            imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
+                            quantity={1}
+                            onDelete={() => {
+                            }}
+                        />
+                        <CartDrawerItem
+                            name="Versace Eros Flame"
+                            productId="drawer-002"
+                            productCode="01203213"
+                            variant={{
+                                volume: 30,
+                                price: 4999,
+                                discountedPrice: undefined,
+                                wishlist: true,
+                                quantityInStock: 1,
+                            }}
+                            imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
+                            quantity={1}
+                            onDelete={() => {
+                            }}
+                        />
+                    </div>
+                </DemoSection>
+
+                {/* 6. STEPPERS */}
+                <DemoSection title="Steppers & Inputs">
+                    <div className="flex gap-8 items-center">
+                        <div className="flex flex-col gap-2">
 							<span className="text-sm text-gray-500">
 								Standard (Max 99)
 							</span>
-							<Stepper
-								value={cartQuantity1}
-								onChange={setCartQuantity1}
-								max={99}
-							/>
-						</div>
+                            <Stepper
+                                value={cartQuantity1}
+                                onChange={setCartQuantity1}
+                                max={99}
+                            />
+                        </div>
 
-						<div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-2">
 							<span className="text-sm text-gray-500">
 								Limited (Max 10)
 							</span>
-							<Stepper
-								value={cartQuantity2}
-								onChange={setCartQuantity2}
-								max={10}
-							/>
-						</div>
+                            <Stepper
+                                value={cartQuantity2}
+                                onChange={setCartQuantity2}
+                                max={10}
+                            />
+                        </div>
 
-						<div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-2">
 							<span className="text-sm text-gray-500">
 								Disabled
 							</span>
-							<Stepper
-								value={cartQuantity3}
-								onChange={setCartQuantity3}
-								max={10}
-								disabled
-							/>
-						</div>
+                            <Stepper
+                                value={cartQuantity3}
+                                onChange={setCartQuantity3}
+                                max={10}
+                                disabled
+                            />
+                        </div>
 
-						<div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-2">
 							<span className="text-sm text-gray-500">
 								Small Variant
 							</span>
-							<Stepper
-								value={cartQuantity1}
-								onChange={setCartQuantity1}
-								max={99}
-								size="sm"
-							/>
-						</div>
-					</div>
-				</DemoSection>
+                            <Stepper
+                                value={cartQuantity1}
+                                onChange={setCartQuantity1}
+                                max={99}
+                                size="sm"
+                            />
+                        </div>
+                    </div>
+                </DemoSection>
 
-				{/* 7. COMMENTS */}
-				<DemoSection title="Comment Cards">
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-						<CommentCard
-							userAvatarUrl=""
-							userName="Nazar"
-							dateCommentLeft="11.11"
-							rating={4.4}
-							text="I am pleasantly surprised by the service and quality of the fragrances! I ordered some perfume, and it arrived very quickly."
-						/>
-						<CommentCard
-							userAvatarUrl=""
-							userName="Nazar Kyselov"
-							dateCommentLeft="24.12"
-							rating={4.9}
-							text="This long comment demonstrates how the card handles wrapping text. It should look clean and not break the layout."
-						/>
-						<CommentCard
-							userAvatarUrl=""
-							userName="Misha"
-							dateCommentLeft="31.12"
-							rating={5.0}
-							text="Short comment."
-						/>
-					</div>
-				</DemoSection>
+                {/* 7. COMMENTS */}
+                <DemoSection title="Comment Cards">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <CommentCard
+                            userAvatarUrl=""
+                            userName="Nazar"
+                            dateCommentLeft="11.11"
+                            rating={4.4}
+                            text="I am pleasantly surprised by the service and quality of the fragrances! I ordered some perfume, and it arrived very quickly."
+                        />
+                        <CommentCard
+                            userAvatarUrl=""
+                            userName="Nazar Kyselov"
+                            dateCommentLeft="24.12"
+                            rating={4.9}
+                            text="This long comment demonstrates how the card handles wrapping text. It should look clean and not break the layout."
+                        />
+                        <CommentCard
+                            userAvatarUrl=""
+                            userName="Misha"
+                            dateCommentLeft="31.12"
+                            rating={5.0}
+                            text="Short comment."
+                        />
+                    </div>
+                </DemoSection>
 
-				{/* 8. AVATARS */}
-				<DemoSection title="Avatars">
-					<div className="flex flex-col gap-8">
-						{/* Row 1: Images */}
-						<div className="flex items-end gap-6">
-							<Avatar
-								src="https://github.com/shadcn.png"
-								alt="User"
-								size="xl"
-							/>
-							<Avatar
-								src="https://github.com/shadcn.png"
-								alt="User"
-								size="lg"
-							/>
-							<Avatar
-								src="https://github.com/shadcn.png"
-								alt="User"
-								size="md"
-							/>
-							<Avatar
-								src="https://github.com/shadcn.png"
-								alt="User"
-								size="sm"
-							/>
-						</div>
-						{/* Row 2: Fallbacks */}
-						<div className="flex items-end gap-6">
-							<Avatar alt="Misha Kulkin" size="xl" />
-							<Avatar alt="Misha Kulkin" size="lg" />
-							<Avatar alt="Misha Kulkin" size="md" />
-							<Avatar alt="Misha Kulkin" size="sm" />
-						</div>
-					</div>
-				</DemoSection>
+                {/* 8. AVATARS */}
+                <DemoSection title="Avatars">
+                    <div className="flex flex-col gap-8">
+                        {/* Row 1: Images */}
+                        <div className="flex items-end gap-6">
+                            <Avatar
+                                src="https://github.com/shadcn.png"
+                                alt="User"
+                                size="xl"
+                            />
+                            <Avatar
+                                src="https://github.com/shadcn.png"
+                                alt="User"
+                                size="lg"
+                            />
+                            <Avatar
+                                src="https://github.com/shadcn.png"
+                                alt="User"
+                                size="md"
+                            />
+                            <Avatar
+                                src="https://github.com/shadcn.png"
+                                alt="User"
+                                size="sm"
+                            />
+                        </div>
+                        {/* Row 2: Fallbacks */}
+                        <div className="flex items-end gap-6">
+                            <Avatar alt="Misha Kulkin" size="xl"/>
+                            <Avatar alt="Misha Kulkin" size="lg"/>
+                            <Avatar alt="Misha Kulkin" size="md"/>
+                            <Avatar alt="Misha Kulkin" size="sm"/>
+                        </div>
+                    </div>
+                </DemoSection>
 
-				{/* 9. NAVIGATION */}
-				<DemoSection title="Navigation & Breadcrumbs">
-					<Breadcrumbs items={crumbs} />
-				</DemoSection>
-				{/* 9. Sorting Dropdown */}
-				<DemoSection title="Sorting Dropdown">
-					<div className="flex justify-end h-[220px]">
-						<Suspense>
-							 <Sorting criteria={sorting.criteria} order={sorting.order} />
-						</Suspense>
-					</div>
-				</DemoSection>
+                {/* 9. NAVIGATION */}
+                <DemoSection title="Navigation & Breadcrumbs">
+                    <Breadcrumbs items={crumbs}/>
+                </DemoSection>
+                {/* 9. Sorting Dropdown */}
+                <DemoSection title="Sorting Dropdown">
+                    <div className="flex justify-end h-[220px]">
+                        <Suspense>
+                            <Sorting criteria={sorting.criteria} order={sorting.order}/>
+                        </Suspense>
+                    </div>
+                </DemoSection>
 
-				<DemoSection title={"Cart drawer"}>
-					<CartDrawer></CartDrawer>
-				</DemoSection>
-			</div>
-			<Footer />
-		</div>
-	);
+                <DemoSection title={"Cart drawer"}>
+                    <CartDrawer></CartDrawer>
+                </DemoSection>
+
+                <DemoSection title={"Redux Usage Example: Counter"}>
+                    <div>
+                        <div className={"row flex items-center justify-center"}>
+                            <button
+                                className={"appearance-none bg-[rgba(112,76,182,0.1)] text-[rgb(112,76,182)] text-[32px] px-3 pb-1 border-2 border-transparent rounded-sm cursor-pointer transition-all duration-150 outline-none hover:border-[rgba(112,76,182,0.4)] focus:border-[rgba(112,76,182,0.4)] active:bg-[rgba(112,76,182,0.2)]"}
+                                aria-label="Decrement value"
+                                onClick={() => dispatch(decrement())}
+                            >
+                                -
+                            </button>
+                            <span
+                                aria-label="Count"
+                                className={"text-[78px] px-4 mt-0.5 font-mono"}
+                            >
+            {count}
+        </span>
+                            <button
+                                className={"appearance-none bg-[rgba(112,76,182,0.1)] text-[rgb(112,76,182)] text-[32px] px-3 pb-1 border-2 border-transparent rounded-sm cursor-pointer transition-all duration-150 outline-none hover:border-[rgba(112,76,182,0.4)] focus:border-[rgba(112,76,182,0.4)] active:bg-[rgba(112,76,182,0.2)]"}
+                                aria-label="Increment value"
+                                onClick={() => dispatch(increment())}
+                            >
+                                +
+                            </button>
+                        </div>
+                        <div className={"row flex items-center justify-center"}>
+                            <input
+                                className={"text-[32px] p-0.5 w-16 text-center mr-1"}
+                                aria-label="Set increment amount"
+                                value={incrementAmount}
+                                type="number"
+                                onChange={(e) => setIncrementAmount(e.target.value)}
+                            />
+                            <button
+                                className={"appearance-none bg-[rgba(112,76,182,0.1)] text-[rgb(112,76,182)] text-[32px] px-3 pb-1 border-2 border-transparent rounded-sm cursor-pointer transition-all duration-150 outline-none hover:border-[rgba(112,76,182,0.4)] focus:border-[rgba(112,76,182,0.4)] active:bg-[rgba(112,76,182,0.2)] ml-1 mr-2"}
+                                onClick={() => dispatch(incrementByAmount(incrementValue))}
+                            >
+                                Add Amount
+                            </button>
+                            <button
+                                className={"async-button appearance-none bg-[rgba(112,76,182,0.1)] text-[rgb(112,76,182)] text-[32px] px-3 pb-1 border-2 border-transparent rounded-sm cursor-pointer transition-all duration-150 outline-none hover:border-[rgba(112,76,182,0.4)] focus:border-[rgba(112,76,182,0.4)] active:bg-[rgba(112,76,182,0.2)] ml-1 mr-2"}
+                                disabled={status !== "idle"}
+                                onClick={() => dispatch(incrementAsync(incrementValue))}
+                            >
+                                Add Async
+                            </button>
+                            <button
+                                className={"appearance-none bg-[rgba(112,76,182,0.1)] text-[rgb(112,76,182)] text-[32px] px-3 pb-1 border-2 border-transparent rounded-sm cursor-pointer transition-all duration-150 outline-none hover:border-[rgba(112,76,182,0.4)] focus:border-[rgba(112,76,182,0.4)] active:bg-[rgba(112,76,182,0.2)] ml-1 mr-2"}
+                                onClick={() => dispatch(incrementIfOdd(incrementValue))}
+                            >
+                                Add If Odd
+                            </button>
+                            <span>Status: {status}</span>
+                        </div>
+                    </div>
+                </DemoSection>
+            </div>
+            <Footer/>
+        </div>
+    );
 }
