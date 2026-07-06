@@ -39,7 +39,7 @@ import {
 } from "@/lib/features/counter/counterSlice";
 
 /* styles */
-import styles from "./demo.module.css"
+import "./styles.css";
 
 // --- Helper Component for Layout ---
 const DemoSection = ({
@@ -403,51 +403,52 @@ export default function Page() {
 
                 <DemoSection title={"Redux Usage Example: Counter"}>
                     <div>
-                        <div className={styles.row}>
+                        <div className={"row flex items-center justify-center"}>
                             <button
-                                className={styles.button}
+                                className={"appearance-none bg-[rgba(112,76,182,0.1)] text-[rgb(112,76,182)] text-[32px] px-3 pb-1 border-2 border-transparent rounded-sm cursor-pointer transition-all duration-150 outline-none hover:border-[rgba(112,76,182,0.4)] focus:border-[rgba(112,76,182,0.4)] active:bg-[rgba(112,76,182,0.2)]"}
                                 aria-label="Decrement value"
                                 onClick={() => dispatch(decrement())}
                             >
                                 -
                             </button>
-                            <span aria-label="Count" className={styles.value}>{count}</span>
+                            <span
+                                aria-label="Count"
+                                className={"text-[78px] px-4 mt-0.5 font-mono"}
+                            >
+            {count}
+        </span>
                             <button
-                                className={styles.button}
+                                className={"appearance-none bg-[rgba(112,76,182,0.1)] text-[rgb(112,76,182)] text-[32px] px-3 pb-1 border-2 border-transparent rounded-sm cursor-pointer transition-all duration-150 outline-none hover:border-[rgba(112,76,182,0.4)] focus:border-[rgba(112,76,182,0.4)] active:bg-[rgba(112,76,182,0.2)]"}
                                 aria-label="Increment value"
                                 onClick={() => dispatch(increment())}
                             >
                                 +
                             </button>
                         </div>
-                        <div className={styles.row}>
+                        <div className={"row flex items-center justify-center"}>
                             <input
-                                className={styles.textbox}
+                                className={"text-[32px] p-0.5 w-16 text-center mr-1"}
                                 aria-label="Set increment amount"
                                 value={incrementAmount}
                                 type="number"
-                                onChange={(e) => {
-                                    setIncrementAmount(e.target.value);
-                                }}
+                                onChange={(e) => setIncrementAmount(e.target.value)}
                             />
                             <button
-                                className={styles.button}
+                                className={"appearance-none bg-[rgba(112,76,182,0.1)] text-[rgb(112,76,182)] text-[32px] px-3 pb-1 border-2 border-transparent rounded-sm cursor-pointer transition-all duration-150 outline-none hover:border-[rgba(112,76,182,0.4)] focus:border-[rgba(112,76,182,0.4)] active:bg-[rgba(112,76,182,0.2)] ml-1 mr-2"}
                                 onClick={() => dispatch(incrementByAmount(incrementValue))}
                             >
                                 Add Amount
                             </button>
                             <button
-                                className={styles.asyncButton}
+                                className={"async-button appearance-none bg-[rgba(112,76,182,0.1)] text-[rgb(112,76,182)] text-[32px] px-3 pb-1 border-2 border-transparent rounded-sm cursor-pointer transition-all duration-150 outline-none hover:border-[rgba(112,76,182,0.4)] focus:border-[rgba(112,76,182,0.4)] active:bg-[rgba(112,76,182,0.2)] ml-1 mr-2"}
                                 disabled={status !== "idle"}
                                 onClick={() => dispatch(incrementAsync(incrementValue))}
                             >
                                 Add Async
                             </button>
                             <button
-                                className={styles.button}
-                                onClick={() => {
-                                    dispatch(incrementIfOdd(incrementValue));
-                                }}
+                                className={"appearance-none bg-[rgba(112,76,182,0.1)] text-[rgb(112,76,182)] text-[32px] px-3 pb-1 border-2 border-transparent rounded-sm cursor-pointer transition-all duration-150 outline-none hover:border-[rgba(112,76,182,0.4)] focus:border-[rgba(112,76,182,0.4)] active:bg-[rgba(112,76,182,0.2)] ml-1 mr-2"}
+                                onClick={() => dispatch(incrementIfOdd(incrementValue))}
                             >
                                 Add If Odd
                             </button>
