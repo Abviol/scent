@@ -1,7 +1,8 @@
 'use client'
-import { useRef } from 'react'
+import {useEffect, useRef} from 'react'
 import { Provider } from 'react-redux'
 import { makeStore, AppStore } from '../lib/store'
+import {setupListeners} from "@reduxjs/toolkit/query";
 
 export default function StoreProvider({
                                           children,
@@ -17,6 +18,15 @@ export default function StoreProvider({
         // Create the store instance the first time this renders
         storeRef.current = makeStore()
     }
+
+    useEffect(() => {
+        if (storeRef.current != null) {
+            // configure listeners using the provided defaults
+            // optional, but required for `refetchOnFocus`/`refetchOnReconnect` behaviors
+            const unsubscribe = setupListeners(storeRef.current.dispatch);
+            return unsubscribe;
+        }
+    }, []);
 
     // The code is copy-pasted from the official Redux documentation https://redux-toolkit.js.org/usage/nextjs#providing-the-store.
     // Disable ESLint to follow the guidelines.
