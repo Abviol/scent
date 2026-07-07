@@ -202,7 +202,7 @@ export default function Page() {
                     <div className="flex flex-col gap-6">
                         <CartItem
                             name="Versace Eros Flame"
-                            productId="drawer-001"
+                            id="drawer-001"
                             productCode="01203213"
                             variant={{
                                 volume: 30,
@@ -220,7 +220,7 @@ export default function Page() {
                         />
                         <CartItem
                             name="Versace Eros Flame"
-                            productId="drawer-001"
+                            id="drawer-001"
                             productCode="01203213"
                             variant={{
                                 volume: 30,
@@ -245,7 +245,7 @@ export default function Page() {
                     <div className="w-[360px] bg-white p-4 border border-gray-200 shadow-sm flex flex-col gap-6">
                         <CartDrawerItem
                             name="Versace Eros Flame"
-                            productId="drawer-001"
+                            id="drawer-001"
                             productCode="01203213"
                             variant={{
                                 volume: 30,
@@ -261,7 +261,7 @@ export default function Page() {
                         />
                         <CartDrawerItem
                             name="Versace Eros Flame"
-                            productId="drawer-002"
+                            id="drawer-002"
                             productCode="01203213"
                             variant={{
                                 volume: 30,

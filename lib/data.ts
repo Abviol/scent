@@ -317,7 +317,7 @@ const CART_ITEMS: CartItemType[] = [
             wishlist: true,
             quantityInStock: 34,
         },
-        productId: "asdf-wedg-cfad",
+        id: "asdf-wedg-cfad",
         productCode: "422454",
         quantity: 2,
     },
@@ -331,7 +331,7 @@ const CART_ITEMS: CartItemType[] = [
             wishlist: true,
             quantityInStock: 12,
         },
-        productId: "feqd-asdv-edwq",
+        id: "feqd-asdv-edwq",
         productCode: "123456",
         quantity: 1,
     }

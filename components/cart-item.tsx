@@ -24,7 +24,7 @@ export default function CartItem({
                                      imageUrl,
                                      name,
                                      variant,
-                                     productId,
+                                     id,
                                      productCode,
                                      quantity,
                                      onDelete,
@@ -32,16 +32,16 @@ export default function CartItem({
                                  }: CartItemProps) {
     const availability: AvailabilityType = getAvailability(variant.quantityInStock);
     const availabilityClass: string = getAvailabilityClass(availability);
-    const productLink: string = `/shop/product/${productId}`;
+    const productLink: string = `/shop/product/${id}`;
 
     const totalPrice = variant.price * quantity;
 
     const handleQuantityChange = (delta: number) => {
-        onQuantityChange(productId, delta);
+        onQuantityChange(id, delta);
     };
 
     const handleDelete = () => {
-        onDelete(productId);
+        onDelete(id);
     };
 
     return (

@@ -29,14 +29,14 @@ export default function CartPageClient({cartItems}: CartPageClientProps) {
     const updateQuantity = (id: string, newValue: number) => {
         setItems((prev) =>
             prev.map((item) => {
-                if (item.productId === id) return {...item, quantity: newValue};
+                if (item.id === id) return {...item, quantity: newValue};
                 return item;
             })
         );
     };
 
     const removeItem = (id: string) => {
-        setItems((prev) => prev.filter((item) => item.productId !== id));
+        setItems((prev) => prev.filter((item) => item.id !== id));
     };
 
     if (items.length === 0) return (
@@ -65,11 +65,11 @@ export default function CartPageClient({cartItems}: CartPageClientProps) {
             <div className="w-full flex flex-col gap-y-8">
                 {items.length > 0 && items.map((item, index) => (
                     <CartItem
-                        key={item.productId + index}
+                        key={item.id + index}
                         imageUrl={item.imageUrl}
                         name={item.name}
                         variant={item.variant}
-                        productId={item.productId}
+                        id={item.id}
                         productCode={item.productCode}
                         quantity={item.quantity}
                         onDelete={removeItem}

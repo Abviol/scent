@@ -30,7 +30,7 @@ export default function CartDrawerItem({
 	imageUrl,
 	name,
 	variant,
-	productId,
+	id,
 	productCode,
 	quantity,
 	onDelete,
@@ -42,7 +42,7 @@ export default function CartDrawerItem({
 	const availabilityClass: string =
 		availability == "not_available" ? "not-available" : "";
 
-	const productLink: string = `/shop/product/${productId}`;
+	const productLink: string = `/shop/product/${id}`;
 	const [newQuantity, setNewQuantity] = useState<number>(quantity);
 	const [totalPrice, setTotalPrice] = useState<number>(
 		variant.price * quantity

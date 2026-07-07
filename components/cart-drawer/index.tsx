@@ -18,7 +18,7 @@ export default function CartDrawer() {
 
     const recentlyAddedItem: CartItemType = {
         name: "Versace Eros Flame",
-        productId: "drawer-001",
+        id: "drawer-001",
         productCode: "01203213",
         imageUrl: "https://i.makeup.it/1/1x/1xkz6atfgthd.jpg",
         quantity: 1,
@@ -34,7 +34,7 @@ export default function CartDrawer() {
         recentlyAddedItem,
         ...Array.from({length: 4}, () => ({
             name: "Versace Eros Flame",
-            productId: "drawer-001",
+            id: "drawer-001",
             productCode: "01203213",
             imageUrl: "https://i.makeup.it/1/1x/1xkz6atfgthd.jpg",
             quantity: 1,
@@ -105,7 +105,7 @@ export default function CartDrawer() {
 
                                         <CartDrawerItem
                                             name={recentlyAddedItem.name}
-                                            productId={recentlyAddedItem.productId}
+                                            id={recentlyAddedItem.id}
                                             productCode={recentlyAddedItem.productCode}
                                             variant={recentlyAddedItem.variant}
                                             imageUrl={recentlyAddedItem.imageUrl}
@@ -124,7 +124,7 @@ export default function CartDrawer() {
                                                 <CartDrawerItem
                                                     key={item.productCode + index}
                                                     name={item.name}
-                                                    productId={item.productId}
+                                                    id={item.id}
                                                     productCode={item.productCode}
                                                     variant={item.variant}
                                                     imageUrl={item.imageUrl}

@@ -73,12 +73,12 @@ export interface BrandGroupType {
 }
 
 export interface CartItemType {
+	id: string;
 	imageUrl: string;
 	name: string;
-	variant: VariantType;
-	productId: string;
 	productCode: string;
 	quantity: number;
+	variant: VariantType;
 }
 
 export interface BreadcrumbsItemType {
