@@ -202,12 +202,16 @@ export default function Page() {
                     <div className="flex flex-col gap-6">
                         <CartItem
                             name="Versace Eros Flame"
-                            productId="cart-001"
+                            productId="drawer-001"
                             productCode="01203213"
-                            quantityInStock={11}
-                            imageUrl="https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"
-                            volume={2}
-                            pricePerItem={4999}
+                            variant={{
+                                volume: 30,
+                                price: 4999,
+                                discountedPrice: undefined,
+                                wishlist: true,
+                                quantityInStock: 1,
+                            }}
+                            imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
                             quantity={1}
                             onDelete={() => {
                             }}
@@ -215,13 +219,17 @@ export default function Page() {
                             }}
                         />
                         <CartItem
-                            name="Expensive Limited Edition"
-                            productId="cart-002"
+                            name="Versace Eros Flame"
+                            productId="drawer-001"
                             productCode="01203213"
-                            quantityInStock={0}
-                            imageUrl="https://i.makeup.it/2/2p/2pj8d0xfdqe0.jpg"
-                            volume={2}
-                            pricePerItem={11999}
+                            variant={{
+                                volume: 30,
+                                price: 4999,
+                                discountedPrice: undefined,
+                                wishlist: true,
+                                quantityInStock: 1,
+                            }}
+                            imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
                             quantity={1}
                             onDelete={() => {
                             }}

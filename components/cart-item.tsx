@@ -6,7 +6,7 @@ import Link from "next/link";
 /* components */
 import Stepper from "./stepper";
 /* lib */
-import {AvailabilityType} from "@/lib/types";
+import {AvailabilityType, CartItemType} from "@/lib/types";
 import {
     getAvailability,
     getAvailabilityClass,
@@ -15,15 +15,7 @@ import {
 /* icons */
 import {Trash2} from "lucide-react";
 
-interface CartItemProps {
-    imageUrl: string;
-    name: string;
-    volume: number;
-    productId: string;
-    productCode: string;
-    quantity: number;
-    quantityInStock: number;
-    pricePerItem: number; // cents
+interface CartItemProps extends CartItemType {
     onDelete: (id: string) => void;
     onQuantityChange: (id: string, newValue: number) => void;
 }
@@ -31,20 +23,18 @@ interface CartItemProps {
 export default function CartItem({
                                      imageUrl,
                                      name,
-                                     volume,
+                                     variant,
                                      productId,
                                      productCode,
                                      quantity,
-                                     quantityInStock,
-                                     pricePerItem,
                                      onDelete,
                                      onQuantityChange,
                                  }: CartItemProps) {
-    const availability: AvailabilityType = getAvailability(quantityInStock);
+    const availability: AvailabilityType = getAvailability(variant.quantityInStock);
     const availabilityClass: string = getAvailabilityClass(availability);
     const productLink: string = `/shop/product/${productId}`;
 
-    const totalPrice = pricePerItem * quantity;
+    const totalPrice = variant.price * quantity;
 
     const handleQuantityChange = (delta: number) => {
         onQuantityChange(productId, delta);
@@ -63,7 +53,7 @@ export default function CartItem({
                         className="relative overflow-hidden size-[100px] aspect-square flex shrink-0 justify-center items-center">
                         <Image
                             src={imageUrl}
-                            alt={`${name} ${volume} ml`}
+                            alt={`${name} ${variant.volume} ml`}
                             fill
                             sizes={"100px"}
                             className="object-contain"
@@ -78,7 +68,7 @@ export default function CartItem({
                             </h3>
                             <div className="flex justify-between font-semibold leading-3">
 									<span className="text-gray-500">
-										{volume} ml
+										{variant.volume} ml
 									</span>
                                 <span className="text-gray-500">
 										Product Code&nbsp;-&nbsp;
@@ -100,8 +90,8 @@ export default function CartItem({
                     value={quantity}
                     onChange={(delta) => handleQuantityChange(delta)}
                     min={1}
-                    max={quantityInStock}
-                    disabled={quantityInStock == 0}
+                    max={variant.quantityInStock}
+                    disabled={variant.quantityInStock == 0}
                 ></Stepper>
                 <div className="flex gap-x-[calc(24px+5vw)] items-center">
 						<span className="my-text-h4">

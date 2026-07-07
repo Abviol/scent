@@ -68,12 +68,10 @@ export default function CartPageClient({cartItems}: CartPageClientProps) {
                         key={item.productId + index}
                         imageUrl={item.imageUrl}
                         name={item.name}
-                        volume={item.variant.volume}
+                        variant={item.variant}
                         productId={item.productId}
                         productCode={item.productCode}
                         quantity={item.quantity}
-                        quantityInStock={item.variant.quantityInStock}
-                        pricePerItem={item.variant.price}
                         onDelete={removeItem}
                         onQuantityChange={updateQuantity}
                     />
