@@ -1,9 +1,10 @@
 import {Action, combineSlices, configureStore, ThunkAction} from "@reduxjs/toolkit";
 import {counterSlice} from "@/lib/features/counter/counterSlice";
+import {cartSlice} from "@/lib/features/cart/cartSlice";
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-const rootReducer = combineSlices(counterSlice);
+const rootReducer = combineSlices(counterSlice, cartSlice);
 
 /**
 * Function for creating a new store instance per-request (instead of global singleton)
