@@ -14,6 +14,11 @@ import {
 	getAvailability,
 	getEuro,
 } from "@/lib/utils";
+import {useAppDispatch} from "@/hooks/use-app-dispatch";
+import {
+	incrementItemQuantityByAmount,
+	removeItem
+} from "@/lib/features/cart/cartSlice";
 
 /* icons */
 import { Trash2 } from "lucide-react";
@@ -21,11 +26,6 @@ import Image from "next/image";
 
 /* styles */
 import "./styles.css";
-import {useAppDispatch} from "@/hooks/use-app-dispatch";
-import {
-	incrementItemQuantityByAmount,
-	removeItem
-} from "@/lib/features/cart/cartSlice";
 
 export default function CartDrawerItem({
 	imageUrl,
