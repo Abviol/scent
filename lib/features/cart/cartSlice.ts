@@ -17,7 +17,7 @@ const cartAdapter = createEntityAdapter<CartEntity>({});
 * !!! Remove mock data before merge !!!
 * */
 const initialState = cartAdapter.upsertMany(cartAdapter.getInitialState<CartSliceState>({
-    totalAmount: 2,
+    totalAmount: 3,
 }), {
     "asdf-wedg-cfad": {
         id: "asdf-wedg-cfad",
