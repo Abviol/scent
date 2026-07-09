@@ -21,11 +21,12 @@ import Image from "next/image";
 
 /* styles */
 import "./styles.css";
+import {useAppDispatch} from "@/hooks/use-app-dispatch";
+import {
+	incrementItemQuantityByAmount,
+	removeItem
+} from "@/lib/features/cart/cartSlice";
 
-
-interface CartDrawerItemProps extends CartItemType {
-	onDelete: () => void;
-}
 export default function CartDrawerItem({
 	imageUrl,
 	name,
@@ -33,8 +34,9 @@ export default function CartDrawerItem({
 	id,
 	productCode,
 	quantity,
-	onDelete,
-}: CartDrawerItemProps) {
+}: CartItemType) {
+	const dispatch = useAppDispatch();
+
 	const [isDeleted, setIsDeleted] = useState<boolean>(false);
 	const [availability] = useState<AvailabilityType>(
 		getAvailability(variant.quantityInStock)
@@ -43,20 +45,6 @@ export default function CartDrawerItem({
 		availability == "not_available" ? "not-available" : "";
 
 	const productLink: string = `/shop/product/${id}`;
-	const [newQuantity, setNewQuantity] = useState<number>(quantity);
-	const [totalPrice, setTotalPrice] = useState<number>(
-		variant.price * quantity
-	);
-
-	const handleQuantity = (e: number) => {
-		setNewQuantity(e);
-		setTotalPrice(e * variant.price);
-	};
-
-	const handleDelete = () => {
-		setIsDeleted(true);
-		onDelete();
-	};
 
 	return (
 		<>
@@ -104,7 +92,7 @@ export default function CartDrawerItem({
 								<Trash2
 									size={20}
 									strokeWidth={1.5}
-									onClick={handleDelete}
+									onClick={() => dispatch(removeItem(id))}
 								></Trash2>
 							</button>
 						</div>
@@ -115,15 +103,15 @@ export default function CartDrawerItem({
 									Price:
 								</span>
 								<span className="font-semibold text-accent">
-									{getEuro(totalPrice)}
+									{getEuro(quantity * variant.price)}
 								</span>
 							</div>
 							<Stepper
 								size="sm"
 								min={1}
 								max={variant.quantityInStock}
-								value={newQuantity}
-								onChange={(e: number) => handleQuantity(e)}
+								value={quantity}
+								onChange={(e: number) => dispatch(incrementItemQuantityByAmount({ id: id, amount: e}))}
 							></Stepper>
 						</div>
 					</div>
