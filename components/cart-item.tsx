@@ -33,7 +33,6 @@ export default function CartItem({
                                  }: CartItemType) {
     // redux cartSlice
     const dispatch = useAppDispatch();
-    const totalPrice = useAppSelector(selectTotalPrice);
 
     const availability: AvailabilityType = getAvailability(variant.quantityInStock);
     const availabilityClass: string = getAvailabilityClass(availability);
@@ -96,7 +95,7 @@ export default function CartItem({
                 ></Stepper>
                 <div className="flex gap-x-[calc(24px+5vw)] items-center">
 						<span className="my-text-h4">
-							{getEuro(totalPrice)}
+							{getEuro(quantity * variant.price)}
 						</span>
                     <button
                         title="Remove from cart"
