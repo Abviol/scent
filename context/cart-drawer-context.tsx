@@ -50,7 +50,7 @@ export function CartDrawerProvider({children}: { children: React.ReactNode }) {
  * @throws {Error} If called outside of a {@link CartDrawerProvider}.
  */
 export function useCartDrawer() {
-    const context = useContext(CartDrawerContext);
+const context = useContext(CartDrawerContext);
 
     if (!context) {
         throw new Error(

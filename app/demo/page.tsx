@@ -21,7 +21,6 @@ import Footer from "@/components/layout/footer";
 import Nav from "@/components/layout/nav";
 import {SortingType} from "@/lib/types";
 import Sorting from "@/components/pages/shop/sorting";
-import CartDrawer from "@/components/cart-drawer";
 
 /* hooks*/
 import {useAppDispatch} from "@/hooks/use-app-dispatch";
@@ -42,6 +41,7 @@ import {
 import "./styles.css";
 import {Button} from "@/components/ui/button";
 import {acknowledgeRecentlyAddedItems, addItem, clearCart} from "@/lib/features/cart/cart-slice";
+import {useCartDrawer} from "@/context/cart-drawer-context";
 
 // --- Helper Component for Layout ---
 const DemoSection = ({
@@ -85,6 +85,9 @@ export default function Page() {
     const [incrementAmount, setIncrementAmount] = useState("2");
 
     const incrementValue = Number(incrementAmount) || 0;
+
+    // Cart Drawer context
+    const {open: openCartDrawer} = useCartDrawer();
 
     return (
         <div className="min-h-screen bg-white">
@@ -410,11 +413,11 @@ export default function Page() {
 
                 <DemoSection title={"Cart drawer + Redux Cart Slice"}>
                     <div className="flex gap-2">
-                        <CartDrawer>
-                            <Button>
-                                Trigger cart drawer
+                            <Button
+                                onClick={() => openCartDrawer()}
+                            >
+                                Open cart drawer
                             </Button>
-                        </CartDrawer>
                         <Button
                             onClick={() => dispatch(addItem({
                                 imageUrl: "https://i.makeup.it/l/l7/l7yfzcx8yetn.png",
