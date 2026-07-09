@@ -1,5 +1,6 @@
-import {createEntityAdapter, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createEntityAdapter, createSelector, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import type {CartItemType} from "@/lib/types";
+import {RootState} from "@/lib/store";
 
 interface CartSliceState {
     totalAmount: number;
@@ -12,6 +13,10 @@ interface CartEntity extends CartItemType {
 // Provides prebuilt reducers and selectors for normalized state management,
 // as recommended by the official Redux documentation.
 const cartAdapter = createEntityAdapter<CartEntity>({});
+
+const cartAdapterSelectors = cartAdapter.getSelectors<RootState>(
+    state => state.cart,
+);
 
 /*
 * !!! Remove mock data before merge !!!
@@ -124,15 +129,7 @@ export const cartSlice = createSlice({
         },
     },
     selectors: {
-        selectRecentlyAddedItems: (cart) => Object.values(cart.entities).filter(item => !item.isSeen),
-        selectSeenItems: (cart) => Object.values(cart.entities).filter(item => item.isSeen),
-        selectItems: (cart) => Object.values(cart.entities),
         selectTotalAmount: (cart) => cart.totalAmount,
-        selectTotalPrice: (cart) => Object.values(cart.entities)
-            .reduce(
-                (accumulator, currentValue) => accumulator += currentValue.quantity * currentValue.variant.price,
-                0
-            ),
     },
 });
 
@@ -146,4 +143,21 @@ export const {
 } = cartSlice.actions;
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.
-export const {selectRecentlyAddedItems, selectSeenItems, selectItems, selectTotalAmount, selectTotalPrice} = cartSlice.selectors;
+export const {selectTotalAmount} = cartSlice.selectors;
+// Memoized selectors to avoid unnecessary re-renders
+export const selectRecentlyAddedItems = createSelector(
+    [cartAdapterSelectors.selectAll],
+    (items) => items.filter(item => !item.isSeen),
+);
+export const selectSeenItems = createSelector(
+    [cartAdapterSelectors.selectAll],
+    (items) => items.filter(item => item.isSeen),
+);
+export const selectItems = cartAdapterSelectors.selectAll;
+export const selectTotalPrice = createSelector(
+    [cartAdapterSelectors.selectAll],
+    (items) => items.reduce(
+        (accumulator, currentValue) => accumulator += currentValue.quantity * currentValue.variant.price,
+        0
+    ),
+);
