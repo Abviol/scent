@@ -18,7 +18,7 @@ interface CartSliceState {
 * */
 const initialState = cartAdapter.upsertMany(cartAdapter.getInitialState<CartSliceState>({
     recentlyAddedItems: {},
-    recentlyAddedItemsIds: ["asdf-wedg-cfad", "feqd-asdv-edwq"],
+    recentlyAddedItemsIds: [],
     totalAmount: 3,
 }), {
     "asdf-wedg-cfad": {
