@@ -20,7 +20,7 @@ import {
 import {
 	incrementItemQuantityByAmount,
 	removeItem
-} from "@/lib/features/cart/cartSlice";
+} from "@/lib/features/cart/cart-slice";
 
 /* icons */
 import { Trash2 } from "lucide-react";

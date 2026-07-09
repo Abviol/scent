@@ -18,7 +18,7 @@ import {
     getAvailabilityClass,
     getEuro,
 } from "@/lib/utils";
-import {incrementItemQuantityByAmount, removeItem, selectTotalPrice} from "@/lib/features/cart/cartSlice";
+import {incrementItemQuantityByAmount, removeItem, selectTotalPrice} from "@/lib/features/cart/cart-slice";
 
 /* icons */
 import {Trash2} from "lucide-react";

@@ -17,7 +17,7 @@ import {useAppSelector} from "@/hooks/use-app-selector";
 import {CartItemType} from "@/lib/types";
 import {getEuro} from "@/lib/utils";
 import {Search} from "lucide-react";
-import {incrementItemQuantityByAmount, removeItem, selectItems, selectTotalPrice} from "@/lib/features/cart/cartSlice";
+import {incrementItemQuantityByAmount, removeItem, selectItems, selectTotalPrice} from "@/lib/features/cart/cart-slice";
 import {useAppDispatch} from "@/hooks/use-app-dispatch";
 
 interface CartPageClientProps {

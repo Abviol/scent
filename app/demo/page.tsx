@@ -36,12 +36,12 @@ import {
     selectCount,
     selectStatus,
     incrementIfOdd
-} from "@/lib/features/counter/counterSlice";
+} from "@/lib/features/counter/counter-slice";
 
 /* styles */
 import "./styles.css";
 import {Button} from "@/components/ui/button";
-import {acknowledgeRecentlyAddedItems, addItem, clearCart} from "@/lib/features/cart/cartSlice";
+import {acknowledgeRecentlyAddedItems, addItem, clearCart} from "@/lib/features/cart/cart-slice";
 
 // --- Helper Component for Layout ---
 const DemoSection = ({

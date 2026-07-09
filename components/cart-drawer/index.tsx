@@ -17,7 +17,7 @@ import {
     selectRecentlyAddedItems,
     selectTotalPrice,
     selectSeenItems, acknowledgeRecentlyAddedItems
-} from "@/lib/features/cart/cartSlice";
+} from "@/lib/features/cart/cart-slice";
 import {useAppSelector} from "@/hooks/use-app-selector";
 import {getEuro} from "@/lib/utils";
 import {useAppDispatch} from "@/hooks/use-app-dispatch";
