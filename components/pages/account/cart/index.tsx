@@ -10,10 +10,15 @@ import Link from "next/link";
 import CartItem from "@/components/cart-item";
 import {Button} from "@/components/ui/button";
 
+/* hooks */
+import {useAppSelector} from "@/hooks/use-app-selector";
+
 /* Lib */
 import {CartItemType} from "@/lib/types";
 import {getEuro} from "@/lib/utils";
 import {Search} from "lucide-react";
+import {incrementItemQuantityByAmount, removeItem, selectItems, selectTotalPrice} from "@/lib/features/cart/cartSlice";
+import {useAppDispatch} from "@/hooks/use-app-dispatch";
 
 interface CartPageClientProps {
     cartItems: CartItemType[];
@@ -22,22 +27,9 @@ interface CartPageClientProps {
 const DELIVERY_COST = 0;
 
 export default function CartPageClient({cartItems}: CartPageClientProps) {
-    const [items, setItems] = useState<CartItemType[]>(cartItems);
-    const orderPrice = useMemo(() => items.reduce((sum, item) => sum + item.variant.price * item.quantity, 0), [items]);
-    const totalPrice = useMemo(() => orderPrice + DELIVERY_COST, [orderPrice]);
-
-    const updateQuantity = (id: string, newValue: number) => {
-        setItems((prev) =>
-            prev.map((item) => {
-                if (item.id === id) return {...item, quantity: newValue};
-                return item;
-            })
-        );
-    };
-
-    const removeItem = (id: string) => {
-        setItems((prev) => prev.filter((item) => item.id !== id));
-    };
+    const dispatch = useAppDispatch();
+    const totalPrice = useAppSelector(selectTotalPrice);
+    const items = useAppSelector(selectItems);
 
     if (items.length === 0) return (
         <div className="my-[120px] flex flex-col justify-center items-center">
@@ -72,8 +64,6 @@ export default function CartPageClient({cartItems}: CartPageClientProps) {
                         id={item.id}
                         productCode={item.productCode}
                         quantity={item.quantity}
-                        onDelete={removeItem}
-                        onQuantityChange={updateQuantity}
                     />
                 ))}
             </div>
@@ -82,7 +72,7 @@ export default function CartPageClient({cartItems}: CartPageClientProps) {
                 className="flex flex-col mt-[100px] mx-auto max-w-[800px] p-[60px] rounded-[8px] border-2 border-gray-200">
                 <div className="flex justify-between text-2xl text-slate-500 font-semibold mb-3">
                     <span>Order price</span>
-                    <span>{getEuro(orderPrice)}</span>
+                    <span>{getEuro(totalPrice)}</span>
                 </div>
                 <div className="flex justify-between text-2xl text-slate-500 font-semibold mb-10">
                     <span>Estimated delivery price</span>

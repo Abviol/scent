@@ -3,8 +3,14 @@
 /* next.js */
 import Image from "next/image";
 import Link from "next/link";
+
 /* components */
 import Stepper from "./stepper";
+
+/* hooks */
+import {useAppDispatch} from "@/hooks/use-app-dispatch";
+import {useAppSelector} from "@/hooks/use-app-selector";
+
 /* lib */
 import {AvailabilityType, CartItemType} from "@/lib/types";
 import {
@@ -12,13 +18,10 @@ import {
     getAvailabilityClass,
     getEuro,
 } from "@/lib/utils";
+import {incrementItemQuantityByAmount, removeItem, selectTotalPrice} from "@/lib/features/cart/cartSlice";
+
 /* icons */
 import {Trash2} from "lucide-react";
-
-interface CartItemProps extends CartItemType {
-    onDelete: (id: string) => void;
-    onQuantityChange: (id: string, newValue: number) => void;
-}
 
 export default function CartItem({
                                      imageUrl,
@@ -27,27 +30,25 @@ export default function CartItem({
                                      id,
                                      productCode,
                                      quantity,
-                                     onDelete,
-                                     onQuantityChange,
-                                 }: CartItemProps) {
+                                 }: CartItemType) {
+    // redux cartSlice
+    const dispatch = useAppDispatch();
+    const totalPrice = useAppSelector(selectTotalPrice);
+
     const availability: AvailabilityType = getAvailability(variant.quantityInStock);
     const availabilityClass: string = getAvailabilityClass(availability);
     const productLink: string = `/shop/product/${id}`;
 
-    const totalPrice = variant.price * quantity;
 
-    const handleQuantityChange = (delta: number) => {
-        onQuantityChange(id, delta);
-    };
-
-    const handleDelete = () => {
-        onDelete(id);
-    };
 
     return (
         <>
             <div
-                className="grid grid-cols-[3fr_1fr_1fr] gap-x-4 items-center w-full bg-white text-main border-gray-200 border-2 p-10 rounded-[8px]">
+                className="
+                    grid grid-cols-[3fr_1fr_1fr] gap-x-4 items-center w-full
+                    bg-white text-main border-gray-200 border-2 p-10 rounded-[8px]
+                "
+            >
                 <Link href={productLink} className="flex gap-x-10">
                     <div
                         className="relative overflow-hidden size-[100px] aspect-square flex shrink-0 justify-center items-center">
@@ -88,7 +89,7 @@ export default function CartItem({
                 </Link>
                 <Stepper
                     value={quantity}
-                    onChange={(delta) => handleQuantityChange(delta)}
+                    onChange={(e: number) => dispatch(incrementItemQuantityByAmount({ id: id, amount: e}))}
                     min={1}
                     max={variant.quantityInStock}
                     disabled={variant.quantityInStock == 0}
@@ -100,7 +101,7 @@ export default function CartItem({
                     <button
                         title="Remove from cart"
                         aria-label="Remove from cart"
-                        onClick={handleDelete}
+                        onClick={() => dispatch(removeItem(id))}
                     >
                         <Trash2
                             strokeWidth={1.5}
