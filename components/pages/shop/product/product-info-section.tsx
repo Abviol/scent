@@ -14,6 +14,7 @@ import {useAppDispatch} from "@/hooks/use-app-dispatch";
 import { ProductType } from "@/lib/types";
 import {convertProductToCartItem, getAvailability, getAvailabilityClass, getEuro} from "@/lib/utils";
 import {addItem} from "@/lib/features/cart/cart-slice";
+import {useCartDrawer} from "@/context/cart-drawer-context";
 
 interface ProductInfoSectionProps {
 	product: ProductType;
@@ -68,6 +69,14 @@ export default function ProductInfoSection({
 
 	// Redux Cart Slice
 	const dispatch = useAppDispatch();
+
+	// Cart drawer context
+	const {open: openCartDrawer} = useCartDrawer();
+
+	const handleBuy = () => {
+		dispatch(addItem(convertProductToCartItem(product, 1, selectedVariant)));
+		openCartDrawer();
+	}
 
 	return (
 		<section id="product-info">
@@ -161,7 +170,7 @@ export default function ProductInfoSection({
 								product.variants[selectedVariant]
 									.quantityInStock == 0
 							}
-							onClick={() => dispatch(addItem(convertProductToCartItem(product, 1, selectedVariant)))}
+							onClick={() => handleBuy()}
 						>
 							Buy
 						</Button>
