@@ -5,6 +5,7 @@ import "./globals.css";
 /* fonts*/
 import { inter } from "@/assets/fonts";
 import StoreProvider from "@/app/store-provider";
+import {CartDrawerProvider} from "@/context/cart-drawer-context";
 
 export const metadata: Metadata = {
   title: "Scents",
@@ -18,13 +19,15 @@ export default function RootLayout({
 }>) {
   return (
     <StoreProvider>
-        <html lang="en">
-        <body
-            className={`${inter.className} antialiased`}
-        >
-        {children}
-        </body>
-        </html>
+        <CartDrawerProvider>
+            <html lang="en">
+            <body
+                className={`${inter.className} antialiased`}
+            >
+            {children}
+            </body>
+            </html>
+        </CartDrawerProvider>
     </StoreProvider>
   );
 }
