@@ -1,25 +1,23 @@
 import {createEntityAdapter, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import type {CartItemType} from "@/lib/types";
 
-// Provides prebuilt reducers and selectors for normalized state management,
-// as recommended by the official Redux documentation.
-const cartAdapter = createEntityAdapter<CartItemType>({});
-
 interface CartSliceState {
-    recentlyAddedItems: Record<string, CartItemType>;
-    // Serves for rendering the recently added items in the order they were added
-    // as soon as plain objects don't guarantee key order in all cases.
-    recentlyAddedItemsIds: string[],
     totalAmount: number;
 }
+
+interface CartEntity extends CartItemType {
+    isSeen: boolean;
+}
+
+// Provides prebuilt reducers and selectors for normalized state management,
+// as recommended by the official Redux documentation.
+const cartAdapter = createEntityAdapter<CartEntity>({});
 
 /*
 * !!! Remove mock data before merge !!!
 * */
 const initialState = cartAdapter.upsertMany(cartAdapter.getInitialState<CartSliceState>({
-    recentlyAddedItems: {},
-    recentlyAddedItemsIds: [],
-    totalAmount: 3,
+    totalAmount: 2,
 }), {
     "asdf-wedg-cfad": {
         id: "asdf-wedg-cfad",
@@ -34,6 +32,7 @@ const initialState = cartAdapter.upsertMany(cartAdapter.getInitialState<CartSlic
             quantityInStock: 34,
         },
         quantity: 2,
+        isSeen: true,
     },
     "feqd-asdv-edwq": {
         id: "feqd-asdv-edwq",
@@ -48,6 +47,7 @@ const initialState = cartAdapter.upsertMany(cartAdapter.getInitialState<CartSlic
             quantityInStock: 12,
         },
         quantity: 1,
+        isSeen: true,
     },
 });
 
@@ -56,53 +56,43 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         /**
-         * Adds an item to `cart.recentlyAddedItems` and increments `cart.totalAmount`.
+         * Adds an item to `cart.entities` and increments `cart.totalAmount`.
          * In case if the item's id appears for the first time,
-         * the id is pushed to `cart.recentlyAddedItemsIds`.
          * @param action - Payload  containing an object of type `CartItemType`
          * */
         addItem: (state, action: PayloadAction<CartItemType>) => {
             const id = action.payload.id;
-            const existing = state.entities[id] || state.recentlyAddedItems[id];
+            const existing = state.entities[id];
             state.totalAmount++;
             if (existing) {
                 existing.quantity++;
             } else {
-                state.recentlyAddedItems[id] = action.payload;
-                state.recentlyAddedItemsIds.push(id);
+                cartAdapter.addOne(state, {...action.payload, isSeen: false});
             }
         },
         /**
-         * Removes an item from `cart.recentlyAddedItems` or `cart.entities`
-         * based on where the item resides. In the first case the item's id
-         * gets removed from `cart.recentlyAddedItemsIds` as well.
+         * Removes an item from `cart.entities`.
          *
          * Subtracts the item's quantity from `cart.totalAmount`.
          * @param action - Payload containing the item's id
          * */
         removeItem: (state, action: PayloadAction<string>) => {
             const id = action.payload;
-            const item = state.entities[id] || state.recentlyAddedItems[id];
+            const item = state.entities[id];
 
             if (!item) return;
 
             state.totalAmount -= item.quantity;
-
-            if (state.entities[id]) {
-                cartAdapter.removeOne(state, id);
-            } else {
-                delete state.recentlyAddedItems[id];
-                state.recentlyAddedItemsIds.splice(state.recentlyAddedItemsIds.indexOf(id), 1);
-            }
+            cartAdapter.removeOne(state, id);
         },
         /**
-         * Finds an item by id among `cart.entities` and `cart.recentlyAddedItems`
+         * Finds an item by id among `cart.entities`
          * and increments its quantity by the specified amount.
          * @param action - Payload containing the item id and the amount to increment by
          */
         incrementItemQuantityByAmount: (state, action: PayloadAction<{ id: string, amount: number }>) => {
             const id = action.payload.id;
-            const item = state.entities[id] || state.recentlyAddedItems[id];
+            const item = state.entities[id];
 
             if (!item) return;
 
@@ -117,43 +107,32 @@ export const cartSlice = createSlice({
         /**
          * Removes all entries from `cart.entities`.
          *
-         * Removes all entries from `cart.recentlyAddedItems`
-         * and all ids from `cart.recentlyAddedItemsIds`.
-         *
          * Sets `cart.totalAmount` to `0`.
          * */
         clearCart: (state) => {
             state.totalAmount = 0;
             cartAdapter.removeAll(state);
-            state.recentlyAddedItems = {};
-            state.recentlyAddedItemsIds = [];
         },
         /**
-         * Moves all `cart.recentlyAddedItems` entries to `cart.entities`.
-         *
-         * Removes all entries from `cart.recentlyAddedItems`
-         * and all ids from `cart.recentlyAddedItemsIds`.
+         * Sets all entities with `isSeen` set to false and sets it to true.
          * */
         acknowledgeRecentlyAddedItems: (state) => {
-            cartAdapter.addMany(state, state.recentlyAddedItems);
-            state.recentlyAddedItems = {};
-            state.recentlyAddedItemsIds = [];
+            cartAdapter.updateMany(state, state.ids
+                .filter(id => !state.entities[id]?.isSeen)
+                .map(id => ({id, changes: {isSeen: true}}))
+            );
         },
     },
     selectors: {
-        selectRecentlyAddedItems: (cart) => cart.recentlyAddedItemsIds.map(id => cart.recentlyAddedItems[id]),
+        selectRecentlyAddedItems: (cart) => Object.values(cart.entities).filter(item => !item.isSeen),
+        selectSeenItems: (cart) => Object.values(cart.entities).filter(item => item.isSeen),
         selectItems: (cart) => Object.values(cart.entities),
         selectTotalAmount: (cart) => cart.totalAmount,
-        selectTotalPrice: (cart) => {
-            let total = 0;
-            Object.values(cart.entities).forEach((value) => {
-                total += value.quantity * value.variant.price;
-            });
-            Object.values(cart.recentlyAddedItems).forEach((value) => {
-                total += value.quantity * value.variant.price;
-            });
-            return total;
-        },
+        selectTotalPrice: (cart) => Object.values(cart.entities)
+            .reduce(
+                (accumulator, currentValue) => accumulator += currentValue.quantity * currentValue.variant.price,
+                0
+            ),
     },
 });
 
@@ -167,4 +146,4 @@ export const {
 } = cartSlice.actions;
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.
-export const {selectRecentlyAddedItems, selectItems, selectTotalAmount, selectTotalPrice} = cartSlice.selectors;
+export const {selectRecentlyAddedItems, selectSeenItems, selectItems, selectTotalAmount, selectTotalPrice} = cartSlice.selectors;
