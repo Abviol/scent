@@ -40,6 +40,8 @@ import {
 
 /* styles */
 import "./styles.css";
+import {Button} from "@/components/ui/button";
+import {acknowledgeRecentlyAddedItems, addItem, clearCart} from "@/lib/features/cart/cartSlice";
 
 // --- Helper Component for Layout ---
 const DemoSection = ({
@@ -64,6 +66,7 @@ export default function Page() {
     const [cartQuantity1, setCartQuantity1] = useState<number>(10);
     const [cartQuantity2, setCartQuantity2] = useState<number>(10);
     const [cartQuantity3, setCartQuantity3] = useState<number>(10);
+    const [cartQuantity4, setCartQuantity4] = useState<number>(10);
 
     // Data for Breadcrumbs
     const crumbs = [
@@ -248,8 +251,6 @@ export default function Page() {
                             }}
                             imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
                             quantity={1}
-                            onDelete={() => {
-                            }}
                         />
                         <CartDrawerItem
                             name="Versace Eros Flame"
@@ -264,8 +265,6 @@ export default function Page() {
                             }}
                             imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
                             quantity={1}
-                            onDelete={() => {
-                            }}
                         />
                     </div>
                 </DemoSection>
@@ -279,7 +278,7 @@ export default function Page() {
 							</span>
                             <Stepper
                                 value={cartQuantity1}
-                                onChange={setCartQuantity1}
+                                onChange={(e: number) => setCartQuantity1(prev => prev + e)}
                                 max={99}
                             />
                         </div>
@@ -290,7 +289,7 @@ export default function Page() {
 							</span>
                             <Stepper
                                 value={cartQuantity2}
-                                onChange={setCartQuantity2}
+                                onChange={(e: number) => setCartQuantity2(prev => prev + e)}
                                 max={10}
                             />
                         </div>
@@ -301,9 +300,21 @@ export default function Page() {
 							</span>
                             <Stepper
                                 value={cartQuantity3}
-                                onChange={setCartQuantity3}
+                                onChange={() => {}}
                                 max={10}
                                 disabled
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+							<span className="text-sm text-gray-500">
+								Step 5
+							</span>
+                            <Stepper
+                                value={cartQuantity4}
+                                onChange={(e: number) => setCartQuantity4(prev => prev + e)}
+                                step={5}
+                                max={100}
                             />
                         </div>
 
@@ -312,8 +323,8 @@ export default function Page() {
 								Small Variant
 							</span>
                             <Stepper
-                                value={cartQuantity1}
-                                onChange={setCartQuantity1}
+                                value={cartQuantity3}
+                                onChange={(e: number) => setCartQuantity3(prev => prev + e)}
                                 max={99}
                                 size="sm"
                             />
@@ -397,8 +408,36 @@ export default function Page() {
                     </div>
                 </DemoSection>
 
-                <DemoSection title={"Cart drawer"}>
-                    <CartDrawer></CartDrawer>
+                <DemoSection title={"Cart drawer + Redux Cart Slice"}>
+                    <div className="flex gap-2">
+                        <CartDrawer></CartDrawer>
+                        <Button
+                            onClick={() => dispatch(addItem({
+                                imageUrl: "https://i.makeup.it/l/l7/l7yfzcx8yetn.png",
+                                name: "Yves Saint Laurent",
+                                variant: {
+                                    volume: 50,
+                                    price: 15600,
+                                    discountedPrice: 9388,
+                                    wishlist: true,
+                                    quantityInStock: 34,
+                                },
+                                id: "asdf-cvfd-nhrq",
+                                productCode: "865436",
+                                quantity: 1,
+                            }))}
+                        >Add to cart</Button>
+                        <Button
+                            onClick={() => dispatch(clearCart())}
+                        >
+                            Clear cart
+                        </Button>
+                        <Button
+                            onClick={() => dispatch(acknowledgeRecentlyAddedItems())}
+                        >
+                            Acknowledge recently added items
+                        </Button>
+                    </div>
                 </DemoSection>
 
                 <DemoSection title={"Redux Usage Example: Counter"}>
