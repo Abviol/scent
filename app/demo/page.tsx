@@ -410,7 +410,11 @@ export default function Page() {
 
                 <DemoSection title={"Cart drawer + Redux Cart Slice"}>
                     <div className="flex gap-2">
-                        <CartDrawer></CartDrawer>
+                        <CartDrawer>
+                            <Button>
+                                Trigger cart drawer
+                            </Button>
+                        </CartDrawer>
                         <Button
                             onClick={() => dispatch(addItem({
                                 imageUrl: "https://i.makeup.it/l/l7/l7yfzcx8yetn.png",

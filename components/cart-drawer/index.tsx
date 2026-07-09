@@ -21,8 +21,9 @@ import {
 import {useAppSelector} from "@/hooks/use-app-selector";
 import {getEuro} from "@/lib/utils";
 import {useAppDispatch} from "@/hooks/use-app-dispatch";
+import {useState} from "react";
 
-export default function CartDrawer() {
+export default function CartDrawer({children}: { children: React.ReactNode }) {
     const dispatch = useAppDispatch();
     const recentlyAddedItems = useAppSelector(selectRecentlyAddedItems);
     const seenItems = useAppSelector(selectSeenItems);
@@ -30,11 +31,17 @@ export default function CartDrawer() {
     const totalPrice = useAppSelector(selectTotalPrice);
     const totalAmount = useAppSelector(selectTotalAmount);
 
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
     return (
         <>
-            <Dialog.Root>
+            <Dialog.Root
+                // defaultOpen={false}
+                open={isOpen}
+                onOpenChange={(e) => setIsOpen(e)}
+            >
                 <Dialog.Trigger asChild>
-                    <Button>Trigger cart drawer</Button>
+                    {children}
                 </Dialog.Trigger>
                 <Dialog.Portal>
                     <Dialog.Overlay className="dialog__overlay"/>
@@ -152,6 +159,7 @@ export default function CartDrawer() {
                                         size="lg"
                                         variant="outline"
                                         className="h-[44px] w-full text-base"
+                                        onClick={() => setIsOpen(false)}
                                         asChild
                                     >
                                         <Link href={"/account/cart"}>
