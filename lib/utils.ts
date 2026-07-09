@@ -2,10 +2,10 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import {
-	AvailabilityType,
+	AvailabilityType, CartItemType,
 	FilterTag,
-	GenderType,
-	SORTING_CRITERIAS,
+	GenderType, ProductType,
+	SORTING_CRITERIAS, VariantType,
 } from "./types";
 import { FilterState, SortingType, SortingCriteriaType } from "@/lib/types";
 import { MOCK_SHOP_FILTERS } from "./data";
@@ -221,3 +221,20 @@ export function formatTime(time: number): string {
 	return time / 10 < 1 ? `0${time}` : time.toString();
 }
 
+/**
+ * Converts an object of `ProductType` to `CartItemType` object.
+ * @param product - The object to convert.
+ * @param quantity - Initial quantity.
+ * @param variantIndex - The index of the selected variant.
+ * @returns An object of `CartItemType`.
+ * */
+export function convertProductToCartItem(product: ProductType, quantity: number, variantIndex: number): CartItemType {
+	return {
+		id: product.id,
+		imageUrl: product.imageUrls[0],
+		name: product.name,
+		productCode: product.code,
+		quantity: quantity,
+		variant: product.variants[variantIndex],
+	}
+}
