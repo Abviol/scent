@@ -8,13 +8,15 @@ import Link from "next/link";
 /* components */
 import Stepper from "../../stepper";
 
+/* hooks */
+import {useAppDispatch} from "@/hooks/use-app-dispatch";
+
 /* lib */
 import {AvailabilityType, CartItemType} from "@/lib/types";
 import {
 	getAvailability,
 	getEuro,
 } from "@/lib/utils";
-import {useAppDispatch} from "@/hooks/use-app-dispatch";
 import {
 	incrementItemQuantityByAmount,
 	removeItem

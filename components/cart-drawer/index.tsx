@@ -13,12 +13,19 @@ import {CartItemType} from "@/lib/types";
 import {Check, ShoppingCart, X, Lock, Search} from "lucide-react";
 /* styles */
 import "./styles.css";
-import {selectTotalAmount, selectItems, selectRecentlyAddedItems, selectTotalPrice} from "@/lib/features/cart/cartSlice";
+import {
+    selectTotalAmount,
+    selectItems,
+    selectRecentlyAddedItems,
+    selectTotalPrice,
+    selectSeenItems
+} from "@/lib/features/cart/cartSlice";
 import {useAppSelector} from "@/hooks/use-app-selector";
 import {getEuro} from "@/lib/utils";
 
 export default function CartDrawer() {
     const recentlyAddedItems = useAppSelector(selectRecentlyAddedItems);
+    const seenItems = useAppSelector(selectSeenItems);
     const items = useAppSelector(selectItems);
     const totalPrice = useAppSelector(selectTotalPrice);
     const totalAmount = useAppSelector(selectTotalAmount);
@@ -100,17 +107,30 @@ export default function CartDrawer() {
                                             {recentlyAddedItems.length == 0 ? "All" : "Other"} products ({items.length})
                                         </h3>
                                         <div className="flex flex-col gap-y-2">
-                                            {items.map((item, index) => (
-                                                <CartDrawerItem
-                                                    key={item.id + index}
-                                                    id={item.id}
-                                                    productCode={item.productCode}
-                                                    name={item.name}
-                                                    variant={item.variant}
-                                                    imageUrl={item.imageUrl}
-                                                    quantity={item.quantity}
-                                                />
-                                            ))}
+                                            {recentlyAddedItems.length == 0 ?
+                                                items.map((item, index) => (
+                                                    <CartDrawerItem
+                                                        key={item.id + index}
+                                                        id={item.id}
+                                                        productCode={item.productCode}
+                                                        name={item.name}
+                                                        variant={item.variant}
+                                                        imageUrl={item.imageUrl}
+                                                        quantity={item.quantity}
+                                                    />
+                                                )) :
+                                                seenItems.map((item, index) => (
+                                                    <CartDrawerItem
+                                                        key={item.id + index}
+                                                        id={item.id}
+                                                        productCode={item.productCode}
+                                                        name={item.name}
+                                                        variant={item.variant}
+                                                        imageUrl={item.imageUrl}
+                                                        quantity={item.quantity}
+                                                    />
+                                                ))
+                                            }
                                         </div>
                                     </div>
                                 </div>
