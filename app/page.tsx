@@ -187,7 +187,7 @@ function BannerCard(props: BannerCardProps) {
 				</div>
 				<div className="relative h-[30%] overflow-hidden group-hover:h-[50%] transition-all ease-in-out duration-500">
 					<div
-						className={`relative w-full h-full flex flex-col justify-center items-center backdrop-blur-sm z-20`}
+						className={`relative w-full h-full flex flex-col justify-center items-center backdrop-blur-sm z-10`}
 						style={{
 							background: `color-mix(in oklab, ${props.color} 52%, transparent)`,
 						}}
@@ -212,7 +212,7 @@ function BannerCard(props: BannerCardProps) {
 					<Image
 						src={props.imageUrl}
 						alt={props.title + " banner reflected"}
-						className="absolute top-0 z-10 w-full rotate-x-180 group-hover:-translate-y-[20%] transition-transform duration-500"
+						className="absolute top-0 z-0 w-full rotate-x-180 group-hover:-translate-y-[20%] transition-transform duration-500"
 					/>
 				</div>
 			</div>

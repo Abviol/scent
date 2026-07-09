@@ -127,7 +127,7 @@ function DropdownContent({
 	if (!isOpen) return null;
 
 	return (
-		<div className="sorting-content absolute top-10 right-0 w-[160px] py-4 px-8 bg-white rounded-md drop-shadow-md z-50">
+		<div className="sorting-content absolute top-10 right-0 w-[160px] py-4 px-8 bg-white rounded-md drop-shadow-md z-30">
 			<ul className="flex flex-col">
 				{SORTING_CRITERIAS.map((v, k) => {
 					const isSelected = v === selectedCriteria;
