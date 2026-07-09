@@ -102,8 +102,8 @@ export const cartSlice = createSlice({
             if (!item) return;
 
             if (item.quantity + action.payload.amount < 0) { // to prevent setting item.quantity below zero e.g. in case item.quantity = 3, amount = -5 => -2
-                item.quantity = 0;
                 state.totalAmount -= item.quantity;
+                item.quantity = 0;
             } else {
                 item.quantity += action.payload.amount;
                 state.totalAmount += action.payload.amount;
