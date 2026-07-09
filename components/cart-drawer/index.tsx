@@ -7,8 +7,6 @@ import Link from "next/link";
 import {Dialog} from "radix-ui";
 import {Button} from "@/components/ui/button";
 import CartDrawerItem from "./item";
-/* lib */
-import {CartItemType} from "@/lib/types";
 /* icons */
 import {Check, ShoppingCart, X, Lock, Search} from "lucide-react";
 /* styles */
@@ -18,12 +16,14 @@ import {
     selectItems,
     selectRecentlyAddedItems,
     selectTotalPrice,
-    selectSeenItems
+    selectSeenItems, acknowledgeRecentlyAddedItems
 } from "@/lib/features/cart/cartSlice";
 import {useAppSelector} from "@/hooks/use-app-selector";
 import {getEuro} from "@/lib/utils";
+import {useAppDispatch} from "@/hooks/use-app-dispatch";
 
 export default function CartDrawer() {
+    const dispatch = useAppDispatch();
     const recentlyAddedItems = useAppSelector(selectRecentlyAddedItems);
     const seenItems = useAppSelector(selectSeenItems);
     const items = useAppSelector(selectItems);
@@ -38,7 +38,10 @@ export default function CartDrawer() {
                 </Dialog.Trigger>
                 <Dialog.Portal>
                     <Dialog.Overlay className="dialog__overlay"/>
-                    <Dialog.Content className="dialog__content">
+                    <Dialog.Content
+                        className="dialog__content"
+                        onCloseAutoFocus={() => dispatch(acknowledgeRecentlyAddedItems())}
+                    >
                         {/* Description: hidden */}
                         <Dialog.Description className="hidden">
                             Manage your cart articles here.
