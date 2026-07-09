@@ -1,6 +1,6 @@
 ﻿export interface ProductType {
 	id: string;
-	code: number; //! convert to a string
+	code: string;
 	name: string;
 	imageUrls: string[];
 	rating: number;

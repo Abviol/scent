@@ -5,7 +5,7 @@ import {BrandType, CartItemType, FilterState, ProductType} from "./types";
 const PRODUCTS: ProductType[] = [
     {
         id: "asdf-werg-cfad",
-        code: 123456,
+        code: "123456",
         name: "Jean Paul Gaultier Le Beau",
         imageUrls: [
             "https://i.makeup.it/9/9i/9iajbg7jxhit.jpg",
@@ -70,7 +70,7 @@ const PRODUCTS: ProductType[] = [
     },
     {
         id: "asdf-werg-cfad",
-        code: 529683,
+        code: "529683",
         name: "Yves Saint Laurent Libre Intense",
         rating: 4.9,
         reviewsAmount: 142,
@@ -141,7 +141,7 @@ const PRODUCTS: ProductType[] = [
     },
     {
         id: "asdf-wedg-cfad",
-        code: 422454,
+        code: "422454",
         name: "Montblanc Explorer",
         rating: 4.9,
         reviewsAmount: 352,
