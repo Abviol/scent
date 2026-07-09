@@ -213,10 +213,6 @@ export default function Page() {
                             }}
                             imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
                             quantity={1}
-                            onDelete={() => {
-                            }}
-                            onQuantityChange={() => {
-                            }}
                         />
                         <CartItem
                             name="Versace Eros Flame"
@@ -231,10 +227,6 @@ export default function Page() {
                             }}
                             imageUrl="https://i.makeup.it/1/1x/1xkz6atfgthd.jpg"
                             quantity={1}
-                            onDelete={() => {
-                            }}
-                            onQuantityChange={() => {
-                            }}
                         />
                     </div>
                 </DemoSection>
