@@ -4,23 +4,25 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 /* next.js */
 import Link from "next/link";
-/* icons */
-import { Bookmark, Mail, Search, ShoppingCartIcon, X } from "lucide-react";
-
-// UI Components
+import { useRouter } from "next/navigation";
+// Components
 import { Button } from "../ui/button";
 import Avatar from "../ui/avatar";
 import { Input } from "../ui/input";
 import SearchResultItem from "../search-result-item";
-import { useRouter } from "next/navigation";
+import CartDrawer from "@/components/cart-drawer";
+/* hooks */
+import {useAppSelector} from "@/hooks/use-app-selector";
+/* lib */
+import {selectTotalAmount} from "@/lib/features/cart/cart-slice";
+/* icons */
+import { Bookmark, Mail, Search, ShoppingCartIcon, X } from "lucide-react";
 
-// Types
 interface User {
 	avatarUrl: string;
 	name: string;
 }
 
-// Main Component
 export default function Header() {
 	const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
 	const [searchQuery, setSearchQuery] = useState<string>("");
@@ -28,12 +30,12 @@ export default function Header() {
 
 	// Mock Data
 	const isLoggedIn: boolean = false;
-	const itemsInCart: number = 2;
 	const user: User = {
 		avatarUrl: "https://github.com/shadcn.png",
 		name: "Misha Kulkin",
 	};
 
+	// Search
 	const closeSearch = () => setIsSearchOpen(false);
 	const handleSearchFocus = () => setIsSearchOpen(true);
 	const clearSearch = () => setSearchQuery("");
@@ -64,18 +66,21 @@ export default function Header() {
 		return () => document.body.removeEventListener("click", handleBlur);
 	}, [handleBlur]);
 
+	// Cart
+	const cartItemsTotalAmount = useAppSelector(selectTotalAmount);
+
 	return (
 		<>
 			{/* Backdrop Overlay */}
 			{isSearchOpen && searchQuery && (
 				<div
-					className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm transition-all"
+					className="fixed inset-0 z-20 bg-black/20 backdrop-blur-sm transition-all"
 					onClick={closeSearch}
 					aria-hidden="true"
 				/>
 			)}
 
-			<header className="relative w-full py-9 z-50 bg-white">
+			<header className="relative w-full py-9 z-30 bg-white">
 				<div className="container mx-auto px-8 flex justify-between items-center gap-8">
 					{/* 1. Logo */}
 					<Link
@@ -102,7 +107,7 @@ export default function Header() {
 						<HeaderActions
 							isLoggedIn={isLoggedIn}
 							user={user}
-							itemsInCart={itemsInCart}
+							itemsInCart={cartItemsTotalAmount}
 						/>
 					</div>
 				</div>
@@ -205,7 +210,7 @@ function HeaderActions({
 				>
 					<Bookmark className="size-8" strokeWidth={1.5} />
 				</Link>
-				<CartLink items={itemsInCart} />
+				<CartTrigger items={itemsInCart} />
 			</div>
 
 			{isLoggedIn ? (
@@ -228,7 +233,7 @@ function SearchDropdown({ isOpen, query }: { isOpen: boolean; query: string }) {
 	if (!isOpen || !query) return null;
 
 	return (
-		<div className="absolute z-50 left-0 top-full w-full bg-white border-b border-gray-100 shadow-xl animate-in fade-in slide-in-from-top-2 duration-200">
+		<div className="absolute z-30 left-0 top-full w-full bg-white border-b border-gray-100 shadow-xl animate-in fade-in slide-in-from-top-2 duration-200">
 			<div className="container mx-auto px-8 grid grid-cols-12 gap-11">
 				{/* Product Results */}
 				<div className="col-span-9 flex flex-col gap-y-10 py-8">
@@ -280,21 +285,22 @@ function SearchDropdown({ isOpen, query }: { isOpen: boolean; query: string }) {
 	);
 }
 
-function CartLink({ items = 0 }: { items?: number }) {
+function CartTrigger({ items = 0 }: { items?: number }) {
 	return (
-		<Link
-			href={"/account/cart"}
-			aria-label="Go to cart"
-			className="relative button-icon flex items-center justify-center"
-		>
-			<ShoppingCartIcon className="size-8" strokeWidth={1.5} />
-			{items > 0 && (
-				<div className="absolute top-0 right-0 size-5 bg-main border-2 border-white rounded-full flex justify-center items-center translate-x-1 -translate-y-1">
+		<CartDrawer>
+			<button
+				aria-label="Open cart"
+				className="relative button-icon flex items-center justify-center"
+			>
+				<ShoppingCartIcon className="size-8" strokeWidth={1.5} />
+				{items > 0 && (
+					<div className="absolute top-0 right-0 size-5 bg-main border-2 border-white rounded-full flex justify-center items-center translate-x-1 -translate-y-1">
 					<span className="text-[10px] text-white font-semibold">
 						{items}
 					</span>
-				</div>
-			)}
-		</Link>
+					</div>
+				)}
+			</button>
+		</CartDrawer>
 	);
 }
