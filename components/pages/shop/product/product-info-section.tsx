@@ -8,9 +8,12 @@ import Rating from "@/components/ui/rating";
 import BookmarkButton from "@/components/bookmark-button";
 import { Button } from "@/components/ui/button";
 import { ProdTab, ProdTabList, ProdTabPanel, ProdTabs } from "./product-detail-tabs";
+/* hooks */
+import {useAppDispatch} from "@/hooks/use-app-dispatch";
 /* lib */
 import { ProductType } from "@/lib/types";
-import { getAvailability, getAvailabilityClass, getEuro } from "@/lib/utils";
+import {convertProductToCartItem, getAvailability, getAvailabilityClass, getEuro} from "@/lib/utils";
+import {addItem} from "@/lib/features/cart/cart-slice";
 
 interface ProductInfoSectionProps {
 	product: ProductType;
@@ -20,12 +23,12 @@ export default function ProductInfoSection({
 	product,
 }: ProductInfoSectionProps) {
 	const [selectedVariant, setSelectedVariant] = useState<number>(0);
-
 	const availability = getAvailability(
 		product.variants[selectedVariant].quantityInStock,
 	);
 	const availabilityClass: string = getAvailabilityClass(availability);
 
+	// Tabs
 	const tabsConfig = [
 		product.details
 			? {
@@ -62,6 +65,10 @@ export default function ProductInfoSection({
 				}
 			: null,
 	].filter((item) => item !== null);
+
+	// Redux Cart Slice
+	const dispatch = useAppDispatch();
+
 	return (
 		<section id="product-info">
 			<div className="grid grid-cols-[2fr_3fr] gap-x-6 mb-15">
@@ -154,6 +161,7 @@ export default function ProductInfoSection({
 								product.variants[selectedVariant]
 									.quantityInStock == 0
 							}
+							onClick={() => dispatch(addItem(convertProductToCartItem(product, 1, selectedVariant)))}
 						>
 							Buy
 						</Button>
