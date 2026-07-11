@@ -49,7 +49,10 @@ export default function CartDrawer({children}: { children: React.ReactNode }) {
                     <Dialog.Overlay className="dialog__overlay"/>
                     <Dialog.Content
                         className="dialog__content"
-                        onCloseAutoFocus={() => dispatch(acknowledgeRecentlyAddedItems())}
+                        onCloseAutoFocus={(e) => {
+                            e.preventDefault();
+                            dispatch(acknowledgeRecentlyAddedItems());
+                        }}
                     >
                         {/* Description: hidden */}
                         <Dialog.Description className="hidden">
