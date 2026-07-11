@@ -2,29 +2,37 @@
 
 /* next.js*/
 import Link from "next/link";
+import {usePathname} from "next/navigation";
 
 /* components*/
 import {Dialog} from "radix-ui";
 import {Button} from "@/components/ui/button";
 import CartDrawerItem from "./item";
-/* icons */
-import {Check, ShoppingCart, X, Lock, Search} from "lucide-react";
-/* styles */
-import "./styles.css";
+
+/* hooks */
+import {useAppSelector} from "@/hooks/use-app-selector";
+import {useAppDispatch} from "@/hooks/use-app-dispatch";
+import {useCartDrawer} from "@/context/cart-drawer-context";
+
+/* lib */
 import {
-    selectTotalAmount,
     selectAllItems,
     selectRecentlyAddedItems,
     selectTotalPrice,
     selectSeenItems, acknowledgeRecentlyAddedItems
 } from "@/lib/features/cart/cart-slice";
-import {useAppSelector} from "@/hooks/use-app-selector";
 import {getEuro} from "@/lib/utils";
-import {useAppDispatch} from "@/hooks/use-app-dispatch";
-import {useState} from "react";
-import {useCartDrawer} from "@/context/cart-drawer-context";
+
+/* icons */
+import {Check, ShoppingCart, X, Lock, Search} from "lucide-react";
+/* styles */
+import "./styles.css";
+import {useEffect} from "react";
 
 export default function CartDrawer({children}: { children: React.ReactNode }) {
+    // For detecting URL changes and closing the drawer
+    const pathname = usePathname();
+
     const dispatch = useAppDispatch();
     const recentlyAddedItems = useAppSelector(selectRecentlyAddedItems);
     const seenItems = useAppSelector(selectSeenItems);
@@ -34,6 +42,8 @@ export default function CartDrawer({children}: { children: React.ReactNode }) {
 
     // Cart drawer context
     const {isOpen, open, close} = useCartDrawer();
+
+    useEffect(close, [pathname]);
 
     return (
         <>
