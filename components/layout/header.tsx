@@ -14,7 +14,7 @@ import CartDrawer from "@/components/cart-drawer";
 /* hooks */
 import {useAppSelector} from "@/hooks/use-app-selector";
 /* lib */
-import {selectItems} from "@/lib/features/cart/cart-slice";
+import {selectAllItems} from "@/lib/features/cart/cart-slice";
 /* icons */
 import { Bookmark, Mail, Search, ShoppingCartIcon, X } from "lucide-react";
 
@@ -67,7 +67,7 @@ export default function Header() {
 	}, [handleBlur]);
 
 	// Cart
-	const cartUniqueItemsAmount = useAppSelector(selectItems).length;
+	const cartUniqueItemsAmount = useAppSelector(selectAllItems).length;
 	return (
 		<>
 			{/* Backdrop Overlay */}

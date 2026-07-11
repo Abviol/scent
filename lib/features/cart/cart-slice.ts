@@ -158,7 +158,7 @@ export const selectSeenItems = createSelector(
     [cartAdapterSelectors.selectAll],
     (items) => items.filter(item => item.isSeen),
 );
-export const selectItems = cartAdapterSelectors.selectAll;
+export const selectAllItems = cartAdapterSelectors.selectAll;
 export const selectTotalPrice = createSelector(
     [cartAdapterSelectors.selectAll],
     (items) => items.reduce(

@@ -13,7 +13,7 @@ import {Check, ShoppingCart, X, Lock, Search} from "lucide-react";
 import "./styles.css";
 import {
     selectTotalAmount,
-    selectItems,
+    selectAllItems,
     selectRecentlyAddedItems,
     selectTotalPrice,
     selectSeenItems, acknowledgeRecentlyAddedItems
@@ -28,9 +28,9 @@ export default function CartDrawer({children}: { children: React.ReactNode }) {
     const dispatch = useAppDispatch();
     const recentlyAddedItems = useAppSelector(selectRecentlyAddedItems);
     const seenItems = useAppSelector(selectSeenItems);
-    const items = useAppSelector(selectItems);
+    const items = useAppSelector(selectAllItems);
     const totalPrice = useAppSelector(selectTotalPrice);
-    const uniqueItemsAmount = useAppSelector(selectItems).length;
+    const uniqueItemsAmount = useAppSelector(selectAllItems).length;
 
     // Cart drawer context
     const {isOpen, open, close} = useCartDrawer();

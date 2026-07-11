@@ -17,7 +17,7 @@ import {useAppSelector} from "@/hooks/use-app-selector";
 import {CartItemType} from "@/lib/types";
 import {getEuro} from "@/lib/utils";
 import {Search} from "lucide-react";
-import {incrementItemQuantityByAmount, removeItem, selectItems, selectTotalPrice} from "@/lib/features/cart/cart-slice";
+import {incrementItemQuantityByAmount, removeItem, selectAllItems, selectTotalPrice} from "@/lib/features/cart/cart-slice";
 import {useAppDispatch} from "@/hooks/use-app-dispatch";
 
 interface CartPageClientProps {
@@ -29,7 +29,7 @@ const DELIVERY_COST = 0;
 export default function CartPageClient({cartItems}: CartPageClientProps) {
     const dispatch = useAppDispatch();
     const totalPrice = useAppSelector(selectTotalPrice);
-    const items = useAppSelector(selectItems);
+    const items = useAppSelector(selectAllItems);
 
     if (items.length === 0) return (
         <div className="my-[120px] flex flex-col justify-center items-center">
