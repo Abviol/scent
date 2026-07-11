@@ -1,7 +1,7 @@
 ﻿"use client";
 
 /* react */
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, {useEffect, useRef, useState, useCallback} from "react";
 /* next.js */
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,7 +14,7 @@ import CartDrawer from "@/components/cart-drawer";
 /* hooks */
 import {useAppSelector} from "@/hooks/use-app-selector";
 /* lib */
-import {selectTotalAmount} from "@/lib/features/cart/cart-slice";
+import {selectItems} from "@/lib/features/cart/cart-slice";
 /* icons */
 import { Bookmark, Mail, Search, ShoppingCartIcon, X } from "lucide-react";
 
@@ -67,8 +67,7 @@ export default function Header() {
 	}, [handleBlur]);
 
 	// Cart
-	const cartItemsTotalAmount = useAppSelector(selectTotalAmount);
-
+	const cartUniqueItemsAmount = useAppSelector(selectItems).length;
 	return (
 		<>
 			{/* Backdrop Overlay */}
@@ -107,7 +106,7 @@ export default function Header() {
 						<HeaderActions
 							isLoggedIn={isLoggedIn}
 							user={user}
-							itemsInCart={cartItemsTotalAmount}
+							itemsInCart={cartUniqueItemsAmount}
 						/>
 					</div>
 				</div>

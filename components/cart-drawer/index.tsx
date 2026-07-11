@@ -30,7 +30,7 @@ export default function CartDrawer({children}: { children: React.ReactNode }) {
     const seenItems = useAppSelector(selectSeenItems);
     const items = useAppSelector(selectItems);
     const totalPrice = useAppSelector(selectTotalPrice);
-    const totalAmount = useAppSelector(selectTotalAmount);
+    const uniqueItemsAmount = useAppSelector(selectItems).length;
 
     // Cart drawer context
     const {isOpen, open, close} = useCartDrawer();
@@ -64,7 +64,7 @@ export default function CartDrawer({children}: { children: React.ReactNode }) {
                                 <Dialog.Title className="dialog__title">Shopping Cart</Dialog.Title>
                                 {/* Quantity */}
                                 <span className="p-2 bg-slate-600 rounded-[8px] text-base text-white leading-3">
-                                    {totalAmount}
+                                    {uniqueItemsAmount}
                                 </span>
                             </div>
 
@@ -81,7 +81,7 @@ export default function CartDrawer({children}: { children: React.ReactNode }) {
 
                         {/* Conditional Rendering */}
                         {/* Handle empty and full cart states */}
-                        {totalAmount === 0 ? (
+                        {uniqueItemsAmount === 0 ? (
                             <div
                                 className={"dialog__banner h-12 justify-center items-center gap-x-3 bg-gray-100! text-slate-500!"}>
                                 <Search strokeWidth={2}></Search>
