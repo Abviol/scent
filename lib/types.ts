@@ -17,6 +17,7 @@
 }
 
 export interface VariantType {
+	id: string;
 	volume: number;
 	price: number;
 	discountedPrice: number | undefined;

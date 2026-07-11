@@ -211,6 +211,7 @@ export default function Page() {
                             id="drawer-001"
                             productCode="01203213"
                             variant={{
+                                id: "versace-eros-flame-30",
                                 volume: 30,
                                 price: 4999,
                                 discountedPrice: undefined,
@@ -225,6 +226,7 @@ export default function Page() {
                             id="drawer-001"
                             productCode="01203213"
                             variant={{
+                                id: "versace-eros-flame-30",
                                 volume: 30,
                                 price: 4999,
                                 discountedPrice: undefined,
@@ -246,6 +248,7 @@ export default function Page() {
                             id="drawer-001"
                             productCode="01203213"
                             variant={{
+                                id: "versace-eros-flame-30",
                                 volume: 30,
                                 price: 4999,
                                 discountedPrice: undefined,
@@ -260,6 +263,7 @@ export default function Page() {
                             id="drawer-002"
                             productCode="01203213"
                             variant={{
+                                id: "versace-eros-flame-30",
                                 volume: 30,
                                 price: 4999,
                                 discountedPrice: undefined,
@@ -421,8 +425,9 @@ export default function Page() {
                         <Button
                             onClick={() => dispatch(addItem({
                                 imageUrl: "https://i.makeup.it/l/l7/l7yfzcx8yetn.png",
-                                name: "Yves Saint Laurent",
+                                name: "Yves Saint Laurent Libre Intense",
                                 variant: {
+                                    id: "yves-saint-laurent-libre-intense-50",
                                     volume: 50,
                                     price: 15600,
                                     discountedPrice: 9388,

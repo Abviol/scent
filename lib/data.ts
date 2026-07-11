@@ -21,6 +21,7 @@ const PRODUCTS: ProductType[] = [
         brand: "Jean Paul Gaultier",
         variants: [
             {
+                id: "jean-paul-gaultier-le-beau-30",
                 volume: 30,
                 price: 4999,
                 discountedPrice: undefined,
@@ -28,6 +29,7 @@ const PRODUCTS: ProductType[] = [
                 quantityInStock: 1,
             },
             {
+                id: "jean-paul-gaultier-le-beau-50",
                 volume: 50,
                 price: 6999,
                 discountedPrice: 5794,
@@ -35,6 +37,7 @@ const PRODUCTS: ProductType[] = [
                 quantityInStock: 0,
             },
             {
+                id: "jean-paul-gaultier-le-beau-75",
                 volume: 75,
                 price: 7999,
                 wishlist: true,
@@ -88,6 +91,7 @@ const PRODUCTS: ProductType[] = [
         ],
         variants: [
             {
+                id: "yves-saint-laurent-libre-intense-30",
                 volume: 30,
                 price: 10900,
                 discountedPrice: 6539,
@@ -95,6 +99,7 @@ const PRODUCTS: ProductType[] = [
                 quantityInStock: 1,
             },
             {
+                id: "yves-saint-laurent-libre-intense-50",
                 volume: 50,
                 price: 15600,
                 discountedPrice: 9388,
@@ -102,6 +107,7 @@ const PRODUCTS: ProductType[] = [
                 quantityInStock: 34,
             },
             {
+                id: "yves-saint-laurent-libre-intense-60",
                 volume: 60,
                 price: 19900,
                 discountedPrice: undefined,
@@ -161,6 +167,7 @@ const PRODUCTS: ProductType[] = [
         ],
         variants: [
             {
+                id: "montblanc-explorer-60",
                 volume: 60,
                 price: 5100,
                 discountedPrice: 4550,
@@ -168,6 +175,7 @@ const PRODUCTS: ProductType[] = [
                 quantityInStock: 1,
             },
             {
+                id: "montblanc-explorer-100",
                 volume: 100,
                 price: 7084,
                 discountedPrice: undefined,
@@ -175,6 +183,7 @@ const PRODUCTS: ProductType[] = [
                 quantityInStock: 34,
             },
             {
+                id: "montblanc-explorer-200",
                 volume: 200,
                 price: 9894,
                 discountedPrice: undefined,
@@ -311,6 +320,7 @@ const CART_ITEMS: CartItemType[] = [
         imageUrl: "https://i.makeup.it/2/2h/2h0tbxmkoqlr.jpg",
         name: "Montblanc Explorer",
         variant: {
+            id: "montblanc-explorer-100",
             volume: 100,
             price: 7084,
             discountedPrice: undefined,
@@ -323,8 +333,9 @@ const CART_ITEMS: CartItemType[] = [
     },
     {
         imageUrl: "https://i.makeup.it/9/9i/9iajbg7jxhit.jpg",
-        name: "Jean Paul Gaultier Le Beau",
+        name: "jean-paul-gaultier-le-beau-75",
         variant: {
+            id: "montblanc-explorer-0",
             volume: 75,
             price: 7999,
             discountedPrice: undefined,

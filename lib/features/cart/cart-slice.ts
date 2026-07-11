@@ -30,6 +30,7 @@ const initialState = cartAdapter.upsertMany(cartAdapter.getInitialState<CartSlic
         imageUrl: "https://i.makeup.it/2/2h/2h0tbxmkoqlr.jpg",
         name: "Montblanc Explorer",
         variant: {
+            id: "montblanc-explorer-100",
             volume: 100,
             price: 7084,
             discountedPrice: undefined,
@@ -45,6 +46,7 @@ const initialState = cartAdapter.upsertMany(cartAdapter.getInitialState<CartSlic
         imageUrl: "https://i.makeup.it/9/9i/9iajbg7jxhit.jpg",
         name: "Jean Paul Gaultier Le Beau",
         variant: {
+            id: "jean-paul-gaultier-le-beau-75",
             volume: 75,
             price: 7999,
             discountedPrice: undefined,
