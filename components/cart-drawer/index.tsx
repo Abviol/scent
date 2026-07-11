@@ -118,9 +118,11 @@ export default function CartDrawer({children}: { children: React.ReactNode }) {
 
                                     {/* All/other cart items */}
                                     <div className="flex flex-col gap-y-6">
-                                        <h3 className={"text-xl leading-7 font-semibold"}>
-                                            {recentlyAddedItems.length == 0 ? "All" : "Other"} products ({items.length})
-                                        </h3>
+                                        {recentlyAddedItems.length > 0 && seenItems.length > 0 && (
+                                            <h3 className={"text-xl leading-7 font-semibold"}>
+                                                Other products ({seenItems.length})
+                                            </h3>
+                                        )}
                                         <div className="flex flex-col gap-y-2">
                                             {recentlyAddedItems.length == 0 ?
                                                 items.map((item, index) => (
