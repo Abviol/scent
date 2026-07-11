@@ -34,7 +34,6 @@ export default function CartDrawer({children}: { children: React.ReactNode }) {
 
     // Cart drawer context
     const {isOpen, open, close} = useCartDrawer();
-    // const [isOpen, setIsOpen] = useState<boolean>(false);
 
     return (
         <>
