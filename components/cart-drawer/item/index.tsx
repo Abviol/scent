@@ -94,7 +94,7 @@ export default function CartDrawerItem({
 								<Trash2
 									size={20}
 									strokeWidth={1.5}
-									onClick={() => dispatch(removeItem(id))}
+									onClick={() => dispatch(removeItem({itemId: id, variantId: variant.id}))}
 								></Trash2>
 							</button>
 						</div>
@@ -113,7 +113,7 @@ export default function CartDrawerItem({
 								min={1}
 								max={variant.quantityInStock}
 								value={quantity}
-								onChange={(e: number) => dispatch(incrementItemQuantityByAmount({ id: id, amount: e}))}
+								onChange={(e: number) => dispatch(incrementItemQuantityByAmount({ itemId: id, variantId: variant.id, amount: e}))}
 							></Stepper>
 						</div>
 					</div>

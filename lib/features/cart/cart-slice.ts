@@ -9,10 +9,13 @@ interface CartSliceState {
 interface CartEntity extends CartItemType {
     isSeen: boolean;
 }
+const convertCartItemIdToCartEntityId = (itemId: string, variantId: string) => `${itemId}-${variantId}`;
 
 // Provides prebuilt reducers and selectors for normalized state management,
 // as recommended by the official Redux documentation.
-const cartAdapter = createEntityAdapter<CartEntity>({});
+const cartAdapter = createEntityAdapter({
+    selectId: (item: CartEntity) => convertCartItemIdToCartEntityId(item.id, item.variant.id),
+});
 
 const cartAdapterSelectors = cartAdapter.getSelectors<RootState>(
     state => state.cart,
@@ -68,7 +71,7 @@ export const cartSlice = createSlice({
          * @param action - Payload  containing an object of type `CartItemType`
          * */
         addItem: (state, action: PayloadAction<CartItemType>) => {
-            const id = action.payload.id;
+            const id = convertCartItemIdToCartEntityId(action.payload.id, action.payload.variant.id);
             const existing = state.entities[id];
             state.totalAmount++;
             if (existing) {
@@ -83,8 +86,8 @@ export const cartSlice = createSlice({
          * Subtracts the item's quantity from `cart.totalAmount`.
          * @param action - Payload containing the item's id
          * */
-        removeItem: (state, action: PayloadAction<string>) => {
-            const id = action.payload;
+        removeItem: (state, action: PayloadAction<{itemId: string, variantId: string}>) => {
+            const id = convertCartItemIdToCartEntityId(action.payload.itemId, action.payload.variantId);
             const item = state.entities[id];
 
             if (!item) return;
@@ -97,8 +100,8 @@ export const cartSlice = createSlice({
          * and increments its quantity by the specified amount.
          * @param action - Payload containing the item id and the amount to increment by
          */
-        incrementItemQuantityByAmount: (state, action: PayloadAction<{ id: string, amount: number }>) => {
-            const id = action.payload.id;
+        incrementItemQuantityByAmount: (state, action: PayloadAction<{ itemId: string, variantId: string, amount: number }>) => {
+            const id = convertCartItemIdToCartEntityId(action.payload.itemId, action.payload.variantId);
             const item = state.entities[id];
 
             if (!item) return;

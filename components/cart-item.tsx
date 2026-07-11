@@ -88,7 +88,7 @@ export default function CartItem({
                 </Link>
                 <Stepper
                     value={quantity}
-                    onChange={(e: number) => dispatch(incrementItemQuantityByAmount({ id: id, amount: e}))}
+                    onChange={(e: number) => dispatch(incrementItemQuantityByAmount({ itemId: id, variantId: variant.id, amount: e}))}
                     min={1}
                     max={variant.quantityInStock}
                     disabled={variant.quantityInStock == 0}
@@ -100,7 +100,7 @@ export default function CartItem({
                     <button
                         title="Remove from cart"
                         aria-label="Remove from cart"
-                        onClick={() => dispatch(removeItem(id))}
+                        onClick={() => dispatch(removeItem({itemId: id, variantId: variant.id}))}
                     >
                         <Trash2
                             strokeWidth={1.5}
